@@ -1,8 +1,6 @@
 
 class Registro():
         
-
-
         def __init__(self, comando,nivelLog,timeStamp,ipCliente):
             self.comando = comando
             self.nivelLog = nivelLog
