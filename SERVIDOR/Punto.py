@@ -1,9 +1,10 @@
 #
 # @version 1.0
 # @date 2023.10.17
-# @author Borquez Juan Manuel, D'Alessandro Francisco, Miranda Francisco,
-# @contact francisconehuenmiranda@gmail.com
+# @author Borquez Juan Manuel, Dalessandro Francisco, Miranda Francisco,
+# @contact borquez.juan00@gmail.com, panchodal867@gmail.com, francisconehuenmiranda@gmail.com
 #/
+
 class Punto():
     def __init__(self, X: float, Y: float, Z: float):
         self.x = X
