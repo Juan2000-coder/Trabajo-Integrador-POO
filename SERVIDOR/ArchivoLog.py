@@ -11,7 +11,7 @@ class ArchivoLog():
 
         try:
             with open(self.nombreArchivo, 'a') as archivo:
-                archivo.write(f"{registro.getTimeStamp()} - {registro.getnNivelLog}: {self.getComando} (IP: {self.getIpCliente})" + "\n")
+                archivo.write(f"Hora: {registro.getTimeStamp()} - {registro.getnNivelLog}: Comando: {self.getComando} (IP: {self.getIpCliente})" + "\n")
         except Exception as e:
             print("Error al agregar el registro al archivo:", str(e))
 
