@@ -1,15 +1,16 @@
-window_sizes 1280 637 320 955 487 104
+window_sizes 1366 705 320 1041 555 104
 
 diagrams
   active  classdiagram_ref 128077 // Server
-    819 425 100 A4 0 9
+    1041 555 100 A4 7 0
 end
 show_stereotypes
-selected attribute_ref 128077 // registroTrabajo
 open
-  class_ref 128205 // Registros
+  class_ref 128077 // ArchivoLog
+  class_ref 128205 // Registro
   class_ref 128333 // BrazoRobot
   class_ref 128589 // Cmd
   class_ref 128717 // InterfazCLI
+  class_ref 128002 // Servidor
 end
 end

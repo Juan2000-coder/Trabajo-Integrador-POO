@@ -7,5 +7,6 @@ class Secuencia():
 
     def agregarComando(self,comando):
         pass
+    
     def generarArchivoDeTrabajo(self):
         pass
