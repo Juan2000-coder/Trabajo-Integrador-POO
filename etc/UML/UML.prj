@@ -1,7 +1,7 @@
 format 224
 "proyecto_final"
-  revision 2
-  modified_by 127 "Adriana"
+  revision 1
+  modified_by 77 "LENOVO"
 
 
   
@@ -83,8 +83,8 @@ ${docstring}${members}
       
       classrelation 128077 // <composition>
 	relation 128077 *---
-	  a role_name "" multiplicity "1..*" private
-	    python "${comment}${self}${name} = ${stereotype}()
+	  a role_name "" private
+	    python "${comment}${self}${name} = ${type}()
 "
 	    classrelation_ref 128077 // <composition>
 	  b role_name "" private
@@ -92,48 +92,6 @@ ${docstring}${members}
 "
 	    classrelation_ref 128205 // <composition>
       end
-
-      attribute 128639 "archivo"
-	private explicit_type "File"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl "${comment}${self}${name} = ${value}
-"
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-      end
-
-      operation 128127 "agregarRegistro"
-	public explicit_return_type "void"
-	nparams 1
-	  param in name "registro" type class_ref 128205 // Registros
-	
-	
-	
-	python_def "${@}${static}${abstract}def ${name}${(}${p0}${v0}, ${p1}${v1}, ${p2}${v2}, ${p3}${v3}, ${p4}${v4}${)}:
-${docstring}${body}
-"
-	
-      end
-
-      operation 128255 "obtenerRegistro"
-	public return_type class_ref 128205 // Registros
-	nparams 4
-	  param in name "timeStamp" explicit_type "time"
-	  param in name "comando" explicit_type "string"
-	  param in name "nivelLog" explicit_type "string"
-	  param in name "ipCliente" explicit_type "string"
-	
-	
-	
-	python_def "${@}${static}${abstract}def ${name}${(}${p0}${v0}, ${p1}${v1}, ${p2}${v2}, ${p3}${v3}${)}:
-${docstring}${body}
-"
-	
-      end
-
     end
 
     class 128205 "Registros"
@@ -150,54 +108,6 @@ ${docstring}${members}
       
       classrelation 128205 // <composition>
 	relation_ref 128077 // <composition>
-      end
-
-      attribute 128127 "comando"
-	private explicit_type "string"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl "${comment}${self}${name} = ${value}
-"
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-      end
-
-      attribute 128255 "nivelLog"
-	private explicit_type "string"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl "${comment}${self}${name} = ${value}
-"
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-      end
-
-      attribute 128383 "timeStamp"
-	private explicit_type "time"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl "${comment}${self}${name} = ${value}
-"
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-      end
-
-      attribute 128511 "ipCliente"
-	private explicit_type "string"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl "${comment}${self}${name} = ${value}
-"
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
       end
     end
 
@@ -298,31 +208,6 @@ ${docstring}${members}
       explicit_switch_type ""
       mysql_decl ""
       
-      operation 128511 "NumeroDeOcurrencias"
-	public explicit_return_type "int"
-	nparams 1
-	  param in name "comando" explicit_type "string"
-	
-	
-	
-	python_def "${@}${static}${abstract}def ${name}${(}${p0}${v0}${)}:
-${docstring}${body}
-"
-	
-      end
-
-      operation 128639 "erroresEn"
-	public explicit_return_type "int"
-	nparams 1
-	  param in name "comando" explicit_type "string"
-	
-	
-	
-	python_def "${@}${static}${abstract}def ${name}${(}${p0}${v0}${)}:
-${docstring}${body}
-"
-	
-      end
     end
 
     class 128589 "Cmd"
@@ -514,46 +399,6 @@ ${docstring}${body}
 "
 	
       end
-
-      classrelation 128767 // <aggregation>
-	relation_ref 128639 // <aggregation>
-      end
-
-      classrelation 129023 // <aggregation>
-	relation 128767 o---
-	  a role_name "" private
-	    python "${comment}${self}${name} = ${value}
-"
-	    classrelation_ref 129023 // <aggregation>
-	  b role_name "" private
-	    python "${comment}${self}${name} = ${value}
-"
-	    classrelation_ref 129151 // <aggregation>
-      end
-
-      operation 128767 "do_levantarServidor"
-	public explicit_return_type ""
-	nparams 0
-	
-	
-	
-	python_def "${@}${static}${abstract}def ${name}${(}${)}:
-${docstring}${body}
-"
-	
-      end
-
-      operation 128895 "do_destruirServidor"
-	public explicit_return_type ""
-	nparams 0
-	
-	
-	
-	python_def "${@}${static}${abstract}def ${name}${(}${)}:
-${docstring}${body}
-"
-	
-      end
     end
 
     class 128845 "Secuencia"
@@ -569,47 +414,6 @@ ${docstring}${members}
       mysql_decl ""
       
     end
-
-    class 128127 "Servidor"
-      visibility package 
-      cpp_decl ""
-      java_decl ""
-      php_decl ""
-      python_2_2 python_decl "class ${name}${inherit}:
-${docstring}${members}
-"
-      idl_decl ""
-      explicit_switch_type ""
-      mysql_decl ""
-      
-      classrelation 129151 // <aggregation>
-	relation_ref 128767 // <aggregation>
-      end
-    end
-
-    class 128255 "main"
-      visibility package 
-      cpp_decl ""
-      java_decl ""
-      php_decl ""
-      python_2_2 python_decl "class ${name}${inherit}:
-${docstring}${members}
-"
-      idl_decl ""
-      explicit_switch_type ""
-      mysql_decl ""
-      
-      classrelation 128639 // <aggregation>
-	relation 128639 o---
-	  a role_name "" private
-	    python "${comment}${self}${name} = ${value}
-"
-	    classrelation_ref 128639 // <aggregation>
-	  b role_name "" private
-	    python "${comment}${self}${name} = ${value}
-"
-	    classrelation_ref 128767 // <aggregation>
-      end
-    end
   end
+
 end

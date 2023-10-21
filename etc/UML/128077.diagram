@@ -2,39 +2,58 @@ format 224
 
 classcanvas 128077 class_ref 128077 // ArchivoLog
   classdiagramsettings member_max_width 0 end
-  xyz 344 279 2000
+  xyzwh 256.457 292.602 2000 548 75
 end
 classcanvas 128205 class_ref 128205 // Registros
   classdiagramsettings member_max_width 0 end
-  xyz 585 253 2000
+  xyz 478.524 386.469 2000
+end
+classcanvas 128255 class_ref 128127 // Servidor
+  classdiagramsettings member_max_width 0 end
+  xyz 251.567 210.829 2000
+end
+classcanvas 128383 class_ref 128255 // main
+  classdiagramsettings member_max_width 0 end
+  xyz 86.8988 27.8032 2000
 end
 classcanvas 128461 class_ref 128333 // BrazoRobot
   classdiagramsettings show_members_full_definition yes show_members_visibility yes member_max_width 0 end
-  xyz 330 41 2005
+  xyz 335.416 17.988 2005
 end
 classcanvas 128589 class_ref 128461 // Reporte
   classdiagramsettings member_max_width 0 end
-  xyz 601 40 2000
+  xyzwh 554.652 63.5675 2000 256 65
 end
 classcanvas 128717 class_ref 128589 // Cmd
   classdiagramsettings member_max_width 0 end
-  xyz 102 24 2000
+  xyz 80.6767 387.333 2000
 end
 classcanvas 128845 class_ref 128717 // InterfazCLI
   classdiagramsettings member_max_width 0 end
-  xyzwh 38 93 2000 175 241
+  xyzwh 17.6377 96.3901 2000 176 273
 end
 classcanvas 129229 class_ref 128845 // Secuencia
   classdiagramsettings member_max_width 0 end
-  xyz 614 156 2000
+  xyz 519.875 538.93 2000
 end
 relationcanvas 128333 relation_ref 128077 // <composition>
+  decenter_end 486
   from ref 128077 z 2001 to ref 128205
+  no_role_a no_role_b
+  multiplicity_a_pos 504 370 3000 no_multiplicity_b
+end
+relationcanvas 128895 relation_ref 128639 // <aggregation>
+  from ref 128383 z 2001 to ref 128845
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 129101 relation_ref 128333 // <generalisation>
   from ref 128845 z 2001 to ref 128717
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129279 relation_ref 128767 // <aggregation>
+  from ref 128845 z 2001 to ref 128255
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 end
