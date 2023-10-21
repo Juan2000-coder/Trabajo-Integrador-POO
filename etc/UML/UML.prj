@@ -1,0 +1,1014 @@
+format 224
+"proyecto_final"
+  revision 3
+  modified_by 77 "LENOVO"
+
+
+  
+  // class settings
+  default_attribute_visibility private default_relation_visibility private default_operation_visibility public
+  
+  classdiagramsettings draw_all_relations yes hide_attributes no hide_operations no hide_getset_operations no hide_ports no show_members_full_definition no show_members_visibility no show_members_stereotype no show_members_context no show_members_multiplicity no show_members_initialization no show_attribute_modifiers no member_max_width 127 show_parameter_dir yes show_parameter_name yes package_name_in_tab no class_drawing_mode natural drawing_language uml show_context_mode no auto_label_position yes show_relation_modifiers no show_relation_visibility no show_infonote no shadow yes gradient none show_stereotype_properties no end
+  
+  classcompositediagramsettings auto_label_position yes draw_all_relations yes shadow yes gradient none end
+  
+  usecasediagramsettings package_name_in_tab no show_context_mode no auto_label_position yes draw_all_relations yes class_drawing_mode actor shadow yes gradient none show_stereotype_properties no end
+  
+  sequencediagramsettings show_full_operations_definition no show_class_of_operation no write_horizontally yes instances_drawing_mode natural drawing_language uml draw_all_relations yes shadow yes gradient none show_stereotype_properties no show_class_context_mode no show_msg_context_mode no end
+  
+  collaborationdiagramsettings show_full_operations_definition no show_class_of_operation no show_hierarchical_rank no write_horizontally yes instances_drawing_mode natural drawing_language uml package_name_in_tab no show_class_pack_context_mode no show_msg_context_mode no draw_all_relations yes shadow yes gradient none show_stereotype_properties no end
+  
+  objectdiagramsettings write_horizontally yes package_name_in_tab no show_class_pack_context_mode no auto_label_position yes draw_all_relations yes shadow yes gradient none show_stereotype_properties no end
+  
+  objectcompositediagramsettings auto_label_position yes draw_all_relations yes shadow yes gradient none end
+  
+  componentdiagramsettings package_name_in_tab no show_context_mode no auto_label_position yes draw_all_relations yes shadow yes gradient none
+   draw_component_as_icon no show_component_req_prov no show_component_rea no show_stereotype_properties no end
+  
+  deploymentdiagramsettings package_name_in_tab no show_context_mode no write_horizontally yes auto_label_position yes draw_all_relations yes shadow yes gradient none
+   draw_component_as_icon no show_component_req_prov no show_component_rea no show_stereotype_properties no end
+  
+  statediagramsettings package_name_in_tab no show_context_mode no auto_label_position yes write_label_horizontally yes show_trans_definition no draw_all_relations yes shadow yes gradient none
+   show_activities yes region_horizontally yes drawing_language uml show_stereotype_properties no end
+  
+  activitydiagramsettings package_name_in_tab no show_context_mode no show_opaque_action_definition no auto_label_position yes write_label_horizontally no draw_all_relations yes shadow yes gradient none
+   show_infonote yes drawing_language uml show_stereotype_properties no end
+  
+  class_color yellow duration_color transparent continuation_color gray note_color blue fragment_color transparent subject_color transparent usecase_color yellow package_color transparent component_color green artifact_color green deploymentnode_color gray state_color yellow stateaction_color transparent activity_color transparent activityregion_color transparent activitypartition_color transparent activityaction_color transparent parameterpin_color white generalization_color black 
+  dpi 96
+  font_size 8
+  diagram_format A4
+
+  image_root_dir ""
+
+
+  mark_for_import
+  
+  classview 128077 "Servidor"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    classdiagram 128077 "Server"
+      classdiagramsettings draw_all_relations no show_members_full_definition yes show_members_visibility yes show_members_stereotype yes member_max_width 0 end
+      size A4
+    end
+
+    class 128077 "ArchivoLog"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128077 // <composition>
+	relation 128077 *---
+	  a role_name "" multiplicity "1..*" private
+	    python "${comment}${self}${name} = ${stereotype}()
+"
+	    classrelation_ref 128077 // <composition>
+	  b role_name "" private
+	    python "${comment}${self}${name} = ${type}()
+"
+	    classrelation_ref 128205 // <composition>
+      end
+
+      attribute 128514 "archivo"
+	private explicit_type "File"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 128002 "agregarRegistro"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "registro" type class_ref 128205 // Registro
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${p0}${v0}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 128130 "obtenerRegistro"
+	public return_type class_ref 128205 // Registro
+	nparams 4
+	  param in name "timeStamp" explicit_type "time"
+	  param in name "comando" explicit_type "str"
+	  param in name "nivelLog" explicit_type "str"
+	  param in name "ipCliente" explicit_type "str"
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${p0}${v0}, ${p1}${v1}, ${p2}${v2}, ${p3}${v3}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      attribute 128642 "nombreDeArchivo"
+	private explicit_type "str"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 128258 "devolverRegistro"
+	public return_type class_ref 128205 // Registro
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      classrelation 129282 // <aggregation>
+	relation 128642 o---
+	  a role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 129282 // <aggregation>
+	  b role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 129410 // <aggregation>
+      end
+
+      classrelation 129794 // <directional aggregation>
+	relation 128898 o-->
+	  a role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 129794 // <directional aggregation>
+	  b parent class_ref 128717 // InterfazCLI
+      end
+
+      classrelation 129922 // <aggregation>
+	relation 129026 o---
+	  a role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 129922 // <aggregation>
+	  b role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 130050 // <aggregation>
+      end
+
+      classrelation 130306 // <aggregation>
+	relation_ref 129154 // <aggregation>
+      end
+    end
+
+    class 128205 "Registro"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128205 // <composition>
+	relation_ref 128077 // <composition>
+      end
+
+      attribute 128002 "comando"
+	private explicit_type "str"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128130 "nivelLog"
+	private explicit_type "str"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128258 "timeStamp"
+	private explicit_type "time"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128386 "ipCliente"
+	private explicit_type "str"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 128333 "BrazoRobot"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 128077 "conectarRobot"
+	public explicit_return_type "bool"
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 128205 "desconectarRobot"
+	public explicit_return_type "bool"
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 128333 "activarMotor"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 128461 "desactivarMotor"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 128717 "seleccionarModo"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      attribute 128077 "registroTrabajo"
+	private type class_ref 128077 // ArchivoLog
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128770 "posicion"
+	private explicit_type "Punto"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 129282 "velocidad"
+	private explicit_type "float"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 128642 // <aggregation>
+	relation_ref 128258 // <aggregation>
+      end
+
+      classrelation 128770 // <aggregation>
+	relation 128386 o---
+	  a role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 128770 // <aggregation>
+	  b role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 128898 // <aggregation>
+      end
+
+      classrelation 129154 // <aggregation>
+	relation_ref 128514 // <aggregation>
+      end
+
+      operation 129410 "movLineal"
+	public explicit_return_type "void"
+	nparams 2
+	  param in name "posFinal" type class_ref 128258 // Punto
+	  param in name "velocidad" explicit_type "double"
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${p0}${v0}, ${p1}${v1}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 129538 "movLineal"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "posFinal" type class_ref 128258 // Punto
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${p0}${v0}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 129666 "activarPinza"
+	public explicit_return_type "void"
+	nparams 3
+	  param in name "velocidad" explicit_type "double"
+	  param in name "tiempo" explicit_type "time"
+	  param in name "sentido" explicit_type "str"
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${p0}${v0}, ${p1}${v1}, ${p2}${v2}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 129794 "desactivarPinza"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 129922 "home"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+    end
+
+    class 128589 "Cmd"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 128717 "InterfazCLI"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128461 // <generalisation>
+	relation 128333 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 128461 // <generalisation>
+	  b parent class_ref 128589 // Cmd
+      end
+
+      operation 128845 "do_reporteGeneral"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 128973 "do_obtenerLogServidor"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 129101 "do_seleccionarModo"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 129229 "do_conectarRobot"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 129357 "do_desconectarRobot"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 129485 "do_activarMotor"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 129613 "do_desactivarMotor"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 129741 "do_home"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 129869 "do_movLineal"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 129997 "do_activarPinza"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 130125 "do_desactivarPinza"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 130253 "do_grabar"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 130381 "do_cargar"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 128770 "do_levantarServidor"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      classrelation 128002 // <aggregation>
+	relation 128002 o---
+	  a role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 128002 // <aggregation>
+	  b role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 128130 // <aggregation>
+      end
+
+      operation 128898 "do_desconectarServidor"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      classrelation 129026 // <aggregation>
+	relation 128514 o---
+	  a role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 129026 // <aggregation>
+	  b role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 129154 // <aggregation>
+      end
+
+      classrelation 129410 // <aggregation>
+	relation_ref 128642 // <aggregation>
+      end
+
+      classrelation 130050 // <aggregation>
+	relation_ref 129026 // <aggregation>
+      end
+
+      classrelation 130178 // <aggregation>
+	relation 129154 o---
+	  a role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 130178 // <aggregation>
+	  b role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 130306 // <aggregation>
+      end
+
+      classrelation 130434 // <aggregation>
+	relation 129282 o---
+	  a role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 130434 // <aggregation>
+	  b role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 130562 // <aggregation>
+      end
+
+      classrelation 131202 // <aggregation>
+	relation_ref 129794 // <aggregation>
+      end
+
+      classrelation 131586 // <aggregation>
+	relation 130050 o---
+	  a role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 131586 // <aggregation>
+	  b role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 131714 // <aggregation>
+      end
+
+      classrelation 131970 // <unidirectional association>
+	relation 130306 --->
+	  a role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 131970 // <unidirectional association>
+	  b parent class_ref 128845 // Secuencia
+      end
+
+      operation 129282 "do_listarArchivosDeTrabajo"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      classrelation 135373 // <aggregation>
+	relation 135245 o---
+	  a role_name "" multiplicity "1..*" private
+	    python "${comment}${self}${name} = ${stereotype}()
+"
+	    classrelation_ref 135373 // <aggregation>
+	  b role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 135501 // <aggregation>
+      end
+
+      classrelation 135629 // <aggregation>
+	relation 135373 o---
+	  a role_name "" multiplicity "1..*" private
+	    python "${comment}${self}${name} = ${stereotype}()
+"
+	    classrelation_ref 135629 // <aggregation>
+	  b role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 135757 // <aggregation>
+      end
+    end
+
+    class 128845 "Secuencia"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 131074 // <aggregation>
+	relation 129794 o---
+	  a role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 131074 // <aggregation>
+	  b role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 131202 // <aggregation>
+      end
+
+      classrelation 131714 // <aggregation>
+	relation_ref 130050 // <aggregation>
+      end
+
+      operation 129026 "agregarComando"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "comando" explicit_type "str"
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${p0}${v0}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      attribute 129410 "listaDeComandos"
+	private explicit_type "str"
+	stereotype "list"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 129154 "generarArchivoDeTrabajo"
+	public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+    end
+
+    class 128002 "Servidor"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128130 // <aggregation>
+	relation_ref 128002 // <aggregation>
+      end
+
+      classrelation 130562 // <aggregation>
+	relation_ref 129282 // <aggregation>
+      end
+    end
+
+    class 128130 "main"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 135117 // <unidirectional association>
+	relation 134989 --->
+	  a role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 135117 // <unidirectional association>
+	  b parent class_ref 128717 // InterfazCLI
+      end
+    end
+
+    class 128258 "Punto"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 128898 "x"
+	private explicit_type "float"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 129026 "y"
+	private explicit_type "float"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 129154 "z"
+	private explicit_type "float"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 128514 // <aggregation>
+	relation 128258 o---
+	  a role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 128514 // <aggregation>
+	  b role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 128642 // <aggregation>
+      end
+
+      classrelation 128898 // <aggregation>
+	relation_ref 128386 // <aggregation>
+      end
+    end
+
+    class 135373 "ArchivoJob"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 135757 // <aggregation>
+	relation_ref 135373 // <aggregation>
+      end
+    end
+
+    class 135501 "ArchivoUsuario"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 135501 // <aggregation>
+	relation_ref 135245 // <aggregation>
+      end
+    end
+
+    class 135629 "Archivo"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+  end
+end
