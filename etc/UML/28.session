@@ -1,0 +1,12 @@
+window_sizes 1366 705 320 1041 555 104
+
+diagrams
+  active  classdiagram_ref 128077 // Server
+    1041 555 100 A4 0 0
+end
+show_stereotypes
+selected classdiagram_ref 128077 // Server
+open
+  classview_ref 128077 // Servidor
+end
+end
