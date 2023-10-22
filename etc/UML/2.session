@@ -2,7 +2,7 @@ window_sizes 1357 637 80 1272 537 54
 
 diagrams
   active  classdiagram_ref 128077 // Server
-    1191 543 100 A4 0 0
+    1191 543 138 A4 228 0
 end
 show_stereotypes
 selected operation_ref 129922 // home
@@ -10,7 +10,6 @@ open
   class_ref 128077 // ArchivoLog
   class_ref 128205 // Registro
   class_ref 128333 // BrazoRobot
-  class_ref 128461 // Reporte
   class_ref 128717 // InterfazCLI
   class_ref 128845 // Secuencia
   class_ref 128258 // Punto
