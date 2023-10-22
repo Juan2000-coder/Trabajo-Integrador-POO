@@ -26,6 +26,9 @@ from cmd import Cmd
 import os
 import subprocess
 import platform
+from BrazoRobot import BrazoRobot
+from ArchivoLog import ArchivoLog
+from ArchivoUsuario import ArchivoUsuario
 
 class commandException(Exception):
     """A class for specific C4 class exceptions."""
@@ -46,6 +49,10 @@ class C4(Cmd):
 
         super().__init__()
         self.route = os.getcwd()    # The path of the solution.
+        self.brazoRobot = BrazoRobot()
+        self.requerimientos = {}
+        # Será un diccionario donde las claves son los ids o ips de usuario
+        # Y las claves serán los archivos de usuario.
 
     def do_cls(self, args):
 

@@ -2,7 +2,7 @@ window_sizes 1357 637 80 1272 537 54
 
 diagrams
   active  classdiagram_ref 128077 // Server
-    1191 543 139 A4 429 0
+    1191 543 138 A4 228 0
 end
 show_stereotypes
 selected operation_ref 129922 // home
