@@ -94,7 +94,7 @@ reporteGeneral <id>
             print(self.outFormat.format(e))
         except Exception as e:
             print(self.outFormat.format(e))
-        except archivoLogExepiton as e:
+        except archivoLogException as e:
             print(self.outFormat.format(e))
         finally:
             print()

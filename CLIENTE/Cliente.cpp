@@ -1,3 +1,5 @@
+//NOTA: ESTO POR AHORA FUNCIONA SOLO EN LINUX
+
 #include <iostream>
 #include <stdlib.h>
 #include <fstream>
@@ -27,7 +29,7 @@ int main(int argc, char* argv[]) {
     int port = atoi(argv[2]);
 
     XmlRpcClient c(argv[1], port);
-    XmlRpcValue oneArg, result;
+    XmlRpcValue oneArg, noArgs, result;
 
 
 
@@ -55,8 +57,10 @@ int main(int argc, char* argv[]) {
 
 
 
-
+    bool flagServidor = true;
+    bool flagCliente = true;
     string input;
+    while (flagCliente) {
     cout << "Ingrese una opción: ";
     cin >> input;
 
@@ -69,26 +73,172 @@ int main(int argc, char* argv[]) {
         int value = it->second; //accede al valor asociado a la clave
         switch (value) {
             case 1: //reporteGeneral
-                oneArg[0] = "reporteGeneral";
 
-                if (c.execute("Generar", oneArg, result)) { //ESTO POSIBLEMENTE ESTA MAL. HAY QUE VER COMO HACER PARA LLAMAR AL METODO DEL SERVIDOR PERO EN PYTHON.
+                if (c.execute("reporteGeneral", noArgs, result)) { //ESTO ESTA BIEN... FUNCIONA!
                     cout << result << "\n\n";
                 } else {
-                    cout << "Error en la llamada a 'Generar'\n\n";
-                };
+                    cout << "Error en la llamada a 'reporteGeneral'\n\n";
+                }
                 break;
+
             case 2: //obtenerLogServidor
-                std::cout << "Opción 2 seleccionada" << std::endl; //de aca para abajo esta sin modificar de lo que me dio chatgpt
+
+                if (c.execute("obtenerLogServidor", noArgs, result)) { 
+                    cout << result << "\n\n";
+                } else {
+                    cout << "Error en la llamada a 'obtenerLogServidor'\n\n";
+                }
                 break;
+
             case 3: //seleccionarModo
-                std::cout << "Opción 3 seleccionada" << std::endl;
+                cin >> input;
+                oneArg[0] = input;
+                if (c.execute("seleccionarModo", oneArg, result)) {
+                    cout << result << "\n\n";
+                } else {
+                    cout << "Error en la llamada a 'seleccionarModo'\n\n";
+                }
                 break;
+            case 4: //conectarRobot
+        
+                if (c.execute("conectarRobot", noArgs, result)) {
+                    cout << result << "\n\n";
+                } else {
+                    cout << "Error en la llamada a 'conectarRobot'\n\n";
+                }
+                break;
+
+
+            case 5: //desconectarRobot
+  
+                if (c.execute("desconectarRobot", noArgs, result)) {
+                    cout << result << "\n\n";
+                } else {
+                    cout << "Error en la llamada a 'desconectarRobot'\n\n";
+                }
+                break;
+
+            
+            case 6: //activarMotor
+
+                if (c.execute("activarMotor", noArgs, result)) {
+                    cout << result << "\n\n";
+                } else {
+                    cout << "Error en la llamada a 'activarMotor'\n\n";
+                }
+                break;
+
+            case 7: //desactivarMotor
+
+                if (c.execute("desactivarMotor", noArgs, result)) {
+                    cout << result << "\n\n";
+                } else {
+                    cout << "Error en la llamada a 'desactivarMotor'\n\n";
+                }
+                break;
+
+            case 8: //home
+
+                if (c.execute("home", noArgs, result)) {
+                    cout << result << "\n\n";
+                } else {
+                    cout << "Error en la llamada a 'home'\n\n";
+                }
+                break;
+
+            case 9: //movLineal
+
+                if (c.execute("movLineal", noArgs, result)) {
+                    cout << result << "\n\n";
+                } else {
+                    cout << "Error en la llamada a 'movLineal'\n\n";
+                }
+                break;
+
+            case 10: //activarPinza
+
+                if (c.execute("activarPinza", noArgs, result)) {
+                    cout << result << "\n\n";
+                } else {
+                    cout << "Error en la llamada a 'activarPinza'\n\n";
+                }
+                break;
+
+            case 11: //desactivarPinza
+
+                if (c.execute("desactivarPinza", noArgs, result)) {
+                    cout << result << "\n\n";
+                } else {
+                    cout << "Error en la llamada a 'desactivarPinza'\n\n";
+                }
+                break;
+
+            case 12: //grabar
+
+                if (c.execute("grabar", noArgs, result)) {
+                    cout << result << "\n\n";
+                } else {
+                    cout << "Error en la llamada a 'grabar'\n\n";
+                }
+                break;
+
+            case 13: //cargar
+
+                if (c.execute("cargar", noArgs, result)) {
+                    cout << result << "\n\n";
+                } else {
+                    cout << "Error en la llamada a 'cargar'\n\n";
+                }
+                break;
+
+            case 14: //levantarServidor
+                /*
+                if (flagServidor){
+
+                    std::string startServerCommand = "/usr/bin/python3.9 /home/pancho/Escritorio/integrador/SERVIDOR/serverTest.py &";
+
+                    // Inicia el servidor como un proceso independiente
+                    int status = std::system(startServerCommand.c_str()); //lanza el servidor
+                    flagServidor = false;
+                    if (status == 0) {
+                        std::cout << "Servidor iniciado exitosamente." << std::endl;
+                        // Aquí puedes enviar comandos adicionales al servidor si es necesario
+                    } else {
+                        std::cerr << "Error al iniciar el servidor." << std::endl;
+                    }
+                } else {
+
+                    std::cout << "Servidor ya iniciado" << std::endl;
+
+                }
+                */
+                break;
+
+            case 15: //desconectarServidor
+
+                if (c.execute("desconectarServidor", noArgs, result)) {
+                    cout << result << "\n\n";
+                } else {
+                    cout << "Error en la llamada a 'desconectarServidor'\n\n";
+                }
+                break;
+
+            case 16: //listarArchivosDeTrabajo
+
+                if (c.execute("listarArchivosDeTrabajo", noArgs, result)) {
+                    cout << result << "\n\n";
+                } else {
+                    cout << "Error en la llamada a 'listarArchivosDeTrabajo'\n\n";
+                }
+                break;
+          
+
             default:
                 std::cout << "Opción no válida" << std::endl;
         }
     } else {
         std::cout << "Opción no encontrada" << std::endl;
     }
-
+    }
     return 0;
 }
