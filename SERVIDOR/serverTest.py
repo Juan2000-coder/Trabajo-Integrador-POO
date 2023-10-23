@@ -15,3 +15,4 @@ server.register_function(generar_reporte_general, "Generar")
 
 print("Servidor listo para recibir solicitudes.")
 server.serve_forever()
+

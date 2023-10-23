@@ -95,7 +95,7 @@ reporteGeneral <id>
         except Exception as e:
             print(self.outFormat.format(e))
         except archivoLogExepiton as e:
-            peint(self.outFormat.format(e))
+            print(self.outFormat.format(e))
         finally:
             print()
     
