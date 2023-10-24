@@ -1,32 +1,13 @@
 # -*- coding: utf-8 -*-
 from xmlrpc.server import SimpleXMLRPCServer
 from xmlrpc.server import SimpleXMLRPCRequestHandler
-import subprocess
-import re
+import socket
+hostname = socket.getfqdn()
+print("IP Address:",socket.gethostbyname_ex(hostname)[2][1])
 
-def get_wifi_ipv4():
-    try:
-        # Ejecuta el comando 'ipconfig' y captura su salida
-        result = subprocess.run(["ipconfig"], stdout=subprocess.PIPE, text=True)
-        ipconfig_output = result.stdout
-
-        # Utiliza una expresión regular para buscar la dirección IPv4 de la interfaz de Wi-Fi
-        pattern = r"Adaptador de LAN inalámbrica Wi-Fi:\s+Dirección IPv4\..+?(\d+\.\d+\.\d+\.\d+)"
-        match = re.search(pattern, ipconfig_output)
-
-        if match:
-            return match.group(1)  # Devuelve la dirección IPv4 encontrada
-        else:
-            return "No se encontró la dirección IPv4 de Wi-Fi"
-    except Exception as e:
-        return str(e)
-
-# Llama a la función para obtener la dirección IPv4 de Wi-Fi
-wifi_ipv4 = get_wifi_ipv4()
-print(f"Dirección IPv4 de Wi-Fi: {wifi_ipv4}")
 
 # Configura el servidor
-server = SimpleXMLRPCServer((wifi_ipv4, 8000))
+server = SimpleXMLRPCServer((socket.gethostbyname_ex(hostname)[2][1], 8000))
 
 # Definimos una función para manejar el comando "Generar" con argumento "reporteGeneral"
 def generar_reporte():
