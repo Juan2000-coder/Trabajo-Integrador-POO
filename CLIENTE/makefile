@@ -1,9 +1,9 @@
 # makefile written for gnu make
 SRCDIR = ./src
 BUILDDIR = ./build
-INCLDIR = ./include
+INCLDIR = ./xmlrpc
 CXX		= g++
-CPPFLAGS	= -I$(INCLDIR) -I$(INCLDIR)/xmlrpc
+CPPFLAGS	= -I$(INCLDIR)
 DEBUG		= -g
 OPTIMIZE	= -O2
 GCCWARN		= -Wall
