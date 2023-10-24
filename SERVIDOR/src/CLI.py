@@ -49,7 +49,6 @@ class CLI(Cmd):
 
     def __init__(self):
         """"""
-
         super().__init__()
         self.rpc_server = None
         self.route = os.getcwd()    # The path of the solution.
@@ -62,10 +61,13 @@ class CLI(Cmd):
     def onecmd(self, line):
         # Acciones a realizar antes de ejecutar un comando
         # Podriamos hacer la validación de usuario
+
         timeStamp = datetime.datetime.now()
+        # Habria que ver porque el servidor obtiene el timstamp de las peticiones de usuario de una
+
         comando = line
-        print(line)
-        ipCliente = "127.0.0.1" #Buscar alguna forma de obtenerlo
+        ipCliente = "127.0.0.1"
+        # Hay que ver como recuperarlo del servidor que lo conoce
         
         # Ejecutar el comando
         result = super().onecmd(line)
@@ -199,49 +201,60 @@ seleccionarModo <modo>
             print(self.outFormat.format(e))
             return ["ERROR", str(e)]
         
-    def do_conectarRobot(self,args):
+    def do_conectarRobot(self, args):
         """
 Conecta el robot.
 conectarRobot
         """
         try:
-            result = self.brazoRobot.conectarRobot('COM3', 115200)
-            print(self.outFormat.format(result))
-            return ["INFO", result]
+            arguments = args.split()
+            if len(arguments) == 0:
+                result = self.brazoRobot.conectarRobot('COM3', 115200)
+                print(self.outFormat.format(result))
+                return ':'.join(["INFO", result])
+            else:
+                raise Excepciones.ExcepcionDeComando(1)
             
         except Exception as e:
             print(self.outFormat.format(e))
-            return ["ERROR", str(e)]
+            return ':'.join(["ERROR", str(e)])
         
-    def do_desconectarRobot(self):
+    def do_desconectarRobot(self, args):
         """
 Desconecta el robot.
 desconectarRobot
         """
         try:
-            result = self.brazoRobot.desconectarRobot()
-            print(self.outFormat.format(result))
-            return ["INFO", result]
+            arguments = args.split()
+            if len(arguments) == 0:
+                result = self.brazoRobot.desconectarRobot()
+                print(self.outFormat.format(result))
+                return ':'.join(["INFO", result])
+            else:
+                raise Excepciones.ExcepcionDeComando(1)
             
         except Exception as e:
             print(self.outFormat.format(e))
-            return ["ERROR", str(e)]
+            return ':'.join(["ERROR", str(e)])
 
-    def do_activarMotores(self):
+    def do_activarMotores(self, args):
         """
 Activa los motores del brazo.
 activarMotores
         """
         print()
         try:
+            arguments = args.split()
+            if len(arguments) == 0:
+                result = self.brazoRobot.activarMotor()
+                print(self.outFormat.format(result))
+                return ':'.join(["INFO", result])
+            else:
+                raise Excepciones.ExcepcionDeComando(1)
             
-            result = self.brazoRobot.activarMotor()
-            print(self.outFormat.format(result))
-            return ["INFO", result]
-                    
         except Exception as e:
             print(self.outFormat.format(e))
-            return ["ERROR", str(e)]
+            return ':'.join(["ERROR", str(e)])
 
     def do_desactivarMotores(self, args):
         """
@@ -254,13 +267,13 @@ desactivarMotores
             if len(arguments) == 0:
                 result = self.brazoRobot.desactivarMotor()
                 print(self.outFormat.format(result))
-                return ["INFO", result]
+                return ':'.join(["INFO", result])
             else:
                 raise Excepciones.ExcepcionDeComando(1)
             
         except Exception as e:
             print(self.outFormat.format(e))
-            return ["ERROR", str(e)]
+            return ':'.join(["ERROR", str(e)])
 
     def do_home(self, args):
         """
@@ -273,13 +286,13 @@ home
             if len(arguments) == 0:
                 result = self.brazoRobot.home()
                 print(self.outFormat.format(result))
-                return result.split(':')
+                return result
             else:
                 raise Excepciones.ExcepcionDeComando(1)
             
         except Exception as e:
             print(self.outFormat.format(e))
-            return ["ERROR", str(e)]
+            return ':'.join(["ERROR", str(e)])
         
     def do_movLineal(self, args):
         """
@@ -296,19 +309,19 @@ movLineal <xx.x> <yy.y> <zz.z> [vv.v]
             if len(arguments) == 3:
                 result = self.brazoRobot.movLineal(Punto(arguments[0], arguments[1], arguments[2]))
                 print(self.outFormat.format(result))
-                return result.split(':')
+                return result
             
             elif len(arguments) == 4:
                 result = self.brazoRobot.movLineal(Punto(arguments[0], arguments[1], arguments[2]), arguments[3])
                 print(self.outFormat.format(result))
-                return result.split(':')
+                return result
             
             else:
                 raise Excepciones.ExcepcionDeComando(1)
             
         except Exception as e:
             print(self.outFormat.format(e))
-            return ["ERROR", str(e)]
+            return ':'.join(["ERROR", str(e)])
 
     def do_activarPinza(self, args):
         """
@@ -322,13 +335,13 @@ activarPinza
                 # Debería llamar al metodo correspondiente en el brazo
                 result = self.brazoRobot.activarPinza()
                 print(self.outFormat.format(result))
-                return result.split(':')
+                return result
             else:
                 raise Excepciones.ExcepcionDeComando(1)
 
         except Exception as e:
             print(self.outFormat.format(e))
-            return ["ERROR", str(e)]
+            return ':'.join(["ERROR", str(e)])
 
     def do_desactivarPinza(self, args):
         """
@@ -342,13 +355,13 @@ desactivarPinza
                 # Debería llamar al metodo correspondiente en el brazo
                 result = self.brazoRobot.desactivarPinza()
                 print(self.outFormat.format(result))
-                return result.split(':')
+                return result
             else:
                 raise Excepciones.ExcepcionDeComando(1)
             
         except Exception as e:
             print(self.outFormat.format(e))
-            return ["ERROR", str(e)]
+            return ':'.join(["ERROR", str(e)])
 
     def do_grabar(self, args):
         """
@@ -371,9 +384,8 @@ grabar
             
         except Exception as e:
             print(self.outFormat.format(e))
-        finally:
-            print()
-
+            return ':'.join(["ERROR", str(e)])
+        
     def do_cargar(self, args):
         """
 Carga un archivo de trabajo existente en el directorio.
@@ -399,8 +411,7 @@ cargar <JobFile>
             
         except Exception as e:
             print(self.outFormat.format(e))
-        finally:
-            print()
+            return ':'.join(["ERROR", str(e)])
     
     def do_servidor(self, value):
         """"Inicia/Para el servidor rpc según el valor dado (true/false)."""
@@ -420,12 +431,11 @@ cargar <JobFile>
         port: El puerto del servidor.
         """
 
-        print()
         try:
             arguments = args.split()
             if len(arguments) == 1:
-                port = int(arguments[0])  # Obtiene el puerto desde el argumento
-                server = SimpleXMLRPCServer(('192.168.131.188', int(port)))  # Crea una instancia del servidor
+                port = arguments[0]  # Obtiene el puerto desde el argumento
+                server = SimpleXMLRPCServer('192.168.131.188', port)  # Crea una instancia del servidor
                 
                 #self.registrar_funciones(server)  # Registra tus funciones en el servidor
                 print("Servidor listo para recibir solicitudes en el puerto", int(port))
