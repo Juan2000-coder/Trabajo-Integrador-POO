@@ -27,6 +27,9 @@ import os
 import subprocess
 import platform
 import datetime
+##Para levantar el SV
+from xmlrpc.server import SimpleXMLRPCServer
+from xmlrpc.server import SimpleXMLRPCRequestHandler
 
 from BrazoRobot import BrazoRobot
 from ArchivoLog import ArchivoLog
@@ -414,20 +417,26 @@ cargar <JobFile>
     
     def do_levantarServidor(self, args):
         """
-Levanta el Servidor en el puerto indicado.
-levantarServiror <port>
-    port     El puerto del servidor.
-    """
+        Levanta el servidor XML-RPC en el puerto indicado.
+        levantarServidor <port>
+        port: El puerto del servidor.
+        """
         print()
         try:
             arguments = args.split()
             if len(arguments) == 1:
-                # Supongo que crea el objeto servidor o bien
-                # llama al método para activar el mismo.
-                pass
+                port = int(arguments[0])  # Obtiene el puerto desde el argumento
+                server = SimpleXMLRPCServer(('192.168.131.188', int(port)))  # Crea una instancia del servidor
+                #Definimos funciones
+                  
+                #Registramos funciones
+                server.register_function(conectarRobot, "conectarRobot")
+            
+                #self.registrar_funciones(server)  # Registra tus funciones en el servidor
+                print("Servidor listo para recibir solicitudes en el puerto", int(port))
+                server.serve_forever()  # Inicia el servidor
             else:
                 raise Excepciones.ExcepcionDeComando(1)
-            
         except Exception as e:
             print(self.outFormat.format(e))
         finally:
@@ -435,19 +444,18 @@ levantarServiror <port>
 
     def do_desconectarServidor(self, args):
         """
-Desconecta el Servidor.
-desconectarServidor
-    """
+        Detiene y desconecta el servidor.
+        desconectarServidor
+        """
         print()
         try:
-            arguments = args.split()
-            if len(arguments) == 0:
-                # Supongo que destruye el objeto servidor o bien
-                # llama al método para desactivar el mismo.
-                pass
+            if self.server is not None:
+                self.server.shutdown()  # Detiene el servidor
+                self.server.server_close()  # Cierra la conexión del servidor
+                self.server = None  # Restablece la variable del servidor a nula
+                print("Servidor desconectado.")
             else:
-                raise Excepciones.ExcepcionDeComando(1)
-            
+                print("No se encontró un servidor para desconectar.")
         except Exception as e:
             print(self.outFormat.format(e))
         finally:

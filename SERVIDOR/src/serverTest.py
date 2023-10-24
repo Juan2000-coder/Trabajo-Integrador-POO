@@ -4,6 +4,7 @@ from xmlrpc.server import SimpleXMLRPCRequestHandler
 
 # Configura el servidor
 server = SimpleXMLRPCServer(('localhost', 8000))
+#server = SimpleXMLRPCServer(('IP', 8000))
 
 # Definimos una función para manejar el comando "Generar" con argumento "reporteGeneral"
 def generar_reporte():
