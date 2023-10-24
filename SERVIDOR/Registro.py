@@ -6,23 +6,12 @@
 #/
 class Registro():
         
-        def __init__(self, comando:str,nivelLog:str,timeStamp,ipCliente:str):
+        def __init__(self, comando:str,nivelLog:str,timeStamp,ipCliente:str, mensaje:str):
             self.comando = comando
             self.nivelLog = nivelLog
             self.timeStamp = timeStamp
             self.ipCliente = ipCliente
-        
-        def getComando(self):
-            return self.comando
-
-        def getNivelLog(self):
-            return self.nivelLog
-        
-        def getTimeStamp(self):
-            return self.timeStamp
-        
-        def getIpCliente(self):
-            return self.ipCliente
+            self.mensaje = mensaje
         
         def __str__(self):
-            return f"{self.timeStamp};{self.nivelLog};{self.getComando};{self.getIpCliente}"
+            return f"{self.timeStamp};{self.nivelLog};{self.comando};{self.ipCliente};{self.mensaje}"

@@ -26,17 +26,16 @@ from cmd import Cmd
 import os
 import subprocess
 import platform
+import datetime
+
 from BrazoRobot import BrazoRobot
 from ArchivoLog import ArchivoLog
 from ArchivoUsuario import ArchivoUsuario
+from Punto import Punto
+from Registro import Registro
+import Excepciones
 
-class commandException(Exception):
-    """A class for specific C4 class exceptions."""
-
-    def __init__(self, message):
-        super().__init__(message)
-
-class C4(Cmd):
+class CLI(Cmd):
     """Command Interpreter. Interface with user."""
 
     doc_header = "Ayuda para comandos documentados."
@@ -50,10 +49,41 @@ class C4(Cmd):
         super().__init__()
         self.route = os.getcwd()    # The path of the solution.
         self.brazoRobot = BrazoRobot()
+        self.archivoLog = ArchivoLog('Log.csv')
         self.requerimientos = {}
         # Será un diccionario donde las claves son los ids o ips de usuario
-        # Y las claves serán los archivos de usuario.
+        # Y las claves serán los archivos de usuario (objetos).
+    
+    def onecmd(self, line):
+        # Acciones a realizar antes de ejecutar un comando
+        # Podriamos hacer la validación de usuario
+        timeStamp = datetime.datetime.now()
+        comando = line
+        ipCliente = "127.0.0.1" #Buscar alguna forma de obtenerlo
+        
+        # Ejecutar el comando
+        result = super().onecmd(line)
 
+        # Acciones a realizar después de ejecutar un comando
+        # result debería contener tanto el nievl log y un mensaje que es el resultado
+        # del comando.
+        # Podemos hacer que siempre se devuelva un valor
+        # Sobre todo para aquellos que tienen sentido que den un valor
+
+        print("chota")
+        if result is not None:
+            nivelLog = result[0]
+            mensaje = result[1]
+            with self.archivoLog as Log:
+                Log.agregarRegistro(Registro(comando, nivelLog, timeStamp, ipCliente, mensaje))
+
+            if not (ipCliente in self.requerimientos):
+                self.requerimientos[ipCliente] = ArchivoUsuario(ipCliente)
+
+            with self.requerimientos[ipCliente] as LogUsuario:
+                LogUsuario.agregarRegistro(Registro(comando, nivelLog, timeStamp, ipCliente, mensaje))
+
+    
     def do_cls(self, args):
 
         """
@@ -82,7 +112,6 @@ reporteGeneral <id>
                 # asociado con el requerimiento, que arme el reporte y que lo devuelva
                 # como un str o algún objeto imprimible.
 
-                print(self.requerimientos[arguments[0]].reporte())
                 """
                 requerimientos seria un diccionario en el que las claves
                 son los id de los usuarios y los valores asociados son objetos
@@ -90,15 +119,25 @@ reporteGeneral <id>
                 Los objetos del tipo ArchivoUsuario tendrían un método reporte()
                 que devuelve el reporte en forma de str o bien como pretty table.
                 """
-        except commandException as e:
-            print(self.outFormat.format(e))
+                result = self.brazoRobot.enviarComando('M114').split(':')
+                for i, elem in enumerate(result):
+                    if i > 0:
+                        print(elem, end='')
+                with self.requerimientos[arguments[0]] as archivo:
+                    contador = 0
+                    while True:
+                        contador += 1
+                        registro = archivo.devolverRegistro()
+                        if registro is not None:
+                            print(self.outFormat.format(registro))
+                        else:
+                            break
+
+                return ["INFO", "Reporte del Usuario."]
         except Exception as e:
             print(self.outFormat.format(e))
-        except archivoLogException as e:
-            print(self.outFormat.format(e))
-        finally:
-            print()
-    
+            return ["ERROR", str(e)]
+        
     def do_obtenerLogServidor(self, args):
 
         """
@@ -112,54 +151,51 @@ obtenerLogServidor
                 # Debería llamar a un método del archivoLog que devuelve el contenido
                 # del archivo como un str para imprimirlo por pantalla o un objeto imprimible
                 # por pantalla.
-                print(logServidor)
 
                 """
                 logServidor seria un objeto del tipo ArchivoLog.
                 Definiendo el método __str__ en esa clase podemos hacer print(objeto)
                 y de esa manera imprimimos el contenido por pantalla.
                 """
+                with self.archivoLog:
+                    while True:
+                        registro = self.archivoLog.devolverRegistro()
+                        if registro is not None:
+                            print(self.outFormat.format(registro))
+                        else:
+                            break
+
+                return ["INFO", "Muestra del Log del Servidor."]
+
             else:
-                raise commandException("Sintaxis de comando incorrecta.")
-        except commandException as e:
-            print(self.outFormat.format(e))
-        except FileNotFoundError as e:
-            print(self.outFormat.format(f"El archivo {e.filename} no se encontró."))
+                raise Excepciones.ExcepcionDeComando(1)
         except Exception as e:
             print(self.outFormat.format(e))
-        except archivoLogException as e:
-            print(self.outFormat.format(e))
-        finally:
-            print()
+            return ["ERROR", str(e)]
 
     def do_seleccionarModo(self, args):
 
         """
-Selecciona el modo de operacion Manual(m) o Automático(a).
+Selecciona el modo de operacion en coordenadas Absolutas(a) o Relativas(r).
 seleccionarModo <modo>
-    modo        modo = a || modo = m.
+    modo        modo = a || modo = r.
         """
         print()
         try:
             arguments = args.split()
             if len(arguments) == 1:
                 # Debería llamar al método correspondiente en la clase Robot.
-                brazoRobot.seleccionarModo(arguments[0])
-
-                """
-                El brazo tiene un método que le permite seleccionar el modo.
-                """
+                result = self.brazoRobot.seleccionarModo(arguments[0])
+                for elem in result.split('\n'):
+                    print(self.outFormat.format(elem))
+                return result.split(':')
             else:
-                raise commandException("Sintaxis de comando incorrecta.")
-        except commandException as e:
-            print(self.outFormat.format(e))
-        except brazoRobotException as e:
-            print(self.outFormat.format(e))
+                raise Excepciones.ExcepcionDeComando(1)
+            
         except Exception as e:
             print(self.outFormat.format(e))
-        finally:
-            print()
-
+            return ["ERROR", str(e)]
+        
     def do_conectarRobot(self, args):
         """
 Conecta el robot.
@@ -170,19 +206,16 @@ conectarRobot
             arguments = args.split()
             if len(arguments) == 0:
                 # Debería llamar al método correspondiente en la clase Robot.
-                brazoRobot.conectar()
+                result = self.brazoRobot.conectarRobot('COM3', 115200)
+                print(self.outFormat.format(result))
+                return ["INFO", result]
             else:
-                raise commandException("Sintaxis de comando incorrecta.")
+                raise Excepciones.ExcepcionDeComando(1)
             
-        except commandException as e:
-            print(self.outFormat.format(e))
-        except brazoRobotException as e:
-            print(self.outFormat.format(e))
         except Exception as e:
             print(self.outFormat.format(e))
-        finally:
-            print()
-
+            return ["ERROR", str(e)]
+        
     def do_desconectarRobot(self, args):
         """
 Desconecta el robot.
@@ -192,19 +225,16 @@ desconectarRobot
         try:
             arguments = args.split()
             if len(arguments) == 0:
-                # Debería llamar al método correspondiente en la clase Robot.
-                brazoRobot.desconectar()
-            else:
-                raise commandException("Sintaxis de comando incorrecta.")
+                result = self.brazoRobot.desconectarRobot()
+                print(self.outFormat.format(result))
+                return ["INFO", result]
             
-        except commandException as e:
-            print(self.outFormat.format(e))
-        except brazoRobotException as e:
-            print(self.outFormat.format(e))
+            else:
+                raise Excepciones.ExcepcionDeComando(1)
+            
         except Exception as e:
             print(self.outFormat.format(e))
-        finally:
-            print()
+            return ["ERROR", str(e)]
 
     def do_activarMotores(self, args):
         """
@@ -214,20 +244,17 @@ activarMotores
         print()
         try:
             arguments = args.split()
-            if len(arguments) == 1:
-                # Debería llamar al método correspondiente en la clase Robot.
-                brazoRobot.activarMotores()
-            else:
-                raise commandException("Sintaxis de comando incorrecta.")
+            if len(arguments) == 0:
+                result = self.brazoRobot.activarMotor()
+                print(self.outFormat.format(result))
+                return ["INFO", result]
             
-        except commandException as e:
-            print(self.outFormat.format(e))
-        except brazoRobotException as e:
-            print(self.outFormat.format(e))
+            else:
+                raise Excepciones.ExcepcionDeComando(1)
+            
         except Exception as e:
             print(self.outFormat.format(e))
-        finally:
-            print()
+            return ["ERROR", str(e)]
 
     def do_desactivarMotores(self, args):
         """
@@ -238,19 +265,15 @@ desactivarMotores
         try:
             arguments = args.split()
             if len(arguments) == 0:
-                # Debería llamar al método correspondiente en la clase Robot.
-                brazoRobot.desactivarMotores()
+                result = self.brazoRobot.desactivarMotor()
+                print(self.outFormat.format(result))
+                return ["INFO", result]
             else:
-                raise commandException("Sintaxis de comando incorrecta.")
+                raise Excepciones.ExcepcionDeComando(1)
             
-        except commandException as e:
-            print(self.outFormat.format(e))
-        except brazoRobotException as e:
-            print(self.outFormat.format(e))
         except Exception as e:
             print(self.outFormat.format(e))
-        finally:
-            print()
+            return ["ERROR", str(e)]
 
     def do_home(self, args):
         """
@@ -261,51 +284,44 @@ home
         try:
             arguments = args.split()
             if len(arguments) == 0:
-                # Debería llamar al método correspondiente en la clase Robot.
-                brazoRobot.home()
+                result = self.brazoRobot.home()
+                print(self.outFormat.format(result))
+                return result.split(':')
             else:
-                raise commandException("Sintaxis de comando incorrecta.")
+                raise Excepciones.ExcepcionDeComando(1)
             
-        except commandException as e:
-            print(self.outFormat.format(e))
-        except brazoRobotException as e:
-            print(self.outFormat.format(e))
         except Exception as e:
             print(self.outFormat.format(e))
-        finally:
-            print()
-
+            return ["ERROR", str(e)]
+        
     def do_movLineal(self, args):
         """
 Realiza el movimiento lineal del efector final.
 movLineal <xx.x> <yy.y> <zz.z> [vv.v]
-    xx.x    Posicion final en eje x en cm.
-    yy.y    Posición final en eje y en cm.
-    zz.z    Posición final en eje z en cm.
-    vv.v    Velocidad del movimiento.
+    xx.x    Posicion final en eje x en mm.
+    yy.y    Posición final en eje y en mm.
+    zz.z    Posición final en eje z en mm.
+    vv.v    Velocidad del movimiento en mm/s.
         """
         print()
         try:
             arguments = args.split()
             if len(arguments) == 3:
-                # Debería llamar al metodo correspondiente en el brazo
-                # En la forma solo con 3 argumentos.
-                brazoRobot.movlineal(arguments[0], arguments[1], arguments[2])
-            elif len(arguments) == 4:
-                # Debería llamar al método correspondiente en la clase Robot.
-                # En la forma con 4 argumentos.
-                brazoRobot.movlineal(arguments[0], arguments[1], arguments[2], arguments[3])
-            else:
-                raise commandException("Sintaxis de comando incorrecta.")
+                result = self.brazoRobot.movLineal(Punto(arguments[0], arguments[1], arguments[2]))
+                print(self.outFormat.format(result))
+                return result.split(':')
             
-        except commandException as e:
-            print(self.outFormat.format(e))
-        except brazoRobotException as e:
-            print(self.outFormat.format(e))
+            elif len(arguments) == 4:
+                result = self.brazoRobot.movLineal(Punto(arguments[0], arguments[1], arguments[2]), arguments[3])
+                print(self.outFormat.format(result))
+                return result.split(':')
+            
+            else:
+                raise Excepciones.ExcepcionDeComando(1)
+            
         except Exception as e:
             print(self.outFormat.format(e))
-        finally:
-            print()
+            return ["ERROR", str(e)]
 
     def do_activarPinza(self, args):
         """
@@ -317,18 +333,15 @@ activarPinza
             arguments = args.split()
             if len(arguments) == 0:
                 # Debería llamar al metodo correspondiente en el brazo
-                brazoRobot.activarPinza()
+                result = self.brazoRobot.activarPinza()
+                print(self.outFormat.format(result))
+                return result.split(':')
             else:
-                raise commandException("Sintaxis de comando incorrecta.")
-            
-        except commandException as e:
-            print(self.outFormat.format(e))
-        except brazoRobotException as e:
-            print(self.outFormat.format(e))
+                raise Excepciones.ExcepcionDeComando(1)
+
         except Exception as e:
             print(self.outFormat.format(e))
-        finally:
-            print()
+            return ["ERROR", str(e)]
 
     def do_desactivarPinza(self, args):
         """
@@ -340,18 +353,15 @@ desactivarPinza
             arguments = args.split()
             if len(arguments) == 0:
                 # Debería llamar al metodo correspondiente en el brazo
-                brazoRobot.desactivarPinza()
+                result = self.brazoRobot.desactivarPinza()
+                print(self.outFormat.format(result))
+                return result.split(':')
             else:
-                raise commandException("Sintaxis de comando incorrecta.")
+                raise Excepciones.ExcepcionDeComando(1)
             
-        except commandException as e:
-            print(self.outFormat.format(e))
-        except brazoRobotException as e:
-            print(self.outFormat.format(e))
         except Exception as e:
             print(self.outFormat.format(e))
-        finally:
-            print()
+            return ["ERROR", str(e)]
 
     def do_grabar(self, args):
         """
@@ -366,16 +376,12 @@ grabar
                 # En realidad podemos activar un flag en esta misma clase o en el brazo Robot
                 # Crear un nuevo archivo de Job y entonces en cada llamada a un comando 
                 # Este se coloca en el archivo. Algo como lo siguiente
-
-                self.enGrabación = True
-                self.jobs.append(ArchivoJob("Grabacion1" + str(id) + ".txt"))
+                pass
+                #self.enGrabación = True
+                #self.jobs.append(ArchivoJob("Grabacion1" + str(id) + ".txt"))
             else:
-                raise commandException("Sintaxis de comando incorrecta.")
+                raise Excepciones.ExcepcionDeComando(1)
             
-        except commandException as e:
-            print(self.outFormat.format(e))
-        except archivoJobException as e:
-            print(self.outFormat.format(e))
         except Exception as e:
             print(self.outFormat.format(e))
         finally:
@@ -398,17 +404,12 @@ cargar <JobFile>
                 # y de esa manera irlos ejecutando.
 
                 #   Algo así
-                self.jobs.append(ArchivoJob(arguments[0]))
-                brazoRobot.ejecutar(self.jobs[-1])
+                pass
+                #self.jobs.append(ArchivoJob(arguments[0]))
+                #self.brazoRobot.ejecutar(self.jobs[-1])
             else:
-                raise commandException("Sintaxis de comando incorrecta.")
+                raise Excepciones.ExcepcionDeComando(1)
             
-        except commandException as e:
-            print(self.outFormat.format(e))
-        except archivoJobException as e:
-            print(self.outFormat.format(e))
-        except brazoRobotException as e:
-            print(self.outFormat.format(e))
         except Exception as e:
             print(self.outFormat.format(e))
         finally:
@@ -428,12 +429,8 @@ levantarServiror <port>
                 # llama al método para activar el mismo.
                 pass
             else:
-                raise commandException("Sintaxis de comando incorrecta.")
+                raise Excepciones.ExcepcionDeComando(1)
             
-        except commandException as e:
-            print(self.outFormat.format(e))
-        except servidorException as e:
-            print(self.outFormat.format(e))
         except Exception as e:
             print(self.outFormat.format(e))
         finally:
@@ -452,12 +449,8 @@ desconectarServidor
                 # llama al método para desactivar el mismo.
                 pass
             else:
-                raise commandException("Sintaxis de comando incorrecta.")
+                raise Excepciones.ExcepcionDeComando(1)
             
-        except commandException as e:
-            print(self.outFormat.format(e))
-        except servidorException as e:
-            print(self.outFormat.format(e))
         except Exception as e:
             print(self.outFormat.format(e))
         finally:
@@ -480,10 +473,9 @@ listarArchivosDeTrabajo [-e EXTENSION]
                         if not (fileName[-len(arguments[1]):] == arguments[1]):
                             continue
                     else:
-                        raise commandException("Opcion de comando no encontrada.")
+                        raise Excepciones.ExcepcionDeComando(2)
                 print(self.outFormat.format(fileName))
-        except commandException as e:
-            print(self.outFormat.format(e))
+
         except Exception as e:
             print(self.outFormat.format(e))
         finally:
@@ -497,3 +489,8 @@ exit
         """
 
         raise SystemExit
+    
+if __name__ == "__main__":
+    commandLine = CLI()
+    commandLine.prompt = '->'
+    commandLine.cmdloop('Entrada de comandos')
