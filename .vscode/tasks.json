@@ -1,0 +1,32 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "-Wall",
+                "-I./CLIENTE/include/xmlrpc",
+                "./CLIENTE/src/*.cpp",
+                "./CLIENTE/src/xmlrpc/*.cpp", 
+                "-lws2_32",
+                "-o",
+                "./CLIENTE/build/Cliente",
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        }
+    ]
+}
