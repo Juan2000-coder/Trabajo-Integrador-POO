@@ -130,7 +130,7 @@ reporteGeneral <id>
                         else:
                             break
 
-                return ["INFO", "Reporte del Usuario."]
+                return ":".join("INFO""Reporte del Usuario.")
         except Exception as e:
             print(self.outFormat.format(e))
             return ["ERROR", str(e)]
