@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 from xmlrpc.server import SimpleXMLRPCServer
 from xmlrpc.server import SimpleXMLRPCRequestHandler
+import socket
+hostname = socket.getfqdn()
+print("IP Address:",socket.gethostbyname_ex(hostname)[2][1])
+
 
 # Configura el servidor
-server = SimpleXMLRPCServer(('localhost', 8000))
-#server = SimpleXMLRPCServer(('IP', 8000))
+server = SimpleXMLRPCServer((socket.gethostbyname_ex(hostname)[2][1], 8000))
 
 # Definimos una función para manejar el comando "Generar" con argumento "reporteGeneral"
 def generar_reporte():

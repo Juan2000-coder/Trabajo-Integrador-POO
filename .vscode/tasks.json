@@ -9,9 +9,11 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "-Wall",
-                "-I./CLIENTE/xmlrpc",
+                "-I./CLIENTE/include",
+                "-I./CLIENTE/include/xmlrpc",
                 "./CLIENTE/src/*.cpp",
-                "./CLIENTE/build/libXmlRpc.a",
+                "./CLIENTE/src/xmlrpc/*.cpp",
+                
                 "-lws2_32",
                 "-o",
                 "./CLIENTE/build/Cliente",
