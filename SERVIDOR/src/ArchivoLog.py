@@ -16,7 +16,7 @@ class ArchivoLog():
         self.archivo.close()
         self.reader = None
 
-    def agregarRegistro(self, registro: Registro):
+    def agregarRegistro(self, comando: str, ipCliente:str, timeStamp, mensaje:str):
         # Acá lo que decía era que capaz que estaría bueno que solamente se lancen excepciones
         # Ponele, en caso de que ocurra una excepción al leer el archivo, que se lance pero que
         # se captura en una clase de la capa de control o de la capa de visualización.        
@@ -31,7 +31,8 @@ class ArchivoLog():
                 #archivo.write(f"Hora: {registro.getTimeStamp()} - {registro.getNivelLog()}: Comando: {self.getComando()} (IP: {self.getIpCliente()})" + "\n")
 
                 # Definí el método __str__ en la clase Registro de modo que se podría hacer lo siguiente:
-            self.archivo.write(str(registro)) # Me parece que el write pone automaticamente el fin de linea.
+            for registro in self.obtenerRegistro(comando, ipCliente, timeStamp, mensaje):
+                self.archivo.write(str(registro)) # Me parece que el write pone automaticamente el fin de linea.
 
         except Exception as e:
             raise Excepciones.ExcepcionArchivo(1)
@@ -39,7 +40,14 @@ class ArchivoLog():
     # Este devolver registro como que no hace mucho sentido. Capaz que conviene
     # cambiarle el nombre a leer registro y que se encargue de hacer la lectyra del siguiente
     # registro en el archivo.
-        
+
+    def obtenerRegistro(self, comando:str, ipCliente:str, timeStamp, mensaje:str):
+        registros = []
+        for linea in mensaje.split('\n'):
+            segmentos = linea.split(':')
+            registros.append(Registro(comando, segmentos[0], timeStamp, ipCliente, ":".join(segmentos[1:])))
+        return registros
+
     def devolverRegistro(self):
         try:
             linea = next(self.reader)

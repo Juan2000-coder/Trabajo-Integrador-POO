@@ -72,17 +72,14 @@ class CLI(Cmd):
 
         print("chota")
         if result is not None:
-            nivelLog = result[0]
-            mensaje = result[1]
             with self.archivoLog as Log:
-                Log.agregarRegistro(Registro(comando, nivelLog, timeStamp, ipCliente, mensaje))
+                Log.agregarRegistro(comando, ipCliente, timeStamp, result)
 
             if not (ipCliente in self.requerimientos):
                 self.requerimientos[ipCliente] = ArchivoUsuario(ipCliente)
 
             with self.requerimientos[ipCliente] as LogUsuario:
-                LogUsuario.agregarRegistro(Registro(comando, nivelLog, timeStamp, ipCliente, mensaje))
-
+                LogUsuario.agregarRegistro(comando, ipCliente, timeStamp, result)
     
     def do_cls(self, args):
 
@@ -127,7 +124,7 @@ reporteGeneral <id>
                     contador = 0
                     while True:
                         contador += 1
-                        registro = archivo.devolverRegistro()
+                        registro = archivo.obe
                         if registro is not None:
                             print(self.outFormat.format(registro))
                         else:
