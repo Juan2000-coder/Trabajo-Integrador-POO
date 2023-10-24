@@ -40,18 +40,6 @@ class Servidor():
     def shutdown(self):
         self.server.shutdown()
         self.thread.join()
-
-    def get_status(self):
-        """Funcion definida en el propio servidor"""
-        return {"param_1": "11",
-                "param_2": "22",
-                "param_N": "NN",
-                }
-
-    def do_list(self, arg1):
-        """Funcion definida en otro modulo dentro del servidor 
-        en este caso dentro del propio interprete de comandos"""
-        return self.consola.do_list(arg1, "remoto")
     
     def conectarRobot(self):
         return self.consola.onecmd("conectarRobot")

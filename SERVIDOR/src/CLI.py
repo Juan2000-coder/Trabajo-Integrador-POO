@@ -62,7 +62,6 @@ class CLI(Cmd):
     def onecmd(self, line):
         # Acciones a realizar antes de ejecutar un comando
         # Podriamos hacer la validación de usuario
-        print("Toi en onecmd")
         timeStamp = datetime.datetime.now()
         comando = line
         print(line)
@@ -77,7 +76,7 @@ class CLI(Cmd):
         # Podemos hacer que siempre se devuelva un valor
         # Sobre todo para aquellos que tienen sentido que den un valor
 
-        print("chota")
+        
         if result is not None:
             with self.archivoLog as Log:
                 Log.agregarRegistro(comando, ipCliente, timeStamp, result)
@@ -205,7 +204,6 @@ seleccionarModo <modo>
 Conecta el robot.
 conectarRobot
         """
-        print("Chotita en robot")
         try:
             result = self.brazoRobot.conectarRobot('COM3', 115200)
             print(self.outFormat.format(result))
