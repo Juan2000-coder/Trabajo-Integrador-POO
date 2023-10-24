@@ -36,6 +36,7 @@ from ArchivoLog import ArchivoLog
 from ArchivoUsuario import ArchivoUsuario
 from Punto import Punto
 from Registro import Registro
+from Servidor import Servidor
 import Excepciones
 
 class CLI(Cmd):
@@ -50,6 +51,7 @@ class CLI(Cmd):
         """"""
 
         super().__init__()
+        self.rpc_server = None
         self.route = os.getcwd()    # The path of the solution.
         self.brazoRobot = BrazoRobot()
         self.archivoLog = ArchivoLog('Log.csv')
@@ -60,8 +62,10 @@ class CLI(Cmd):
     def onecmd(self, line):
         # Acciones a realizar antes de ejecutar un comando
         # Podriamos hacer la validación de usuario
+        print("Toi en onecmd")
         timeStamp = datetime.datetime.now()
         comando = line
+        print(line)
         ipCliente = "127.0.0.1" #Buscar alguna forma de obtenerlo
         
         # Ejecutar el comando
@@ -196,62 +200,47 @@ seleccionarModo <modo>
             print(self.outFormat.format(e))
             return ["ERROR", str(e)]
         
-    def do_conectarRobot(self, args):
+    def do_conectarRobot(self,args):
         """
 Conecta el robot.
 conectarRobot
         """
-        print()
+        print("Chotita en robot")
         try:
-            arguments = args.split()
-            if len(arguments) == 0:
-                # Debería llamar al método correspondiente en la clase Robot.
-                result = self.brazoRobot.conectarRobot('COM3', 115200)
-                print(self.outFormat.format(result))
-                return ["INFO", result]
-            else:
-                raise Excepciones.ExcepcionDeComando(1)
+            result = self.brazoRobot.conectarRobot('COM3', 115200)
+            print(self.outFormat.format(result))
+            return ["INFO", result]
             
         except Exception as e:
             print(self.outFormat.format(e))
             return ["ERROR", str(e)]
         
-    def do_desconectarRobot(self, args):
+    def do_desconectarRobot(self):
         """
 Desconecta el robot.
 desconectarRobot
         """
-        print()
         try:
-            arguments = args.split()
-            if len(arguments) == 0:
-                result = self.brazoRobot.desconectarRobot()
-                print(self.outFormat.format(result))
-                return ["INFO", result]
-            
-            else:
-                raise Excepciones.ExcepcionDeComando(1)
+            result = self.brazoRobot.desconectarRobot()
+            print(self.outFormat.format(result))
+            return ["INFO", result]
             
         except Exception as e:
             print(self.outFormat.format(e))
             return ["ERROR", str(e)]
 
-    def do_activarMotores(self, args):
+    def do_activarMotores(self):
         """
 Activa los motores del brazo.
 activarMotores
         """
         print()
         try:
-            arguments = args.split()
-            if len(arguments) == 0:
-                result = self.brazoRobot.activarMotor()
-                print(self.outFormat.format(result))
-                return ["INFO", result]
             
-            else:
-                raise Excepciones.ExcepcionDeComando(1)
-            
+            result = self.brazoRobot.activarMotor()
+            print(self.outFormat.format(result))
+            return ["INFO", result]
+                    
         except Exception as e:
             print(self.outFormat.format(e))
             return ["ERROR", str(e)]
@@ -415,23 +404,31 @@ cargar <JobFile>
         finally:
             print()
     
+    def do_servidor(self, value):
+        """"Inicia/Para el servidor rpc según el valor dado (true/false)."""
+        if value:
+            if self.rpc_server is None:
+                self.rpc_server = Servidor(self)  #este objeto inicia el servidor y se da a conocer
+        else:
+            if self.rpc_server is not None:
+                self.rpc_server.shutdown()
+                self.rpc_server = None
+    
     def do_levantarServidor(self, args):
+
         """
         Levanta el servidor XML-RPC en el puerto indicado.
         levantarServidor <port>
         port: El puerto del servidor.
         """
+
         print()
         try:
             arguments = args.split()
             if len(arguments) == 1:
                 port = int(arguments[0])  # Obtiene el puerto desde el argumento
                 server = SimpleXMLRPCServer(('192.168.131.188', int(port)))  # Crea una instancia del servidor
-                #Definimos funciones
-                  
-                #Registramos funciones
-                server.register_function(conectarRobot, "conectarRobot")
-            
+                
                 #self.registrar_funciones(server)  # Registra tus funciones en el servidor
                 print("Servidor listo para recibir solicitudes en el puerto", int(port))
                 server.serve_forever()  # Inicia el servidor

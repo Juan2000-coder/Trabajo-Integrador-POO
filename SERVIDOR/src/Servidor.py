@@ -3,11 +3,10 @@ from threading import Thread
 import socket
 import logging
 
+hostname = socket.getfqdn()
+RPC_PORT = 8000
 
-RPC_PORT = 8891
-
-class XRServer(object):
-
+class Servidor():
     server = None
 
     def __init__(self, consola, port = RPC_PORT):
@@ -15,7 +14,7 @@ class XRServer(object):
         used_port = port
         while True:
             try:
-                self.server = SimpleXMLRPCServer(("localhost", used_port),
+                self.server = SimpleXMLRPCServer((socket.gethostbyname_ex(hostname)[2][1], port),
                                                  allow_none = True,
                                                  logRequests = None)
                 if used_port != port:
@@ -29,6 +28,7 @@ class XRServer(object):
                     raise
         self.server.register_function(self.get_status, 'status')
         self.server.register_function(self.do_list, 'list')
+        self.server.register_function(self.conectarRobot, 'conectarRobot')   
 
         self.thread = Thread(target = self.run_server)
         self.thread.start()
@@ -52,3 +52,6 @@ class XRServer(object):
         """Funcion definida en otro modulo dentro del servidor 
         en este caso dentro del propio interprete de comandos"""
         return self.consola.do_list(arg1, "remoto")
+    
+    def conectarRobot(self):
+        return self.consola.onecmd("conectarRobot")
