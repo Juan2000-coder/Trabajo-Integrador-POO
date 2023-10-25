@@ -24,7 +24,7 @@ class ExcepcionBrazoRobot(Exception):
             super().__init__("Modo de coordenadas no válido. Use 'a' o 'r'")
         
         elif codigoDeExcepcion == 8:
-            super().__init__("Conexión a establecida.")
+            super().__init__("Conexión ya establecida.")
 
     def __str__(self):
         return f"Excepcion de Brazo Robot con mensaje: {self.args[0]} - Codigo: {self.codigoDeExcepcion}"
@@ -52,6 +52,9 @@ class ExcepcionDeComando(Exception):
 
         if codigoDeExcepcion == 2:
             super().__init__("Opcion de comando no encontrada.")
+        
+        if codigoDeExcepcion == 3:
+            super().__init__("Faltan argumentos.")
 
     def __str__(self):
         return f"Excepcion de comando con mensaje: {self.args[0]} - Codigo: {self.codigoDeExcepcion}"
