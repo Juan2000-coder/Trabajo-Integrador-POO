@@ -227,7 +227,7 @@ desconectarRobot
             print(self.outFormat.format(e))
             return ["ERROR", str(e)]
 
-    def do_activarMotores(self):
+    def do_activarMotores(self,args):
         """
 Activa los motores del brazo.
 activarMotores

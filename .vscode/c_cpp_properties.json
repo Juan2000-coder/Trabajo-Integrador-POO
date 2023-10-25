@@ -1,10 +1,11 @@
-<<<<<<< HEAD
 {
     "configurations": [
         {
             "name": "Win32",
+            "compilerPathInCppPropertiesJson": "",
             "includePath": [
-                "${default}"
+                "D:/include",
+                "${workspaceFolder}/CLIENTE/include/xmlrpc"
             ],
             "defines": [
                 "_DEBUG",
@@ -14,28 +15,16 @@
             "cStandard": "c11",
             "cppStandard": "gnu++14",
             "intelliSenseMode": "windows-gcc-x86",
-            "compilerPath": "D:/bin/g++.exe"
+            "mergeConfigurations": false,
+            "compilerPath": "D:/bin/g++.exe",
+            "browse": {
+                "path": [
+                    "D:/include",
+                    "d:/tareas pancho/UnCuyo/Programacion Orientada a Objetos/integrador"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
         }
     ],
     "version": 4
-=======
-{
-    "configurations": [
-        {
-            "name": "Win32",
-            "includePath": [
-                "${default}"
-            ],
-            "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
-            ],
-            "cStandard": "c11",
-            "cppStandard": "gnu++14",
-            "intelliSenseMode": "windows-gcc-x86"
-        }
-    ],
-    "version": 4
->>>>>>> d520a5780a4bec6cbb695772c487fe4097a8864a
 }

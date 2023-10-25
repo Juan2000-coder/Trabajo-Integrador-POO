@@ -26,10 +26,11 @@ class Servidor():
                     continue
                 else:
                     raise
-        self.server.register_function(self.get_status, 'status')
-        self.server.register_function(self.do_list, 'list')
-        self.server.register_function(self.conectarRobot, 'conectarRobot')   
 
+        self.server.register_function(self.conectarRobot, 'conectarRobot')   
+        self.server.register_function(self.activarMotores, 'activarMotores') 
+        self.server.register_function(self.desactivarMotores, 'desactivarMotores') 
+        self.server.register_function(self.reporteGeneral, 'reporteGeneral') 
         self.thread = Thread(target = self.run_server)
         self.thread.start()
         print("Servidor RPC iniciado en el puerto [%s]" % str(self.server.server_address))
@@ -43,3 +44,12 @@ class Servidor():
     
     def conectarRobot(self):
         return self.consola.onecmd("conectarRobot")
+    
+    def activarMotores(self):
+        return self.consola.onecmd("activarMotores")
+    
+    def desactivarMotores(self):
+        return self.consola.onecmd("desactivarMotores")
+    
+    def reporteGeneral(self):
+        return self.consola.onecmd("reporteGeneral")
