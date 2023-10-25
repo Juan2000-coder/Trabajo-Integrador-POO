@@ -154,7 +154,7 @@ obtenerLogServidor
                     while True:
                         registro = self.archivoLog.devolverRegistro()
                         if registro is not None:
-                            print(self.outFormat.format(registro))
+                            print(self.outFormat.format(registro), end = '')
                         else:
                             break
 
@@ -411,18 +411,21 @@ cargar <JobFile>
     def do_levantarServidor(self, args):
         """"
 Inicia/Para el servidor rpc según el valor dado (true/false).
-levantarServidor true|false
+levantarServidor True|False
         """
         try:
             arguments = args.split()
             if len(arguments) == 1:
-                if arguments[1]:
+                if arguments[0]=="true":
                     if self.rpc_server is None:
                         self.rpc_server = Servidor(self)  #este objeto inicia el servidor y se da a conocer
-                else:
+                elif arguments[0]=="false":
                     if self.rpc_server is not None:
                         self.rpc_server.shutdown()
+                        print("Servidor Apagado")
                         self.rpc_server = None
+                else: 
+                    raise Excepciones.ExcepcionDeComando(2)
             else:
                 raise Excepciones.ExcepcionDeComando(3)
         except Exception as e:
