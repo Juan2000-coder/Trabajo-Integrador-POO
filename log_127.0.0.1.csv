@@ -39,3 +39,6 @@
 2023-10-25 09:55:56.648323;127.0.0.1;levantarServidor 1;ERROR;list index out of range
 2023-10-25 09:56:33.633381;127.0.0.1;levantarServidor true;ERROR;list index out of range
 2023-10-25 09:56:58.161959;127.0.0.1;levantarServidor 1;ERROR;list index out of range
+2023-10-25 10:00:16.790762;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
+2023-10-25 10:00:29.255083;127.0.0.1;levantarServidor;ERROR;Excepcion de comando con mensaje: Faltan argumentos. - Codigo: 3
+2023-10-25 10:00:35.679608;127.0.0.1;levantarServidor 1;ERROR;list index out of range
