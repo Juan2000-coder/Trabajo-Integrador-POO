@@ -100,3 +100,6 @@
 2023-10-25 10:36:02.719760;127.0.0.1;desconectarRobot;INFO;Conexión cerrada.
 2023-10-25 10:36:12.777889;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.
 >>>>>>> b07c51cd44c4a1999a49d0c05f085fd9c3f4d9a9
+2023-10-25 11:06:42.647532;127.0.0.1;conectarRobot;ERROR;Excepcion de Brazo Robot con mensaje: Error al intentar establecer la conexión con el Robot. - Codigo: 1
+2023-10-25 11:19:10.138237;127.0.0.1;levantarServidor 1;ERROR;Excepcion de comando con mensaje: Opcion de comando no encontrada. - Codigo: 2
+2023-10-25 11:19:51.137551;127.0.0.1;conectarRobot;ERROR;Excepcion de Brazo Robot con mensaje: Error al intentar establecer la conexión con el Robot. - Codigo: 1

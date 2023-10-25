@@ -416,10 +416,10 @@ levantarServidor True|False
         try:
             arguments = args.split()
             if len(arguments) == 1:
-                if arguments[0]=="true":
+                if arguments[0].lower()=="true":
                     if self.rpc_server is None:
                         self.rpc_server = Servidor(self)  #este objeto inicia el servidor y se da a conocer
-                elif arguments[0]=="false":
+                elif arguments[0].lower()=="false":
                     if self.rpc_server is not None:
                         self.rpc_server.shutdown()
                         print("Servidor Apagado")

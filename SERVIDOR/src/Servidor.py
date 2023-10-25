@@ -18,7 +18,7 @@ class Servidor():
                                                  allow_none = True,
                                                  logRequests = None)
                 if used_port != port:
-                    logging.warning(_("RPC server bound on non-default port %d") % used_port)
+                    logging.warning(("RPC server bound on non-default port %d") % used_port)
                 break
             except socket.error as e:
                 if e.errno == 98:
@@ -27,8 +27,10 @@ class Servidor():
                 else:
                     raise
 
-        self.server.register_function(self.conectarRobot, 'conectarRobot')   
+        self.server.register_function(self.conectarRobot, 'conectarRobot')
+        self.server.register_function(self.desconectarRobot, 'desconectarRobot')
         self.server.register_function(self.activarMotores, 'activarMotores') 
+        self.server.register.function(self.seleccionarModo, 'seleccionarModo')
         self.server.register_function(self.desactivarMotores, 'desactivarMotores') 
         self.server.register_function(self.reporteGeneral, 'reporteGeneral') 
         self.server.register_function(self.home, 'home') 
@@ -39,8 +41,6 @@ class Servidor():
         self.server.register_function(self.grabar, 'grabar') 
         self.server.register_function(self.cargar, 'cargar')        
         self.server.register_function(self.listarArchivosDeTrabajo, 'listarArchivosDeTrabajo') 
-        self.server.register_function(self.levantarServidor, 'levantarServidor') 
-
         self.thread = Thread(target = self.run_server)
         self.thread.start()
         print("Servidor RPC iniciado en el puerto [%s]" % str(self.server.server_address))
@@ -54,6 +54,9 @@ class Servidor():
     
     def conectarRobot(self):
         return self.consola.onecmd("conectarRobot")
+
+    def desconectarRobot(self):
+        return self.consola.onecmd("desconectarRobot")
     
     def activarMotores(self):
         return self.consola.onecmd("activarMotores")
@@ -68,13 +71,13 @@ class Servidor():
         return self.consola.onecmd("obtenerLogServidor")
     
     def seleccionarModo(self, args):
-        return self.consola.onecmd("seleccionarModo" + args)
+        return self.consola.onecmd("seleccionarModo " + args)
     
     def home(self):
         return self.consola.onecmd("home")
     
-    def movLineal(self,args):
-        return self.consola.onecmd("movLineal" + args)
+    def movLineal(self,arg1,arg2,arg3,arg4=0):
+        return self.consola.onecmd("movLineal " + arg1 + " " + arg2 + " " + arg3 + " " + arg4)
     
     def activarPinza(self):
         return self.consola.onecmd("activarPinza")
@@ -91,5 +94,3 @@ class Servidor():
     def listarArchivosDeTrabajo(self):
         return self.consola.onecmd("listarArchivosDeTrabajo")
     
-    def levantarServidor(self, args):
-        return self.consola.onecmd("levantarServidor" + args)
