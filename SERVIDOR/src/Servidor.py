@@ -31,6 +31,15 @@ class Servidor():
         self.server.register_function(self.activarMotores, 'activarMotores') 
         self.server.register_function(self.desactivarMotores, 'desactivarMotores') 
         self.server.register_function(self.reporteGeneral, 'reporteGeneral') 
+        self.server.register_function(self.home, 'home') 
+        self.server.register_function(self.obtenerLogServidor, 'obtenerLogServidor') 
+        self.server.register_function(self.movLineal, 'movLineal') 
+        self.server.register_function(self.activarPinza, 'activarPinza') 
+        self.server.register_function(self.desactivarPinza, 'desactivarPinza') 
+        self.server.register_function(self.grabar, 'grabar') 
+        self.server.register_function(self.cargar, 'cargar')        
+        self.server.register_function(self.listarArchivosDeTrabajo, 'listarArchivosDeTrabajo') 
+
         self.thread = Thread(target = self.run_server)
         self.thread.start()
         print("Servidor RPC iniciado en el puerto [%s]" % str(self.server.server_address))
@@ -53,3 +62,30 @@ class Servidor():
     
     def reporteGeneral(self):
         return self.consola.onecmd("reporteGeneral")
+    
+    def obtenerLogServidor(self):
+        return self.consola.onecmd("obtenerLogServidor")
+    
+    def seleccionarModo(self, args):
+        return self.consola.onecmd("seleccionarModo" + args)
+    
+    def home(self):
+        return self.consola.onecmd("home")
+    
+    def movLineal(self,args):
+        return self.consola.onecmd("movLineal" + args)
+    
+    def activarPinza(self):
+        return self.consola.onecmd("activarPinza")
+    
+    def desactivarPinza(self):
+        return self.consola.onecmd("desactivarPinza")
+    
+    def grabar(self):
+        return self.consola.onecmd("grabar")
+    
+    def cargar(self):
+        return self.consola.onecmd("cargar")
+    
+    def listarArchivosDeTrabajo(self):
+        return self.consola.onecmd("listarArchivosDeTrabajo")
