@@ -1,65 +1,13 @@
-2023-10-24 23:16:48.180238;127.0.0.1;conectarRobot;INFO;Conexiï¿½n exitosa con el puerto COM3.
-2023-10-24 23:16:51.065970;127.0.0.1;home;INFO; ROBOT ONLINE
-2023-10-24 23:16:51.065970;127.0.0.1;home;INFO; SEND G28 TO CALIBRATE
-2023-10-24 23:16:51.065970;127.0.0.1;home;INFO; HOMING
-2023-10-24 23:16:51.065970;127.0.0.1;home;INFO; HOMING COMPLETE t=7.50s
-2023-10-24 23:16:56.625444;127.0.0.1;activarPinza;ERROR; COMMAND NOT RECOGNIZED
-2023-10-24 23:16:56.625444;127.0.0.1;activarPinza;ERROR;
-2023-10-24 23:17:00.834754;127.0.0.1;desactivarPinza;ERROR; COMMAND NOT RECOGNIZED
-2023-10-24 23:17:00.834754;127.0.0.1;desactivarPinza;ERROR;
-<<<<<<< HEAD
-2023-10-24 23:17:05.349682;127.0.0.1;desconectarRobot;INFO;Conexiï¿½n cerrada.
-2023-10-25 09:09:33.495782;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.
-2023-10-25 09:36:52.365278;127.0.0.1;conectarRobot;ERROR;Excepcion de Brazo Robot con mensaje: Error al intentar establecer la conexiï¿½n con el Robot. - Codigo: 1
-2023-10-25 09:36:56.433773;127.0.0.1;activarMotores;INFO;Motor activado.
-2023-10-25 09:37:00.395903;127.0.0.1;desactivarMotores;INFO;Motor desactivado.
-2023-10-25 09:37:13.206679;127.0.0.1;home;ERROR;Excepcion de Brazo Robot con mensaje: No se pudo enviar el comando. La conexiï¿½n con el Robot no estï¿½ establecida. - Codigo: 2
-2023-10-25 09:37:18.921819;127.0.0.1;obtenerLogServidor;ERROR;Excepcion de Archivo con mensaje: Error al devolver un registro. - Codigo: 2
-2023-10-25 09:37:22.265599;127.0.0.1;movLineal;ERROR;Excepcion de comando con mensaje: Sintaxis de comando incorrecta. - Codigo: 1
-2023-10-25 09:38:15.837450;127.0.0.1;activarPinza;ERROR;Excepcion de Brazo Robot con mensaje: No se pudo enviar el comando. La conexiï¿½n con el Robot no estï¿½ establecida. - Codigo: 2
-2023-10-25 09:38:19.589661;127.0.0.1;desactivarPinza;ERROR;Excepcion de Brazo Robot con mensaje: No se pudo enviar el comando. La conexiï¿½n con el Robot no estï¿½ establecida. - Codigo: 2
-2023-10-25 09:38:27.705247;127.0.0.1;cargar;ERROR;Excepcion de comando con mensaje: Sintaxis de comando incorrecta. - Codigo: 1
-2023-10-25 09:43:34.290611;127.0.0.1;movLineal;ERROR;Excepcion de comando con mensaje: Sintaxis de comando incorrecta. - Codigo: 1
-2023-10-25 09:43:39.551057;127.0.0.1;movLineal 20;ERROR;Excepcion de comando con mensaje: Sintaxis de comando incorrecta. - Codigo: 1
-2023-10-25 09:46:00.960090;127.0.0.1;seleccionarModo;ERROR;Excepcion de comando con mensaje: Sintaxis de comando incorrecta. - Codigo: 1
-2023-10-25 09:46:15.317784;127.0.0.1;seleccionarModo a;ERROR;Excepcion de Brazo Robot con mensaje: No se pudo enviar el comando. La conexiï¿½n con el Robot no estï¿½ establecida. - Codigo: 2
-=======
-2023-10-24 23:17:05.349682;127.0.0.1;desconectarRobot;INFO;Conexiï¿½n cerrada.
-2023-10-25 09:16:35.681842;127.0.0.1;conectarRobot;INFO;Conexiï¿½n exitosa con el puerto COM3.
-2023-10-25 09:17:47.632498;127.0.0.1;activarMotores;INFO;Motor activado.
-2023-10-25 09:18:13.087666;127.0.0.1;desactivarMotores;INFO;Motor desactivado.
-2023-10-25 09:38:42.872067;127.0.0.1;conectarRobot;INFO;Conexiï¿½n exitosa con el puerto COM3.
-2023-10-25 09:38:56.740450;127.0.0.1;home;INFO; ROBOT ONLINE
-2023-10-25 09:38:56.740450;127.0.0.1;home;INFO; SEND G28 TO CALIBRATE
-2023-10-25 09:38:56.740450;127.0.0.1;home;INFO; HOMING
-2023-10-25 09:38:56.740450;127.0.0.1;home;INFO; HOMING COMPLETE t=7.50s
-2023-10-25 09:41:29.891260;127.0.0.1;movLineal 10 180 130;INFO; LINEAR! MOVE: [X:10.00 Y:180.00 Z:130.00 E:0.00] t=2.40s
-2023-10-25 09:41:37.572295;127.0.0.1;movLineal 10 180 130 2;ERROR;Unknown format code 'f' for object of type 'str'
-2023-10-25 09:43:30.457653;127.0.0.1;conectarRobot;INFO;Conexiï¿½n exitosa con el puerto COM3.
-2023-10-25 09:43:47.833422;127.0.0.1;movLineal 10 180 130 2;ERROR;Unknown format code 'f' for object of type 'str'
-2023-10-25 09:45:01.631428;127.0.0.1;conectarRobot;INFO;Conexiï¿½n exitosa con el puerto COM3.
-2023-10-25 09:45:12.128383;127.0.0.1;movLineal 10 180 130;INFO; ROBOT ONLINE
-2023-10-25 09:45:12.128383;127.0.0.1;movLineal 10 180 130;INFO; SEND G28 TO CALIBRATE
-2023-10-25 09:45:12.128383;127.0.0.1;movLineal 10 180 130;INFO; LINEAR! MOVE: [X:10.00 Y:180.00 Z:130.00 E:0.00] t=2.40s
-2023-10-25 09:45:16.419299;127.0.0.1;movLineal 10 180 130 2;ERROR;Punto.__init__() takes 4 positional arguments but 5 were given
-2023-10-25 09:45:41.366475;127.0.0.1;movLineal 10 180 130;INFO; LINEAR! MOVE: [X:10.00 Y:180.00 Z:130.00 E:0.00] t=0.00s
-2023-10-25 09:45:48.599306;127.0.0.1;movLineal 10 180 130 2;ERROR;Punto.__init__() takes 4 positional arguments but 5 were given
-2023-10-25 09:53:01.038890;127.0.0.1;conectarRobot;INFO;Conexiï¿½n exitosa con el puerto COM3.
-2023-10-25 09:53:22.192544;127.0.0.1;movLineal 10 180 130;INFO; ROBOT ONLINE
-2023-10-25 09:53:22.192544;127.0.0.1;movLineal 10 180 130;INFO; SEND G28 TO CALIBRATE
-2023-10-25 09:53:22.192544;127.0.0.1;movLineal 10 180 130;INFO; LINEAR! MOVE: [X:10.00 Y:180.00 Z:130.00 E:0.00] t=2.40s
-2023-10-25 09:53:27.157687;127.0.0.1;movLineal 10 180 130 2;INFO; LINEAR! MOVE: [X:10.00 Y:180.00 Z:130.00 E:2.00] t=7.07s
-2023-10-25 09:53:46.488113;127.0.0.1;activarPinza;INFO; GRIPPER ON
-2023-10-25 09:53:57.698812;127.0.0.1;desactivarPinza;INFO; GRIPPER OFF
-2023-10-25 09:55:42.623647;127.0.0.1;levantarServidor 1;ERROR;list index out of range
-2023-10-25 09:55:49.584890;127.0.0.1;levantarServidor;ERROR;Excepcion de comando con mensaje: Faltan argumentos. - Codigo: 3
-2023-10-25 09:55:56.648323;127.0.0.1;levantarServidor 1;ERROR;list index out of range
-2023-10-25 09:56:33.633381;127.0.0.1;levantarServidor true;ERROR;list index out of range
-2023-10-25 09:56:58.161959;127.0.0.1;levantarServidor 1;ERROR;list index out of range
-<<<<<<< HEAD
-2023-10-25 10:00:16.790762;127.0.0.1;conectarRobot;INFO;Conexiï¿½n exitosa con el puerto COM3.
-2023-10-25 10:00:29.255083;127.0.0.1;levantarServidor;ERROR;Excepcion de comando con mensaje: Faltan argumentos. - Codigo: 3
-2023-10-25 10:00:35.679608;127.0.0.1;levantarServidor 1;ERROR;list index out of range
-=======
->>>>>>> e3786ab541dff278820cf55fe6394b0d575b914f
->>>>>>> 16c75647e768ab5f1bf9473c5b6fbbe72f4df36f
+2023-10-25 10:35:34.901702;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
+2023-10-25 10:35:37.880805;127.0.0.1;home;INFO; ROBOT ONLINE
+2023-10-25 10:35:37.880805;127.0.0.1;home;INFO; SEND G28 TO CALIBRATE
+2023-10-25 10:35:37.880805;127.0.0.1;home;INFO; HOMING
+2023-10-25 10:35:37.880805;127.0.0.1;home;INFO; HOMING COMPLETE t=7.50s
+2023-10-25 10:35:49.622341;127.0.0.1;activarPinza;ERROR; COMMAND NOT RECOGNIZED
+2023-10-25 10:35:49.622341;127.0.0.1;activarPinza;ERROR;
+2023-10-25 10:35:57.708765;127.0.0.1;desactivarPinza;ERROR; COMMAND NOT RECOGNIZED
+2023-10-25 10:35:57.708765;127.0.0.1;desactivarPinza;ERROR;
+2023-10-25 10:35:59.341930;127.0.0.1;home;ERROR; COMMAND NOT RECOGNIZED
+2023-10-25 10:35:59.341930;127.0.0.1;home;ERROR;
+2023-10-25 10:36:02.719760;127.0.0.1;desconectarRobot;INFO;Conexión cerrada.
+2023-10-25 10:36:12.777889;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.

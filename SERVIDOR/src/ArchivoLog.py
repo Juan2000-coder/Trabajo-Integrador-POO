@@ -46,7 +46,7 @@ class ArchivoLog():
         registros = []
         for linea in mensaje.split('\n'):
             segmentos = linea.split(':')
-            registros.append(Registro(comando, segmentos[0], timeStamp, ipCliente, ":".join(segmentos[1:])))
+            registros.append(Registro(timeStamp, ipCliente, comando, segmentos[0], ":".join(segmentos[1:])))
         return registros
 
     def devolverRegistro(self):
@@ -54,7 +54,6 @@ class ArchivoLog():
             linea = next(self.reader)
             return Registro(linea[0], linea[1], linea[2], linea[3], linea[4])
         except StopIteration:
-            self.lectura = None
             return None
         except Exception as e:
             raise Excepciones.ExcepcionArchivo(2)
