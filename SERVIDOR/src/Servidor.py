@@ -26,8 +26,7 @@ class Servidor():
                     continue
                 else:
                     raise
-        self.server.register_function(self.get_status, 'status')
-        self.server.register_function(self.do_list, 'list')
+
         self.server.register_function(self.conectarRobot, 'conectarRobot')   
 
         self.thread = Thread(target = self.run_server)

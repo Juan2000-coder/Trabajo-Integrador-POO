@@ -404,7 +404,7 @@ cargar <JobFile>
     
     def do_servidor(self, value):
         """"Inicia/Para el servidor rpc según el valor dado (true/false)."""
-        if value:
+        if value == '1':
             if self.rpc_server is None:
                 self.rpc_server = Servidor(self)  #este objeto inicia el servidor y se da a conocer
         else:
