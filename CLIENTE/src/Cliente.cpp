@@ -27,7 +27,6 @@ int main(int argc, char* argv[]) {
     }
     
     int port = atoi(argv[2]);
-+
     XmlRpcClient c(argv[1], port);
     XmlRpcValue oneArg, noArgs, result;
 

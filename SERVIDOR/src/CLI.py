@@ -81,14 +81,25 @@ class CLI(Cmd):
 
         
         if result is not None:
+            
+            mensaje = result
             with self.archivoLog as Log:
-                Log.agregarRegistro(comando, ipCliente, timeStamp, result)
+                if comando == "obtenerLogServidor":
+                    mensaje = "INFO: Muestra del Log del Servidor."
+                elif comando == "reporteGeneral":
+                    mensaje = "INFO: Muestra de reporte de usuario."
+                else:
+                    pass
+                Log.agregarRegistro(comando, ipCliente, timeStamp, mensaje)
 
             if not (ipCliente in self.requerimientos):
                 self.requerimientos[ipCliente] = ArchivoUsuario(ipCliente)
 
             with self.requerimientos[ipCliente] as LogUsuario:
-                LogUsuario.agregarRegistro(comando, ipCliente, timeStamp, result)
+                LogUsuario.agregarRegistro(comando, ipCliente, timeStamp, mensaje)
+
+        return result
+
     
     def do_cls(self, args):
 
@@ -409,17 +420,17 @@ cargar <JobFile>
     
 
     def do_levantarServidor(self, args):
-        """"
+        """
 Inicia/Para el servidor rpc según el valor dado (true/false).
-levantarServidor True|False
+levantarServidor true|false
         """
         try:
             arguments = args.split()
             if len(arguments) == 1:
-                if arguments[0]=="true":
+                if arguments[0].lower()=="true":
                     if self.rpc_server is None:
                         self.rpc_server = Servidor(self)  #este objeto inicia el servidor y se da a conocer
-                elif arguments[0]=="false":
+                elif arguments[0].lower() =="false":
                     if self.rpc_server is not None:
                         self.rpc_server.shutdown()
                         print("Servidor Apagado")

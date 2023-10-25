@@ -100,3 +100,7 @@
 2023-10-25 10:36:02.719760;127.0.0.1;desconectarRobot;INFO;Conexión cerrada.
 2023-10-25 10:36:12.777889;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.
 >>>>>>> b07c51cd44c4a1999a49d0c05f085fd9c3f4d9a9
+2023-10-25 11:17:43.275838;127.0.0.1;levantarServidor true;ERROR;[Errno 11001] getaddrinfo failed
+2023-10-25 11:18:30.228050;127.0.0.1;levantarServidor true;ERROR;[Errno 11001] getaddrinfo failed
+2023-10-25 11:21:19.703494;127.0.0.1;levantarServidor;ERROR;Excepcion de comando con mensaje: Faltan argumentos. - Codigo: 3
+2023-10-25 11:21:23.179563;127.0.0.1;levantarServidor true;ERROR;[Errno 11001] getaddrinfo failed

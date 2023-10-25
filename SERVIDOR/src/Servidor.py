@@ -18,7 +18,7 @@ class Servidor():
                                                  allow_none = True,
                                                  logRequests = None)
                 if used_port != port:
-                    logging.warning(_("RPC server bound on non-default port %d") % used_port)
+                    logging.warning(("RPC server bound on non-default port %d") % used_port)
                 break
             except socket.error as e:
                 if e.errno == 98:
