@@ -81,15 +81,14 @@ class CLI(Cmd):
 
         
         if result is not None:
-            
-            mensaje = result
+            if comando == "obtenerLogServidor":
+                mensaje = "INFO: Muestra del Log del Servidor."
+            elif comando == "reporteGeneral":
+                mensaje = "INFO: Muestra de reporte de usuario."
+            else:
+                mensaje = result
             with self.archivoLog as Log:
-                if comando == "obtenerLogServidor":
-                    mensaje = "INFO: Muestra del Log del Servidor."
-                elif comando == "reporteGeneral":
-                    mensaje = "INFO: Muestra de reporte de usuario."
-                else:
-                    pass
+               
                 Log.agregarRegistro(comando, ipCliente, timeStamp, mensaje)
 
             if not (ipCliente in self.requerimientos):

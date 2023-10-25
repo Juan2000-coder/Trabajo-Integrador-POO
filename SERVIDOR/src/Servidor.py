@@ -30,7 +30,7 @@ class Servidor():
         self.server.register_function(self.conectarRobot, 'conectarRobot')
         self.server.register_function(self.desconectarRobot, 'desconectarRobot')
         self.server.register_function(self.activarMotores, 'activarMotores') 
-        self.server.register.function(self.seleccionarModo, 'seleccionarModo')
+        self.server.register_function(self.seleccionarModo, 'seleccionarModo')
         self.server.register_function(self.desactivarMotores, 'desactivarMotores') 
         self.server.register_function(self.reporteGeneral, 'reporteGeneral') 
         self.server.register_function(self.home, 'home') 
