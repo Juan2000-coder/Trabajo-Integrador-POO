@@ -50,9 +50,13 @@ class ArchivoLog():
 
     def devolverRegistro(self):
         try:
+            if not self.lectura:
+                self.archivo.seek(0)
+                self.lectura = True
             linea = next(self.reader)
             return Registro(linea[0], linea[1], linea[2], linea[3], linea[4])
         except StopIteration:
+            self.lectura
             return None
         except Exception as e:
             raise Excepciones.ExcepcionArchivo(2)
