@@ -100,7 +100,75 @@
 2023-10-25 10:36:02.719760;127.0.0.1;desconectarRobot;INFO;Conexión cerrada.
 2023-10-25 10:36:12.777889;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.
 >>>>>>> b07c51cd44c4a1999a49d0c05f085fd9c3f4d9a9
+<<<<<<< HEAD
 2023-10-25 11:17:43.275838;127.0.0.1;levantarServidor true;ERROR;[Errno 11001] getaddrinfo failed
 2023-10-25 11:18:30.228050;127.0.0.1;levantarServidor true;ERROR;[Errno 11001] getaddrinfo failed
 2023-10-25 11:21:19.703494;127.0.0.1;levantarServidor;ERROR;Excepcion de comando con mensaje: Faltan argumentos. - Codigo: 3
 2023-10-25 11:21:23.179563;127.0.0.1;levantarServidor true;ERROR;[Errno 11001] getaddrinfo failed
+=======
+<<<<<<< HEAD
+2023-10-25 11:06:42.647532;127.0.0.1;conectarRobot;ERROR;Excepcion de Brazo Robot con mensaje: Error al intentar establecer la conexión con el Robot. - Codigo: 1
+2023-10-25 11:19:10.138237;127.0.0.1;levantarServidor 1;ERROR;Excepcion de comando con mensaje: Opcion de comando no encontrada. - Codigo: 2
+2023-10-25 11:19:51.137551;127.0.0.1;conectarRobot;ERROR;Excepcion de Brazo Robot con mensaje: Error al intentar establecer la conexión con el Robot. - Codigo: 1
+=======
+2023-10-25 11:19:48.787557;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
+2023-10-25 11:21:10.419663;127.0.0.1;conectarRobot;ERROR;Excepcion de Brazo Robot con mensaje: Conexión ya establecida. - Codigo: 8
+2023-10-25 11:22:05.999404;127.0.0.1;activarMotores;INFO;Motor activado.
+2023-10-25 11:22:38.160385;127.0.0.1;activarMotores;INFO;Motor activado.
+2023-10-25 11:23:23.489221;127.0.0.1;activarMotores;INFO;Motor activado.
+2023-10-25 11:23:31.926168;127.0.0.1;obtenerLogServidor;ERROR;Excepcion de Archivo con mensaje: Error al devolver un registro. - Codigo: 2
+2023-10-25 11:24:06.564518;127.0.0.1;obtenerLogServidor;ERROR;Excepcion de Archivo con mensaje: Error al devolver un registro. - Codigo: 2
+2023-10-25 11:24:18.756293;127.0.0.1;conectarRobot;ERROR;Excepcion de Brazo Robot con mensaje: Conexión ya establecida. - Codigo: 8
+2023-10-25 11:26:30.022827;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
+2023-10-25 11:26:52.580788;127.0.0.1;desconectarRobot;INFO;Conexión cerrada.
+2023-10-25 11:28:42.998756;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
+2023-10-25 11:29:01.939231;127.0.0.1;desconectarRobot;INFO;Conexión cerrada.
+2023-10-25 11:29:14.648354;127.0.0.1;home;ERROR;Excepcion de Brazo Robot con mensaje: No se pudo enviar el comando. La conexión con el Robot no está establecida. - Codigo: 2
+2023-10-25 11:29:23.112288;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
+2023-10-25 11:29:28.206107;127.0.0.1;home;INFO; ROBOT ONLINE
+2023-10-25 11:29:28.206107;127.0.0.1;home;INFO; SEND G28 TO CALIBRATE
+2023-10-25 11:29:28.206107;127.0.0.1;home;INFO; HOMING
+2023-10-25 11:29:28.206107;127.0.0.1;home;INFO; HOMING COMPLETE t=7.50s
+2023-10-25 11:29:46.162159;127.0.0.1;activarMotores;INFO;Motor activado.
+2023-10-25 11:30:37.625759;127.0.0.1;desactivarMotores;INFO;Motor desactivado.
+2023-10-25 11:31:36.467074;127.0.0.1;obtenerLogServidor;ERROR;Excepcion de Archivo con mensaje: Error al devolver un registro. - Codigo: 2
+2023-10-25 11:32:02.817246;127.0.0.1;activarPinza;INFO; GRIPPER ON
+2023-10-25 11:32:11.655028;127.0.0.1;desactivarPinza;INFO; GRIPPER OFF
+2023-10-25 11:34:40.602279;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
+2023-10-25 11:37:15.432752;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
+2023-10-25 11:37:22.603989;127.0.0.1;seleccionarModo a;INFO; ROBOT ONLINE
+2023-10-25 11:37:22.603989;127.0.0.1;seleccionarModo a;INFO; SEND G28 TO CALIBRATE
+2023-10-25 11:37:22.603989;127.0.0.1;seleccionarModo a;INFO; ABSOLUTE MODE ON
+2023-10-25 11:37:43.775713;127.0.0.1;seleccionarModo r;INFO; RELATIVE MODE ON
+2023-10-25 11:45:35.276908;127.0.0.1;conectarRobot;ERROR;Excepcion de Brazo Robot con mensaje: Conexión ya establecida. - Codigo: 8
+2023-10-25 11:50:58.069238;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
+2023-10-25 11:51:12.065707;127.0.0.1;movLineal 15 130 100 20;INFO; ROBOT ONLINE
+2023-10-25 11:51:12.065707;127.0.0.1;movLineal 15 130 100 20;INFO; SEND G28 TO CALIBRATE
+2023-10-25 11:51:12.065707;127.0.0.1;movLineal 15 130 100 20;INFO; LINEAR! MOVE: [X:15.00 Y:130.00 Z:100.00 E:20.00] t=1.46s
+2023-10-25 11:51:45.954273;127.0.0.1;movLineal 10 15 20 20;ERROR; POINT IS OUTSIDE OF WORKSPACE
+2023-10-25 11:52:32.276721;127.0.0.1;movLineal 120 140 120 20;INFO; LINEAR! MOVE: [X:120.00 Y:140.00 Z:120.00 E:20.00] t=0.97s
+2023-10-25 11:57:52.898320;127.0.0.1;conectarRobot;ERROR;Excepcion de Brazo Robot con mensaje: Conexión ya establecida. - Codigo: 8
+2023-10-25 11:57:59.214298;127.0.0.1;movLineal 130 130 130 20;INFO; LINEAR! MOVE: [X:130.00 Y:130.00 Z:130.00 E:20.00] t=2.40s
+2023-10-25 11:58:03.852163;127.0.0.1;movLineal 130 130 130 20;INFO; LINEAR! MOVE: [X:130.00 Y:130.00 Z:130.00 E:20.00] t=0.00s
+2023-10-25 11:58:19.764731;127.0.0.1;movLineal 130 130 130 20;INFO; LINEAR! MOVE: [X:130.00 Y:130.00 Z:130.00 E:20.00] t=0.00s
+2023-10-25 11:58:22.089572;127.0.0.1;movLineal 130 130 130 20;INFO; LINEAR! MOVE: [X:130.00 Y:130.00 Z:130.00 E:20.00] t=0.00s
+2023-10-25 11:59:09.924314;127.0.0.1;conectarRobot;ERROR;Excepcion de Brazo Robot con mensaje: Conexión ya establecida. - Codigo: 8
+2023-10-25 12:01:18.359274;127.0.0.1;conectarRobot;ERROR;Excepcion de Brazo Robot con mensaje: Conexión ya establecida. - Codigo: 8
+2023-10-25 12:02:58.250079;127.0.0.1;desconectarRobot;INFO;Conexión cerrada.
+2023-10-25 12:03:03.175509;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
+2023-10-25 12:03:14.337897;127.0.0.1;movLineal 15 130 140 20;INFO; ROBOT ONLINE
+2023-10-25 12:03:14.337897;127.0.0.1;movLineal 15 130 140 20;INFO; SEND G28 TO CALIBRATE
+2023-10-25 12:03:14.337897;127.0.0.1;movLineal 15 130 140 20;INFO; LINEAR! MOVE: [X:15.00 Y:130.00 Z:140.00 E:20.00] t=1.46s
+2023-10-25 12:04:38.192423;127.0.0.1;levantarServidor;ERROR;Excepcion de comando con mensaje: Faltan argumentos. - Codigo: 3
+2023-10-25 12:05:19.311917;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
+2023-10-25 12:05:30.239952;127.0.0.1;movLineal 120 130 140 ;INFO; ROBOT ONLINE
+2023-10-25 12:05:30.239952;127.0.0.1;movLineal 120 130 140 ;INFO; SEND G28 TO CALIBRATE
+2023-10-25 12:05:30.239952;127.0.0.1;movLineal 120 130 140 ;INFO; LINEAR! MOVE: [X:120.00 Y:130.00 Z:140.00 E:0.00] t=0.88s
+2023-10-25 12:05:36.398317;127.0.0.1;movLineal 120 130 140 20;INFO; LINEAR! MOVE: [X:120.00 Y:130.00 Z:140.00 E:20.00] t=2.24s
+2023-10-25 12:05:47.741653;127.0.0.1;home;INFO; HOMING
+2023-10-25 12:05:47.741653;127.0.0.1;home;INFO; HOMING COMPLETE t=7.50s
+2023-10-25 12:06:01.935314;127.0.0.1;home;INFO; HOMING
+2023-10-25 12:06:01.935314;127.0.0.1;home;INFO; HOMING COMPLETE t=4.50s
+2023-10-25 12:06:10.801441;127.0.0.1;obtenerLogServidor;ERROR;Excepcion de Archivo con mensaje: Error al devolver un registro. - Codigo: 2
+>>>>>>> 2d5f87d424c1d6367766a7a39ce84fa392930c46
+>>>>>>> b036d1b32723e99d2d139c8ed7eaa9edd2f819cc

@@ -27,8 +27,9 @@ int main(int argc, char* argv[]) {
     }
     
     int port = atoi(argv[2]);
+
     XmlRpcClient c(argv[1], port);
-    XmlRpcValue oneArg, noArgs, result;
+    XmlRpcValue oneArg, noArgs, result, args;
 
 
 
@@ -42,7 +43,7 @@ int main(int argc, char* argv[]) {
     comandoANumero["conectarRobot"] = 4;
     comandoANumero["desconectarRobot"] = 5;
     comandoANumero["activarMotores"] = 6;
-    comandoANumero["desactivarMotor"] = 7;
+    comandoANumero["desactivarMotores"] = 7;
     comandoANumero["home"] = 8;
     comandoANumero["movLineal"] = 9;
     comandoANumero["activarPinza"] = 10;
@@ -59,6 +60,7 @@ int main(int argc, char* argv[]) {
     bool flagServidor = true;
     bool flagCliente = true;
     string input;
+    string input1, input2, input3, input4;
     while (flagCliente) {
     cout << "Ingrese una opción: ";
     cin >> input;
@@ -146,8 +148,17 @@ int main(int argc, char* argv[]) {
                 break;
 
             case 9: //movLineal
+                
+                cin >> input1 >> input2 >> input3;
+                args[0]=input1;
+                args[1]=input2;
+                args[2]=input3;
+                if (cin.peek() != '\n') {
+                    cin >> input4;
+                    args[3]=input4;
+                }
 
-                if (c.execute("movLineal", noArgs, result)) {
+                if (c.execute("movLineal", args, result)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'movLineal'\n\n";
