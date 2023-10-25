@@ -1,4 +1,4 @@
-2023-10-24 23:16:48.180238;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
+2023-10-24 23:16:48.180238;127.0.0.1;conectarRobot;INFO;Conexiï¿½n exitosa con el puerto COM3.
 2023-10-24 23:16:51.065970;127.0.0.1;home;INFO; ROBOT ONLINE
 2023-10-24 23:16:51.065970;127.0.0.1;home;INFO; SEND G28 TO CALIBRATE
 2023-10-24 23:16:51.065970;127.0.0.1;home;INFO; HOMING
@@ -7,7 +7,7 @@
 2023-10-24 23:16:56.625444;127.0.0.1;activarPinza;ERROR;
 2023-10-24 23:17:00.834754;127.0.0.1;desactivarPinza;ERROR; COMMAND NOT RECOGNIZED
 2023-10-24 23:17:00.834754;127.0.0.1;desactivarPinza;ERROR;
-2023-10-24 23:17:05.349682;127.0.0.1;desconectarRobot;INFO;Conexión cerrada.
-2023-10-25 09:16:35.681842;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
+2023-10-24 23:17:05.349682;127.0.0.1;desconectarRobot;INFO;Conexiï¿½n cerrada.
+2023-10-25 09:16:35.681842;127.0.0.1;conectarRobot;INFO;Conexiï¿½n exitosa con el puerto COM3.
 2023-10-25 09:17:47.632498;127.0.0.1;activarMotores;INFO;Motor activado.
 2023-10-25 09:18:13.087666;127.0.0.1;desactivarMotores;INFO;Motor desactivado.

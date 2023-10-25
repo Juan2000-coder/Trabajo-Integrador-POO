@@ -405,6 +405,17 @@ cargar <JobFile>
         except Exception as e:
             print(self.outFormat.format(e))
             return ':'.join(["ERROR", str(e)])
+
+    
+    def do_servidor(self, value):
+        """"Inicia/Para el servidor rpc según el valor dado (true/false)."""
+        if value == '1':
+            if self.rpc_server is None:
+                self.rpc_server = Servidor(self)  #este objeto inicia el servidor y se da a conocer
+        else:
+            if self.rpc_server is not None:
+                self.rpc_server.shutdown()
+                self.rpc_server = None
     
     def do_levantarServidor(self, args):
         """"

@@ -1,0 +1,7 @@
+en obtenerReporteGeneral hay que ver como parsear la respuesta de velocidad del robot
+hacer que los mensajes que devuelve el robot tengan todos el mismo formato
+activar pinza no lo reconoce
+hay que tener en cuenta la velocidad de la comunicación con arduino tal vez sea muy alta sobre todo cuando el ca
+ble es largo.
+usar uno solo camelCase o snake_case
+El problema es que los archivos se están abriendo al final y no al inicio para la lectura.
