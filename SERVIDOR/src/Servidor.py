@@ -39,6 +39,7 @@ class Servidor():
         self.server.register_function(self.grabar, 'grabar') 
         self.server.register_function(self.cargar, 'cargar')        
         self.server.register_function(self.listarArchivosDeTrabajo, 'listarArchivosDeTrabajo') 
+        self.server.register_function(self.levantarServidor, 'levantarServidor') 
 
         self.thread = Thread(target = self.run_server)
         self.thread.start()
@@ -89,3 +90,6 @@ class Servidor():
     
     def listarArchivosDeTrabajo(self):
         return self.consola.onecmd("listarArchivosDeTrabajo")
+    
+    def levantarServidor(self, args):
+        return self.consola.onecmd("levantarServidor" + args)

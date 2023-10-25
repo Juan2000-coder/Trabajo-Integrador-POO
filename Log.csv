@@ -63,3 +63,13 @@
 =======
 >>>>>>> e3786ab541dff278820cf55fe6394b0d575b914f
 >>>>>>> 16c75647e768ab5f1bf9473c5b6fbbe72f4df36f
+2023-10-25 10:17:41.593378;127.0.0.1;levantarServidor 1;ERROR;list index out of range
+2023-10-25 10:17:45.280641;127.0.0.1;levantarServidor 1;ERROR;list index out of range
+2023-10-25 10:18:41.827581;127.0.0.1;seleccionarModo a;ERROR;Excepcion de Brazo Robot con mensaje: No se pudo enviar el comando. La conexión con el Robot no está establecida. - Codigo: 2
+2023-10-25 10:18:51.728104;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
+2023-10-25 10:18:57.940830;127.0.0.1;seleccionarModo a;INFO; ROBOT ONLINE
+2023-10-25 10:18:57.940830;127.0.0.1;seleccionarModo a;INFO; SEND G28 TO CALIBRATE
+2023-10-25 10:18:57.940830;127.0.0.1;seleccionarModo a;INFO; ABSOLUTE MODE ON
+2023-10-25 10:19:05.903018;127.0.0.1;seleccionarModo r;INFO; RELATIVE MODE ON
+2023-10-25 10:22:04.597138;127.0.0.1;levantarServidor;ERROR;Excepcion de comando con mensaje: Faltan argumentos. - Codigo: 3
+2023-10-25 10:22:07.919525;127.0.0.1;levantarServidor 1;ERROR;list index out of range
