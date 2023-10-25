@@ -1,13 +1,8 @@
-2023-10-24 23:16:48.180238;127.0.0.1;conectarRobot;INFO;Conexiï¿½n exitosa con el puerto COM3.
-2023-10-24 23:16:51.065970;127.0.0.1;home;INFO; ROBOT ONLINE
-2023-10-24 23:16:51.065970;127.0.0.1;home;INFO; SEND G28 TO CALIBRATE
-2023-10-24 23:16:51.065970;127.0.0.1;home;INFO; HOMING
-2023-10-24 23:16:51.065970;127.0.0.1;home;INFO; HOMING COMPLETE t=7.50s
-2023-10-24 23:16:56.625444;127.0.0.1;activarPinza;ERROR; COMMAND NOT RECOGNIZED
-2023-10-24 23:16:56.625444;127.0.0.1;activarPinza;ERROR;
-2023-10-24 23:17:00.834754;127.0.0.1;desactivarPinza;ERROR; COMMAND NOT RECOGNIZED
-2023-10-24 23:17:00.834754;127.0.0.1;desactivarPinza;ERROR;
-2023-10-24 23:17:05.349682;127.0.0.1;desconectarRobot;INFO;Conexiï¿½n cerrada.
-2023-10-25 09:16:35.681842;127.0.0.1;conectarRobot;INFO;Conexiï¿½n exitosa con el puerto COM3.
-2023-10-25 09:17:47.632498;127.0.0.1;activarMotores;INFO;Motor activado.
-2023-10-25 09:18:13.087666;127.0.0.1;desactivarMotores;INFO;Motor desactivado.
+2023-10-25 10:13:40.391391;127.0.0.1;conectarRobot;ERROR;Excepcion de Brazo Robot con mensaje: Error al intentar establecer la conexión con el Robot. - Codigo: 1
+2023-10-25 10:13:42.834968;127.0.0.1;activarPinza;ERROR;Excepcion de Brazo Robot con mensaje: No se pudo enviar el comando. La conexión con el Robot no está establecida. - Codigo: 2
+2023-10-25 10:13:43.605734;127.0.0.1;home;ERROR;Excepcion de Brazo Robot con mensaje: No se pudo enviar el comando. La conexión con el Robot no está establecida. - Codigo: 2
+2023-10-25 10:13:46.587441;127.0.0.1;desactivarPinza;ERROR;Excepcion de Brazo Robot con mensaje: No se pudo enviar el comando. La conexión con el Robot no está establecida. - Codigo: 2
+2023-10-25 10:13:51.295151;127.0.0.1;movLineal;ERROR;Excepcion de comando con mensaje: Sintaxis de comando incorrecta. - Codigo: 1
+2023-10-25 10:13:56.145695;127.0.0.1;movLineal 20 20 20 2;ERROR;Unknown format code 'f' for object of type 'str'
+2023-10-25 10:14:03.820206;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.
+2023-10-25 10:15:11.697773;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.
