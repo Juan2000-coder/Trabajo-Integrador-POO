@@ -28,6 +28,7 @@ class Servidor():
                     raise
 
         self.server.register_function(self.conectarRobot, 'conectarRobot')   
+        self.server.register_function(self.desconectarRobot, 'desconectarRobot')  
         self.server.register_function(self.activarMotores, 'activarMotores') 
         self.server.register_function(self.desactivarMotores, 'desactivarMotores') 
         self.server.register_function(self.reporteGeneral, 'reporteGeneral') 
@@ -38,9 +39,9 @@ class Servidor():
         self.server.register_function(self.desactivarPinza, 'desactivarPinza') 
         self.server.register_function(self.grabar, 'grabar') 
         self.server.register_function(self.cargar, 'cargar')        
-        self.server.register_function(self.listarArchivosDeTrabajo, 'listarArchivosDeTrabajo') 
-        self.server.register_function(self.levantarServidor, 'levantarServidor') 
-
+        self.server.register_function(self.listarArchivosDeTrabajo, 'listarArchivosDeTrabajo')  
+        self.server.register_function(self.seleccionarModo, 'seleccionarModo')
+                                      
         self.thread = Thread(target = self.run_server)
         self.thread.start()
         print("Servidor RPC iniciado en el puerto [%s]" % str(self.server.server_address))
@@ -55,6 +56,9 @@ class Servidor():
     def conectarRobot(self):
         return self.consola.onecmd("conectarRobot")
     
+    def desconectarRobot(self):
+        return self.consola.onecmd("desconectarRobot")
+    
     def activarMotores(self):
         return self.consola.onecmd("activarMotores")
     
@@ -68,13 +72,13 @@ class Servidor():
         return self.consola.onecmd("obtenerLogServidor")
     
     def seleccionarModo(self, args):
-        return self.consola.onecmd("seleccionarModo" + args)
+        return self.consola.onecmd("seleccionarModo " + args)
     
     def home(self):
         return self.consola.onecmd("home")
     
     def movLineal(self,args):
-        return self.consola.onecmd("movLineal" + args)
+        return self.consola.onecmd("movLineal " + args)
     
     def activarPinza(self):
         return self.consola.onecmd("activarPinza")
@@ -91,5 +95,3 @@ class Servidor():
     def listarArchivosDeTrabajo(self):
         return self.consola.onecmd("listarArchivosDeTrabajo")
     
-    def levantarServidor(self, args):
-        return self.consola.onecmd("levantarServidor" + args)

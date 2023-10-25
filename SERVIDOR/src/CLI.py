@@ -89,6 +89,7 @@ class CLI(Cmd):
 
             with self.requerimientos[ipCliente] as LogUsuario:
                 LogUsuario.agregarRegistro(comando, ipCliente, timeStamp, result)
+        return result
     
     def do_cls(self, args):
 
