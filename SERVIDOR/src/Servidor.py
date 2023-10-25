@@ -76,8 +76,8 @@ class Servidor():
     def home(self):
         return self.consola.onecmd("home")
     
-    def movLineal(self,arg1,arg2,arg3,arg4=0):
-        return self.consola.onecmd("movLineal " + arg1 + " " + arg2 + " " + arg3 + " " + arg4)
+    def movLineal(self,arg1, arg2, arg3, arg4=""):
+        return self.consola.onecmd("movLineal " + arg1 +" "+ arg2+" "+arg3+" "+arg4)
     
     def activarPinza(self):
         return self.consola.onecmd("activarPinza")
