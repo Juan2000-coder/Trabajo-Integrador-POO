@@ -154,7 +154,7 @@ obtenerLogServidor
                     while True:
                         registro = self.archivoLog.devolverRegistro()
                         if registro is not None:
-                            print(self.outFormat.format(registro))
+                            print(self.outFormat.format(registro), end = '')
                         else:
                             break
 

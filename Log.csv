@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2023-10-24 23:16:48.180238;127.0.0.1;conectarRobot;INFO;Conexiï¿½n exitosa con el puerto COM3.
 2023-10-24 23:16:51.065970;127.0.0.1;home;INFO; ROBOT ONLINE
 2023-10-24 23:16:51.065970;127.0.0.1;home;INFO; SEND G28 TO CALIBRATE
@@ -84,3 +85,18 @@
 2023-10-25 10:38:58.301180;127.0.0.1;levantarServidor;ERROR;Excepcion de comando con mensaje: Faltan argumentos. - Codigo: 3
 2023-10-25 10:39:13.182823;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
 2023-10-25 10:40:54.449883;127.0.0.1;levantarServidor;ERROR;Excepcion de comando con mensaje: Faltan argumentos. - Codigo: 3
+=======
+2023-10-25 10:35:34.901702;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
+2023-10-25 10:35:37.880805;127.0.0.1;home;INFO; ROBOT ONLINE
+2023-10-25 10:35:37.880805;127.0.0.1;home;INFO; SEND G28 TO CALIBRATE
+2023-10-25 10:35:37.880805;127.0.0.1;home;INFO; HOMING
+2023-10-25 10:35:37.880805;127.0.0.1;home;INFO; HOMING COMPLETE t=7.50s
+2023-10-25 10:35:49.622341;127.0.0.1;activarPinza;ERROR; COMMAND NOT RECOGNIZED
+2023-10-25 10:35:49.622341;127.0.0.1;activarPinza;ERROR;
+2023-10-25 10:35:57.708765;127.0.0.1;desactivarPinza;ERROR; COMMAND NOT RECOGNIZED
+2023-10-25 10:35:57.708765;127.0.0.1;desactivarPinza;ERROR;
+2023-10-25 10:35:59.341930;127.0.0.1;home;ERROR; COMMAND NOT RECOGNIZED
+2023-10-25 10:35:59.341930;127.0.0.1;home;ERROR;
+2023-10-25 10:36:02.719760;127.0.0.1;desconectarRobot;INFO;Conexión cerrada.
+2023-10-25 10:36:12.777889;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.
+>>>>>>> b07c51cd44c4a1999a49d0c05f085fd9c3f4d9a9

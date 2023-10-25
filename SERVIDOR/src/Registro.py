@@ -6,7 +6,7 @@
 #/
 class Registro():
         
-        def __init__(self, comando:str,nivelLog:str,timeStamp,ipCliente:str, mensaje:str):
+        def __init__(self, timeStamp, ipCliente:str, comando:str, nivelLog:str, mensaje:str):
             self.comando = comando
             self.nivelLog = nivelLog
             self.timeStamp = timeStamp
