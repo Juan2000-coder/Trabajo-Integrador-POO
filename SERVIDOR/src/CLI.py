@@ -58,6 +58,13 @@ class CLI(Cmd):
         self.requerimientos = {}
         # Será un diccionario donde las claves son los ids o ips de usuario
         # Y las claves serán los archivos de usuario (objetos).
+
+    def postcmd(self, stop, line):
+        
+        if type(stop) == str:
+            return False
+        else:
+            return stop
     
     def onecmd(self, line):
         # Acciones a realizar antes de ejecutar un comando
@@ -81,15 +88,14 @@ class CLI(Cmd):
 
         
         if result is not None:
-            
-            mensaje = result
+            if comando == "obtenerLogServidor":
+                mensaje = "INFO: Muestra del Log del Servidor."
+            elif comando == "reporteGeneral":
+                mensaje = "INFO: Muestra de reporte de usuario."
+            else:
+                mensaje = result
+                
             with self.archivoLog as Log:
-                if comando == "obtenerLogServidor":
-                    mensaje = "INFO: Muestra del Log del Servidor."
-                elif comando == "reporteGeneral":
-                    mensaje = "INFO: Muestra de reporte de usuario."
-                else:
-                    pass
                 Log.agregarRegistro(comando, ipCliente, timeStamp, mensaje)
 
             if not (ipCliente in self.requerimientos):
@@ -123,7 +129,7 @@ reporteGeneral <id>
         print()
         try:
             arguments = args.split()
-            if len(arguments) == 1:
+            if len(arguments) == 0:
                 # Debería buscar en la lista de requerimientos aquella que corresponda
                 # Con el ID indicado para luego llamar a un método del archivo de usuario
                 # asociado con el requerimiento, que arme el reporte y que lo devuelva

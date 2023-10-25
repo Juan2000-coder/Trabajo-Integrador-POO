@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 2023-10-24 23:16:48.180238;127.0.0.1;conectarRobot;INFO;Conexiï¿½n exitosa con el puerto COM3.
 2023-10-24 23:16:51.065970;127.0.0.1;home;INFO; ROBOT ONLINE
 2023-10-24 23:16:51.065970;127.0.0.1;home;INFO; SEND G28 TO CALIBRATE
@@ -172,6 +173,7 @@
 2023-10-25 12:06:10.801441;127.0.0.1;obtenerLogServidor;ERROR;Excepcion de Archivo con mensaje: Error al devolver un registro. - Codigo: 2
 >>>>>>> 2d5f87d424c1d6367766a7a39ce84fa392930c46
 >>>>>>> b036d1b32723e99d2d139c8ed7eaa9edd2f819cc
+<<<<<<< HEAD
 2023-10-25 12:21:01.178522;127.0.0.1;levantarServidor true;ERROR;'SimpleXMLRPCServer' object has no attribute 'register'
 2023-10-25 12:22:02.613798;127.0.0.1;levantarServidor true;ERROR;'SimpleXMLRPCServer' object has no attribute 'register'
 2023-10-25 12:28:14.996928;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
@@ -222,3 +224,32 @@
 2023-10-25 12:56:04.800233;127.0.0.1;posicionActual;INFO; LINEAR! MOVE: [X:10.00 Y:10.00 Z:145.00 E:0.00] t=0.00s
 2023-10-25 13:11:34.338099;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
 2023-10-25 13:11:39.661274;127.0.0.1;posicionActual;ERROR;'utf-8' codec can't decode byte 0xb1 in position 128: invalid start byte
+=======
+2023-10-25 12:20:31.277925;127.0.0.1;levantarServidor true;ERROR;[Errno 11001] getaddrinfo failed
+2023-10-25 12:42:35.016829;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.
+=======
+2023-10-25 12:47:31.808514;127.0.0.1;conectarRobot;ERROR;Excepcion de Brazo Robot con mensaje: Error al intentar establecer la conexión con el Robot. - Codigo: 1
+2023-10-25 12:47:58.024107;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.
+2023-10-25 12:54:05.799392;127.0.0.1;conectarRobot;ERROR;Excepcion de Brazo Robot con mensaje: Error al intentar establecer la conexión con el Robot. - Codigo: 1
+2023-10-25 12:54:13.219418;127.0.0.1;desconectarRobot;ERROR;Excepcion de Brazo Robot con mensaje: No hay una conexión activa con el Robot que cerrar. - Codigo: 4
+2023-10-25 12:54:20.741640;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.
+2023-10-25 12:55:22.170888;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.
+2023-10-25 13:01:55.557729;127.0.0.1;conectarRobot;ERROR;Excepcion de Brazo Robot con mensaje: Error al intentar establecer la conexión con el Robot. - Codigo: 1
+2023-10-25 13:02:33.745023;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.
+2023-10-25 13:02:56.244211;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.
+2023-10-25 13:03:45.942810;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.
+2023-10-25 13:03:53.664031;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.
+2023-10-25 13:03:59.954900;127.0.0.1;conectarRobot;ERROR;Excepcion de Brazo Robot con mensaje: Error al intentar establecer la conexión con el Robot. - Codigo: 1
+2023-10-25 13:07:20.024974;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.
+2023-10-25 13:13:29.225458;127.0.0.1;conectarRobot;ERROR;Excepcion de Brazo Robot con mensaje: Error al intentar establecer la conexión con el Robot. - Codigo: 1
+2023-10-25 13:13:54.716720;127.0.0.1;conectarRobot;ERROR;Excepcion de Brazo Robot con mensaje: Error al intentar establecer la conexión con el Robot. - Codigo: 1
+2023-10-25 13:19:03.935546;127.0.0.1;conectarRobot;ERROR;Excepcion de Brazo Robot con mensaje: Error al intentar establecer la conexión con el Robot. - Codigo: 1
+2023-10-25 13:19:41.353215;127.0.0.1;conectarRobot;ERROR;Excepcion de Brazo Robot con mensaje: Error al intentar establecer la conexión con el Robot. - Codigo: 1
+2023-10-25 13:20:05.264268;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.
+2023-10-25 13:21:31.684657;127.0.0.1;reporteGeneral;INFO; Muestra de reporte de usuario.
+2023-10-25 13:23:27.736302;127.0.0.1;reporteGeneral;INFO; Muestra de reporte de usuario.
+2023-10-25 13:24:56.910739;127.0.0.1;levantarServidor 1;ERROR;Excepcion de comando con mensaje: Opcion de comando no encontrada. - Codigo: 2
+2023-10-25 13:25:07.999885;127.0.0.1;reporteGeneral;INFO; Muestra de reporte de usuario.
+2023-10-25 13:25:14.268577;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.
+>>>>>>> f672f9ed046d535cf6196d4e08492832e323e56d
+>>>>>>> 1765b915502cdbf9ed9b0cc53a0e13545eaee60d
