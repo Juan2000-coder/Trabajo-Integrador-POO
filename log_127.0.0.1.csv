@@ -73,3 +73,14 @@
 2023-10-25 10:19:05.903018;127.0.0.1;seleccionarModo r;INFO; RELATIVE MODE ON
 2023-10-25 10:22:04.597138;127.0.0.1;levantarServidor;ERROR;Excepcion de comando con mensaje: Faltan argumentos. - Codigo: 3
 2023-10-25 10:22:07.919525;127.0.0.1;levantarServidor 1;ERROR;list index out of range
+2023-10-25 10:25:14.273714;127.0.0.1;home;INFO; HOMING
+2023-10-25 10:25:14.273714;127.0.0.1;home;INFO; HOMING COMPLETE t=7.50s
+2023-10-25 10:25:39.975652;127.0.0.1;activarPinza;INFO; GRIPPER ON
+2023-10-25 10:25:58.001885;127.0.0.1;movLineal 10 180 130;ERROR; POINT IS OUTSIDE OF WORKSPACE
+2023-10-25 10:26:26.506694;127.0.0.1;seleccionarModo a;INFO; ABSOLUTE MODE ON
+2023-10-25 10:27:27.688927;127.0.0.1;levantarServidor;ERROR;Excepcion de comando con mensaje: Faltan argumentos. - Codigo: 3
+2023-10-25 10:27:35.158923;127.0.0.1;levantarServidor 1;ERROR;list index out of range
+2023-10-25 10:36:20.481221;127.0.0.1;levantarServidor;ERROR;Excepcion de comando con mensaje: Faltan argumentos. - Codigo: 3
+2023-10-25 10:38:58.301180;127.0.0.1;levantarServidor;ERROR;Excepcion de comando con mensaje: Faltan argumentos. - Codigo: 3
+2023-10-25 10:39:13.182823;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
+2023-10-25 10:40:54.449883;127.0.0.1;levantarServidor;ERROR;Excepcion de comando con mensaje: Faltan argumentos. - Codigo: 3
