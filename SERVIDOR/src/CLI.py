@@ -54,7 +54,7 @@ class CLI(Cmd):
         self.rpc_server = None
         self.route = os.getcwd()    # The path of the solution.
         self.brazoRobot = BrazoRobot()
-        self.archivoLog = ArchivoLog('Log.csv')
+        self.archivoLog = ArchivoLog('Log.csv') #.csv o .log?
         self.requerimientos = {}
         # Será un diccionario donde las claves son los ids o ips de usuario
         # Y las claves serán los archivos de usuario (objetos).
@@ -98,7 +98,7 @@ class CLI(Cmd):
             with self.requerimientos[ipCliente] as LogUsuario:
                 LogUsuario.agregarRegistro(comando, ipCliente, timeStamp, mensaje)
 
-        return result
+        #return result
 
     
     def do_cls(self, args):
@@ -357,6 +357,26 @@ desactivarPinza
             if len(arguments) == 0:
                 # Debería llamar al metodo correspondiente en el brazo
                 result = self.brazoRobot.desactivarPinza()
+                for elem in result.split('\n'):
+                    print(self.outFormat.format(elem))
+                return result
+            else:
+                raise Excepciones.ExcepcionDeComando(1)
+            
+        except Exception as e:
+            print(self.outFormat.format(e))
+            return ':'.join(["ERROR", str(e)])
+        
+    def do_posicionActual(self, args):
+        """
+Inidica la posicion actual
+        """
+        print()
+        try:
+            arguments = args.split()
+            if len(arguments) == 0:
+                # Debería llamar al metodo correspondiente en el brazo
+                result = self.brazoRobot.posicionActual()
                 for elem in result.split('\n'):
                     print(self.outFormat.format(elem))
                 return result

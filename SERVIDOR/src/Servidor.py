@@ -30,7 +30,7 @@ class Servidor():
         self.server.register_function(self.conectarRobot, 'conectarRobot')
         self.server.register_function(self.desconectarRobot, 'desconectarRobot')
         self.server.register_function(self.activarMotores, 'activarMotores') 
-        self.server.register.function(self.seleccionarModo, 'seleccionarModo')
+        self.server.register_function(self.seleccionarModo, 'seleccionarModo')
         self.server.register_function(self.desactivarMotores, 'desactivarMotores') 
         self.server.register_function(self.reporteGeneral, 'reporteGeneral') 
         self.server.register_function(self.home, 'home') 
@@ -41,6 +41,7 @@ class Servidor():
         self.server.register_function(self.grabar, 'grabar') 
         self.server.register_function(self.cargar, 'cargar')        
         self.server.register_function(self.listarArchivosDeTrabajo, 'listarArchivosDeTrabajo') 
+        self.server.register_function(self.posicionActual, 'posicionActual')
         self.thread = Thread(target = self.run_server)
         self.thread.start()
         print("Servidor RPC iniciado en el puerto [%s]" % str(self.server.server_address))
@@ -93,4 +94,7 @@ class Servidor():
     
     def listarArchivosDeTrabajo(self):
         return self.consola.onecmd("listarArchivosDeTrabajo")
+    
+    def posicionActual(self):
+        return self.consola.onecmd("posicionActual")
     
