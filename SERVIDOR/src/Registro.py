@@ -14,4 +14,4 @@ class Registro():
             self.mensaje = mensaje
         
         def __str__(self):
-            return f"{self.timeStamp};{self.nivelLog};{self.comando};{self.ipCliente};{self.mensaje}"
+            return f"{self.timeStamp};{self.ipCliente};{self.comando};{self.nivelLog};{self.mensaje}\n"
