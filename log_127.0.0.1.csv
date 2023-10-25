@@ -11,3 +11,31 @@
 2023-10-25 09:16:35.681842;127.0.0.1;conectarRobot;INFO;Conexiï¿½n exitosa con el puerto COM3.
 2023-10-25 09:17:47.632498;127.0.0.1;activarMotores;INFO;Motor activado.
 2023-10-25 09:18:13.087666;127.0.0.1;desactivarMotores;INFO;Motor desactivado.
+2023-10-25 09:38:42.872067;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
+2023-10-25 09:38:56.740450;127.0.0.1;home;INFO; ROBOT ONLINE
+2023-10-25 09:38:56.740450;127.0.0.1;home;INFO; SEND G28 TO CALIBRATE
+2023-10-25 09:38:56.740450;127.0.0.1;home;INFO; HOMING
+2023-10-25 09:38:56.740450;127.0.0.1;home;INFO; HOMING COMPLETE t=7.50s
+2023-10-25 09:41:29.891260;127.0.0.1;movLineal 10 180 130;INFO; LINEAR! MOVE: [X:10.00 Y:180.00 Z:130.00 E:0.00] t=2.40s
+2023-10-25 09:41:37.572295;127.0.0.1;movLineal 10 180 130 2;ERROR;Unknown format code 'f' for object of type 'str'
+2023-10-25 09:43:30.457653;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
+2023-10-25 09:43:47.833422;127.0.0.1;movLineal 10 180 130 2;ERROR;Unknown format code 'f' for object of type 'str'
+2023-10-25 09:45:01.631428;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
+2023-10-25 09:45:12.128383;127.0.0.1;movLineal 10 180 130;INFO; ROBOT ONLINE
+2023-10-25 09:45:12.128383;127.0.0.1;movLineal 10 180 130;INFO; SEND G28 TO CALIBRATE
+2023-10-25 09:45:12.128383;127.0.0.1;movLineal 10 180 130;INFO; LINEAR! MOVE: [X:10.00 Y:180.00 Z:130.00 E:0.00] t=2.40s
+2023-10-25 09:45:16.419299;127.0.0.1;movLineal 10 180 130 2;ERROR;Punto.__init__() takes 4 positional arguments but 5 were given
+2023-10-25 09:45:41.366475;127.0.0.1;movLineal 10 180 130;INFO; LINEAR! MOVE: [X:10.00 Y:180.00 Z:130.00 E:0.00] t=0.00s
+2023-10-25 09:45:48.599306;127.0.0.1;movLineal 10 180 130 2;ERROR;Punto.__init__() takes 4 positional arguments but 5 were given
+2023-10-25 09:53:01.038890;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
+2023-10-25 09:53:22.192544;127.0.0.1;movLineal 10 180 130;INFO; ROBOT ONLINE
+2023-10-25 09:53:22.192544;127.0.0.1;movLineal 10 180 130;INFO; SEND G28 TO CALIBRATE
+2023-10-25 09:53:22.192544;127.0.0.1;movLineal 10 180 130;INFO; LINEAR! MOVE: [X:10.00 Y:180.00 Z:130.00 E:0.00] t=2.40s
+2023-10-25 09:53:27.157687;127.0.0.1;movLineal 10 180 130 2;INFO; LINEAR! MOVE: [X:10.00 Y:180.00 Z:130.00 E:2.00] t=7.07s
+2023-10-25 09:53:46.488113;127.0.0.1;activarPinza;INFO; GRIPPER ON
+2023-10-25 09:53:57.698812;127.0.0.1;desactivarPinza;INFO; GRIPPER OFF
+2023-10-25 09:55:42.623647;127.0.0.1;levantarServidor 1;ERROR;list index out of range
+2023-10-25 09:55:49.584890;127.0.0.1;levantarServidor;ERROR;Excepcion de comando con mensaje: Faltan argumentos. - Codigo: 3
+2023-10-25 09:55:56.648323;127.0.0.1;levantarServidor 1;ERROR;list index out of range
+2023-10-25 09:56:33.633381;127.0.0.1;levantarServidor true;ERROR;list index out of range
+2023-10-25 09:56:58.161959;127.0.0.1;levantarServidor 1;ERROR;list index out of range

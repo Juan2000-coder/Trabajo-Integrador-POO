@@ -302,7 +302,7 @@ movLineal <xx.x> <yy.y> <zz.z> [vv.v]
                 return result
             
             elif len(margs) == 4:
-                result = self.brazoRobot.movLineal(Punto(margs[0], margs[1], margs[2]), margs[3])
+                result = self.brazoRobot.movLineal(Punto(float (margs[0]), float (margs[1]),float (margs[2])),float( margs[3]))
                 for elem in result.split('\n'):
                     print(self.outFormat.format(elem))
                 return result
@@ -407,16 +407,7 @@ cargar <JobFile>
             return ':'.join(["ERROR", str(e)])
 
     
-    def do_servidor(self, value):
-        """"Inicia/Para el servidor rpc según el valor dado (true/false)."""
-        if value == '1':
-            if self.rpc_server is None:
-                self.rpc_server = Servidor(self)  #este objeto inicia el servidor y se da a conocer
-        else:
-            if self.rpc_server is not None:
-                self.rpc_server.shutdown()
-                self.rpc_server = None
-    
+
     def do_levantarServidor(self, args):
         """"
 Inicia/Para el servidor rpc según el valor dado (true/false).
@@ -468,7 +459,7 @@ listarArchivosDeTrabajo [-e EXTENSION]
 Termina la ejecucion del programa.
 exit
         """
-
+        print("Ejecucion CLI SERVIDOR terminada")
         raise SystemExit
     
 if __name__ == "__main__":
