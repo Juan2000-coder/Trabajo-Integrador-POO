@@ -172,3 +172,5 @@
 2023-10-25 12:06:10.801441;127.0.0.1;obtenerLogServidor;ERROR;Excepcion de Archivo con mensaje: Error al devolver un registro. - Codigo: 2
 >>>>>>> 2d5f87d424c1d6367766a7a39ce84fa392930c46
 >>>>>>> b036d1b32723e99d2d139c8ed7eaa9edd2f819cc
+2023-10-25 12:20:31.277925;127.0.0.1;levantarServidor true;ERROR;[Errno 11001] getaddrinfo failed
+2023-10-25 12:42:35.016829;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.
