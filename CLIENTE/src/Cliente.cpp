@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
     }
     
     int port = atoi(argv[2]);
-
++
     XmlRpcClient c(argv[1], port);
     XmlRpcValue oneArg, noArgs, result;
 
@@ -42,7 +42,7 @@ int main(int argc, char* argv[]) {
     comandoANumero["seleccionarModo"] = 3;
     comandoANumero["conectarRobot"] = 4;
     comandoANumero["desconectarRobot"] = 5;
-    comandoANumero["activarMotor"] = 6;
+    comandoANumero["activarMotores"] = 6;
     comandoANumero["desactivarMotor"] = 7;
     comandoANumero["home"] = 8;
     comandoANumero["movLineal"] = 9;
@@ -121,19 +121,19 @@ int main(int argc, char* argv[]) {
             
             case 6: //activarMotor
 
-                if (c.execute("activarMotor", noArgs, result)) {
+                if (c.execute("activarMotores", noArgs, result)) {
                     cout << result << "\n\n";
                 } else {
-                    cout << "Error en la llamada a 'activarMotor'\n\n";
+                    cout << "Error en la llamada a 'activarMotores'\n\n";
                 }
                 break;
 
-            case 7: //desactivarMotor
+            case 7: //desactivarMotores
 
-                if (c.execute("desactivarMotor", noArgs, result)) {
+                if (c.execute("desactivarMotores", noArgs, result)) {
                     cout << result << "\n\n";
                 } else {
-                    cout << "Error en la llamada a 'desactivarMotor'\n\n";
+                    cout << "Error en la llamada a 'desactivarMotores'\n\n";
                 }
                 break;
 
