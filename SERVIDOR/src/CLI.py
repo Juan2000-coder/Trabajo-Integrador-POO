@@ -50,8 +50,8 @@ class CLI(Cmd):
         """"""
         super().__init__()
         self.rpc_server = None
-        self.route = os.getcwd()
-        self.fileroute = os.path.join(self.route, "SERVIDOR\\archivos")    # The path of the solution.
+        self.route = os.path.dirname(os.path.abspath(__file__))
+        self.fileroute = os.path.join(self.route, "..", "archivos")    # The path of the solution.
         self.brazoRobot = BrazoRobot()
         self.archivoLog = ArchivoLog(os.path.join(self.fileroute, "Log.csv")) #.csv o .log?
         self.requerimientos = {}

@@ -40,3 +40,11 @@ timestamp;ipCliente;comando;nivelLog;mensaje
 2023-10-25 22:51:27;127.0.0.1;levantarServidor true;ERROR;list index out of range
 2023-10-25 22:53:07;127.0.0.1;levantarServidor true;ERROR;list index out of range
 2023-10-25 22:56:18;127.0.0.1;levantarServidor true;ERROR;list index out of range
+2023-10-25 23:01:35;127.0.0.1;conectarRobot;ERROR;De Brazo Robot - Al intentar conectar con el brazo. Codigo(1)
+2023-10-25 23:01:58;127.0.0.1;levantarServidor true;ERROR;list index out of range
+2023-10-25 23:08:56;127.0.0.1;conectarRobot;ERROR;De Brazo Robot - Al intentar conectar con el brazo. Codigo(1)
+2023-10-25 23:09:04;127.0.0.1;obtenerLogServidor;INFO;Muestra del Log del Servidor.
+2023-10-25 23:09:25;127.0.0.1;levantarServidor true;ERROR;list index out of range
+2023-10-25 23:10:23;127.0.0.1;levantarServidor;ERROR;De Comando - Faltan argumentos. Codigo(3)
+2023-10-25 23:10:25;127.0.0.1;levantarServidor true;ERROR;list index out of range
+2023-10-25 23:40:10;127.0.0.1;levantarServidor;ERROR;De Comando - Faltan argumentos. Codigo(3)
