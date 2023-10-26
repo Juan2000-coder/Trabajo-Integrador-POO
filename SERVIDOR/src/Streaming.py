@@ -1,17 +1,30 @@
-from xmlrpc.server import SimpleXMLRPCServer
-from xmlrpc.server import SimpleXMLRPCRequestHandler
 import cv2
-# ... otra lógica de tu servidor
+from flask import Flask, Response, render_template
 
-class VideoServer:
-    def __init__(self):
-        self.cap = cv2.VideoCapture(0)
+app = Flask(__name__)
+cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)  # Abre la cámara (puede variar dependiendo de la cámara)
 
-    def get_video_frame(self):
-        ret, frame = self.cap.read()
-        if ret:
+def generate_frames():
+    while True:
+        success, frame = cap.read()
+        if not success:
+            break
+        else:
             _, buffer = cv2.imencode('.jpg', frame)
             frame = buffer.tobytes()
-            return frame
-        else:
-            return None
+            yield (b'--frame\r\n'
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/video_feed")
+def video_feed():
+    return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+if __name__ == '__main__':
+    app.run('0.0.0.0',port=8000,debug=False)
+
+cap.release()
+
