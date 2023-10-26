@@ -1,0 +1,50 @@
+timestamp;ipCliente;comando;nivelLog;mensaje
+2023-10-25 22:30:39;127.0.0.1;conectarRobot;ERROR;De Brazo Robot - Al intentar conectar con el brazo. Codigo(1)
+2023-10-25 22:30:42;127.0.0.1;activarPinza;ERROR;De Brazo Robot - No se pudo enviar el comando, robot desconectado. Codigo(2)
+2023-10-25 22:30:45;127.0.0.1;desactivarPinza;ERROR;De Brazo Robot - No se pudo enviar el comando, robot desconectado. Codigo(2)
+2023-10-25 22:30:50;127.0.0.1;movLineal;ERROR;De Comando - Sintaxis incorrecta. Codigo(1)
+2023-10-25 22:30:53;127.0.0.1;movLineal 10 10 10;ERROR;De Brazo Robot - No se pudo enviar el comando, robot desconectado. Codigo(2)
+2023-10-25 22:31:00;127.0.0.1;desconectarRobot;ERROR;De Brazo Robot - Robot ya desconectado. Codigo(4)
+2023-10-25 22:31:01;127.0.0.1;home;ERROR;De Brazo Robot - No se pudo enviar el comando, robot desconectado. Codigo(2)
+2023-10-25 22:31:09;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.
+2023-10-25 22:32:15;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.
+2023-10-25 22:32:53;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.
+2023-10-25 22:33:36;127.0.0.1;obtenerLogServidor;INFO; Muestra del Log del Servidor.
+2023-10-25 22:34:20;127.0.0.1;obtenerLogServidor;INFO;Muestra del Log del Servidor.
+2023-10-25 22:34:27;127.0.0.1;obtenerLogServidor;INFO;Muestra del Log del Servidor.
+2023-10-25 22:34:28;127.0.0.1;obtenerLogServidor;INFO;Muestra del Log del Servidor.
+2023-10-25 22:34:28;127.0.0.1;obtenerLogServidor;INFO;Muestra del Log del Servidor.
+2023-10-25 22:34:29;127.0.0.1;obtenerLogServidor;INFO;Muestra del Log del Servidor.
+2023-10-25 22:34:29;127.0.0.1;obtenerLogServidor;INFO;Muestra del Log del Servidor.
+2023-10-25 22:34:29;127.0.0.1;obtenerLogServidor;INFO;Muestra del Log del Servidor.
+2023-10-25 22:34:30;127.0.0.1;obtenerLogServidor;INFO;Muestra del Log del Servidor.
+2023-10-25 22:34:30;127.0.0.1;obtenerLogServidor;INFO;Muestra del Log del Servidor.
+2023-10-25 22:34:30;127.0.0.1;obtenerLogServidor;INFO;Muestra del Log del Servidor.
+2023-10-25 22:34:31;127.0.0.1;obtenerLogServidor;INFO;Muestra del Log del Servidor.
+2023-10-25 22:34:32;127.0.0.1;obtenerLogServidor;INFO;Muestra del Log del Servidor.
+2023-10-25 22:34:32;127.0.0.1;obtenerLogServidor;INFO;Muestra del Log del Servidor.
+2023-10-25 22:34:33;127.0.0.1;obtenerLogServidor;INFO;Muestra del Log del Servidor.
+2023-10-25 22:34:51;127.0.0.1;movLineal 10.0 10.0 10.0 45.4;ERROR;De Brazo Robot - No se pudo enviar el comando, robot desconectado. Codigo(2)
+2023-10-25 22:34:57;127.0.0.1;obtenerLogServidor;INFO;Muestra del Log del Servidor.
+2023-10-25 22:35:53;127.0.0.1;obtenerLogServidor;INFO;Muestra del Log del Servidor.
+2023-10-25 22:41:01;127.0.0.1;levantarServidor true;ERROR;list index out of range
+2023-10-25 22:43:19;127.0.0.1;levantarServidor;ERROR;De Comando - Faltan argumentos. Codigo(3)
+2023-10-25 22:43:27;127.0.0.1;levantarServidor true;ERROR;list index out of range
+2023-10-25 22:44:44;127.0.0.1;levantarServidor true;ERROR;list index out of range
+2023-10-25 22:46:58;127.0.0.1;levantarServidor;ERROR;De Comando - Faltan argumentos. Codigo(3)
+2023-10-25 22:47:02;127.0.0.1;levantarServidor true;ERROR;list index out of range
+2023-10-25 22:47:40;127.0.0.1;levantarServidor true;ERROR;list index out of range
+2023-10-25 22:49:17;127.0.0.1;levantarServidor true;ERROR;list index out of range
+2023-10-25 22:49:40;127.0.0.1;levantarServidor true;ERROR;list index out of range
+2023-10-25 22:50:29;127.0.0.1;levantarServidor true;ERROR;list index out of range
+2023-10-25 22:51:27;127.0.0.1;levantarServidor true;ERROR;list index out of range
+2023-10-25 22:53:07;127.0.0.1;levantarServidor true;ERROR;list index out of range
+2023-10-25 22:56:18;127.0.0.1;levantarServidor true;ERROR;list index out of range
+2023-10-25 23:01:35;127.0.0.1;conectarRobot;ERROR;De Brazo Robot - Al intentar conectar con el brazo. Codigo(1)
+2023-10-25 23:01:58;127.0.0.1;levantarServidor true;ERROR;list index out of range
+2023-10-25 23:08:56;127.0.0.1;conectarRobot;ERROR;De Brazo Robot - Al intentar conectar con el brazo. Codigo(1)
+2023-10-25 23:09:04;127.0.0.1;obtenerLogServidor;INFO;Muestra del Log del Servidor.
+2023-10-25 23:09:25;127.0.0.1;levantarServidor true;ERROR;list index out of range
+2023-10-25 23:10:23;127.0.0.1;levantarServidor;ERROR;De Comando - Faltan argumentos. Codigo(3)
+2023-10-25 23:10:25;127.0.0.1;levantarServidor true;ERROR;list index out of range
+2023-10-25 23:40:10;127.0.0.1;levantarServidor;ERROR;De Comando - Faltan argumentos. Codigo(3)
