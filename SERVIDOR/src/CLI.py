@@ -545,7 +545,7 @@ listarArchivosDeTrabajo [-e EXTENSION]
         try:
             arguments = args.split()
 
-            for fileName in os.listdir(self.route):
+            for fileName in os.listdir(self.jobRoute):
                 if len(arguments) > 0:
                     if arguments[0] == '-e':
                         if not (fileName[-len(arguments[1]):] == arguments[1]):
