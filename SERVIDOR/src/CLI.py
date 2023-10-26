@@ -137,9 +137,6 @@ class CLI(Cmd):
                 except Exception as e:
                     return ':'.join(["ERROR", str(e)])
 
-                
-            with self.archivoLog as Log:
-                Log.agregarRegistro(comando, ipCliente, timeStamp, mensaje)
 
             try:
                 self.archivoLog.agregarRegistro(comando, ipCliente, timeStamp, mensaje)
@@ -152,7 +149,7 @@ class CLI(Cmd):
                 self.archivoLog.agregarRegistro(':'.join(["ERROR", str(e)]))
         return result
 
-    
+
     def do_cls(self, args):
 
         """

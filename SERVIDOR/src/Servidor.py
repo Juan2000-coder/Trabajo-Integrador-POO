@@ -14,6 +14,7 @@ class Servidor():
         used_port = port
         while True:
             try:
+                aux = socket.gethostbyname_ex(hostname)
                 self.server = SimpleXMLRPCServer((socket.gethostbyname_ex(hostname)[2][1], port),
                                                  allow_none = True,
                                                  logRequests = None)
