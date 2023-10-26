@@ -6,16 +6,15 @@ class ArchivoLog():
 
     def __init__(self, nombreArchivo: str):
         self.nombreArchivo = nombreArchivo
+        self.lineFormat = "{:^10}" + " "*2 + "{:^10}" + " "*2 + "{:^30}" + " "*2 + "{:^5}" + " "*2 + "{:^20}"
+        self.header = "timestamp;ipCliente;comando;nivelLog;mensaje\n"
 
-    def __enter__(self):
-        self.archivo = open(self.nombreArchivo, "a+", newline = '')
-        self.archivo.seek(0)
-        self.reader = csv.reader(self.archivo, delimiter = ';')
-        return self
-    
-    def __exit__(self, exc_type, exc_value, traceback):
-        self.archivo.close()
-        self.reader = None
+        try:
+            with open(self.nombreArchivo, 'a') as archivo:
+                if archivo.tell() == 0:
+                    archivo.write(self.header)
+        except Exception as e:
+            raise Excepciones.ExcepcionArchivo()
 
     def agregarRegistro(self, comando: str, ipCliente:str, timeStamp, mensaje:str):
         # Acá lo que decía era que capaz que estaría bueno que solamente se lancen excepciones
@@ -32,8 +31,9 @@ class ArchivoLog():
                 #archivo.write(f"Hora: {registro.getTimeStamp()} - {registro.getNivelLog()}: Comando: {self.getComando()} (IP: {self.getIpCliente()})" + "\n")
 
                 # Definí el método __str__ en la clase Registro de modo que se podría hacer lo siguiente:
-            for registro in self.obtenerRegistro(comando, ipCliente, timeStamp, mensaje):
-                self.archivo.write(str(registro)) # Me parece que el write pone automaticamente el fin de linea.
+            with open(self.nombreArchivo, 'a') as archivo:
+                for registro in self.obtenerRegistro(comando, ipCliente, timeStamp, mensaje):
+                    archivo.write(str(registro)) # Me parece que el write pone automaticamente el fin de linea.
 
         except Exception as e:
             raise Excepciones.ExcepcionArchivo(1)
@@ -48,12 +48,17 @@ class ArchivoLog():
             segmentos = linea.split(':')
             registros.append(Registro(timeStamp, ipCliente, comando, segmentos[0], ":".join(segmentos[1:])))
         return registros
-
-    def devolverRegistro(self):
+    
+    def obtenerLog(self):
         try:
-            linea = next(self.reader)
-            return Registro(linea[0], linea[1], linea[2], linea[3], linea[4])
-        except StopIteration:
-            return None
+            log:str = ''
+            with open(self.nombreArchivo, "r") as archivo:
+                reader = csv.reader(archivo, delimiter = ';')
+                for i, linea in enumerate(reader):
+                    if i > 0:
+                        #aca esta largando error por alguna razon
+                        log += self.lineFormat.format(*linea) + "\n"
+            return log
         except Exception as e:
+            print(e)
             raise Excepciones.ExcepcionArchivo(2)

@@ -29,10 +29,6 @@ from pathlib import Path
 import subprocess
 import platform
 import datetime
-import serial
-import argparse
-
-
 ##Para levantar el SV
 from xmlrpc.server import SimpleXMLRPCServer
 from xmlrpc.server import SimpleXMLRPCRequestHandler
@@ -42,7 +38,6 @@ from ArchivoLog import ArchivoLog
 from ArchivoUsuario import ArchivoUsuario
 from ArchivoJob import ArchivoJob
 from Punto import Punto
-from Registro import Registro
 from Servidor import Servidor
 import Excepciones
 
@@ -62,10 +57,12 @@ class CLI(Cmd):
         directorio_primario = os.path.dirname(str(Path(__file__).resolve()))
         
         self.rpc_server = None
-        self.route = directorio_primario + subdirectorio_bytes
-        self.brazoRobot = BrazoRobot()
-        self.archivoLog = ArchivoLog('Log.csv') #.csv o .log?
+        self.jobRoute = directorio_primario + subdirectorio_bytes
         self.nombreArchivoJob = None
+        self.route = os.path.dirname(os.path.abspath(__file__))
+        self.fileroute = os.path.join(self.route, "..", "archivos")    # The path of the solution.
+        self.brazoRobot = BrazoRobot()
+        self.archivoLog = ArchivoLog(os.path.join(self.fileroute, "Log.csv")) #.csv o .log?
         self.requerimientos = {}
         # Será un diccionario donde las claves son los ids o ips de usuario
         # Y las claves serán los archivos de usuario (objetos).
@@ -92,7 +89,8 @@ class CLI(Cmd):
         # Acciones a realizar antes de ejecutar un comando
         # Podriamos hacer la validación de usuario
 
-        timeStamp = datetime.datetime.now()
+        timeStamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        
         # Habria que ver porque el servidor obtiene el timstamp de las peticiones de usuario de una
        
         comando = line 
@@ -111,15 +109,15 @@ class CLI(Cmd):
         
         if result is not None:
             if comando == "obtenerLogServidor":
-                mensaje = "INFO: Muestra del Log del Servidor."
+                mensaje = "INFO:Muestra del Log del Servidor."
             elif comando == "reporteGeneral":
-                mensaje = "INFO: Muestra de reporte de usuario."
+                mensaje = "INFO:Muestra de reporte de usuario."
             else:
                 mensaje = result
             if self.jobFlag == True:
                 try:
                     lineLista = line.split()
-                    job = ArchivoJob(self.nombreArchivoJob, self.route)
+                    job = ArchivoJob(self.nombreArchivoJob, self.jobRoute)
                     if lineLista[0] in comandosDelRobot:
                         # Verifica si se proporcionan parámetros adicionales
                         if len(lineLista) == 4 or len(lineLista) == 5:
@@ -143,12 +141,15 @@ class CLI(Cmd):
             with self.archivoLog as Log:
                 Log.agregarRegistro(comando, ipCliente, timeStamp, mensaje)
 
-            if not (ipCliente in self.requerimientos):
-                self.requerimientos[ipCliente] = ArchivoUsuario(ipCliente)
+            try:
+                self.archivoLog.agregarRegistro(comando, ipCliente, timeStamp, mensaje)
+                if not (ipCliente in self.requerimientos):
+                    self.requerimientos[ipCliente] = ArchivoUsuario(ipCliente, self.fileroute)
+                self.requerimientos[ipCliente].agregarRegistro(comando, ipCliente, timeStamp, mensaje)
 
-            with self.requerimientos[ipCliente] as LogUsuario:
-                LogUsuario.agregarRegistro(comando, ipCliente, timeStamp, mensaje)
-
+            except Exception as e:
+                print(self.outFormat.str(e))
+                self.archivoLog.agregarRegistro(':'.join(["ERROR", str(e)]))
         return result
 
     
@@ -190,8 +191,9 @@ reporteGeneral <id>
 
                 return "INFO: Reporte del Usuario."
         except Exception as e:
-            print(self.outFormat.format(e))
-            return ':'.join(["ERROR", str(e)])
+            result = ':'.join(["ERROR", str(e)])
+            print(self.outFormat.format(result))
+            return result
         
     def do_obtenerLogServidor(self, args):
 
@@ -210,23 +212,16 @@ obtenerLogServidor
                 """
                 logServidor seria un objeto del tipo ArchivoLog.
                 Definiendo el método __str__ en esa clase podemos hacer print(objeto)
-                y de esa manera imprimimos el contenido por pantalla.
-                """
-                with self.archivoLog:
-                    while True:
-                        registro = self.archivoLog.devolverRegistro()
-                        if registro is not None:
-                            print(self.outFormat.format(registro), end = '')
-                        else:
-                            break
-
-                return "INFO: Muestra del Log del Servidor."
-
+                y de esa manera imprimimos el contenido por pantalla."""
+                result = self.archivoLog.obtenerLog()
+                print(result)
+                return result
             else:
                 raise Excepciones.ExcepcionDeComando(1)
         except Exception as e:
-            print(self.outFormat.format(e))
-            return ':'.join(["ERROR", str(e)])
+            result = ':'.join(["ERROR", str(e)])
+            print(self.outFormat.format(result))
+            return result
 
     def do_seleccionarModo(self, args):
 
@@ -248,14 +243,16 @@ seleccionarModo <modo>
                 raise Excepciones.ExcepcionDeComando(1)
             
         except Exception as e:
-            print(self.outFormat.format(e))
-            return ':'.join(["ERROR", str(e)])
+            result = ':'.join(["ERROR", str(e)])
+            print(self.outFormat.format(result))
+            return result
         
     def do_conectarRobot(self, args):
         """
 Conecta el robot.
 conectarRobot
         """
+        print()
         try:
             arguments = args.split()
             if len(arguments) == 0:
@@ -266,14 +263,16 @@ conectarRobot
                 raise Excepciones.ExcepcionDeComando(1)
             
         except Exception as e:
-            print(self.outFormat.format(e))
-            return ':'.join(["ERROR", str(e)])
+            result = ':'.join(["ERROR", str(e)])
+            print(self.outFormat.format(result))
+            return result
         
     def do_desconectarRobot(self, args):
         """
 Desconecta el robot.
 desconectarRobot
         """
+        print()
         try:
             arguments = args.split()
             if len(arguments) == 0:
@@ -284,8 +283,9 @@ desconectarRobot
                 raise Excepciones.ExcepcionDeComando(1)
             
         except Exception as e:
-            print(self.outFormat.format(e))
-            return ':'.join(["ERROR", str(e)])
+            result = ':'.join(["ERROR", str(e)])
+            print(self.outFormat.format(result))
+            return result
 
     def do_activarMotores(self, args):
         """
@@ -303,8 +303,9 @@ activarMotores
                 raise Excepciones.ExcepcionDeComando(1)
             
         except Exception as e:
-            print(self.outFormat.format(e))
-            return ':'.join(["ERROR", str(e)])
+            result = ':'.join(["ERROR", str(e)])
+            print(self.outFormat.format(result))
+            return result
 
     def do_desactivarMotores(self, args):
         """
@@ -322,8 +323,9 @@ desactivarMotores
                 raise Excepciones.ExcepcionDeComando(1)
             
         except Exception as e:
-            print(self.outFormat.format(e))
-            return ':'.join(["ERROR", str(e)])
+            result = ':'.join(["ERROR", str(e)])
+            print(self.outFormat.format(result))
+            return result
 
     def do_home(self, args):
         """
@@ -342,8 +344,9 @@ home
                 raise Excepciones.ExcepcionDeComando(1)
             
         except Exception as e:
-            print(self.outFormat.format(e))
-            return ':'.join(["ERROR", str(e)])
+            result = ':'.join(["ERROR", str(e)])
+            print(self.outFormat.format(result))
+            return result
         
     def do_movLineal(self, args):
         """
@@ -364,7 +367,7 @@ movLineal <xx.x> <yy.y> <zz.z> [vv.v]
                 return result
             
             elif len(margs) == 4:
-                result = self.brazoRobot.movLineal(Punto(float (margs[0]), float (margs[1]),float (margs[2])),float( margs[3]))
+                result = self.brazoRobot.movLineal(Punto(float(margs[0]), float(margs[1]), float(margs[2])), float(margs[3]))
                 for elem in result.split('\n'):
                     print(self.outFormat.format(elem))
                 return result
@@ -373,8 +376,9 @@ movLineal <xx.x> <yy.y> <zz.z> [vv.v]
                 raise Excepciones.ExcepcionDeComando(1)
             
         except Exception as e:
-            print(self.outFormat.format(e))
-            return ':'.join(["ERROR", str(e)])
+            result = ':'.join(["ERROR", str(e)])
+            print(self.outFormat.format(result))
+            return result
 
     def do_activarPinza(self, args):
         """
@@ -394,8 +398,9 @@ activarPinza
                 raise Excepciones.ExcepcionDeComando(1)
 
         except Exception as e:
-            print(self.outFormat.format(e))
-            return ':'.join(["ERROR", str(e)])
+            result = ':'.join(["ERROR", str(e)])
+            print(self.outFormat.format(result))
+            return result
 
     def do_desactivarPinza(self, args):
         """
@@ -415,8 +420,9 @@ desactivarPinza
                 raise Excepciones.ExcepcionDeComando(1)
             
         except Exception as e:
-            print(self.outFormat.format(e))
-            return ':'.join(["ERROR", str(e)])
+            result = ':'.join(["ERROR", str(e)])
+            print(self.outFormat.format(result))
+            return result
         
     def do_posicionActual(self, args):
         """
@@ -435,8 +441,9 @@ Inidica la posicion actual
                 raise Excepciones.ExcepcionDeComando(1)
             
         except Exception as e:
-            print(self.outFormat.format(e))
-            return ':'.join(["ERROR", str(e)])
+            result = ':'.join(["ERROR", str(e)])
+            print(self.outFormat.format(result))
+            return result
 
     def do_grabar(self, args):
         """
@@ -469,8 +476,9 @@ grabar
                 return result
 
         except Exception as e:
-            print(self.outFormat.format(e))
-            return ':'.join(["ERROR", str(e)])
+            result = ':'.join(["ERROR", str(e)])
+            print(self.outFormat.format(result))
+            return result
         
     def do_cargar(self, args):
         """
@@ -496,8 +504,9 @@ cargar <JobFile>
                 raise Excepciones.ExcepcionDeComando(1)
             
         except Exception as e:
-            print(self.outFormat.format(e))
-            return ':'.join(["ERROR", str(e)])
+            result = ':'.join(["ERROR", str(e)])
+            print(self.outFormat.format(result))
+            return result
 
     
 
@@ -506,24 +515,26 @@ cargar <JobFile>
 Inicia/Para el servidor rpc según el valor dado (true/false).
 levantarServidor true|false
         """
+        print()
         try:
             arguments = args.split()
             if len(arguments) == 1:
-                if arguments[0].lower().lower()=="true":
+                if arguments[0].lower() =="true":
                     if self.rpc_server is None:
                         self.rpc_server = Servidor(self)  #este objeto inicia el servidor y se da a conocer
-                elif arguments[0].lower() .lower()=="false":
+                elif arguments[0].lower() =="false":
                     if self.rpc_server is not None:
                         self.rpc_server.shutdown()
                         print("Servidor Apagado")
                         self.rpc_server = None
-                else: 
+                else:
                     raise Excepciones.ExcepcionDeComando(2)
             else:
                 raise Excepciones.ExcepcionDeComando(3)
         except Exception as e:
-            print(self.outFormat.format(e))
-            return ':'.join(["ERROR", str(e)])
+            result = ':'.join(["ERROR", str(e)])
+            print(self.outFormat.format(result))
+            return result
             
     def do_listarArchivosDeTrabajo(self, args):
 
@@ -547,8 +558,9 @@ listarArchivosDeTrabajo [-e EXTENSION]
                 print(self.outFormat.format(fileName))
 
         except Exception as e:
-            print(self.outFormat.format(e))
-            return ':'.join(["ERROR", str(e)])
+            result = ':'.join(["ERROR", str(e)])
+            print(self.outFormat.format(result))
+            return result
     
     def do_exit(self, args):
 
