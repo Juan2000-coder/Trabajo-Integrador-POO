@@ -16,3 +16,6 @@
 2023-10-26 00:08:28.545970;127.0.0.1;seleccionarModo r;ERROR;Excepcion de Brazo Robot con mensaje: No se pudo enviar el comando. La conexión con el Robot no está establecida. - Codigo: 2
 2023-10-26 00:08:46.731123;127.0.0.1;grabar r;Almacenamiento de comandos parado;
 2023-10-26 00:08:49.922741;127.0.0.1;home;ERROR;Excepcion de Brazo Robot con mensaje: No se pudo enviar el comando. La conexión con el Robot no está establecida. - Codigo: 2
+2023-10-26 10:30:15.637097;127.0.0.1;grabar sexo.txt;Comandos se almacenaran en sexo.txt;
+2023-10-26 10:30:18.292767;127.0.0.1;home;ERROR;Excepcion de Brazo Robot con mensaje: No se pudo enviar el comando. La conexión con el Robot no está establecida. - Codigo: 2
+2023-10-26 10:30:24.728583;127.0.0.1;posicionActual;ERROR;Excepcion de Brazo Robot con mensaje: No se pudo enviar el comando. La conexión con el Robot no está establecida. - Codigo: 2
