@@ -6,7 +6,7 @@ class ArchivoLog():
 
     def __init__(self, nombreArchivo: str):
         self.nombreArchivo = nombreArchivo
-        self.lineFormat = "{:^20}" + " "*2 + "{:^20}" + " "*2 + "{:^20}" + " "*2 + "{:^20}" + " "*2 + "{:^20}"
+        self.lineFormat = "{:^10}" + " "*2 + "{:^10}" + " "*2 + "{:^30}" + " "*2 + "{:^5}" + " "*2 + "{:^20}"
         self.header = "timestamp;ipCliente;comando;nivelLog;mensaje\n"
 
         try:

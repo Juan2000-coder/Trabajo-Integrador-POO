@@ -27,7 +27,6 @@ import os
 import subprocess
 import platform
 import datetime
-import serial
 ##Para levantar el SV
 from xmlrpc.server import SimpleXMLRPCServer
 from xmlrpc.server import SimpleXMLRPCRequestHandler
@@ -36,7 +35,6 @@ from BrazoRobot import BrazoRobot
 from ArchivoLog import ArchivoLog
 from ArchivoUsuario import ArchivoUsuario
 from Punto import Punto
-from Registro import Registro
 from Servidor import Servidor
 import Excepciones
 
@@ -71,7 +69,8 @@ class CLI(Cmd):
         # Acciones a realizar antes de ejecutar un comando
         # Podriamos hacer la validación de usuario
 
-        timeStamp = datetime.datetime.now()
+        timeStamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        
         # Habria que ver porque el servidor obtiene el timstamp de las peticiones de usuario de una
 
         comando = line
@@ -90,9 +89,9 @@ class CLI(Cmd):
         
         if result is not None:
             if comando == "obtenerLogServidor":
-                mensaje = "INFO: Muestra del Log del Servidor."
+                mensaje = "INFO:Muestra del Log del Servidor."
             elif comando == "reporteGeneral":
-                mensaje = "INFO: Muestra de reporte de usuario."
+                mensaje = "INFO:Muestra de reporte de usuario."
             else:
                 mensaje = result
 
@@ -463,15 +462,15 @@ levantarServidor true|false
         try:
             arguments = args.split()
             if len(arguments) == 1:
-                if arguments[0].lower().lower()=="true":
+                if arguments[0].lower() =="true":
                     if self.rpc_server is None:
                         self.rpc_server = Servidor(self)  #este objeto inicia el servidor y se da a conocer
-                elif arguments[0].lower() .lower()=="false":
+                elif arguments[0].lower() =="false":
                     if self.rpc_server is not None:
                         self.rpc_server.shutdown()
                         print("Servidor Apagado")
                         self.rpc_server = None
-                else: 
+                else:
                     raise Excepciones.ExcepcionDeComando(2)
             else:
                 raise Excepciones.ExcepcionDeComando(3)
