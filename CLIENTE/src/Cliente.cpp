@@ -50,14 +50,14 @@ int main(int argc, char* argv[]) {
     comandoANumero["desactivarPinza"] = 11;
     comandoANumero["grabar"] = 12;
     comandoANumero["cargar"] = 13;
-    comandoANumero["levantarServidor"] = 14;
+    comandoANumero["posicionActual"] = 14;
     comandoANumero["desconectarServidor"] = 15;
     comandoANumero["listarArchivosDeTrabajo"] = 16;    
 
 
 
 
-    bool flagServidor = true;
+    
     bool flagCliente = true;
     string input;
     string input1, input2, input3, input4;
@@ -184,8 +184,11 @@ int main(int argc, char* argv[]) {
                 break;
 
             case 12: //grabar
-
-                if (c.execute("grabar", noArgs, result)) {
+                if (cin.peek() != '\n') {
+                    cin >> input1;
+                    oneArg[0]=input1;
+                }
+                if (c.execute("grabar", oneArg, result)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'grabar'\n\n";
@@ -201,29 +204,13 @@ int main(int argc, char* argv[]) {
                 }
                 break;
 
-            case 14: //levantarServidor
-                /*
-                if (flagServidor){
-
-                    std::string startServerCommand = "/usr/bin/python3.9 /home/pancho/Escritorio/integrador/SERVIDOR/serverTest.py &";
-
-                    // Inicia el servidor como un proceso independiente
-                    int status = std::system(startServerCommand.c_str()); //lanza el servidor
-                    flagServidor = false;
-                    if (status == 0) {
-                        std::cout << "Servidor iniciado exitosamente." << std::endl;
-                        // Aquí puedes enviar comandos adicionales al servidor si es necesario
-                    } else {
-                        std::cerr << "Error al iniciar el servidor." << std::endl;
-                    }
+            case 14: //posicionActual
+                if (c.execute("posicionActual", noArgs, result)) {
+                    cout << result << "\n\n";
                 } else {
-
-                    std::cout << "Servidor ya iniciado" << std::endl;
-
+                    cout << "Error en la llamada a 'posicionActual'\n\n";
                 }
-                */
                 break;
-
             case 15: //desconectarServidor
 
                 if (c.execute("desconectarServidor", noArgs, result)) {

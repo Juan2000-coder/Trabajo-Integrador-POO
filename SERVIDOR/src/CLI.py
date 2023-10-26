@@ -24,10 +24,15 @@ cada una de las clases de excepciones en cada uno de los archivos de las clases 
 
 from cmd import Cmd
 import os
+import os.path
+from pathlib import Path
 import subprocess
 import platform
 import datetime
 import serial
+import argparse
+
+
 ##Para levantar el SV
 from xmlrpc.server import SimpleXMLRPCServer
 from xmlrpc.server import SimpleXMLRPCRequestHandler
@@ -35,6 +40,7 @@ from xmlrpc.server import SimpleXMLRPCRequestHandler
 from BrazoRobot import BrazoRobot
 from ArchivoLog import ArchivoLog
 from ArchivoUsuario import ArchivoUsuario
+from ArchivoJob import ArchivoJob
 from Punto import Punto
 from Registro import Registro
 from Servidor import Servidor
@@ -48,16 +54,22 @@ class CLI(Cmd):
     marginLevel = 5                      # Left Margin for output
     outFormat = ' '*marginLevel + "{}"   # Left Margin string for use with format()
 
+
     def __init__(self):
         """"""
-        super().__init__()
+        super().__init__()        
+        subdirectorio_bytes = "\\job"   
+        directorio_primario = os.path.dirname(str(Path(__file__).resolve()))
+        
         self.rpc_server = None
-        self.route = os.getcwd()    # The path of the solution.
+        self.route = directorio_primario + subdirectorio_bytes
         self.brazoRobot = BrazoRobot()
         self.archivoLog = ArchivoLog('Log.csv') #.csv o .log?
+        self.nombreArchivoJob = None
         self.requerimientos = {}
         # Será un diccionario donde las claves son los ids o ips de usuario
         # Y las claves serán los archivos de usuario (objetos).
+        self.jobFlag = False
 
     def postcmd(self, stop, line):
         
@@ -67,13 +79,23 @@ class CLI(Cmd):
             return stop
     
     def onecmd(self, line):
+
+        comandosDelRobot = {"seleccionarModo": {"a" : "G90",
+                                                "r" : "G91"},
+                        "activarMotores" : "G17",
+                        "desactivarMotores" : "G18",
+                        "home" : "G28",
+                        "posicionActual" : "G0",
+                        "movLineal" : "G1", 
+                        "activarPinza" : "M3",
+                        "desactivarPinza" : "M5"}
         # Acciones a realizar antes de ejecutar un comando
         # Podriamos hacer la validación de usuario
 
         timeStamp = datetime.datetime.now()
         # Habria que ver porque el servidor obtiene el timstamp de las peticiones de usuario de una
-
-        comando = line
+       
+        comando = line 
         ipCliente = "127.0.0.1"
         # Hay que ver como recuperarlo del servidor que lo conoce
         
@@ -94,6 +116,29 @@ class CLI(Cmd):
                 mensaje = "INFO: Muestra de reporte de usuario."
             else:
                 mensaje = result
+            if self.jobFlag == True:
+                try:
+                    lineLista = line.split()
+                    job = ArchivoJob(self.nombreArchivoJob, self.route)
+                    if lineLista[0] in comandosDelRobot:
+                        # Verifica si se proporcionan parámetros adicionales
+                        if len(lineLista) == 4 or len(lineLista) == 5:
+                            job.agregarComando(lineLista) ## Resolver que pasa si pongo movLineal con menos argumentos de los necesarios. Resolver tambien si se ponen comandos que no llevan argumentos, con argumentos
+                        elif len(lineLista) == 1:
+                            job.agregarComando(comandosDelRobot.get(lineLista[0], ""))
+                        elif lineLista[0] == "seleccionarModo":
+                            if lineLista[1] == "a":
+                                job.agregarComando(comandosDelRobot["seleccionarModo"]["a"])
+                            elif lineLista[1] == "r":
+                                job.agregarComando(comandosDelRobot["seleccionarModo"]["r"])
+                            else:
+                                raise Excepciones.ExcepcionDeComando(2)
+                        else:
+                            raise Excepciones.ExcepcionDeComando(1)
+                        
+                except Exception as e:
+                    return ':'.join(["ERROR", str(e)])
+
                 
             with self.archivoLog as Log:
                 Log.agregarRegistro(comando, ipCliente, timeStamp, mensaje)
@@ -104,7 +149,7 @@ class CLI(Cmd):
             with self.requerimientos[ipCliente] as LogUsuario:
                 LogUsuario.agregarRegistro(comando, ipCliente, timeStamp, mensaje)
 
-        #return result
+        return result
 
     
     def do_cls(self, args):
@@ -214,7 +259,7 @@ conectarRobot
         try:
             arguments = args.split()
             if len(arguments) == 0:
-                result = self.brazoRobot.conectarRobot('COM3', 115200)
+                result = self.brazoRobot.conectarRobot('COM4', 115200)
                 print(self.outFormat.format(result))
                 return ':'.join(["INFO", result])
             else:
@@ -401,17 +446,28 @@ grabar
         print()
         try:
             arguments = args.split()
-            if len(arguments) == 0:
-                # Debería llamar al metodo correspondiente en el brazo
-                # En realidad podemos activar un flag en esta misma clase o en el brazo Robot
-                # Crear un nuevo archivo de Job y entonces en cada llamada a un comando 
-                # Este se coloca en el archivo. Algo como lo siguiente
-                pass
-                #self.enGrabación = True
-                #self.jobs.append(ArchivoJob("Grabacion1" + str(id) + ".txt"))
+            if self.jobFlag == False:
+                if len(arguments) == 1:
+                    
+                    self.nombreArchivoJob= arguments[0]
+                    result = "Comandos se almacenaran en " + self.nombreArchivoJob
+                    print(result)
+                    self.jobFlag = True
+                    return result
+                    # Debería llamar al metodo correspondiente en el brazo
+                    # En realidad podemos activar un flag en esta misma clase o en el brazo Robot
+                    # Crear un nuevo archivo de Job y entonces en cada llamada a un comando 
+                    # Este se coloca en el archivo. Algo como lo siguiente
+                    #self.enGrabación = True
+                    #self.jobs.append(ArchivoJob("Grabacion1" + str(id) + ".txt"))
+                else:
+                    raise Excepciones.ExcepcionDeComando(1)
             else:
-                raise Excepciones.ExcepcionDeComando(1)
-            
+                result = "Almacenamiento de comandos parado"
+                print(result)
+                self.jobFlag = False
+                return result
+
         except Exception as e:
             print(self.outFormat.format(e))
             return ':'.join(["ERROR", str(e)])
@@ -480,6 +536,7 @@ listarArchivosDeTrabajo [-e EXTENSION]
         print()
         try:
             arguments = args.split()
+
             for fileName in os.listdir(self.route):
                 if len(arguments) > 0:
                     if arguments[0] == '-e':

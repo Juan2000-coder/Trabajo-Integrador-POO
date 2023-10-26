@@ -86,8 +86,8 @@ class Servidor():
     def desactivarPinza(self):
         return self.consola.onecmd("desactivarPinza")
     
-    def grabar(self):
-        return self.consola.onecmd("grabar")
+    def grabar(self, args):
+        return self.consola.onecmd("grabar "+ args)
     
     def cargar(self):
         return self.consola.onecmd("cargar")
