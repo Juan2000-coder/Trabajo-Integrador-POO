@@ -253,7 +253,7 @@ conectarRobot
         try:
             arguments = args.split()
             if len(arguments) == 0:
-                result = self.brazoRobot.conectarRobot('COM4', 115200)
+                result = self.brazoRobot.conectarRobot('COM3', 115200)
                 print(self.outFormat.format(result))
                 return ':'.join(["INFO", result])
             else:
@@ -545,7 +545,7 @@ listarArchivosDeTrabajo [-e EXTENSION]
         try:
             arguments = args.split()
 
-            for fileName in os.listdir(self.route):
+            for fileName in os.listdir(self.jobRoute):
                 if len(arguments) > 0:
                     if arguments[0] == '-e':
                         if not (fileName[-len(arguments[1]):] == arguments[1]):

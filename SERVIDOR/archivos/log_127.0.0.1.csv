@@ -56,3 +56,24 @@ timestamp;ipCliente;comando;nivelLog;mensaje
 2023-10-26 10:40:06;127.0.0.1;movLineal 20 30 50;ERROR;De Brazo Robot - No se pudo enviar el comando, robot desconectado. Codigo(2)
 2023-10-26 10:40:54;127.0.0.1;grabar;Almacenamiento de comandos parado;
 2023-10-26 10:44:38;127.0.0.1;grabar pato.txt;Comandos se almacenaran en pato.txt;
+2023-10-26 11:12:38;127.0.0.1;levantarServidor;ERROR;De Comando - Faltan argumentos. Codigo(3)
+2023-10-26 11:13:41;127.0.0.1;levantarServidor;ERROR;De Comando - Faltan argumentos. Codigo(3)
+2023-10-26 11:14:14;127.0.0.1;grabar sexooo.txt;Comandos se almacenaran en sexooo.txt;
+2023-10-26 11:14:22;127.0.0.1;home;ERROR;De Brazo Robot - No se pudo enviar el comando, robot desconectado. Codigo(2)
+2023-10-26 11:14:29;127.0.0.1;conectarRobot;ERROR;De Brazo Robot - Al intentar conectar con el brazo. Codigo(1)
+2023-10-26 11:14:37;127.0.0.1;grabar sexooo.txt;Almacenamiento de comandos parado;
+2023-10-26 11:14:40;127.0.0.1;conectarRobot;ERROR;De Brazo Robot - Al intentar conectar con el brazo. Codigo(1)
+2023-10-26 11:20:39;127.0.0.1;levantarServidor;ERROR;De Comando - Faltan argumentos. Codigo(3)
+2023-10-26 11:20:47;127.0.0.1;conectarRobot;INFO;Conexión exitosa con el puerto COM3.
+2023-10-26 11:20:59;127.0.0.1;grabar fran.txt;Comandos se almacenaran en fran.txt;
+2023-10-26 11:21:27;127.0.0.1;home;INFO; ROBOT ONLINE
+2023-10-26 11:21:27;127.0.0.1;home;INFO; SEND G28 TO CALIBRATE
+2023-10-26 11:21:27;127.0.0.1;home;INFO; HOMING
+2023-10-26 11:21:27;127.0.0.1;home;INFO; HOMING COMPLETE t=7.50s
+2023-10-26 11:21:46;127.0.0.1;movLineal 20 30 40 50;ERROR; POINT IS OUTSIDE OF WORKSPACE
+2023-10-26 11:21:50;127.0.0.1;home;INFO; HOMING
+2023-10-26 11:21:50;127.0.0.1;home;INFO; HOMING COMPLETE t=4.50s
+2023-10-26 11:22:00;127.0.0.1;posicionActual;INFO; LINEAR  MOVE: [X:0.00 Y:170.00 Z:120.00 E:0.00] t=0.00s
+2023-10-26 11:22:08;127.0.0.1;seleccionarModo r;INFO; RELATIVE MODE ON
+2023-10-26 11:22:13;127.0.0.1;grabar r;Almacenamiento de comandos parado;
+2023-10-26 11:22:24;127.0.0.1;seleccionarModo a;INFO; ABSOLUTE MODE ON
