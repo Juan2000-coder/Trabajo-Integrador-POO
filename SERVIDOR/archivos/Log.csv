@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 timestamp;ipCliente;comando;nivelLog;mensaje
 2023-10-25 22:30:39;127.0.0.1;conectarRobot;ERROR;De Brazo Robot - Al intentar conectar con el brazo. Codigo(1)
 2023-10-25 22:30:42;127.0.0.1;activarPinza;ERROR;De Brazo Robot - No se pudo enviar el comando, robot desconectado. Codigo(2)
@@ -92,3 +93,6 @@ timestamp;ipCliente;comando;nivelLog;mensaje
 2023-10-26 12:07:17;127.0.0.1;movLineal 10 10 10 ;ERROR;De Brazo Robot - No se pudo enviar el comando, robot desconectado. Codigo(2)
 2023-10-26 12:13:23;127.0.0.1;listarArchivosDeTrabajo;chota.txt;
 2023-10-26 12:13:23;127.0.0.1;listarArchivosDeTrabajo;;
+=======
+timestamp;ipCliente;comando;nivelLog;mensaje
+>>>>>>> 74af85c53c33b6b3776835f8b0b9874dba96b879

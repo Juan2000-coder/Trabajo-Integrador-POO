@@ -147,7 +147,7 @@ class CLI(Cmd):
                 self.archivoLog.agregarRegistro(':'.join(["ERROR", str(e)]))
         return result
 
-    
+
     def do_cls(self, args):
 
         """
