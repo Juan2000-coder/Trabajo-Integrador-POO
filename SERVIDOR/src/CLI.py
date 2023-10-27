@@ -52,18 +52,16 @@ class CLI(Cmd):
 
     def __init__(self):
         """"""
-        super().__init__()        
-        subdirectorio_bytes = "\\job"   
-        directorio_primario = os.path.dirname(str(Path(__file__).resolve()))
-        
+        super().__init__()
         self.rpc_server = None
-        self.jobRoute = directorio_primario + subdirectorio_bytes
         self.nombreArchivoJob = None
         self.route = os.path.dirname(os.path.abspath(__file__))
-        self.fileroute = os.path.join(self.route, "..", "archivos")    # The path of the solution.
+        self.logRoute = os.path.join(self.route, "..", "archivos")    # The path of the solution.
+        self.jobRoute = os.path.join(self.route, "..", "Job")    # The path of the solution.
         self.brazoRobot = BrazoRobot()
-        self.archivoLog = ArchivoLog(os.path.join(self.fileroute, "Log.csv")) #.csv o .log?
+        self.archivoLog = ArchivoLog(os.path.join(self.logRoute, "Log.csv")) #.csv o .log?
         self.requerimientos = {}
+
         # Será un diccionario donde las claves son los ids o ips de usuario
         # Y las claves serán los archivos de usuario (objetos).
         self.jobFlag = False
@@ -135,13 +133,13 @@ class CLI(Cmd):
                             raise Excepciones.ExcepcionDeComando(1)
                         
                 except Exception as e:
-                    return ':'.join(["ERROR", str(e)])
-
+                    print(self.outFormat.str(e))
+                    self.archivoLog.agregarRegistro(':'.join(["ERROR", str(e)]))
 
             try:
                 self.archivoLog.agregarRegistro(comando, ipCliente, timeStamp, mensaje)
                 if not (ipCliente in self.requerimientos):
-                    self.requerimientos[ipCliente] = ArchivoUsuario(ipCliente, self.fileroute)
+                    self.requerimientos[ipCliente] = ArchivoUsuario(ipCliente, self.logRoute)
                 self.requerimientos[ipCliente].agregarRegistro(comando, ipCliente, timeStamp, mensaje)
 
             except Exception as e:
@@ -544,7 +542,7 @@ listarArchivosDeTrabajo [-e EXTENSION]
         print()
         try:
             arguments = args.split()
-
+            lista = ""
             for fileName in os.listdir(self.jobRoute):
                 if len(arguments) > 0:
                     if arguments[0] == '-e':
@@ -552,7 +550,9 @@ listarArchivosDeTrabajo [-e EXTENSION]
                             continue
                     else:
                         raise Excepciones.ExcepcionDeComando(2)
+                lista += fileName + "\n"
                 print(self.outFormat.format(fileName))
+            return lista
 
         except Exception as e:
             result = ':'.join(["ERROR", str(e)])
