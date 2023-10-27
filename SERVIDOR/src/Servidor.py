@@ -3,7 +3,8 @@ from threading import Thread
 import socket
 import logging
 
-hostname = socket.getfqdn()
+#hostname = socket.getfqdn()
+hostname = "Juan_Portátil"     # Esto me funciona en mi compu
 RPC_PORT = 8000
 
 class Servidor():
@@ -14,12 +15,12 @@ class Servidor():
         used_port = port
         while True:
             try:
-                self.server = SimpleXMLRPCServer((socket.gethostbyname_ex(hostname)[2][1], port),
-                                                 allow_none = True,
-                                                 logRequests = None)
-                """self.server = SimpleXMLRPCServer((socket.gethostbyname_ex(hostname)[2][0], port),
+                """self.server = SimpleXMLRPCServer((socket.gethostbyname_ex(hostname)[2][1], port),
                                                  allow_none = True,
                                                  logRequests = None)"""
+                self.server = SimpleXMLRPCServer((socket.gethostbyname_ex(hostname)[2][0], port),
+                                                 allow_none = True,
+                                                 logRequests = None)
                 # Lo anterior es porque así me anda en mi compu Juan
                 if used_port != port:
                     logging.warning(("RPC server bound on non-default port %d") % used_port)
