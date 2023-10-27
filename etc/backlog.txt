@@ -8,6 +8,7 @@ El problema es que los archivos se est�n abriendo al final y no al inicio para
 Poner un comando para devolver la posición y la velocidad actual
 Devolver el estado actual del robot
 Implementar el envio de comandos G por el cliente
-habría que meterle un with también al servidor para que se cierre solo.
+habría que meterle un with también al servidor para que se cierre solo.NECESARIO
 poner un help del lado del cliente
 poner un cls del lado del cliente
+hacer la función de cargar el archivo de trabajo

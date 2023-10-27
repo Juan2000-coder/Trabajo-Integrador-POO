@@ -4,8 +4,8 @@ import socket
 import logging
 #from Streaming import VideoServer
 
-#hostname = socket.getfqdn()
-hostname = "Juan_Portátil"     # Esto me funciona en mi compu
+hostname = socket.getfqdn()
+#hostname = "Juan_Portátil"     # Esto me funciona en mi compu
 RPC_PORT = 8000
 
 class Servidor():
@@ -16,7 +16,7 @@ class Servidor():
         self.consola = consola
         used_port = port
         while True:
-            
+            try:
                 self.server = SimpleXMLRPCServer((socket.gethostbyname_ex(hostname)[2][1], port),
                                                  allow_none = True,
                                                  logRequests = None)
@@ -105,4 +105,3 @@ class Servidor():
     
     def posicionActual(self):
         return self.consola.onecmd("posicionActual")
-    
