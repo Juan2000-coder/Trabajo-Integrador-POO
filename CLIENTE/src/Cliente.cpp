@@ -1,5 +1,3 @@
-//NOTA: ESTO POR AHORA FUNCIONA SOLO EN LINUX
-
 #include <iostream>
 #include <stdlib.h>
 #include <fstream>
@@ -16,6 +14,9 @@ using namespace std;
 #include "XmlRpc.h"
 
 using namespace XmlRpc;
+
+
+
 
 //METODO CLS PARA LIMPIAR CONSOLA. 
 void cls() {
@@ -106,6 +107,14 @@ void mostrarAyuda(int comando) {
     }
 
 
+// Función que se ejecutará al recibir la señal SIGINT (Ctrl + C).
+    void signalHandler(int signum) {
+        std::cout << "\n Interrupcion por teclado recibida. \n Desconectando del servidor..." << std::endl;
+        exit(0);
+    }
+
+
+
 int main(int argc, char* argv[]) {
     
     //VERIFICACION POR SI NO SE INGRESO CORRECTAMENTE LOS PARAMETROS DEL SERVIDOR PARA CONECTARSE
@@ -119,7 +128,8 @@ int main(int argc, char* argv[]) {
     XmlRpcClient c(argv[1], port);
     XmlRpcValue oneArg, noArgs, result, args;
 
-
+    // Registra la función signalHandler para la señal SIGINT.
+    signal(SIGINT, signalHandler);
 
 
     //MAPA
@@ -299,10 +309,13 @@ int main(int argc, char* argv[]) {
                     cout << "Error en la llamada a 'posicionActual'\n\n";
                 }
                 break;
-            case 15: //desconectarServidor
 
+            case 15: // desconectarServidor
                 if (c.execute("desconectarServidor", noArgs, result)) {
-                    cout << result << "\n\n";
+                    cout << "Desconectando del servidor...\n";    
+                    cout << "Desconectado del servidor.\n";
+                    cout << "Saliendo del programa...\n";
+                    exit(0);
                 } else {
                     cout << "Error en la llamada a 'desconectarServidor'\n\n";
                 }

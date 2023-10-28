@@ -190,3 +190,4 @@ timestamp;ipCliente;comando;nivelLog;mensaje
 2023-10-28 10:41:14;127.0.0.1;activarMotores;INFO;INFO:Motor activado.
 2023-10-28 10:41:22;127.0.0.1;conectarRobot;ERROR;De Brazo Robot - Conexión ya establecida. Codigo(8)
 2023-10-28 10:41:29;127.0.0.1;activarPinza;INFO; GRIPPER ON
+2023-10-28 12:33:58;127.0.0.1;levantarServidor rue;ERROR;De Comando - Opcion no encontrada. Codigo(2)
