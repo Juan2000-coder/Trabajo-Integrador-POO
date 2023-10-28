@@ -544,10 +544,17 @@ listarArchivosDeTrabajo [-e EXTENSION]
 Termina la ejecucion del programa.
 exit
         """
+        self.brazoRobot.desconectarRobot()
+        print("Robot desconectado.")
         print("Ejecucion CLI SERVIDOR terminada")
         raise SystemExit
     
 if __name__ == "__main__":
-    commandLine = CLI()
-    commandLine.prompt = '->'
-    commandLine.cmdloop('Entrada de comandos')
+    try:
+        commandLine = CLI()
+        commandLine.prompt = '->'
+        commandLine.cmdloop('Entrada de comandos')
+    except KeyboardInterrupt:
+        # Cuando se presiona Ctrl+C, el flujo llega aquí.
+        CLI.BrazoRobot.desconectarRobot()
+        print("Robot desconectado.")

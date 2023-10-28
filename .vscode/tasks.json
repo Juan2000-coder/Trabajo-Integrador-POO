@@ -4,17 +4,17 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "g++",
+            "command": "C:\\msys64\\mingw64\\bin\\g++",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
                 "-Wall",
-                "-I./CLIENTE/include/xmlrpc",
-                "./CLIENTE/src/*.cpp",
-                "./CLIENTE/src/xmlrpc/*.cpp", 
+                "-I.\\CLIENTE\\include\\xmlrpc",
+                ".\\CLIENTE\\src\\*.cpp",
+                ".\\CLIENTE\\src\\xmlrpc\\*.cpp", 
                 "-lws2_32",
                 "-o",
-                "./CLIENTE/build/Cliente",
+                ".\\CLIENTE\\build\\Cliente",
             ],
             "problemMatcher": [
                 "$gcc"

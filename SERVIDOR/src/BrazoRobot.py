@@ -92,15 +92,15 @@ class BrazoRobot():
         return  self.enviarComando("G28")
     
     def posicionActual(self):
-        return  self.enviarComando("G0")
+        return  self.enviarComando("M114")
     
     def activarMotor(self):
-        print("Motor activado.")
-        return self.enviarComando("G17")
+        self.enviarComando("G17")
+        return "INFO:Motor activado."
             
     def desactivarMotor(self):
-        print("Motor desactivado.")
-        return self.enviarComando("G18")
+        self.enviarComando("G18")
+        return "INFO:Motor desactivado."
 
 '''
 Ejemplo test
