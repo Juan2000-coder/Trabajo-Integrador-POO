@@ -16,6 +16,74 @@ using namespace std;
 using namespace XmlRpc;
 
 
+//METODO DE AYUDA
+void mostrarAyuda(int comando) {
+    switch (comando) {
+        case 1:
+            cout << "Comando: reporteGeneral\nDescripción: Genera un reporte general del robot.\n";
+            break;
+        case 2:
+            cout << "Comando: obtenerLogServidor\nDescripción: Obtiene el registro de actividad del servidor.\n";
+            break;
+        case 3:
+            cout << "Comando: seleccionarModo\nDescripción: Selecciona el modo de operación (auto o manual) del robot.\n";
+            break;
+        case 4:
+            cout << "Comando: conectarRobot\nDescripción: Conecta el robot al servidor.\n";
+            break;
+        case 5:
+            cout << "Comando: desconectarRobot\nDescripción: Desconecta el robot del servidor.\n";
+            break;
+        
+        case 6:
+            cout << "Comando: activarMotores\nDescripción: Activa los motores del robot.\n";
+            break;
+        
+        case 7:
+            cout << "Comando: desactivarMotores\nDescripción: Desactiva los motores del robot.\n";
+            break;
+        
+        case 8:
+            cout << "Comando: home\nDescripción: Mueve el robot a la posición home.\n";
+            break;
+        
+        case 9:
+            cout << "Comando: movLineal\nDescripción: Mueve el robot en línea recta.\n";
+            break;
+        
+        case 10:
+            cout << "Comando: activarPinza\nDescripción: Activa la pinza del robot.\n";
+            break;
+
+        case 11:
+            cout << "Comando: desactivarPinza\nDescripción: Desactiva la pinza del robot.\n";
+            break;
+        
+        case 12:
+            cout << "Comando: grabar\nDescripción: Graba una secuencia de movimientos.\n";
+            break;
+        
+        case 13:
+            cout << "Comando: cargar\nDescripción: Carga una secuencia de movimientos.\n";
+            break;
+        
+        case 14:
+            cout << "Comando: posicionActual\nDescripción: Obtiene la posición actual del robot.\n";
+            break;
+        
+        case 15:
+            cout << "Comando: desconectarServidor\nDescripción: Desconecta el servidor.\n";
+            break;
+    
+        case 16:
+            cout << "Comando: listarArchivosDeTrabajo\nDescripción: Lista los archivos de trabajo disponibles.\n";
+            break;
+        
+        default:
+            cout << "Comando no reconocido. Use 'ayuda' para ver la lista de comandos disponibles.\n";
+            break;
+        }
+    }
 
 
 int main(int argc, char* argv[]) {
@@ -53,9 +121,7 @@ int main(int argc, char* argv[]) {
     comandoANumero["posicionActual"] = 14;
     comandoANumero["desconectarServidor"] = 15;
     comandoANumero["listarArchivosDeTrabajo"] = 16;    
-
-
-
+    comandoANumero["ayuda"] = 17;  // Agregamos el comando "ayuda" a la lista de comandos.
 
     
     bool flagCliente = true;
@@ -69,6 +135,7 @@ int main(int argc, char* argv[]) {
                                           //en el mapa. Si input se encuentra en el mapa, it apuntará a esa ubicación, y it != stringToValue.end() será verdadero, 
                                           //lo que significa que la clave se encontró. Si input no se encuentra en el mapa, it será igual a stringToValue.end(), y la 
                                           //condición será falsa, lo que indica que la clave no se encontró.
+    
 
     if (it != comandoANumero.end()) { 
         int value = it->second; //accede al valor asociado a la clave
@@ -108,7 +175,6 @@ int main(int argc, char* argv[]) {
                     cout << "Error en la llamada a 'conectarRobot'\n\n";
                 }
                 break;
-
 
             case 5: //desconectarRobot
   
@@ -228,14 +294,39 @@ int main(int argc, char* argv[]) {
                     cout << "Error en la llamada a 'listarArchivosDeTrabajo'\n\n";
                 }
                 break;
+            
+            case 17: // Ayuda
+                if (c.execute("ayuda", noArgs, result)) {
+                    cout << "Lista de comandos disponibles:" << endl;
+                    for (const auto& cmd : comandoANumero) {
+                        if (cmd.first != "ayuda") {  // Excluir el comando "ayuda" de la lista de comandos.
+                            cout << cmd.first << endl;
+                        }
+                    }
+                    cout << "Ingrese el comando del cual desea obtener informacion'.\n";
+                    cin >> input2;
+                    auto it = comandoANumero.find(input2);                        if (it != comandoANumero.end()) {
+                        
+                        int value = it->second; //accede al valor asociado a la clave
+                        mostrarAyuda(value);
+                        }
+                        else{
+                        cout << "Error en la llamada a 'ayuda [Comando]'\n\n";
+                        }
+                    } else {
+                        cout << "Error en la llamada a 'ayuda'\n\n";
+                    }
+                    break;
           
-
+        
             default:
                 std::cout << "Opción no válida" << std::endl;
         }
-    } else {
+    }
+    else {
         std::cout << "Opción no encontrada" << std::endl;
     }
     }
+    
     return 0;
 }

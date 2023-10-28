@@ -251,7 +251,7 @@ conectarRobot
         try:
             arguments = args.split()
             if len(arguments) == 0:
-                result = self.brazoRobot.conectarRobot('COM3', 115200)
+                result = self.brazoRobot.conectarRobot('COM3', 9600)
                 print(self.outFormat.format(result))
                 return ':'.join(["INFO", result])
             else:
@@ -565,10 +565,17 @@ listarArchivosDeTrabajo [-e EXTENSION]
 Termina la ejecucion del programa.
 exit
         """
+        self.brazoRobot.desconectarRobot()
+        print("Robot desconectado.")
         print("Ejecucion CLI SERVIDOR terminada")
         raise SystemExit
     
 if __name__ == "__main__":
-    commandLine = CLI()
-    commandLine.prompt = '->'
-    commandLine.cmdloop('Entrada de comandos')
+    try:
+        commandLine = CLI()
+        commandLine.prompt = '->'
+        commandLine.cmdloop('Entrada de comandos')
+    except KeyboardInterrupt:
+        # Cuando se presiona Ctrl+C, el flujo llega aquí.
+        CLI.BrazoRobot.desconectarRobot()
+        print("Robot desconectado.")
