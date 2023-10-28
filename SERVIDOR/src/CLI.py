@@ -29,9 +29,6 @@ from pathlib import Path
 import subprocess
 import platform
 import datetime
-##Para levantar el SV
-from xmlrpc.server import SimpleXMLRPCServer
-from xmlrpc.server import SimpleXMLRPCRequestHandler
 
 from BrazoRobot import BrazoRobot
 from ArchivoLog import ArchivoLog
@@ -40,6 +37,7 @@ from ArchivoJob import ArchivoJob
 from Punto import Punto
 from Servidor import Servidor
 import Excepciones
+
 
 class CLI(Cmd):
     """Command Interpreter. Interface with user."""
@@ -56,10 +54,8 @@ class CLI(Cmd):
         self.rpc_server = None
         self.nombreArchivoJob = None
         self.route = os.path.dirname(os.path.abspath(__file__))
-        self.logRoute = os.path.join(self.route, "..", "archivos")    # The path of the solution.
         self.jobRoute = os.path.join(self.route, "..", "Job")    # The path of the solution.
         self.brazoRobot = BrazoRobot()
-        self.archivoLog = ArchivoLog(os.path.join(self.logRoute, "Log.csv")) #.csv o .log?
         self.requerimientos = {}
 
         # Será un diccionario donde las claves son los ids o ips de usuario
@@ -134,17 +130,8 @@ class CLI(Cmd):
                         
                 except Exception as e:
                     print(self.outFormat.str(e))
-                    self.archivoLog.agregarRegistro(':'.join(["ERROR", str(e)]))
 
-            try:
-                self.archivoLog.agregarRegistro(comando, ipCliente, timeStamp, mensaje)
-                if not (ipCliente in self.requerimientos):
-                    self.requerimientos[ipCliente] = ArchivoUsuario(ipCliente, self.logRoute)
-                self.requerimientos[ipCliente].agregarRegistro(comando, ipCliente, timeStamp, mensaje)
 
-            except Exception as e:
-                print(self.outFormat.str(e))
-                self.archivoLog.agregarRegistro(':'.join(["ERROR", str(e)]))
         return result
 
 
@@ -208,9 +195,9 @@ obtenerLogServidor
                 logServidor seria un objeto del tipo ArchivoLog.
                 Definiendo el método __str__ en esa clase podemos hacer print(objeto)
                 y de esa manera imprimimos el contenido por pantalla."""
-                result = self.archivoLog.obtenerLog()
-                print(result)
-                return result
+                #result = self.archivoLog.obtenerLog()
+                #print(result)
+                return
             else:
                 raise Excepciones.ExcepcionDeComando(1)
         except Exception as e:
@@ -242,25 +229,17 @@ seleccionarModo <modo>
             print(self.outFormat.format(result))
             return result
         
-    def do_conectarRobot(self, args):
+    def do_conectarRobot(self, *args):
         """
 Conecta el robot.
 conectarRobot
         """
-        print()
-        try:
-            arguments = args.split()
-            if len(arguments) == 0:
-                result = self.brazoRobot.conectarRobot('COM3', 115200)
-                print(self.outFormat.format(result))
-                return ':'.join(["INFO", result])
-            else:
-                raise Excepciones.ExcepcionDeComando(1)
-            
-        except Exception as e:
-            result = ':'.join(["ERROR", str(e)])
+        if len(args) == 0:
+            result = self.brazoRobot.conectarRobot('COM3', 115200)
             print(self.outFormat.format(result))
             return result
+        else:
+            raise Excepciones.ExcepcionDeComando(1)
         
     def do_desconectarRobot(self, args):
         """

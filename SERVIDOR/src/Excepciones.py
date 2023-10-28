@@ -60,3 +60,13 @@ class ExcepcionDeComando(Exception):
 
     def __str__(self):
         return f"De Comando - {self.args[0]} Codigo({self.codigoDeExcepcion})"
+    
+class ExcepcionDeServidor(Exception):
+    def __init__(self, codigoDeExcepcion):
+        self.codigoDeExcepcion = codigoDeExcepcion
+
+        if codigoDeExcepcion == 1:
+            super().__init__("El puerto está en uso.")
+
+    def __str__(self):
+        return f"De Servidor - {self.args[0]} Codigo({self.codigoDeExcepcion})"
