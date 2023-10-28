@@ -162,15 +162,16 @@ int main(int argc, char* argv[]) {
     while (flagCliente) {
     cout << "Ingrese una opción: ";
     cin >> input;
+    cout << "\nImprimi puta \n" <<input; 
 
     auto it = comandoANumero.find(input); //Aquí, it es un iterador que apunta a la ubicación de input en el std::map stringToValue. La función find busca la clave input 
                                           //en el mapa. Si input se encuentra en el mapa, it apuntará a esa ubicación, y it != stringToValue.end() será verdadero, 
                                           //lo que significa que la clave se encontró. Si input no se encuentra en el mapa, it será igual a stringToValue.end(), y la 
                                           //condición será falsa, lo que indica que la clave no se encontró.
     
-
     if (it != comandoANumero.end()) { 
         int value = it->second; //accede al valor asociado a la clave
+        cout << "\nImprimi el value puta \n" << value;
         switch (value) {
             case 1: //reporteGeneral
 
