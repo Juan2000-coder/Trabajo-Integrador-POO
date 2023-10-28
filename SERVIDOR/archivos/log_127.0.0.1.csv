@@ -188,3 +188,6 @@ timestamp;ipCliente;comando;nivelLog;mensaje
 2023-10-26 23:13:07;127.0.0.1;desconectarRobot;ERROR;De Brazo Robot - Robot ya desconectado. Codigo(4)
 >>>>>>> 96c47cdcd316cad75668ba36fb06affad0280cb0
 >>>>>>> 7f881bb35f7e9e29452169c0070710c4dd12303d
+2023-10-28 10:41:14;127.0.0.1;activarMotores;INFO;INFO:Motor activado.
+2023-10-28 10:41:22;127.0.0.1;conectarRobot;ERROR;De Brazo Robot - Conexión ya establecida. Codigo(8)
+2023-10-28 10:41:29;127.0.0.1;activarPinza;INFO; GRIPPER ON

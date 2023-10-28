@@ -8,6 +8,8 @@
 #include <iomanip> 
 #include <map>
 #include <string>
+#include <cstdlib> // Para la función 'system'
+
 using namespace std;
 
 //#include "json.hpp"
@@ -15,6 +17,16 @@ using namespace std;
 
 using namespace XmlRpc;
 
+//METODO CLS PARA LIMPIAR CONSOLA. 
+void cls() {
+    #ifdef _WIN32
+    // Código para Windows
+    std::system("cls");
+    #else
+    // Código para sistemas tipo Unix/Linux (incluyendo macOS)
+    std::system("clear");
+    #endif
+}
 
 //METODO DE AYUDA
 void mostrarAyuda(int comando) {
@@ -78,7 +90,15 @@ void mostrarAyuda(int comando) {
         case 16:
             cout << "Comando: listarArchivosDeTrabajo\nDescripción: Lista los archivos de trabajo disponibles.\n";
             break;
-        
+
+        case 17:
+            cout << "Comando: ayuda\nDescripción: Muestra la lista de comandos disponibles.\n";
+            break;
+
+        case 18:
+            cout << "Comando: cls\nDescripción: Limpia la consola.\n";
+            break;
+
         default:
             cout << "Comando no reconocido. Use 'ayuda' para ver la lista de comandos disponibles.\n";
             break;
@@ -121,7 +141,9 @@ int main(int argc, char* argv[]) {
     comandoANumero["posicionActual"] = 14;
     comandoANumero["desconectarServidor"] = 15;
     comandoANumero["listarArchivosDeTrabajo"] = 16;    
-    comandoANumero["ayuda"] = 17;  // Agregamos el comando "ayuda" a la lista de comandos.
+    comandoANumero["ayuda"] = 17;   // Agregamos el comando "ayuda" a la lista de comandos.
+    comandoANumero["cls"] = 18;     // Agregamos el comando "cls" a la lista de comandos.
+
 
     
     bool flagCliente = true;
@@ -317,8 +339,16 @@ int main(int argc, char* argv[]) {
                         cout << "Error en la llamada a 'ayuda'\n\n";
                     }
                     break;
-          
-        
+            case 18:    // cls
+
+                if (c.execute("cls", noArgs, result)) {
+                    cout << result << "\n\n";
+                    cls();
+                } else {
+                    cout << "Error en la llamada a 'cls'\n\n";
+                }
+                break;
+                 
             default:
                 std::cout << "Opción no válida" << std::endl;
         }
