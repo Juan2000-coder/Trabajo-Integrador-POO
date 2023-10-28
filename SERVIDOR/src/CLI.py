@@ -251,7 +251,7 @@ conectarRobot
         try:
             arguments = args.split()
             if len(arguments) == 0:
-                result = self.brazoRobot.conectarRobot('COM4', 115200)
+                result = self.brazoRobot.conectarRobot('COM3', 115200)
                 print(self.outFormat.format(result))
                 return ':'.join(["INFO", result])
             else:
