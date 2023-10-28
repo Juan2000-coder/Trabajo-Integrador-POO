@@ -99,6 +99,10 @@ void mostrarAyuda(int comando) {
         case 18:
             cout << "Comando: cls\nDescripción: Limpia la consola.\n";
             break;
+        
+        case 19:
+            cout << "Comando: salir\nDescripción: Cierra el programa.\n";
+            break;
 
         default:
             cout << "Comando no reconocido. Use 'ayuda' para ver la lista de comandos disponibles.\n";
@@ -153,6 +157,7 @@ int main(int argc, char* argv[]) {
     comandoANumero["listarArchivosDeTrabajo"] = 16;    
     comandoANumero["ayuda"] = 17;   // Agregamos el comando "ayuda" a la lista de comandos.
     comandoANumero["cls"] = 18;     // Agregamos el comando "cls" a la lista de comandos.
+    comandoANumero["salir"] = 19;   // Agregamos el comando "salir" a la lista de comandos.
 
 
     
@@ -162,8 +167,7 @@ int main(int argc, char* argv[]) {
     while (flagCliente) {
     cout << "Ingrese una opción: ";
     cin >> input;
-    cout << "\nImprimi puta \n" <<input; 
-
+    
     auto it = comandoANumero.find(input); //Aquí, it es un iterador que apunta a la ubicación de input en el std::map stringToValue. La función find busca la clave input 
                                           //en el mapa. Si input se encuentra en el mapa, it apuntará a esa ubicación, y it != stringToValue.end() será verdadero, 
                                           //lo que significa que la clave se encontró. Si input no se encuentra en el mapa, it será igual a stringToValue.end(), y la 
@@ -171,7 +175,7 @@ int main(int argc, char* argv[]) {
     
     if (it != comandoANumero.end()) { 
         int value = it->second; //accede al valor asociado a la clave
-        cout << "\nImprimi el value puta \n" << value;
+        
         switch (value) {
             case 1: //reporteGeneral
 
@@ -332,7 +336,6 @@ int main(int argc, char* argv[]) {
                 break;
             
             case 17: // Ayuda
-                if (c.execute("ayuda", noArgs, result)) {
                     cout << "Lista de comandos disponibles:" << endl;
                     for (const auto& cmd : comandoANumero) {
                         if (cmd.first != "ayuda") {  // Excluir el comando "ayuda" de la lista de comandos.
@@ -341,7 +344,8 @@ int main(int argc, char* argv[]) {
                     }
                     cout << "Ingrese el comando del cual desea obtener informacion'.\n";
                     cin >> input2;
-                    auto it = comandoANumero.find(input2);                        if (it != comandoANumero.end()) {
+                    auto it = comandoANumero.find(input2);                        
+                    if (it != comandoANumero.end()) {
                         
                         int value = it->second; //accede al valor asociado a la clave
                         mostrarAyuda(value);
@@ -349,9 +353,7 @@ int main(int argc, char* argv[]) {
                         else{
                         cout << "Error en la llamada a 'ayuda [Comando]'\n\n";
                         }
-                    } else {
-                        cout << "Error en la llamada a 'ayuda'\n\n";
-                    }
+                    
                     break;
             case 18:    // cls
 
@@ -361,6 +363,11 @@ int main(int argc, char* argv[]) {
                 } else {
                     cout << "Error en la llamada a 'cls'\n\n";
                 }
+                break;
+            
+            case 19:    //salir
+                cout << "Saliendo del programa...\n";
+                flagCliente = false;
                 break;
                  
             default:
