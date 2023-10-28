@@ -229,7 +229,7 @@ seleccionarModo <modo>
             print(self.outFormat.format(result))
             return result
         
-    def do_conectarRobot(self, *args):
+    def do_conectarRobot(self, args):
         """
 Conecta el robot.
 conectarRobot
@@ -537,6 +537,30 @@ listarArchivosDeTrabajo [-e EXTENSION]
             result = ':'.join(["ERROR", str(e)])
             print(self.outFormat.format(result))
             return result
+        
+    def do_enviarComando(self, args):
+        """
+Envia un comando al brazo robot.
+enviarComando <comando>
+    comando     El comando a enviar al brazo robot.
+        """
+        print("Funcionando?")
+        try:
+            # Debería llamar al metodo correspondiente en el brazo
+            print("Funcionado2?")
+            print(args)
+            result = self.brazoRobot.enviarComando(args)
+            for elem in result.split('\n'):
+                print(self.outFormat.format(elem))
+            return result
+            
+        except Exception as e:
+            result = ':'.join(["ERROR", str(e)])
+            print(self.outFormat.format(result))
+            return result
+        
+
+   
     
     def do_exit(self, args):
 

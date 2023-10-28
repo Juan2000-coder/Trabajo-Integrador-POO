@@ -158,7 +158,7 @@ int main(int argc, char* argv[]) {
     comandoANumero["ayuda"] = 17;   // Agregamos el comando "ayuda" a la lista de comandos.
     comandoANumero["cls"] = 18;     // Agregamos el comando "cls" a la lista de comandos.
     comandoANumero["salir"] = 19;   // Agregamos el comando "salir" a la lista de comandos.
-
+    comandoANumero["enviarComando"] = 20;  // Agregamos el comando "enviarComando" a la lista de comandos.
 
     
     bool flagCliente = true;
@@ -369,7 +369,10 @@ int main(int argc, char* argv[]) {
                 cout << "Saliendo del programa...\n";
                 flagCliente = false;
                 break;
-                 
+
+            case 20:    //enviarComando
+                
+
             default:
                 std::cout << "Opción no válida" << std::endl;
         }
