@@ -77,12 +77,12 @@ class CLI(Cmd):
         
         # Habria que ver porque el servidor obtiene el timstamp de las peticiones de usuario de una
        
-        comando = line 
+   
         ipCliente = "127.0.0.1"
         # Hay que ver como recuperarlo del servidor que lo conoce
         
         # Ejecutar el comando
-        result = super().onecmd(line)
+        result = super().onecmd(comando)
 
         # Acciones a realizar después de ejecutar un comando
         # result debería contener tanto el nievl log y un mensaje que es el resultado
@@ -104,7 +104,7 @@ class CLI(Cmd):
                 job = ArchivoJob(self.nombreArchivoJob, self.jobRoute)
 
                 try:
-                    lineLista = line.split()
+                    lineLista = comando.split()
                     comandoo = lineLista[0]
                     params = tuple(lineLista[1:])
                     if comandoo != "grabar":
