@@ -280,7 +280,7 @@ activarPinza
         else:
             raise Excepciones.ExcepcionDeComando(1)
 
-    def do_desactivarPinza(self, args):
+    def do_desactivarPinza(self, *args):
         """
 Desactiva el efector final.
 desactivarPinza
@@ -375,6 +375,20 @@ listarArchivosDeTrabajo
             return lista
         else:
             raise Excepciones.ExcepcionDeComando(1)
+        
+    def do_enviarComando(self, *args):
+        """
+Envia un comando al brazo robot.
+enviarComando <comando>
+    comando     El comando a enviar al brazo robot.
+        """
+        args = args[0]
+        result = self.brazoRobot.enviarComando(args)
+               
+        for elem in result.split('\n'):
+            print(self.outFormat.format(elem))
+        return result
+        
     
     def do_exit(self, args):
 

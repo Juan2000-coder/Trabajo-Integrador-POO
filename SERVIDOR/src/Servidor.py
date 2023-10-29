@@ -53,6 +53,7 @@ class Servidor(SimpleXMLRPCServer):
         self.register_function(self.cargar, 'cargar')        
         self.register_function(self.listarArchivosDeTrabajo, 'listarArchivosDeTrabajo') 
         self.register_function(self.posicionActual, 'posicionActual')
+        self.register_function(self.enviarComando, 'enviarComando')
         #self.register_function(self.video_server.get_video_frame, 'get_video_frame')
     
         self.thread = Thread(target = self.run_server)
