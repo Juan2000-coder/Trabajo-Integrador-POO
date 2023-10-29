@@ -37,12 +37,13 @@ from ArchivoJob import ArchivoJob
 from Punto import Punto
 from Servidor import Servidor
 import Excepciones
+from Registro import Registrar
 
 
 class CLI(Cmd):
     """Command Interpreter. Interface with user."""
 
-    doc_header = "Ayuda para comandos documentados."
+    doc_header = "                        Ayuda para comandos documentados                      "
     undoc_header = "Comandos no documentados."
     marginLevel = 5                      # Left Margin for output
     outFormat = ' '*marginLevel + "{}"   # Left Margin string for use with format()
@@ -66,7 +67,7 @@ class CLI(Cmd):
             return False
         else:
             return stop"""
-    
+
     def onecmd(self, comando):
 
         comandosDelRobot = {"seleccionarModo": {"a" : "G90",
@@ -79,8 +80,10 @@ class CLI(Cmd):
                         "activarPinza" : "M3",
                         "desactivarPinza" : "M5"}
 
-        try:
-            super().onecmd(comando)
+        try: 
+            result = super().onecmd(comando)
+            if result is not None:
+                print(result)
         except Excepciones.Excepciones as e:
             print(self.outFormat.format(str(e)))
 
@@ -161,89 +164,88 @@ reporteGeneral <id>
 Imprime el detalle del Log del Servidor.
 obtenerLogServidor
         """
+        args = args.split()
         if len(args) == 0:
             archivo = ArchivoLog('Log.log')
             print(archivo.obtenerLog())
         else:
             raise Excepciones.ExcepcionDeComando(1)
 
-    def do_seleccionarModo(self, *args):
+    def do_seleccionarModo(self, args):
         """
 Selecciona el modo de operacion en coordenadas Absolutas(a) o Relativas(r).
 seleccionarModo <modo>
     modo        modo = a || modo = r.
         """
-        if len(args) == 1 and args[0] != '':
+        args = args.split()
+        if len(args) == 1:
             # Debería llamar al método correspondiente en la clase Robot.
             result = self.brazoRobot.seleccionarModo(args[0])
-            for elem in result.split('\n'):
-                print(self.outFormat.format(elem))
-            return result
+            return Registrar(result)
         else:
             raise Excepciones.ExcepcionDeComando(1)
         
-    def do_conectarRobot(self, *args):
+    def do_conectarRobot(self, args):
         """
 Conecta el robot.
 conectarRobot
         """
-        if args == ('',) * len(args):
+        args = args.split()
+        if len(args) == 0:
             result = self.brazoRobot.conectarRobot('COM3', 115200)
-            print(self.outFormat.format(result))
-            return result
+            return Registrar(result)
         else:
             raise Excepciones.ExcepcionDeComando(1)
         
-    def do_desconectarRobot(self, *args):
+    def do_desconectarRobot(self, args):
         """
 Desconecta el robot.
 desconectarRobot
         """
-        if args == ('',) * len(args):
+        args = args.split()
+        if len(args) == 0:
             result = self.brazoRobot.desconectarRobot()
-            print(self.outFormat.format(result))
-            return result
+            return Registrar(result)
         else:
             raise Excepciones.ExcepcionDeComando(1)
 
-    def do_activarMotores(self, *args):
+    def do_activarMotores(self, args):
         """
 Activa los motores del brazo.
 activarMotores
         """
-        if args == ('',) * len(args):
+        args = args.split()
+        if len(args) == 0:
             result = self.brazoRobot.activarMotor()
-            print(self.outFormat.format(result))
-            return result
+            return Registrar(result)
         else:
             raise Excepciones.ExcepcionDeComando(1)
 
-    def do_desactivarMotores(self, *args):
+    def do_desactivarMotores(self, args):
         """
 Desactiva los motores del brazo.
 desactivarMotores
         """
-        if args == ('',) * len(args):
+        args = args.split()
+        if len(args) == 0:
             result = self.brazoRobot.desactivarMotor()
-            print(self.outFormat.format(result))
-            return result
+            return Registrar(result)
         else:
             raise Excepciones.ExcepcionDeComando(1)
 
-    def do_home(self, *args):
+    def do_home(self, args):
         """
 Activa el proceso de Homming del brazo.
 home
         """
-        if args == ('',) * len(args):
+        args = args.split()
+        if len(args) == 0:
             result = self.brazoRobot.home()
-            for elem in result.split('\n'):
-                print(self.outFormat.format(elem))
-            return result
+            return Registrar(result)
         else:
             raise Excepciones.ExcepcionDeComando(1)
         
-    def do_movLineal(self, *args):
+    def do_movLineal(self, args):
         """
 Realiza el movimiento lineal del efector final.
 movLineal <xx.x> <yy.y> <zz.z> [vv.v]
@@ -253,6 +255,7 @@ movLineal <xx.x> <yy.y> <zz.z> [vv.v]
     vv.v    Velocidad del movimiento en mm/s.
         """
         result = None
+        args = args.split()
         if len(args) == 3:
             result = self.brazoRobot.movLineal(Punto(float(args[0]), float(args[1]), float(args[2])))
            
@@ -262,21 +265,18 @@ movLineal <xx.x> <yy.y> <zz.z> [vv.v]
         else:
             raise Excepciones.ExcepcionDeComando(1)
         
-        for elem in result.split('\n'):
-            print(self.outFormat.format(elem))
-        return result
+        return Registrar(result)
 
-    def do_activarPinza(self, *args):
+    def do_activarPinza(self, args):
         """
 Activa el efector final.
 activarPinza
         """
-        if args == ('',) * len(args):
+        args = args.split()
+        if len(args) == 0:
             # Debería llamar al metodo correspondiente en el brazo
             result = self.brazoRobot.activarPinza()
-            for elem in result.split('\n'):
-                print(self.outFormat.format(elem))
-            return result
+            return Registrar(result)
         else:
             raise Excepciones.ExcepcionDeComando(1)
 
@@ -285,37 +285,36 @@ activarPinza
 Desactiva el efector final.
 desactivarPinza
         """
-        if args == ('',) * len(args):
+        args = args.split()
+        if len(args) == 0:
             # Debería llamar al metodo correspondiente en el brazo
             result = self.brazoRobot.desactivarPinza()
-            for elem in result.split('\n'):
-                print(self.outFormat.format(elem))
-            return result
+            return Registrar(result)
         else:
             raise Excepciones.ExcepcionDeComando(1)
         
-    def do_posicionActual(self, *args):
+    def do_posicionActual(self, args):
         """
 Inidica la posicion actual
         """
-        if args == ('',) * len(args):
+        args = args.split()
+        if len(args) == 0:
             # Debería llamar al metodo correspondiente en el brazo
             result = self.brazoRobot.posicionActual()
-            for elem in result.split('\n'):
-                print(self.outFormat.format(elem))
-            return result
+            return Registrar(result)
         else:
             raise Excepciones.ExcepcionDeComando(1)
 
-    def do_grabar(self, *args):
+    def do_grabar(self, args):
         """
 Inicia el proceso de grabación de movimientos para construir un archivo de trabajo con la secuencia grabada.
 grabar <Archivo>
     Archivo     El archivo donde se guardará la secuencia.
         """
+        args = args.split()
         if self.jobFlag == False:
-            if len(args) == 1 and args[0] != '':
-                self.nombreArchivoJob= args[0]
+            if len(args) == 1:
+                self.nombreArchivoJob = args[0]
                 result = "INFO:Comandos se almacenaran en " + self.nombreArchivoJob
                 print(result)
                 self.jobFlag = True
@@ -328,14 +327,14 @@ grabar <Archivo>
             self.jobFlag = False
             return result
 
-    def do_cargar(self, *args):
+    def do_cargar(self, args):
         """
 Carga un archivo de trabajo existente en el directorio.
 cargar <JobFile>
     JobFile     El nombre del archivo de Trabajo en el directorio.
     """
 
-        if len(args) == 1 and args[0] != '':
+        if len(args) == 1:
             pass
         else:
             raise Excepciones.ExcepcionDeComando(1)
@@ -345,12 +344,12 @@ cargar <JobFile>
 Inicia/Para el servidor rpc según el valor dado (true/false).
 levantarServidor true|false
         """
-        arguments = args.split()
-        if len(arguments) == 1:
-            if arguments[0].lower() =="true":
+        args = args.split()
+        if len(args) == 1:
+            if args[0].lower() =="true":
                 if self.rpc_server is None:
                     self.rpc_server = Servidor(self)  #este objeto inicia el servidor y se da a conocer
-            elif arguments[0].lower() =="false":
+            elif args[0].lower() =="false":
                 if self.rpc_server is not None:
                     self.rpc_server.shutdown()
                     print("Servidor Apagado")
@@ -361,14 +360,14 @@ levantarServidor true|false
             raise Excepciones.ExcepcionDeComando(1)
 
             
-    def do_listarArchivosDeTrabajo(self, *args):
+    def do_listarArchivosDeTrabajo(self, args):
 
         """
 Muestra los archivos de trabajo en el directorio actual.
 listarArchivosDeTrabajo
         """
-        
-        if args == ('',) * len(args):
+        args = args.split()
+        if len(args) == 0:
             lista = ""
             for fileName in os.listdir(self.jobRoute):
                 lista += fileName + "\n"
@@ -386,9 +385,10 @@ exit
         try:
             self.brazoRobot.desconectarRobot()
         except Excepciones.ExcepcionBrazoRobot:
-            print("Robot desconectado.")
-            print("Ejecucion CLI SERVIDOR terminada")
-            raise SystemExit
+            pass
+        print("Robot desconectado.")
+        print("Ejecucion CLI SERVIDOR terminada")
+        raise SystemExit
     
 if __name__ == "__main__":
     try:
@@ -400,5 +400,6 @@ if __name__ == "__main__":
         try:
             CLI.BrazoRobot.desconectarRobot()
         except Excepciones.ExcepcionBrazoRobot:
-            print("Robot desconectado.")
-            print("Ejecucion CLI SERVIDOR terminada")
+            pass
+        print("Robot desconectado.")
+        print("Ejecucion CLI SERVIDOR terminada")

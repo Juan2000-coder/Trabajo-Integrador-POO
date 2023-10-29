@@ -74,69 +74,73 @@ class Servidor(SimpleXMLRPCServer):
                 "method_name": func.__name__
             }
             try:
-                resultado = func(self, *args, **kwargs)
+                argsstr = ''
+                for arg in args:
+                    argsstr += str(arg) + ' '
+                    
+                resultado = func(self, argsstr, **kwargs)
                 logging.info(resultado, extra=self.dic)
                 return resultado
-            except Excepciones as e:
+            except Excepciones.Excepciones as e:
                 return "error"
         return metodoRPC
     
     @_log
-    def conectarRobot(self):
-        return self.consola.do_conectarRobot()
+    def conectarRobot(self, args):
+        return self.consola.do_conectarRobot(args)
 
     @_log
-    def desconectarRobot(self):
-        return self.consola.onecmd("desconectarRobot")
+    def desconectarRobot(self, args):
+        return self.consola.do_desconectarRobot(args)
     
     @_log
-    def activarMotores(self):
-        return self.consola.onecmd("activarMotores")
+    def activarMotores(self, args):
+        return self.consola.do_activarMotores(args)
     
     @_log
-    def desactivarMotores(self):
-        return self.consola.onecmd("desactivarMotores")
+    def desactivarMotores(self, args):
+        return self.consola.do_desactivarMotores(args)
     
     @_log
-    def reporteGeneral(self):
-        return self.consola.onecmd("reporteGeneral")
+    def reporteGeneral(self, args):
+        return self.consola.do_reporteGeneral(args)
     
     @_log
-    def obtenerLogServidor(self):
-        return self.logServidor.obtenerLog()
+    def obtenerLogServidor(self, args):
+        return self.logServidor.obtenerLog(args)
     
     @_log
-    def seleccionarModo(self, args):
-        return self.consola.onecmd("seleccionarModo " + args)
+    def seleccionarModo(self, args): 
+        return self.consola.do_seleccionarModo(args)
     
     @_log
-    def home(self):
-        return self.consola.onecmd("home")
+    def home(self, args):
+        return self.consola.do_home(args)
     
     @_log
-    def movLineal(self,arg1, arg2, arg3, arg4=""):
-        return self.consola.onecmd("movLineal " + arg1 +" "+ arg2+" "+arg3+" "+arg4)
+    def movLineal(self, args):
+        return self.consola.do_movLineal(args)
     
     @_log
-    def activarPinza(self):
-        return self.consola.onecmd("activarPinza")
+    def activarPinza(self, args):
+        return self.consola.do_activarPinza(args)
     
     @_log
-    def desactivarPinza(self):
-        return self.consola.onecmd("desactivarPinza")
+    def desactivarPinza(self, args):
+        return self.consola.do_desactivarPinza(args)
     
     @_log
     def grabar(self, args):
-        return self.consola.onecmd("grabar "+ args)
+        return self.consola.do_grabar(args)
     
     @_log
-    def cargar(self):
-        return self.consola.onecmd("cargar")
+    def cargar(self, args):
+        return self.consola.do_cargar(args)
     
     @_log
-    def listarArchivosDeTrabajo(self):
-        return self.consola.onecmd("listarArchivosDeTrabajo")
+    def listarArchivosDeTrabajo(self, args):
+        return self.consola.do_listarArchivosDeTrabajo(args)
     
     @_log
-    def posicionActual(self):
-        return self.consola.onecmd("posicionActual")
+    def posicionActual(self, args):
+        return self.consola.do_posicionActual(args)
