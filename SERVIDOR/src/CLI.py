@@ -40,15 +40,15 @@ from ArchivoJob import ArchivoJob
 from Punto import Punto
 from Servidor import Servidor
 import Excepciones
+from Comandos import ComandosGcode
 
 class CLI(Cmd):
     """Command Interpreter. Interface with user."""
-
+    
     doc_header = "Ayuda para comandos documentados."
     undoc_header = "Comandos no documentados."
     marginLevel = 5                      # Left Margin for output
     outFormat = ' '*marginLevel + "{}"   # Left Margin string for use with format()
-
 
     def __init__(self):
         """"""
@@ -58,6 +58,7 @@ class CLI(Cmd):
         self.route = os.path.dirname(os.path.abspath(__file__))
         self.logRoute = os.path.join(self.route, "..", "archivos")    # The path of the solution.
         self.jobRoute = os.path.join(self.route, "..", "Job")    # The path of the solution.
+        
         self.brazoRobot = BrazoRobot()
         self.archivoLog = ArchivoLog(os.path.join(self.logRoute, "Log.csv")) #.csv o .log?
         self.requerimientos = {}
@@ -75,15 +76,7 @@ class CLI(Cmd):
     
     def onecmd(self, line):
 
-        comandosDelRobot = {"seleccionarModo": {"a" : "G90",
-                                                "r" : "G91"},
-                        "activarMotores" : "G17",
-                        "desactivarMotores" : "G18",
-                        "home" : "G28",
-                        "posicionActual" : "G0",
-                        "movLineal" : "G1", 
-                        "activarPinza" : "M3",
-                        "desactivarPinza" : "M5"}
+
         # Acciones a realizar antes de ejecutar un comando
         # Podriamos hacer la validación de usuario
 
@@ -112,27 +105,21 @@ class CLI(Cmd):
                 mensaje = "INFO:Muestra de reporte de usuario."
             else:
                 mensaje = result
+
             if self.jobFlag == True:
+                
+                job = ArchivoJob(self.nombreArchivoJob, self.jobRoute)
+
                 try:
                     lineLista = line.split()
-                    job = ArchivoJob(self.nombreArchivoJob, self.jobRoute)
-                    if lineLista[0] in comandosDelRobot:
-                        # Verifica si se proporcionan parámetros adicionales
-                        if len(lineLista) == 4 or len(lineLista) == 5:
-                            job.agregarComando(lineLista) ## Resolver que pasa si pongo movLineal con menos argumentos de los necesarios. Resolver tambien si se ponen comandos que no llevan argumentos, con argumentos
-                        elif len(lineLista) == 1:
-                            job.agregarComando(comandosDelRobot.get(lineLista[0], ""))
-                        elif lineLista[0] == "seleccionarModo":
-                            if lineLista[1] == "a":
-                                job.agregarComando(comandosDelRobot["seleccionarModo"]["a"])
-                            elif lineLista[1] == "r":
-                                job.agregarComando(comandosDelRobot["seleccionarModo"]["r"])
-                            else:
-                                raise Excepciones.ExcepcionDeComando(2)
-                        else:
-                            raise Excepciones.ExcepcionDeComando(1)
-                        
+                    comandoo = lineLista[0]
+                    params = tuple(lineLista[1:])
+                    if comandoo != "grabar":
+                        comandoTransformado = ComandosGcode.comandoAGcode(comandoo,params)
+                        job.agregarComando(comandoTransformado)
+
                 except Exception as e:
+
                     print(self.outFormat.str(e))
                     self.archivoLog.agregarRegistro(':'.join(["ERROR", str(e)]))
 
@@ -143,10 +130,10 @@ class CLI(Cmd):
                 self.requerimientos[ipCliente].agregarRegistro(comando, ipCliente, timeStamp, mensaje)
 
             except Exception as e:
+  
                 print(self.outFormat.str(e))
                 self.archivoLog.agregarRegistro(':'.join(["ERROR", str(e)]))
         return result
-
 
     def do_cls(self, args):
 
@@ -251,7 +238,7 @@ conectarRobot
         try:
             arguments = args.split()
             if len(arguments) == 0:
-                result = self.brazoRobot.conectarRobot('COM3', 9600)
+                result = self.brazoRobot.conectarRobot('COM4', 9600)
                 print(self.outFormat.format(result))
                 return ':'.join(["INFO", result])
             else:
@@ -421,7 +408,7 @@ desactivarPinza
         
     def do_posicionActual(self, args):
         """
-Inidica la posicion actual
+Indica la posicion actual
         """
         print()
         try:
@@ -485,16 +472,15 @@ cargar <JobFile>
         try:
             arguments = args.split()
             if len(arguments) == 1:
-                # Debería llamar al metodo correspondiente en el brazo
-                # Podríamos pasar directamente el objeto de archivoJob
-                # como parámetro a una función en el brazo (por lo tanto es dependencia)
-                # que use los métodos de este objeto archivo para decodificar los comandos
-                # y de esa manera irlos ejecutando.
 
-                #   Algo así
-                pass
-                #self.jobs.append(ArchivoJob(arguments[0]))
-                #self.brazoRobot.ejecutar(self.jobs[-1])
+                direccion = self.jobRoute + "\\"+ arguments[0]
+                with open(direccion, 'r') as archivo:
+                    lineas = archivo.readlines()
+
+                for linea in lineas:
+                    result = self.brazoRobot.enviarComando(linea)
+                    return result
+
             else:
                 raise Excepciones.ExcepcionDeComando(1)
             
@@ -502,8 +488,6 @@ cargar <JobFile>
             result = ':'.join(["ERROR", str(e)])
             print(self.outFormat.format(result))
             return result
-
-    
 
     def do_levantarServidor(self, args):
         """
@@ -579,3 +563,4 @@ if __name__ == "__main__":
         # Cuando se presiona Ctrl+C, el flujo llega aquí.
         CLI.BrazoRobot.desconectarRobot()
         print("Robot desconectado.")
+
