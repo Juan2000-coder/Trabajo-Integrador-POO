@@ -196,7 +196,7 @@ Conecta el robot.
 conectarRobot
         """
         if args == ('',) * len(args):
-            result = self.brazoRobot.conectarRobot('COM3', 115200)
+            result = self.brazoRobot.conectarRobot('COM3', 9600)
             print(self.outFormat.format(result))
             return result
         else:
@@ -261,11 +261,12 @@ movLineal <xx.x> <yy.y> <zz.z> [vv.v]
     vv.v    Velocidad del movimiento en mm/s.
         """
         result = None
-        if len(args) == 3:
-            result = self.brazoRobot.movLineal(Punto(float(args[0]), float(args[1]), float(args[2])))
+        arguments= args[0].split()
+        if len(arguments) == 3:
+            result = self.brazoRobot.movLineal(Punto(float(arguments[0]), float(arguments[1]), float(arguments[2])))
            
-        elif len(args) == 4:
-            result = self.brazoRobot.movLineal(Punto(float(args[0]), float(args[1]), float(args[2])), float(args[3]))
+        elif len(arguments) == 4:
+            result = self.brazoRobot.movLineal(Punto(float(arguments[0]), float(arguments[1]), float(arguments[2])), float(arguments[3]))
             
         else:
             raise Excepciones.ExcepcionDeComando(1)
@@ -288,7 +289,7 @@ activarPinza
         else:
             raise Excepciones.ExcepcionDeComando(1)
 
-    def do_desactivarPinza(self, args):
+    def do_desactivarPinza(self, *args):
         """
 Desactiva el efector final.
 desactivarPinza
@@ -384,6 +385,20 @@ listarArchivosDeTrabajo
             return lista
         else:
             raise Excepciones.ExcepcionDeComando(1)
+        
+    def do_enviarComando(self, *args):
+        """
+Envia un comando al brazo robot.
+enviarComando <comando>
+    comando     El comando a enviar al brazo robot.
+        """
+        args = args[0]
+        result = self.brazoRobot.enviarComando(args)
+               
+        for elem in result.split('\n'):
+            print(self.outFormat.format(elem))
+        return result
+        
     
     def do_exit(self, args):
 
