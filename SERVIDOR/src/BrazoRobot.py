@@ -18,13 +18,13 @@ class BrazoRobot():
                 self.puerto_serie = serial.Serial(puerto, baud_rate)
                 self.conexion_establecida = True
                 time.sleep(2)   #Tiempo para que realice bien la conexion, si no envia los comandos muy rapido.
-                return f"Conexión exitosa con el puerto {puerto}."
+                return "INFO:Conexión exitosa con el robot."
         
-            except serial.SerialException as e:
-                self.conexion_establecida = False
-                raise ExcepcionBrazoRobot(1)
+            except Exception as e:
+                if not self.conexion_establecida:
+                    raise ExcepcionBrazoRobot(1)
         else:
-            raise ExcepcionBrazoRobot(8)
+            raise ExcepcionBrazoRobot(7)
         
     def enviarComando(self, comando:str):
         #USO: respuesta = robot.enviarComando("G28")
@@ -46,7 +46,7 @@ class BrazoRobot():
 
                 return data.decode('utf-8').strip()
             
-            except serial.SerialException as e:
+            except Exception as e:
                 raise ExcepcionBrazoRobot(3)
 
         else:
@@ -58,8 +58,8 @@ class BrazoRobot():
             try:
                 self.puerto_serie.close()
                 self.conexion_establecida = False
-                return "Conexión cerrada."
-            except serial.SerialException as e:
+                return "INFO:Conexión cerrada."
+            except Exception as e:
                 raise ExcepcionBrazoRobot(5)
         else:
             raise ExcepcionBrazoRobot(4)
@@ -70,7 +70,7 @@ class BrazoRobot():
         elif modo.lower() == "r":
             return self.enviarComando("G91")
         else:
-            raise ExcepcionBrazoRobot(7)
+            raise ExcepcionBrazoRobot(6)
     
     def movLineal(self, punto:Punto, velocidad=None):
         if isinstance(punto, Punto):
