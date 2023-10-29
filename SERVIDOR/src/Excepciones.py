@@ -1,72 +1,60 @@
-class ExcepcionBrazoRobot(Exception):
-    def __init__(self, codigoDeExcepcion: int):
-        self.codigoDeExcepcion = codigoDeExcepcion
+from Registro import Registro
 
-        if codigoDeExcepcion == 1: 
-            super().__init__("Al intentar conectar con el brazo.")
+class Excepciones(Exception):
+    codigos = {}
+    default = "Evento no identificado."
 
-        elif codigoDeExcepcion == 2:
-            super().__init__("No se pudo enviar el comando, robot desconectado.")
-        
-        elif codigoDeExcepcion == 3: 
-            super().__init__("Al enviar comando.")
-        
-        elif codigoDeExcepcion == 4: 
-            super().__init__("Robot ya desconectado.")
-        
-        elif codigoDeExcepcion == 5:
-            super().__init__("Al intentar desconectar Robot.")
-
-        elif codigoDeExcepcion == 6:
-            super().__init__("Argumento invalido.")
-
-        elif codigoDeExcepcion == 7:
-            super().__init__("Modo incorrecto, use 'a' o 'r'.")
-        
-        elif codigoDeExcepcion == 8:
-            super().__init__("Conexión ya establecida.")
+    def __init__(self, codigo):
+        self.codigoDeExcepcion = codigo
+        self.registro = Registro(self.codigos.get(self.codigoDeExcepcion, (2, Excepciones.default)))
+        super().__init__(self.registro.mensaje)
 
     def __str__(self):
-        return f"De Brazo Robot - {self.args[0]} Codigo({self.codigoDeExcepcion})"
+        return  ':'.join([f"({self.codigoDeExcepcion})", str(self.registro)])
+
+class ExcepcionBrazoRobot(Excepciones):
+    codigos = {
+        1:(4, "No se puede establecer conexión con el brazo."),
+        2:(2, "No se puede enviar el comando, robot desconectado."),
+        3:(4, "Un evento ocurrió al intentar enviar el comando."),
+        4:(2, "El robot ya se encuentra desconectado."),
+        5:(4, "Ocurrio un error al desconectar el Robot."),
+        6:(2, "Llamada a comando con argumentos no válidos."),
+        7:(2, "La conexión ya está establecida.")}
     
-class ExcepcionArchivo(Exception):
-    def __init__(self, codigoDeExcepcion:int):
-        self.codigoDeExcepcion = codigoDeExcepcion
-
-        if codigoDeExcepcion == 1:
-            super().__init__("Al agregar registro al archivo.")
-        if codigoDeExcepcion == 2:
-            super().__init__("Al devolver el log.")
-        if codigoDeExcepcion == 3:
-            super().__init__("Al crear el archivo.")
+    def __init__(self, codigo):
+        super().__init__(codigo)
 
     def __str__(self):
-        return f"De Archivo - {self.args[0]} Codigo({self.codigoDeExcepcion})"
-
-class ExcepcionDeComando(Exception):
-    """A class for specific C4 class exceptions."""
-
-    def __init__(self, codigoDeExcepcion):
-        self.codigoDeExcepcion = codigoDeExcepcion
-
-        if codigoDeExcepcion == 1:
-            super().__init__("Sintaxis incorrecta.")
-
-        if codigoDeExcepcion == 2:
-            super().__init__("Opcion no encontrada.")
-        
-        if codigoDeExcepcion == 3:
-            super().__init__("Faltan argumentos.")
-
-    def __str__(self):
-        return f"De Comando - {self.args[0]} Codigo({self.codigoDeExcepcion})"
+        return "BRAZO ROBOT" + super().__str__()
     
-class ExcepcionDeServidor(Exception):
-    def __init__(self, codigoDeExcepcion):
-        self.codigoDeExcepcion = codigoDeExcepcion
-
-        if codigoDeExcepcion == 1:
-            super().__init__("El puerto está en uso.")
+class ExcepcionArchivo(Excepciones):
+    codigos = {
+        1:(4, "Al devolver el log.")}
+    
+    def __init__(self, codigo):
+        super().__init__(codigo)
 
     def __str__(self):
-        return f"De Servidor - {self.args[0]} Codigo({self.codigoDeExcepcion})"
+        return "LOG" + super().__str__()
+
+class ExcepcionDeComando(Excepciones):
+    codigos = {
+        1:(2, "Demasiados argumentos/faltan argumentos."),
+        2:(2, "Opcion no encontrada.")}
+    
+    def __init__(self, codigo):
+        super().__init__(codigo)
+
+    def __str__(self):
+        return "CLI" + super().__str__()
+    
+class ExcepcionDeServidor(Excepciones):
+    codigos = {
+        1:(2, "El puerto está en uso.")}
+    
+    def __init__(self, codigo):
+        super().__init__(codigo)
+
+    def __str__(self):
+        return "SERVIDOR" + super().__str__()
