@@ -164,6 +164,9 @@ int main(int argc, char* argv[]) {
     bool flagCliente = true;
     string input;
     string input1, input2, input3, input4;
+
+  
+
     while (flagCliente) {
     cout << "Ingrese una opción: ";
     cin >> input;
@@ -172,7 +175,9 @@ int main(int argc, char* argv[]) {
                                           //en el mapa. Si input se encuentra en el mapa, it apuntará a esa ubicación, y it != stringToValue.end() será verdadero, 
                                           //lo que significa que la clave se encontró. Si input no se encuentra en el mapa, it será igual a stringToValue.end(), y la 
                                           //condición será falsa, lo que indica que la clave no se encontró.
-    
+     
+
+
     if (it != comandoANumero.end()) { 
         int value = it->second; //accede al valor asociado a la clave
         
@@ -344,7 +349,7 @@ int main(int argc, char* argv[]) {
                     }
                     cout << "Ingrese el comando del cual desea obtener informacion'.\n";
                     cin >> input2;
-                    auto it = comandoANumero.find(input2);                        
+                    it = comandoANumero.find(input2);                        
                     if (it != comandoANumero.end()) {
                         
                         int value = it->second; //accede al valor asociado a la clave
@@ -355,12 +360,14 @@ int main(int argc, char* argv[]) {
                         }
                     
                     break;
+            
+
             case 18:    // cls
 
                 if (c.execute("cls", noArgs, result)) {
                     cout << result << "\n\n";
                     cls();
-                } else {
+                    } else {
                     cout << "Error en la llamada a 'cls'\n\n";
                 }
                 break;
@@ -370,8 +377,16 @@ int main(int argc, char* argv[]) {
                 flagCliente = false;
                 break;
 
-            case 20:    //enviarComando
-                
+            case 20:   //enviarComando
+                cin >> input;
+                oneArg[0] = input;
+                if (c.execute("enviarComando", oneArg, result)) {
+                    cout << result << "\n\n";
+                } else {
+                    cout << "Error en la llamada a 'enviarComando'\n\n";
+                }
+                break;
+                           
 
             default:
                 std::cout << "Opción no válida" << std::endl;

@@ -144,4 +144,4 @@ class Servidor(SimpleXMLRPCServer):
     
     @_log
     def enviarComando(self, args):
-        return self.consola.onecmd("enviarComando " + args)
+        return self.consola.onecmd("enviarComando" + args)
