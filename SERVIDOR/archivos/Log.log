@@ -60,3 +60,14 @@
 2023-10-30 09:32:40 [INFO] - 192.168.56.1 - conectarRobot - INFO:Conexión exitosa con el robot.
 2023-10-30 09:33:20 [INFO] - 192.168.56.1 - activarMotores - None
 2023-10-30 09:48:29 [INFO] - 192.168.56.1 - conectarRobot - INFO:Conexión exitosa con el robot.
+2023-10-30 09:53:15 [INFO] - 192.168.56.1 - conectarRobot - INFO:Conexión exitosa con el robot.
+2023-10-30 09:53:46 [INFO] - 192.168.56.1 - activarMotores - None
+2023-10-30 09:54:00 [INFO] - 192.168.56.1 - activarMotores - None
+2023-10-30 09:54:07 [INFO] - 192.168.56.1 - desactivarMotores - None
+2023-10-30 09:54:31 [INFO] - 192.168.56.1 - activarPinza - None
+2023-10-30 09:55:39 [INFO] - 192.168.56.1 - posicionActual - None
+2023-10-30 09:56:58 [INFO] - 192.168.56.1 - activarPinza - None
+2023-10-30 09:57:05 [INFO] - 192.168.56.1 - desconectarRobot - None
+2023-10-30 09:57:13 [INFO] - 192.168.56.1 - conectarRobot - INFO:Conexión exitosa con el robot.
+2023-10-30 09:57:25 [INFO] - 192.168.56.1 - activarPinza - None
+2023-10-30 09:57:37 [INFO] - 192.168.56.1 - activarPinza - None
