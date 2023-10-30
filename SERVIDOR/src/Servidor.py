@@ -57,27 +57,16 @@ class Servidor(SimpleXMLRPCServer):
         #self.register_function(self.video_server.get_video_frame, 'get_video_frame')
 
         self.thread = Thread(target = self.run_server)
-        self.thread1 = Thread(target = self.terminar)
         self.thread.start()
-        self.thread1.start()
         print("Servidor RPC iniciado en el puerto [%s]" % str(self.server_address))
 
     def run_server(self):
         self.serve_forever()
 
     def shutdown(self):
-        self.solicitudTerminar = True
-        self.thread1.join()
-
-
-    def terminar(self):
-        while not self.solicitudTerminar:
-            pass
         super().shutdown()
         super().server_close()
-        self.solicitudTerminar = False
         self.thread.join()
-        raise Excepciones.ExcepcionDeRegistro(2)
 
     def _log(func):
         def metodoRPC(self, *args, **kwargs):
@@ -100,8 +89,8 @@ class Servidor(SimpleXMLRPCServer):
                 return e.registro.mensaje
             except Exception as e:
                 self.logServidor.log(self.ipCliente, func.__name__, Registro.Registro(("CRITICAL",str(e))))
-                self.solicitudTerminar = True
-                return "que cagada"
+                self.consola.estadoServidor(str(e))
+                return "El servidor no pudo ejecutar una peticion. Excepcion no identificada."
         return metodoRPC
     @_log
     def conectarRobot(self, args):
@@ -137,10 +126,7 @@ class Servidor(SimpleXMLRPCServer):
     
     @_log
     def movLineal(self, args):
-        try:
-            return self.consola.do_movLineal(args)
-        except Exception as e:
-            raise
+        return self.consola.do_movLineal(args)
     
     @_log
     def activarPinza(self, args):
@@ -165,6 +151,7 @@ class Servidor(SimpleXMLRPCServer):
     @_log
     def posicionActual(self, args):
         return self.consola.do_posicionActual(args)
+    
     @_log
     def enviarComando(self, args):
         return self.consola.do_enviarComando(args)

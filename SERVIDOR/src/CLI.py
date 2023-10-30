@@ -24,15 +24,11 @@ cada una de las clases de excepciones en cada uno de los archivos de las clases 
 
 from cmd import Cmd
 import os
-import os.path
-from pathlib import Path
 import subprocess
 import platform
-import datetime
 
 from BrazoRobot import BrazoRobot
 from ArchivoLog import ArchivoLog
-from ArchivoUsuario import ArchivoUsuario
 from ArchivoJob import ArchivoJob
 from Punto import Punto
 from Servidor import Servidor
@@ -62,11 +58,8 @@ class CLI(Cmd):
         # Y las claves serán los archivos de usuario (objetos).
         self.jobFlag = False
 
-    """def postcmd(self, stop, line):    
-        if type(stop) == str:
-            return False
-        else:
-            return stop"""
+    def estadoServidor(self, msg:str):
+        print(msg)
 
     def onecmd(self, comando):
 

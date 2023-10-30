@@ -45,8 +45,7 @@ class ExcepcionDeComando(Excepciones):
     
 class ExcepcionDeServidor(Excepciones):
     codigos = {
-        1:("INFO", " El puerto está en uso."),
-        2:("CRITICAL", "El servidor termino inesperadamente.")}
+        1:("INFO", " El puerto está en uso.")}
     modulo = "SERVIDOR"
 
     def __init__(self, codigo):
