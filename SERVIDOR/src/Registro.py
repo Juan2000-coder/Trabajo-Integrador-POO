@@ -32,7 +32,7 @@ class Registrar():#Se podría meter como método estático de la primera clase.
         for elem in result.split('\r\n'):
             entrada = elem.split(':')
             if len(entrada) > 1:
-                entrada = (entrada[0], ''.join(entrada[1:]))
+                entrada = (entrada[0], ':'.join(entrada[1:]))
                 self.registros.append(Registro(entrada))
     def __str__(self):
         ret = ""
