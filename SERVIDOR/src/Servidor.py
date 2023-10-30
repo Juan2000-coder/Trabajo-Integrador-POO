@@ -147,6 +147,6 @@ class Servidor(SimpleXMLRPCServer):
         return self.consola.do_posicionActual(args)
     
     @_log
-    def enviarComando(self, args):
-        return self.consola.onecmd("enviarComando" + args)
+    def posicionActual(self, args):
+        return self.consola.do_enviarComando(args)
     
