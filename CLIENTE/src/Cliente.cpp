@@ -362,7 +362,7 @@ int main(int argc, char* argv[]) {
             
             case 17: // Ayuda
                     cout << "Lista de comandos disponibles:" << endl;
-                    for (const auto& cmd : comandoANumero) {
+                    for (const auto &cmd : comandoANumero) {
                         if (cmd.first != "ayuda") {  // Excluir el comando "ayuda" de la lista de comandos.
                             cout << cmd.first << endl;
                         }
