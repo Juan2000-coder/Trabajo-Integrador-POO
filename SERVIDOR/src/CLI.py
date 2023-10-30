@@ -192,7 +192,7 @@ conectarRobot
         """
         args = args.split()
         if len(args) == 0:
-            result = self.brazoRobot.conectarRobot('COM4', 9600)
+            result = self.brazoRobot.conectarRobot('COM3', 9600)
             return Registrar(result)
         else:
             raise Excepciones.ExcepcionDeComando(1)
