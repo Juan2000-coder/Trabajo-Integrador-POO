@@ -6,7 +6,8 @@ import socket
 import Registro
 from ArchivoLog import ArchivoLog
 import Excepciones
-    
+import os
+
 class Handler(SimpleXMLRPCRequestHandler):
     def __init__(self, request, client_address, server):
         server.ipCliente = client_address[0]
@@ -21,7 +22,8 @@ class Servidor(SimpleXMLRPCServer):
         self.puerto = puertoRPC
         self.logServidor = ArchivoLog('Log.log')
         self.ipCliente = None
-        self.solicitudTerminar = False
+        self.solicitudTerminar = False 
+        os.system('py SERVIDOR\\src\\Streaming.py')
 
         addr = (socket.gethostbyname_ex(self.hostname)[2][0], self.puerto)
 
@@ -57,16 +59,19 @@ class Servidor(SimpleXMLRPCServer):
         #self.register_function(self.video_server.get_video_frame, 'get_video_frame')
 
         self.thread = Thread(target = self.run_server)
+
         self.thread.start()
+
         print("Servidor RPC iniciado en el puerto [%s]" % str(self.server_address))
 
     def run_server(self):
         self.serve_forever()
-
+        
     def shutdown(self):
         super().shutdown()
         super().server_close()
         self.thread.join()
+
 
     def _log(func):
         def metodoRPC(self, *args, **kwargs):

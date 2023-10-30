@@ -35,6 +35,7 @@ from Servidor import Servidor
 import Excepciones
 from Registro import Registrar
 from Comando import ComandosGcode
+from Streaming import start_video_stream
 
 class CLI(Cmd):
     """Command Interpreter. Interface with user."""
@@ -306,6 +307,7 @@ levantarServidor true|false
         if len(args) == 1:
             if args[0].lower() =="true":
                 if self.rpcServer is None:
+                    start_video_stream()
                     self.rpcServer = Servidor(self)  #este objeto inicia el servidor y se da a conocer
             elif args[0].lower() =="false":
                 if self.rpcServer is not None:
