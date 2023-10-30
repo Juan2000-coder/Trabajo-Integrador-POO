@@ -8,6 +8,8 @@
 #include <string>
 #include <cstdlib> // Para la función 'system'
 
+#include <future> // Para la función 'async' y 'future' en el metodo timeOut.
+
 using namespace std;
 
 //#include "json.hpp"
@@ -15,7 +17,25 @@ using namespace std;
 
 using namespace XmlRpc;
 
+//METODO PARA LLAMAR AL SERVIDOR CON TIMEOUT
 
+bool llamarAlServidorConTimeout(XmlRpcClient& c, const char* metodo, const XmlRpcValue& args, XmlRpcValue& result, int timeout) {
+    std::future<bool> future = std::async(std::launch::async, [&] {
+        return c.execute(metodo, args, result);
+    });
+
+    // Esperar hasta que se complete la llamada o hasta que se agote el tiempo.
+    std::future_status status = future.wait_for(std::chrono::seconds(timeout));
+
+    if (status == std::future_status::timeout) {
+        // La llamada ha superado el tiempo límite, por lo que la cancelamos.
+        // Nota: XmlRpc no proporciona una forma directa de cancelar la llamada, por lo que puedes intentar manejarlo de manera personalizada si es necesario.
+        return false;  // Timeout
+    }
+
+    // La llamada se completó dentro del tiempo límite.
+    return future.get();
+}
 
 
 //METODO CLS PARA LIMPIAR CONSOLA. 
@@ -164,6 +184,9 @@ int main(int argc, char* argv[]) {
     bool flagCliente = true;
     string input;
     string input1, input2, input3, input4;
+
+  
+
     while (flagCliente) {
     cout << "Ingrese una opción: ";
     cin >> input;
@@ -172,7 +195,9 @@ int main(int argc, char* argv[]) {
                                           //en el mapa. Si input se encuentra en el mapa, it apuntará a esa ubicación, y it != stringToValue.end() será verdadero, 
                                           //lo que significa que la clave se encontró. Si input no se encuentra en el mapa, it será igual a stringToValue.end(), y la 
                                           //condición será falsa, lo que indica que la clave no se encontró.
-    
+     
+    int timeout = 15; // Tiempo límite en segundos para la llamada al servidor.
+
     if (it != comandoANumero.end()) { 
         int value = it->second; //accede al valor asociado a la clave
         
@@ -225,10 +250,10 @@ int main(int argc, char* argv[]) {
             
             case 6: //activarMotor
 
-                if (c.execute("activarMotores", noArgs, result)) {
-                    cout << result << "\n\n";
+                if (llamarAlServidorConTimeout(c, "activarMotores", noArgs, result, timeout)) {
+                    std::cout << "Llamada exitosa. Resultado: " << result << std::endl;
                 } else {
-                    cout << "Error en la llamada a 'activarMotores'\n\n";
+                    std::cout << "Timeout: la llamada al servidor ha superado el tiempo límite." << std::endl;
                 }
                 break;
 
@@ -355,14 +380,11 @@ int main(int argc, char* argv[]) {
                         }
                     
                     break;
-            case 18:    // cls
+            
 
-                if (c.execute("cls", noArgs, result)) {
-                    cout << result << "\n\n";
+            case 18:    // cls
                     cls();
-                } else {
-                    cout << "Error en la llamada a 'cls'\n\n";
-                }
+                    
                 break;
             
             case 19:    //salir
@@ -370,8 +392,23 @@ int main(int argc, char* argv[]) {
                 flagCliente = false;
                 break;
 
-            case 20:    //enviarComando
+            case 20:   //enviarComando
+                cin.ignore(); // Ignora el salto de línea pendiente en el búfer.
+                getline(cin, input); // Lee toda la línea como una cadena.
                 
+
+                // Luego, puedes procesar la cadena según tus necesidades.
+                // Por ejemplo, si necesitas enviarla como argumento, puedes hacerlo como lo estabas haciendo.
+
+                oneArg[0] = input;
+
+                if (c.execute("enviarComando", oneArg, result)) {
+                    cout << result << "\n\n";
+                } else {
+                    cout << "Error en la llamada a 'enviarComando'\n\n";
+                }
+                break;
+                           
 
             default:
                 std::cout << "Opción no válida" << std::endl;
