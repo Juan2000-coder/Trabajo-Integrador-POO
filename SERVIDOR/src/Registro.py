@@ -26,7 +26,7 @@ class Registro():
     def __str__(self):
         return ":".join([self.nivelLog, self.mensaje])
     
-class Registrar():
+class Registrar():#Se podría meter como método estático de la primera clase.
     def __init__(self, result:str):
         self.registros:List[Registro] = []
         for elem in result.split('\r\n'):

@@ -1,4 +1,4 @@
-import Excepciones
+from Excepciones import ExcepcionArchivo
 import logging
 import os
 from Registro import Registro
@@ -12,13 +12,10 @@ class ArchivoLog():
         
     def obtenerLog(self):
         try:
-            log:str = ''
             with open(self.nombreArchivo, "r") as archivo:
-                for linea in archivo:
-                    log += linea
-            return log
+                return archivo.readlines()
         except Exception as e:
-            raise Excepciones.ExcepcionArchivo(2)
+            raise ExcepcionArchivo(1)
         
     def log(self, ipCliente, metodo, registro:Registro):
         self.dic = {

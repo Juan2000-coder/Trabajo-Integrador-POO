@@ -72,15 +72,9 @@ class BrazoRobot():
         else:
             raise ExcepcionBrazoRobot(6)
     
-    def movLineal(self, punto:Punto, velocidad=None):
-        if isinstance(punto, Punto):
-            if velocidad is not None:
-                comando = f"G1 X{punto.x:.2f} Y{punto.y:.2f} Z{punto.z:.2f} E{velocidad:.2f}"
-            else:
-                comando = f"G1 X{punto.x:.2f} Y{punto.y:.2f} Z{punto.z:.2f}"
-            return self.enviarComando(comando)
-        else:
-            raise ExcepcionBrazoRobot(6)
+    def movLineal(self, coor:list, velocidad=None):
+        comando = f"G1 X{coor[0]} Y{coor[1]} Z{coor[2]} E{velocidad}"
+        return self.enviarComando(comando)
         
     def activarPinza(self):
         return self.enviarComando("M3")
