@@ -212,6 +212,31 @@ INFO: SEND G28 TO CALIBRATE
 INFO: SEND G28 TO CALIBRATE
 >>>>>>> 9804304dcf7817628bf115fd823153648806b58d
 >>>>>>> bc73043d60045ab7fe8eb1e8ea98f4d8c5653b62
+<<<<<<< HEAD
+2023-10-30 10:29:38 [ERROR] - 192.168.56.1 - conectarRobot -  No se puede establecer conexión con el brazo.
+2023-10-30 10:31:34 [INFO] - 192.168.56.1 - activarMotores -  Motor activado.
+2023-10-30 10:32:47 [INFO] - 192.168.56.1 - conectarRobot -  Conexión exitosa con el robot.
+2023-10-30 10:33:07 [CRITICAL] - 192.168.56.1 - movLineal - could not convert string to float: 'C1'
+2023-10-30 11:06:10 [INFO] - 192.168.56.1 - conectarRobot -  Conexión exitosa con el robot.
+2023-10-30 11:06:17 [INFO] - 192.168.56.1 - activarPinza -  ROBOT ONLINE
+2023-10-30 11:06:17 [INFO] - 192.168.56.1 - activarPinza -  SEND G28 TO CALIBRATE
+2023-10-30 11:06:17 [INFO] - 192.168.56.1 - activarPinza -  GRIPPER ON
+2023-10-30 11:07:09 [INFO] - 192.168.56.1 - activarPinza -  No se puede enviar el comando, robot desconectado.
+2023-10-30 11:07:17 [INFO] - 192.168.56.1 - conectarRobot -  Conexión exitosa con el robot.
+2023-10-30 11:07:45 [INFO] - 192.168.56.1 - activarPinza -  ROBOT ONLINE
+2023-10-30 11:07:45 [INFO] - 192.168.56.1 - activarPinza -  SEND G28 TO CALIBRATE
+2023-10-30 11:07:45 [INFO] - 192.168.56.1 - activarPinza -  GRIPPER ON
+2023-10-30 11:09:13 [INFO] - 192.168.56.1 - activarMotores -  Motor activado.
+2023-10-30 11:10:00 [INFO] - 192.168.56.1 - activarMotores -  No se puede enviar el comando, robot desconectado.
+2023-10-30 11:10:07 [INFO] - 192.168.56.1 - conectarRobot -  Conexión exitosa con el robot.
+2023-10-30 11:10:11 [INFO] - 192.168.56.1 - activarMotores -  Motor activado.
+2023-10-30 11:13:17 [INFO] - 192.168.56.1 - activarMotores -  Motor activado.
+2023-10-30 11:13:58 [INFO] - 192.168.56.1 - activarPinza -  GRIPPER ON
+2023-10-30 11:14:05 [INFO] - 192.168.56.1 - posicionActual -  ABSOLUTE MODE  
+2023-10-30 11:14:05 [INFO] - 192.168.56.1 - posicionActual -  CURRENT POSITION [X0.00 Y170.00 Z120.00 E0.00]
+2023-10-30 12:24:48 [INFO] - 192.168.56.1 - activarMotores -  Motor activado.
+2023-10-30 12:25:33 [INFO] - 192.168.56.1 - activarMotores -  Motor activado.
+=======
 2023-10-30 13:51:04 [INFO] - 192.168.1.48 - conectarRobot -  Conexión exitosa con el robot.
 2023-10-30 13:51:04 [CRITICAL] - 192.168.1.48 - conectarRobot - CLI.actualizarJob() missing 1 required positional argument: 'line'
 2023-10-30 13:52:26 [INFO] - 192.168.1.48 - conectarRobot -  Conexión exitosa con el robot.
@@ -238,3 +263,4 @@ INFO: SEND G28 TO CALIBRATE
 2023-10-30 14:24:54 [ERROR] - 192.168.1.81 - movLineal -  POINT IS OUTSIDE OF WORKSPACE
 2023-10-30 14:25:00 [ERROR] - 192.168.1.81 - movLineal -  POINT IS OUTSIDE OF WORKSPACE
 2023-10-30 14:25:19 [INFO] - 192.168.1.81 - movLineal -  LIOEAR  MOVE [X10.00 Y180.00 Z130.00 E0.00] t=2.40s
+>>>>>>> e2a9e17b82d83b34e4d552962c392e1203d4d29e
