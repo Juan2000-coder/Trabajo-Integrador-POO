@@ -8,8 +8,8 @@
 #include <string>
 #include <cstdlib> // Para la función 'system'
 
-#include <future> // Para la función 'async' y 'future' en el metodo timeOut.
-#include <chrono>
+#include <future>   // Para la función 'async' y 'future' en el metodo timeOut.
+#include <chrono>   // Para la función 'wait_for' en el metodo timeOut.
 
 using namespace std;
 
@@ -205,7 +205,7 @@ int main(int argc, char* argv[]) {
         switch (value) {
             case 1: //reporteGeneral
 
-                if (c.execute("reporteGeneral", noArgs, result)) { //ESTO ESTA BIEN... FUNCIONA!
+                if (llamarAlServidorConTimeout(c, "reporteGeneral", noArgs, result, timeout)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'reporteGeneral'\n\n";
@@ -214,7 +214,7 @@ int main(int argc, char* argv[]) {
 
             case 2: //obtenerLogServidor
 
-                if (c.execute("obtenerLogServidor", noArgs, result)) { 
+                if (llamarAlServidorConTimeout(c, "obtenerLogServidor", noArgs, result, timeout)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'obtenerLogServidor'\n\n";
@@ -224,7 +224,7 @@ int main(int argc, char* argv[]) {
             case 3: //seleccionarModo
                 cin >> input;
                 oneArg[0] = input;
-                if (c.execute("seleccionarModo", oneArg, result)) {
+                if (llamarAlServidorConTimeout(c, "selecionarModo", noArgs, result, timeout)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'seleccionarModo'\n\n";
@@ -232,7 +232,8 @@ int main(int argc, char* argv[]) {
                 break;
             case 4: //conectarRobot
         
-                if (c.execute("conectarRobot", noArgs, result)) {
+                if (llamarAlServidorConTimeout(c, "conectarRobot", noArgs, result, timeout)) {
+                    
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'conectarRobot'\n\n";
@@ -241,7 +242,7 @@ int main(int argc, char* argv[]) {
 
             case 5: //desconectarRobot
   
-                if (c.execute("desconectarRobot", noArgs, result)) {
+                if (llamarAlServidorConTimeout(c, "desconectarRobot", noArgs, result, timeout)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'desconectarRobot'\n\n";
@@ -260,7 +261,7 @@ int main(int argc, char* argv[]) {
 
             case 7: //desactivarMotores
 
-                if (c.execute("desactivarMotores", noArgs, result)) {
+                if (llamarAlServidorConTimeout(c, "desactivarMotores", noArgs, result, timeout)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'desactivarMotores'\n\n";
@@ -269,7 +270,7 @@ int main(int argc, char* argv[]) {
 
             case 8: //home
 
-                if (c.execute("home", noArgs, result)) {
+                if (llamarAlServidorConTimeout(c, "home", noArgs, result, timeout)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'home'\n\n";
@@ -287,7 +288,7 @@ int main(int argc, char* argv[]) {
                     args[3]=input4;
                 }
 
-                if (c.execute("movLineal", args, result)) {
+                if (llamarAlServidorConTimeout(c, "movLineal", noArgs, result, timeout)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'movLineal'\n\n";
@@ -296,7 +297,7 @@ int main(int argc, char* argv[]) {
 
             case 10: //activarPinza
 
-                if (c.execute("activarPinza", noArgs, result)) {
+                if (llamarAlServidorConTimeout(c, "activarPinza", noArgs, result, timeout)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'activarPinza'\n\n";
@@ -305,7 +306,7 @@ int main(int argc, char* argv[]) {
 
             case 11: //desactivarPinza
 
-                if (c.execute("desactivarPinza", noArgs, result)) {
+                if (llamarAlServidorConTimeout(c, "desactivarPinza", noArgs, result, timeout)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'desactivarPinza'\n\n";
@@ -317,7 +318,7 @@ int main(int argc, char* argv[]) {
                     cin >> input1;
                     oneArg[0]=input1;
                 }
-                if (c.execute("grabar", oneArg, result)) {
+                if (llamarAlServidorConTimeout(c, "grabar", noArgs, result, timeout)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'grabar'\n\n";
@@ -326,7 +327,7 @@ int main(int argc, char* argv[]) {
 
             case 13: //cargar
 
-                if (c.execute("cargar", noArgs, result)) {
+                if (llamarAlServidorConTimeout(c, "cargar", noArgs, result, timeout)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'cargar'\n\n";
@@ -334,7 +335,8 @@ int main(int argc, char* argv[]) {
                 break;
 
             case 14: //posicionActual
-                if (c.execute("posicionActual", noArgs, result)) {
+
+                if (llamarAlServidorConTimeout(c, "posicionActual", noArgs, result, timeout)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'posicionActual'\n\n";
@@ -342,7 +344,8 @@ int main(int argc, char* argv[]) {
                 break;
 
             case 15: // desconectarServidor
-                if (c.execute("desconectarServidor", noArgs, result)) {
+
+                if (llamarAlServidorConTimeout(c, "desconectarRobot", noArgs, result, timeout)) {
                     cout << "Desconectando del servidor...\n";    
                     cout << "Desconectado del servidor.\n";
                     cout << "Saliendo del programa...\n";
@@ -354,7 +357,7 @@ int main(int argc, char* argv[]) {
 
             case 16: //listarArchivosDeTrabajo
 
-                if (c.execute("listarArchivosDeTrabajo", noArgs, result)) {
+                if (llamarAlServidorConTimeout(c, "listarArchivosDeTrabajo", noArgs, result, timeout)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'listarArchivosDeTrabajo'\n\n";
@@ -403,7 +406,7 @@ int main(int argc, char* argv[]) {
 
                 oneArg[0] = input;
 
-                if (c.execute("enviarComando", oneArg, result)) {
+                if (llamarAlServidorConTimeout(c, "enviarComando", noArgs, result, timeout)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'enviarComando'\n\n";

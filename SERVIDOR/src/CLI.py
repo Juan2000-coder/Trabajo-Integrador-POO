@@ -30,7 +30,6 @@ import platform
 from BrazoRobot import BrazoRobot
 from ArchivoLog import ArchivoLog
 from ArchivoJob import ArchivoJob
-from Punto import Punto
 from Servidor import Servidor
 import Excepciones
 from Registro import Registrar
@@ -54,9 +53,11 @@ class CLI(Cmd):
         self.nombreArchivoJob = None
         self.jobFlag = False
 
+    #ESTO POR AHÍ NO ESTAN CORRECTO PARA EL SAKE DE LA POO
     def estadoServidor(self, msg:str):
         print(msg)
     
+    #ESTO HABRÍA QUE VERLO POR EL MISMO SAKE
     def actualizarJob(self, line:str):
         if self.jobFlag == True:
             job = ArchivoJob(self.nombreArchivoJob)
@@ -73,7 +74,7 @@ class CLI(Cmd):
             result = super().onecmd(line)
             if result is not None:
                 print(result)
-            self.actualizarJob(line)
+                self.actualizarJob(line)
         except Excepciones.Excepciones as e:
             print(e)
 
@@ -154,7 +155,7 @@ conectarRobot
         """
         args = args.split()
         if len(args) == 0:
-            result = self.brazoRobot.conectarRobot('COM4', 9600)
+            result = self.brazoRobot.conectarRobot('COM3', 9600)
             return Registrar(result)
         else:
             raise Excepciones.ExcepcionDeComando(1)
@@ -292,9 +293,9 @@ cargar <JobFile>
         arguments = args.split()
         if len(arguments) == 1:
             result = ''
-            for comando in ArchivoJob(self.nombreArchivoJob).obtenerComandos():
-                result += self.brazoRobot.enviarComando(comando) + '\n'
-            return Registrar(result)    
+            for comando in ArchivoJob(arguments[0]).obtenerComandos():
+                result += self.brazoRobot.enviarComando(comando) + '\r\n'
+            return Registrar(result)
         else:
             raise Excepciones.ExcepcionDeComando(1)
 

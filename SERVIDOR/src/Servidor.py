@@ -1,7 +1,6 @@
 from xmlrpc.server import SimpleXMLRPCServer
 from xmlrpc.server import SimpleXMLRPCRequestHandler
 from threading import Thread
-import threading
 import socket
 import Registro
 from ArchivoLog import ArchivoLog
@@ -21,14 +20,10 @@ class Servidor(SimpleXMLRPCServer):
         self.consola = consola
         self.puerto = puertoRPC
         self.logServidor = ArchivoLog('Log.log')
+        # self.logUsuarios = {} #Este seria un diccionario para los logs de los usuarios
         self.ipCliente = None
-        self.solicitudTerminar = False 
-        os.system('py SERVIDOR\\src\\Streaming.py')
 
         addr = (socket.gethostbyname_ex(self.hostname)[2][0], self.puerto)
-
-    
-        #logging.basicConfig(filename=self.logServidor.nombreArchivo, level=logging.INFO, format=FORMAT, datefmt='%Y-%m-%d %H:%M:%S')
 
         try:
             super().__init__(addr, requestHandler, logRequests, allow_none, encoding, bind_and_activate,
@@ -75,6 +70,9 @@ class Servidor(SimpleXMLRPCServer):
 
     def _log(func):
         def metodoRPC(self, *args, **kwargs):
+            # Ponemos lo del id de la siguiente manera
+            # id = args[0] #El primer argumento que se envia es el id
+
             argsstr = ''
             for arg in args:
                 argsstr += str(arg) + ' '
@@ -92,9 +90,14 @@ class Servidor(SimpleXMLRPCServer):
                 return resultado
             except Excepciones.Excepciones as e:
                 self.logServidor.log(self.ipCliente, func.__name__, e.registro)
+                #if id in self.logUsuaros:
+                    #self.logUsuarios[id].log(self.ipCliente, func.__name__, e.registro)
+                #else:
+                    #self.logUsuarios[id] = ArchivoUsuario('Log'+'id.log')
                 return e.registro.mensaje
             except Exception as e:
                 self.logServidor.log(self.ipCliente, func.__name__, Registro.Registro(("CRITICAL",str(e))))
+                #self.logUsuarios[id].log(self.ipCliente, func.__name__, Registro.Regstro(("CRITCAL", str(e))))
                 self.consola.estadoServidor(str(e))
                 return "El servidor no pudo ejecutar una peticion. Excepcion no identificada."
         return metodoRPC
