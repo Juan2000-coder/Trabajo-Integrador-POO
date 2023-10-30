@@ -50,3 +50,13 @@
 2023-10-29 00:15:54 [INFO] - 192.168.56.1 - enviarComando - None
 2023-10-29 00:18:48 [INFO] - 192.168.56.1 - enviarComando - None
 2023-10-29 00:20:28 [INFO] - 192.168.56.1 - enviarComando - None
+2023-10-29 00:28:42 [INFO] - 192.168.56.1 - conectarRobot - INFO:Conexión exitosa con el robot.
+2023-10-29 00:28:53 [INFO] - 192.168.56.1 - enviarComando - None
+2023-10-29 00:29:43 [INFO] - 192.168.56.1 - enviarComando - None
+2023-10-29 00:30:10 [INFO] - 192.168.56.1 - enviarComando - None
+2023-10-29 00:39:20 [INFO] - 192.168.56.1 - enviarComando - None
+2023-10-29 00:39:27 [INFO] - 192.168.56.1 - enviarComando - None
+2023-10-29 00:40:09 [INFO] - 192.168.56.1 - enviarComando - None
+2023-10-30 09:32:40 [INFO] - 192.168.56.1 - conectarRobot - INFO:Conexión exitosa con el robot.
+2023-10-30 09:33:20 [INFO] - 192.168.56.1 - activarMotores - None
+2023-10-30 09:48:29 [INFO] - 192.168.56.1 - conectarRobot - INFO:Conexión exitosa con el robot.
