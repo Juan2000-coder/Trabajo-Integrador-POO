@@ -52,7 +52,7 @@ class CLI(Cmd):
     def __init__(self):
         """"""
         super().__init__()
-        self.rpc_server = None
+        self.rpcServer = None
         self.nombreArchivoJob = None
         self.route = os.path.dirname(os.path.abspath(__file__))
         self.jobRoute = os.path.join(self.route, "..", "Job")    # The path of the solution.
@@ -85,7 +85,7 @@ class CLI(Cmd):
             if result is not None:
                 print(result)
         except Excepciones.Excepciones as e:
-            print(self.outFormat.format(str(e)))
+            print(e)
 
         # Acciones a realizar después de ejecutar un comando
         # result debería contener tanto el nievl log y un mensaje que es el resultado
@@ -114,7 +114,7 @@ class CLI(Cmd):
                         raise Excepciones.ExcepcionDeComando(1)
                         
             except Excepciones.Excepciones as e:
-                print(self.outFormat.format(str(e)))
+                print(e)
 
     def do_cls(self, args):
 
@@ -192,7 +192,7 @@ conectarRobot
         """
         args = args.split()
         if len(args) == 0:
-            result = self.brazoRobot.conectarRobot('COM3', 115200)
+            result = self.brazoRobot.conectarRobot('COM4', 9600)
             return Registrar(result)
         else:
             raise Excepciones.ExcepcionDeComando(1)
@@ -280,7 +280,7 @@ activarPinza
         else:
             raise Excepciones.ExcepcionDeComando(1)
 
-    def do_desactivarPinza(self, *args):
+    def do_desactivarPinza(self, args):
         """
 Desactiva el efector final.
 desactivarPinza
@@ -315,14 +315,14 @@ grabar <Archivo>
         if self.jobFlag == False:
             if len(args) == 1:
                 self.nombreArchivoJob = args[0]
-                result = "INFO:Comandos se almacenaran en " + self.nombreArchivoJob
+                result = "INFO: Comandos se almacenaran en " + self.nombreArchivoJob
                 print(result)
                 self.jobFlag = True
                 return result
             else:
                 raise Excepciones.ExcepcionDeComando(1)
         else:
-            result = "INFO:Almacenamiento de comandos parado"
+            result = "INFO: Almacenamiento de comandos parado."
             print(result)
             self.jobFlag = False
             return result
@@ -347,13 +347,13 @@ levantarServidor true|false
         args = args.split()
         if len(args) == 1:
             if args[0].lower() =="true":
-                if self.rpc_server is None:
-                    self.rpc_server = Servidor(self)  #este objeto inicia el servidor y se da a conocer
+                if self.rpcServer is None:
+                    self.rpcServer = Servidor(self)  #este objeto inicia el servidor y se da a conocer
             elif args[0].lower() =="false":
-                if self.rpc_server is not None:
-                    self.rpc_server.shutdown()
+                if self.rpcServer is not None:
+                    self.rpcServer.shutdown()
                     print("Servidor Apagado")
-                    self.rpc_server = None
+                    self.rpcServer = None
             else:
                 raise Excepciones.ExcepcionDeComando(2)
         else:
@@ -370,24 +370,19 @@ listarArchivosDeTrabajo
         if len(args) == 0:
             lista = ""
             for fileName in os.listdir(self.jobRoute):
-                lista += fileName + "\n"
-                print(self.outFormat.format(fileName))
+                lista += self.outFormat.format(fileName + "\n")
             return lista
         else:
             raise Excepciones.ExcepcionDeComando(1)
         
-    def do_enviarComando(self, *args):
+    def do_enviarComando(self, args):
         """
 Envia un comando al brazo robot.
 enviarComando <comando>
     comando     El comando a enviar al brazo robot.
         """
-        args = args[0]
         result = self.brazoRobot.enviarComando(args)
-               
-        for elem in result.split('\n'):
-            print(self.outFormat.format(elem))
-        return result
+        return Registrar(result)
         
     
     def do_exit(self, args):
@@ -396,11 +391,10 @@ enviarComando <comando>
 Termina la ejecucion del programa.
 exit
         """
-        try:
-            self.brazoRobot.desconectarRobot()
-        except Excepciones.ExcepcionBrazoRobot:
-            pass
-        print("Robot desconectado.")
+        if self.brazoRobot.conexion_establecida == True:
+            print(self.brazoRobot.desconectarRobot())
+        if self.rpcServer is not None:
+            self.rpcServer.shutdown()
         print("Ejecucion CLI SERVIDOR terminada")
         raise SystemExit
     
@@ -409,11 +403,9 @@ if __name__ == "__main__":
         commandLine = CLI()
         commandLine.prompt = '->'
         commandLine.cmdloop('Entrada de comandos')
-    except KeyboardInterrupt:
-        # Cuando se presiona Ctrl+C, el flujo llega aquí.
-        try:
-            CLI.BrazoRobot.desconectarRobot()
-        except Excepciones.ExcepcionBrazoRobot:
-            pass
-        print("Robot desconectado.")
+    except KeyboardInterrupt as e:
+        if commandLine.brazoRobot.conexion_establecida == True:
+            print(commandLine.brazoRobot.desconectarRobot())
+        if commandLine.rpcServer is not None:
+            commandLine.rpcServer.shutdown()
         print("Ejecucion CLI SERVIDOR terminada")

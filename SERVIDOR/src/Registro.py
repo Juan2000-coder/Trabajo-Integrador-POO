@@ -4,6 +4,7 @@
 # @author Borquez Juan Manuel, Dalessandro Francisco, Miranda Francisco,
 # @contact borquez.juan00@gmail.com, panchodal867@gmail.com, francisconehuenmiranda@gmail.com
 #/
+from typing import List
 import Excepciones
 class Registro():
     niveles = {
@@ -27,13 +28,14 @@ class Registro():
     
 class Registrar():
     def __init__(self, result:str):
-        self.registros = []
+        self.registros:List[Registro] = []
         for elem in result.split('\r\n'):
-            entrada = tuple(elem.split(':'))
+            entrada = elem.split(':')
             if len(entrada) > 1:
+                entrada = (entrada[0], ''.join(entrada[1:]))
                 self.registros.append(Registro(entrada))
     def __str__(self):
         ret = ""
         for elem in self.registros:
-            ret += str(elem) + '\n'
+            ret += (' '*5 +'{}').format(str(elem) + '\n')
         return ret

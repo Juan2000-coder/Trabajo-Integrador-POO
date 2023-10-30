@@ -18,7 +18,7 @@ class BrazoRobot():
                 self.puerto_serie = serial.Serial(puerto, baud_rate)
                 self.conexion_establecida = True
                 time.sleep(2)   #Tiempo para que realice bien la conexion, si no envia los comandos muy rapido.
-                return "INFO:Conexión exitosa con el robot."
+                return "INFO: Conexión exitosa con el robot."
         
             except Exception as e:
                 if not self.conexion_establecida:
@@ -58,7 +58,7 @@ class BrazoRobot():
             try:
                 self.puerto_serie.close()
                 self.conexion_establecida = False
-                return "INFO:Conexión cerrada."
+                return "INFO: Conexión cerrada."
             except Exception as e:
                 raise ExcepcionBrazoRobot(5)
         else:
@@ -96,11 +96,11 @@ class BrazoRobot():
     
     def activarMotor(self):
         self.enviarComando("G17")
-        return "INFO:Motor activado."
+        return "INFO: Motor activado."
             
     def desactivarMotor(self):
         self.enviarComando("G18")
-        return "INFO:Motor desactivado."
+        return "INFO: Motor desactivado."
 
 '''
 Ejemplo test

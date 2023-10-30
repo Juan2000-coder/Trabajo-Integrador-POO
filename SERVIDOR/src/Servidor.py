@@ -1,12 +1,12 @@
 from xmlrpc.server import SimpleXMLRPCServer
 from xmlrpc.server import SimpleXMLRPCRequestHandler
 from threading import Thread
+import threading
 import socket
-import logging
-
+import Registro
 from ArchivoLog import ArchivoLog
 import Excepciones
-
+    
 class Handler(SimpleXMLRPCRequestHandler):
     def __init__(self, request, client_address, server):
         server.ipCliente = client_address[0]
@@ -16,17 +16,17 @@ class Servidor(SimpleXMLRPCServer):
     def __init__(self, consola, puertoRPC = 8000, addr = None, requestHandler= Handler,
                      logRequests=False, allow_none=False, encoding=None,
                      bind_and_activate=True, use_builtin_types=False):
-        
         self.hostname = socket.getfqdn()
         self.consola = consola
         self.puerto = puertoRPC
         self.logServidor = ArchivoLog('Log.log')
         self.ipCliente = None
+        self.solicitudTerminar = False
 
         addr = (socket.gethostbyname_ex(self.hostname)[2][0], self.puerto)
 
-        FORMAT = '%(asctime)s [%(levelname)s] - %(client_ip)s - %(method_name)s - %(message)s'
-        logging.basicConfig(filename=self.logServidor.nombreArchivo, level=logging.INFO, format=FORMAT, datefmt='%Y-%m-%d %H:%M:%S')
+    
+        #logging.basicConfig(filename=self.logServidor.nombreArchivo, level=logging.INFO, format=FORMAT, datefmt='%Y-%m-%d %H:%M:%S')
 
         try:
             super().__init__(addr, requestHandler, logRequests, allow_none, encoding, bind_and_activate,
@@ -55,37 +55,54 @@ class Servidor(SimpleXMLRPCServer):
         self.register_function(self.posicionActual, 'posicionActual')
         self.register_function(self.enviarComando, 'enviarComando')
         #self.register_function(self.video_server.get_video_frame, 'get_video_frame')
-    
+
         self.thread = Thread(target = self.run_server)
+        self.thread1 = Thread(target = self.terminar)
         self.thread.start()
+        self.thread1.start()
         print("Servidor RPC iniciado en el puerto [%s]" % str(self.server_address))
 
     def run_server(self):
         self.serve_forever()
 
     def shutdown(self):
-        self.shutdown()
+        self.solicitudTerminar = True
+        self.thread1.join()
+
+
+    def terminar(self):
+        while not self.solicitudTerminar:
+            pass
+        super().shutdown()
+        super().server_close()
+        self.solicitudTerminar = False
         self.thread.join()
-    
+        raise Excepciones.ExcepcionDeRegistro(2)
+
     def _log(func):
         def metodoRPC(self, *args, **kwargs):
-            print(func.__name__)
-            self.dic = {
-                "client_ip": self.ipCliente,
-                "method_name": func.__name__
-            }
+            argsstr = ''
+            for arg in args:
+                argsstr += str(arg) + ' '
             try:
-                argsstr = ''
-                for arg in args:
-                    argsstr += str(arg) + ' '
-                    
                 resultado = func(self, argsstr, **kwargs)
-                logging.info(resultado, extra=self.dic)
+                if type(resultado) is Registro.Registrar:
+                    respuesta = ""
+                    for registro in resultado.registros:
+                        self.logServidor.log(self.ipCliente, func.__name__, registro)
+                        respuesta += registro.mensaje + '\n'
+                    resultado = respuesta
+                else:
+                    self.logServidor.log(self.ipCliente, func.__name__, Registro.Registro(("INFO", "Solicitud Exitosa")))
                 return resultado
             except Excepciones.Excepciones as e:
-                return "error"
+                self.logServidor.log(self.ipCliente, func.__name__, e.registro)
+                return e.registro.mensaje
+            except Exception as e:
+                self.logServidor.log(self.ipCliente, func.__name__, Registro.Registro(("CRITICAL",str(e))))
+                self.solicitudTerminar = True
+                return "que cagada"
         return metodoRPC
-    
     @_log
     def conectarRobot(self, args):
         return self.consola.do_conectarRobot(args)
@@ -120,7 +137,10 @@ class Servidor(SimpleXMLRPCServer):
     
     @_log
     def movLineal(self, args):
-        return self.consola.do_movLineal(args)
+        try:
+            return self.consola.do_movLineal(args)
+        except Exception as e:
+            raise
     
     @_log
     def activarPinza(self, args):
@@ -145,3 +165,6 @@ class Servidor(SimpleXMLRPCServer):
     @_log
     def posicionActual(self, args):
         return self.consola.do_posicionActual(args)
+    @_log
+    def enviarComando(self, args):
+        return self.consola.do_enviarComando(args)

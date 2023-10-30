@@ -1,18 +1,119 @@
-2023-10-28 14:22:40 [ERROR] - 192.168.1.81 - conectarRobot - error
-2023-10-28 18:50:52 [INFO] - 192.168.56.1 - conectarRobot - Conexión exitosa con el puerto COM3.
-2023-10-28 22:35:27 [INFO] - 192.168.1.81 - conectarRobot - INFO:Conexión exitosa con el robot.
-
-2023-10-28 22:37:24 [INFO] - 192.168.1.81 - conectarRobot - INFO:Conexión exitosa con el robot.
-
-2023-10-28 22:38:53 [INFO] - 192.168.1.81 - conectarRobot - INFO:Conexión exitosa con el robot.
-
-2023-10-28 22:43:29 [INFO] - 192.168.1.81 - conectarRobot - INFO:Conexión exitosa con el robot.
-
-2023-10-28 22:44:12 [INFO] - 192.168.1.81 - movLineal - INFO: ROBOT ONLINE
-INFO: SEND G28 TO CALIBRATE
-2023-10-29 00:19:30 [INFO] - 192.168.1.81 - conectarRobot - INFO:Conexión exitosa con el robot.
-
-2023-10-29 00:36:05 [INFO] - 192.168.1.81 - conectarRobot - INFO:Conexión exitosa con el robot.
-
-2023-10-29 00:36:29 [INFO] - 192.168.1.81 - movLineal - INFO: ROBOT ONLINE
-INFO: SEND G28 TO CALIBRATE
+2023-10-29 14:30:31 [INFO] - 192.168.1.81 - conectarRobot -  Conexión exitosa con el robot.
+2023-10-29 14:35:45 [INFO] - 192.168.1.81 - conectarRobot -  Conexión exitosa con el robot.
+2023-10-29 14:35:54 [INFO] - 192.168.1.81 - movLineal -  ROBOT ONLINE
+2023-10-29 14:35:54 [INFO] - 192.168.1.81 - movLineal -  SEND G28 TO CALIBRATE
+2023-10-29 14:35:59 [ERROR] - 192.168.1.81 - home -  POINT IS OUTSIDE OF WORKSPACE
+2023-10-29 14:36:08 [ERROR] - 192.168.1.81 - activarPinza -  COMMAND NOT RECOGNIZED
+2023-10-29 14:36:17 [ERROR] - 192.168.1.81 - desactivarPinza -  COMMAND NOT RECOGNIZED
+2023-10-29 14:36:22 [ERROR] - 192.168.1.81 - home -  COMMAND NOT RECOGNIZED
+2023-10-29 14:36:27 [ERROR] - 192.168.1.81 - home -  COMMAND NOT RECOGNIZED
+2023-10-29 14:36:52 [ERROR] - 192.168.1.81 - movLineal -  COMMAND NOT RECOGNIZED
+2023-10-29 14:36:57 [INFO] - 192.168.1.81 - desconectarRobot -  Conexión cerrada.
+2023-10-29 14:37:05 [INFO] - 192.168.1.81 - conectarRobot -  Conexión exitosa con el robot.
+2023-10-29 14:37:07 [INFO] - 192.168.1.81 - home -  ROBOT ONLINE
+2023-10-29 14:37:07 [INFO] - 192.168.1.81 - home -  SEND G28 TO CALIBRATE
+2023-10-29 14:37:07 [INFO] - 192.168.1.81 - home -  HOMING
+2023-10-29 14:37:07 [INFO] - 192.168.1.81 - home -  HOMING COMPLETE t=7.50s
+2023-10-29 14:37:12 [ERROR] - 192.168.1.81 - movLineal -  COMMAND NOT RECOGNIZED
+2023-10-29 14:37:16 [INFO] - 192.168.1.81 - home -  HOMING
+2023-10-29 14:37:16 [INFO] - 192.168.1.81 - home -  HOMING COMPLETE t=4.50s
+2023-10-29 14:37:21 [ERROR] - 192.168.1.81 - movLineal -  COMMAND NOT RECOGNIZED
+2023-10-29 14:37:27 [INFO] - 192.168.1.81 - activarPinza -  GRIPPER ON
+2023-10-29 15:01:01 [INFO] - 192.168.1.81 - conectarRobot -  Conexión exitosa con el robot.
+2023-10-29 15:01:22 [INFO] - 192.168.1.81 - home -  ROBOT ONLINE
+2023-10-29 15:01:22 [INFO] - 192.168.1.81 - home -  SEND G28 TO CALIBRATE
+2023-10-29 15:01:22 [INFO] - 192.168.1.81 - home -  HOMING
+2023-10-29 15:01:22 [INFO] - 192.168.1.81 - home -  HOMING COMPLETE t=7.50s
+2023-10-29 15:01:40 [ERROR] - 192.168.1.81 - activarPinza -  COMMAND NOT RECOGNIZED
+2023-10-29 15:02:13 [INFO] - 192.168.1.81 - desconectarRobot -  Conexión cerrada.
+2023-10-29 15:02:20 [INFO] - 192.168.1.81 - conectarRobot -  Conexión exitosa con el robot.
+2023-10-29 15:02:50 [INFO] - 192.168.1.81 - home -  ROBOT ONLINE
+2023-10-29 15:02:50 [INFO] - 192.168.1.81 - home -  SEND G28 TO CALIBRATE
+2023-10-29 15:02:50 [INFO] - 192.168.1.81 - home -  HOMING
+2023-10-29 15:02:50 [INFO] - 192.168.1.81 - home -  HOMING COMPLETE t=7.50s
+2023-10-29 15:03:50 [ERROR] - 192.168.1.81 - home -  COMMAND NOT RECOGNIZED
+2023-10-29 15:04:37 [ERROR] - 192.168.1.81 - conectarRobot -  La conexión ya está establecida.
+2023-10-29 15:07:02 [INFO] - 192.168.1.81 - conectarRobot -  Conexión exitosa con el robot.
+2023-10-29 18:39:45 [INFO] - 192.168.1.48 - conectarRobot -  Conexión exitosa con el robot.
+2023-10-29 18:39:57 [INFO] - 192.168.1.48 - activarPinza -  ROBOT ONLINE
+2023-10-29 18:39:57 [INFO] - 192.168.1.48 - activarPinza -  SEND G28 TO CALIBRATE
+2023-10-29 18:39:57 [INFO] - 192.168.1.48 - activarPinza -  GRIPPER ON
+2023-10-29 18:40:04 [INFO] - 192.168.1.48 - home -  HOMING
+2023-10-29 18:40:04 [INFO] - 192.168.1.48 - home -  HOMING COMPLETE t=7.50s
+2023-10-29 18:45:51 [INFO] - 192.168.1.48 - conectarRobot -  Conexión exitosa con el robot.
+2023-10-29 18:46:02 [INFO] - 192.168.1.48 - enviarComando -  ROBOT ONLINE
+2023-10-29 18:46:02 [INFO] - 192.168.1.48 - enviarComando -  SEND G28 TO CALIBRATE
+2023-10-29 18:46:02 [INFO] - 192.168.1.48 - enviarComando -  ABSOLUTE MODE  
+2023-10-29 18:46:02 [INFO] - 192.168.1.48 - enviarComando -  CURRENT POSITION [X0.00 Y170.00 Z120.00 E0.00]
+2023-10-29 18:46:30 [INFO] - 192.168.1.48 - enviarComando -  LIOEAR  MOVE [X1.00 Y180.00 Z130.00 E0.00] t=2.66s
+2023-10-29 18:47:12 [INFO] - 192.168.1.48 - enviarComando -  LIOEAR  MOVE [X1.00 Y180.00 Z130.00 E0.00] t=0.00s
+2023-10-29 18:47:57 [INFO] - 192.168.1.48 - enviarComando -  LIOEAR  MOVE [X1.00 Y180.00 Z130.00 E0.00] t=0.00s
+2023-10-29 18:49:42 [INFO] - 192.168.1.48 - enviarComando -  No se puede enviar el comando, robot desconectado.
+2023-10-29 18:49:56 [INFO] - 192.168.1.48 - conectarRobot -  Conexión exitosa con el robot.
+2023-10-29 18:50:01 [INFO] - 192.168.1.48 - enviarComando -  ROBOT ONLINE
+2023-10-29 18:50:01 [INFO] - 192.168.1.48 - enviarComando -  SEND G28 TO CALIBRATE
+2023-10-29 18:50:01 [INFO] - 192.168.1.48 - enviarComando -  LIOEAR  MOVE [X0.00 Y170.00 Z120.00 E0.00] t=0.00s
+2023-10-29 18:50:11 [INFO] - 192.168.1.48 - enviarComando -  LIOEAR  MOVE [X0.00 Y170.00 Z120.00 E0.00] t=0.00s
+2023-10-29 18:53:21 [INFO] - 192.168.1.48 - enviarComando -  No se puede enviar el comando, robot desconectado.
+2023-10-29 18:53:44 [INFO] - 192.168.1.48 - conectarRobot -  Conexión exitosa con el robot.
+2023-10-29 18:53:58 [INFO] - 192.168.1.48 - enviarComando -  ROBOT ONLINE
+2023-10-29 18:53:58 [INFO] - 192.168.1.48 - enviarComando -  SEND G28 TO CALIBRATE
+2023-10-29 18:53:58 [INFO] - 192.168.1.48 - enviarComando -  LIOEAR  MOVE [X1.00 Y180.00 Z130.00 E0.00] t=2.66s
+2023-10-29 18:54:08 [INFO] - 192.168.1.48 - enviarComando -  LIOEAR  MOVE [X1.00 Y180.00 Z130.00 E0.00] t=0.00s
+2023-10-29 19:03:11 [INFO] - 192.168.1.48 - conectarRobot -  Conexión exitosa con el robot.
+2023-10-29 19:03:21 [INFO] - 192.168.1.48 - enviarComando -  ROBOT ONLINE
+2023-10-29 19:03:21 [INFO] - 192.168.1.48 - enviarComando -  SEND G28 TO CALIBRATE
+2023-10-29 19:03:21 [INFO] - 192.168.1.48 - enviarComando -  ABSOLUTE MODE  
+2023-10-29 19:03:21 [INFO] - 192.168.1.48 - enviarComando -  CURRENT POSITION [X0.00 Y170.00 Z120.00 E0.00]
+2023-10-29 19:03:31 [INFO] - 192.168.1.48 - enviarComando -  LIOEAR  MOVE [X0.00 Y170.00 Z120.00 E0.00] t=0.00s
+2023-10-29 19:07:28 [ERROR] - 192.168.1.48 - conectarRobot -  La conexión ya está establecida.
+2023-10-29 19:07:34 [INFO] - 192.168.1.48 - enviarComando -  ABSOLUTE MODE  
+2023-10-29 19:07:34 [INFO] - 192.168.1.48 - enviarComando -  CURRENT POSITION [X0.00 Y170.00 Z120.00 E0.00]
+2023-10-29 19:07:43 [INFO] - 192.168.1.48 - enviarComando -  ABSOLUTE MODE  
+2023-10-29 19:07:43 [INFO] - 192.168.1.48 - enviarComando -  CURRENT POSITION [X0.00 Y170.00 Z120.00 E0.00]
+2023-10-29 19:07:54 [INFO] - 192.168.1.48 - enviarComando -  LIOEAR  MOVE [X0.00 Y170.00 Z120.00 E0.00] t=0.00s
+2023-10-29 19:13:03 [ERROR] - 192.168.1.48 - conectarRobot -  La conexión ya está establecida.
+2023-10-29 19:13:18 [INFO] - 192.168.1.48 - enviarComando -  ABSOLUTE MODE  
+2023-10-29 19:13:18 [INFO] - 192.168.1.48 - enviarComando -  CURRENT POSITION [X0.00 Y170.00 Z120.00 E0.00]
+2023-10-29 19:19:41 [ERROR] - 192.168.1.48 - conectarRobot -  La conexión ya está establecida.
+2023-10-29 19:20:05 [INFO] - 192.168.1.48 - enviarComando -  LIOEAR  MOVE [X10.00 Y180.00 Z130.00 E0.00] t=2.40s
+2023-10-29 19:24:24 [INFO] - 192.168.1.48 - enviarComando -  ABSOLUTE MODE  
+2023-10-29 19:24:24 [INFO] - 192.168.1.48 - enviarComando -  CURRENT POSITION [X10.00 Y180.00 Z130.00 E0.00]
+2023-10-29 19:27:05 [INFO] - 192.168.1.48 - seleccionarModo -  ABSOLUTE MODE ON
+2023-10-29 19:27:13 [INFO] - 192.168.1.48 - activarMotores -  Motor activado.
+2023-10-29 19:27:20 [INFO] - 192.168.1.48 - desactivarMotores -  Motor desactivado.
+2023-10-29 19:27:24 [INFO] - 192.168.1.48 - home -  HOMING
+2023-10-29 19:27:24 [INFO] - 192.168.1.48 - home -  HOMING COMPLETE t=7.50s
+2023-10-29 19:32:28 [INFO] - 192.168.1.48 - enviarComando -  No se puede enviar el comando, robot desconectado.
+2023-10-29 19:32:42 [INFO] - 192.168.1.48 - conectarRobot -  Conexión exitosa con el robot.
+2023-10-29 19:32:45 [INFO] - 192.168.1.48 - enviarComando -  ROBOT ONLINE
+2023-10-29 19:32:45 [INFO] - 192.168.1.48 - enviarComando -  SEND G28 TO CALIBRATE
+2023-10-29 19:32:45 [INFO] - 192.168.1.48 - enviarComando -  LIOEAR  MOVE [X10.00 Y180.00 Z130.00 E0.00] t=2.40s
+2023-10-29 19:44:27 [INFO] - 192.168.1.48 - conectarRobot -  Conexión exitosa con el robot.
+2023-10-29 19:47:42 [INFO] - 192.168.1.48 - movLineal -  ROBOT ONLINE
+2023-10-29 19:47:44 [INFO] - 192.168.1.48 - movLineal -  SEND G28 TO CALIBRATE
+2023-10-29 19:47:46 [INFO] - 192.168.1.48 - movLineal -  LIOEAR  MOVE [X10.00 Y180.00 Z130.00 E0.00] t=2.40s
+2023-10-29 19:48:22 [INFO] - 192.168.1.48 - movLineal -  LIOEAR  MOVE [X10.00 Y180.00 Z130.00 E2.00] t=7.07s
+2023-10-29 19:50:12 [CRITICAL] - 192.168.1.48 - movLineal - could not convert string to float: 'x10'
+2023-10-29 19:54:09 [INFO] - 192.168.1.48 - conectarRobot -  Conexión exitosa con el robot.
+2023-10-29 19:55:07 [INFO] - 192.168.1.48 - enviarComando -  ROBOT ONLINE
+2023-10-29 19:55:13 [INFO] - 192.168.1.48 - enviarComando -  SEND G28 TO CALIBRATE
+2023-10-29 19:55:16 [INFO] - 192.168.1.48 - enviarComando -  LIOEAR  MOVE [X0.00 Y170.00 Z120.00 E0.00] t=0.00s
+2023-10-29 20:00:08 [CRITICAL] - 192.168.1.48 - movLineal - could not convert string to float: 'x10'
+2023-10-29 20:05:35 [CRITICAL] - 192.168.1.48 - movLineal - could not convert string to float: 'x10'
+2023-10-29 20:15:18 [CRITICAL] - 192.168.1.81 - movLineal - could not convert string to float: 'c5'
+2023-10-29 20:18:36 [CRITICAL] - 192.168.1.81 - movLineal - could not convert string to float: 'c5'
+2023-10-29 20:21:18 [CRITICAL] - 192.168.1.81 - movLineal - could not convert string to float: 'c5'
+2023-10-29 20:24:12 [CRITICAL] - 192.168.1.81 - movLineal - could not convert string to float: 'c5'
+2023-10-29 20:39:59 [CRITICAL] - 192.168.1.81 - movLineal - could not convert string to float: 'c5'
+2023-10-29 20:47:05 [CRITICAL] - 192.168.1.81 - movLineal - could not convert string to float: 'c5'
+2023-10-29 21:27:43 [INFO] - 192.168.1.81 - conectarRobot -  Conexión exitosa con el robot.
+2023-10-30 07:29:33 [CRITICAL] - 192.168.1.81 - movLineal - could not convert string to float: 'c1'
+2023-10-30 07:31:02 [CRITICAL] - 192.168.1.81 - movLineal - could not convert string to float: 'c1'
+2023-10-30 08:05:35 [CRITICAL] - 192.168.1.81 - movLineal - could not convert string to float: 'c1'
+2023-10-30 08:10:04 [CRITICAL] - 192.168.1.81 - movLineal - could not convert string to float: 'c1'
+2023-10-30 08:27:28 [CRITICAL] - 192.168.1.81 - movLineal - could not convert string to float: 'c1'
+2023-10-30 08:41:42 [CRITICAL] - 192.168.1.81 - movLineal - could not convert string to float: 'c1'
+2023-10-30 09:39:32 [CRITICAL] - 192.168.1.81 - movLineal - could not convert string to float: 'c1'
+2023-10-30 09:54:15 [CRITICAL] - 192.168.1.81 - movLineal - could not convert string to float: 'c1'
+2023-10-30 09:57:41 [CRITICAL] - 192.168.1.81 - movLineal - could not convert string to float: 'c1'
