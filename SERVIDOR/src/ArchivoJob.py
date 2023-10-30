@@ -1,15 +1,22 @@
 # Clase para manejar la creación de archivos job
 import os
-import os.path
-
+from Excepciones import ExcepcionArchivo
 
 class ArchivoJob:
-    def __init__(self, nombre_archivo,directorio):
-        self.nombre_archivo = nombre_archivo
-        self.directorio = directorio
+    route = os.path.dirname(os.path.abspath(__file__))
+    jobroute = os.path.join(route, "..", "job")
+
+    def __init__(self, nombreArchivo):
+        self.nombreArchivo = os.path.join(self.jobroute, nombreArchivo)
 
     def agregarComando(self, comando):
-        ruta_completa = os.path.join(self.directorio, self.nombre_archivo)
-        with open(ruta_completa, "a") as archivo_job:
+        with open(self.nombreArchivo, "a") as archivo_job:
             if comando != "":
                 archivo_job.write(comando + "\n")
+
+    def obtenerComandos(self):
+        try:
+            with open(self.nombreArchivo, 'r') as archivo:
+                return archivo.readlines()
+        except Exception:
+            raise ExcepcionArchivo(2)

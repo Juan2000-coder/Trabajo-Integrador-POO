@@ -28,7 +28,8 @@ class ExcepcionBrazoRobot(Excepciones):
     
 class ExcepcionArchivo(Excepciones):
     codigos = {
-        1:("ERROR", " Al devolver el log.")}
+        1:("ERROR", " Al devolver el log."),
+        2:("ERROR", " Al leer un archivo de trabajo.")}
     modulo = "ARCHIVO"
 
     def __init__(self, codigo):
@@ -36,7 +37,7 @@ class ExcepcionArchivo(Excepciones):
 
 class ExcepcionDeComando(Excepciones):
     codigos = {
-        1:("INFO", " Demasiados argumentos/faltan argumentos."),
+        1:("INFO", " Una cantidad incorrecta de argumentos fueron dados."),
         2:("INFO", " Opcion no encontrada.")}
     modulo = "CLI"
 

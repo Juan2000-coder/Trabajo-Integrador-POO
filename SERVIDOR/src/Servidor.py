@@ -81,6 +81,7 @@ class Servidor(SimpleXMLRPCServer):
                         self.logServidor.log(self.ipCliente, func.__name__, registro)
                         respuesta += registro.mensaje + '\n'
                     resultado = respuesta
+                    self.consola.actualizarJob(func.__name__)#medio tranfuga
                 else:
                     self.logServidor.log(self.ipCliente, func.__name__, Registro.Registro(("INFO", "Solicitud Exitosa")))
                 return resultado

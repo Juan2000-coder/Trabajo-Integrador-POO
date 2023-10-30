@@ -34,7 +34,7 @@ from Punto import Punto
 from Servidor import Servidor
 import Excepciones
 from Registro import Registrar
-
+from Comando import ComandosGcode
 
 class CLI(Cmd):
     """Command Interpreter. Interface with user."""
@@ -49,65 +49,32 @@ class CLI(Cmd):
         """"""
         super().__init__()
         self.rpcServer = None
-        self.nombreArchivoJob = None
-        self.route = os.path.dirname(os.path.abspath(__file__))
-        self.jobRoute = os.path.join(self.route, "..", "Job")    # The path of the solution.
         self.brazoRobot = BrazoRobot()
-
-        # Será un diccionario donde las claves son los ids o ips de usuario
-        # Y las claves serán los archivos de usuario (objetos).
+        self.nombreArchivoJob = None
         self.jobFlag = False
 
     def estadoServidor(self, msg:str):
         print(msg)
+    
+    def actualizarJob(self, line:str):
+        if self.jobFlag == True:
+            job = ArchivoJob(self.nombreArchivoJob)
+            lineSplit = line.split()
+            comando = lineSplit[0]
+            params = lineSplit[1:]
 
-    def onecmd(self, comando):
+            if comando != "grabar":
+                comandoTransformado = ComandosGcode.comandoAGcode(comando, *params)
+                job.agregarComando(comandoTransformado)
 
-        comandosDelRobot = {"seleccionarModo": {"a" : "G90",
-                                                "r" : "G91"},
-                        "activarMotores" : "G17",
-                        "desactivarMotores" : "G18",
-                        "home" : "G28",
-                        "posicionActual" : "G0",
-                        "movLineal" : "G1", 
-                        "activarPinza" : "M3",
-                        "desactivarPinza" : "M5"}
-
+    def onecmd(self, line):
         try: 
-            result = super().onecmd(comando)
+            result = super().onecmd(line)
             if result is not None:
                 print(result)
+            self.actualizarJob(line)
         except Excepciones.Excepciones as e:
             print(e)
-
-        # Acciones a realizar después de ejecutar un comando
-        # result debería contener tanto el nievl log y un mensaje que es el resultado
-        # del comando.
-        # Podemos hacer que siempre se devuelva un valor
-        # Sobre todo para aquellos que tienen sentido que den un valor
-
-        if self.jobFlag == True:
-            try:
-                lineLista = comando.split()
-                job = ArchivoJob(self.nombreArchivoJob, self.jobRoute)
-                if lineLista[0] in comandosDelRobot:
-                    # Verifica si se proporcionan parámetros adicionales
-                    if len(lineLista) == 4 or len(lineLista) == 5:
-                        job.agregarComando(lineLista) ## Resolver que pasa si pongo movLineal con menos argumentos de los necesarios. Resolver tambien si se ponen comandos que no llevan argumentos, con argumentos
-                    elif len(lineLista) == 1:
-                        job.agregarComando(comandosDelRobot.get(lineLista[0], ""))
-                    elif lineLista[0] == "seleccionarModo":
-                        if lineLista[1] == "a":
-                            job.agregarComando(comandosDelRobot["seleccionarModo"]["a"])
-                        elif lineLista[1] == "r":
-                            job.agregarComando(comandosDelRobot["seleccionarModo"]["r"])
-                        else:
-                            raise Excepciones.ExcepcionDeComando(2)
-                    else:
-                        raise Excepciones.ExcepcionDeComando(1)
-                        
-            except Excepciones.Excepciones as e:
-                print(e)
 
     def do_cls(self, args):
 
@@ -160,7 +127,8 @@ obtenerLogServidor
         args = args.split()
         if len(args) == 0:
             archivo = ArchivoLog('Log.log')
-            print(archivo.obtenerLog())
+            for entrada in archivo.obtenerLog():
+                print(entrada)
         else:
             raise Excepciones.ExcepcionDeComando(1)
 
@@ -247,18 +215,13 @@ movLineal <xx.x> <yy.y> <zz.z> [vv.v]
     zz.z    Posición final en eje z en mm.
     vv.v    Velocidad del movimiento en mm/s.
         """
-        result = None
         args = args.split()
-        if len(args) == 3:
-            result = self.brazoRobot.movLineal(Punto(float(args[0]), float(args[1]), float(args[2])))
-           
-        elif len(args) == 4:
-            result = self.brazoRobot.movLineal(Punto(float(args[0]), float(args[1]), float(args[2])), float(args[3]))
-            
+
+        if (len(args) == 3) or (len(args) == 4):
+            result = self.brazoRobot.movLineal(args)
+            return Registrar(result)
         else:
             raise Excepciones.ExcepcionDeComando(1)
-        
-        return Registrar(result)
 
     def do_activarPinza(self, args):
         """
@@ -309,16 +272,14 @@ grabar <Archivo>
             if len(args) == 1:
                 self.nombreArchivoJob = args[0]
                 result = "INFO: Comandos se almacenaran en " + self.nombreArchivoJob
-                print(result)
                 self.jobFlag = True
-                return result
+                return Registrar(result)
             else:
                 raise Excepciones.ExcepcionDeComando(1)
         else:
             result = "INFO: Almacenamiento de comandos parado."
-            print(result)
             self.jobFlag = False
-            return result
+            return Registrar(result)
 
     def do_cargar(self, args):
         """
@@ -327,8 +288,12 @@ cargar <JobFile>
     JobFile     El nombre del archivo de Trabajo en el directorio.
     """
 
-        if len(args) == 1:
-            pass
+        arguments = args.split()
+        if len(arguments) == 1:
+            result = ''
+            for comando in ArchivoJob(self.nombreArchivoJob).obtenerComandos():
+                result += self.brazoRobot.enviarComando(comando) + '\n'
+            return Registrar(result)    
         else:
             raise Excepciones.ExcepcionDeComando(1)
 
@@ -362,7 +327,7 @@ listarArchivosDeTrabajo
         args = args.split()
         if len(args) == 0:
             lista = ""
-            for fileName in os.listdir(self.jobRoute):
+            for fileName in os.listdir(ArchivoJob.jobroute):
                 lista += self.outFormat.format(fileName + "\n")
             return lista
         else:
