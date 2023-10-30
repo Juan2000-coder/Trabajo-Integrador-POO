@@ -12,4 +12,4 @@ class ArchivoJob:
         ruta_completa = os.path.join(self.directorio, self.nombre_archivo)
         with open(ruta_completa, "a") as archivo_job:
             if comando != "":
-                archivo_job.write(comando + "\n"
+                archivo_job.write(comando + "\n")
