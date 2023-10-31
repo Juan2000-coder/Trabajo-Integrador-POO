@@ -4,7 +4,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "C:\\msys64\\mingw64\\bin\\g++",
+            "command": "g++",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
