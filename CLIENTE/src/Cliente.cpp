@@ -10,6 +10,9 @@
 
 #include <future>   // Para la función 'async' y 'future' en el metodo timeOut.
 #include <chrono>   // Para la función 'wait_for' en el metodo timeOut.
+#include <cctype>  // Para la función 'isspace' en el metodo generarIDUsuario.
+#include <algorithm> // Para la función 'remove_if' en el metodo generarIDUsuario.
+
 
 using namespace std;
 
@@ -18,14 +21,38 @@ using namespace std;
 
 using namespace XmlRpc;
 
+//METODO PARA SOLICITAR Y VERIFICAR EL ID DE UN CLIENTE
+
+std::string generarIDUsuario(const std::string& nombre) {
+    // Genera el ID a partir del nombre, eliminando espacios y reemplazando por guiones bajos.
+    std::string id = nombre;
+    std::replace(id.begin(), id.end(), ' ', '_'); // Reemplaza los espacios por guiones bajos
+    std::transform(id.begin(), id.end(), id.begin(), ::tolower); // Convierte a minúsculas
+    return id;
+}
+
+
 //METODO PARA LLAMAR AL SERVIDOR CON TIMEOUT
 
-bool llamarAlServidorConTimeout(XmlRpcClient& c, const char* metodo, const XmlRpcValue& args, XmlRpcValue& result, int timeout) {
+bool llamarAlServidorConTimeout(XmlRpcClient& c, const char* metodo, const XmlRpcValue& args, XmlRpcValue& result, int timeout, const std::string& id) {
+    XmlRpcValue argsConId;
+
+    // Establece el ID de usuario como primer argumento.
+    argsConId[0] = id;
+
+    // Copia los argumentos adicionales (si los hay).
+    for (int i = 0; i < args.size(); i++) {
+        argsConId[1 + i] = args[i];
+    }
+    cout << "Llamando al servidor..." << endl;
+    cout << argsConId << endl;
+    cout << metodo << endl; 
+
     std::future<bool> future = std::async(std::launch::async, [&] {
-        return c.execute(metodo, args, result);
+        return c.execute(metodo, argsConId, result);
     });
 
-    // Esperar hasta que se complete la llamada o hasta que se agote el tiempo.
+    // Espera hasta que se complete la llamada o hasta que se agote el tiempo.
     std::future_status status = future.wait_for(std::chrono::seconds(timeout));
 
     if (status == std::future_status::timeout) {
@@ -147,7 +174,19 @@ int main(int argc, char* argv[]) {
     std::cerr << "Uso: hola_Client IP_HOST N_PORT\n";
     return -1;
     }
-    
+
+    std::string nombre;
+    std::string id;
+    std::cout << "Ingrese su nombre <Apellido Nombre>" << std::endl;
+    std::getline(cin, nombre); // Lee toda la línea, incluyendo espacios en blanco.
+
+    id = generarIDUsuario(nombre);
+
+    std::cout << "Su ID de usuario es: " << id << std::endl;
+    std::cout << "Bienvenido " << nombre << std::endl;
+
+
+
     int port = atoi(argv[2]);
 
     XmlRpcClient c(argv[1], port);
@@ -196,16 +235,18 @@ int main(int argc, char* argv[]) {
                                           //en el mapa. Si input se encuentra en el mapa, it apuntará a esa ubicación, y it != stringToValue.end() será verdadero, 
                                           //lo que significa que la clave se encontró. Si input no se encuentra en el mapa, it será igual a stringToValue.end(), y la 
                                           //condición será falsa, lo que indica que la clave no se encontró.
-     
-    int timeout = 15; // Tiempo límite en segundos para la llamada al servidor.
+    
+    
 
+    int timeout = 15; // Tiempo límite en segundos para la llamada al servidor.
     if (it != comandoANumero.end()) { 
         int value = it->second; //accede al valor asociado a la clave
+       
         
         switch (value) {
             case 1: //reporteGeneral
 
-                if (llamarAlServidorConTimeout(c, "reporteGeneral", noArgs, result, timeout)) {
+                if (llamarAlServidorConTimeout(c, "reporteGeneral", noArgs, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'reporteGeneral'\n\n";
@@ -214,7 +255,7 @@ int main(int argc, char* argv[]) {
 
             case 2: //obtenerLogServidor
 
-                if (llamarAlServidorConTimeout(c, "obtenerLogServidor", noArgs, result, timeout)) {
+                if (llamarAlServidorConTimeout(c, "obtenerLogServidor", noArgs, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'obtenerLogServidor'\n\n";
@@ -224,16 +265,17 @@ int main(int argc, char* argv[]) {
             case 3: //seleccionarModo
                 cin >> input;
                 oneArg[0] = input;
-                if (llamarAlServidorConTimeout(c, "selecionarModo", noArgs, result, timeout)) {
+                if (llamarAlServidorConTimeout(c, "selecionarModo", noArgs, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'seleccionarModo'\n\n";
                 }
                 break;
             case 4: //conectarRobot
+                cout << "llamando a conectarRobot\n";
         
-                if (llamarAlServidorConTimeout(c, "conectarRobot", noArgs, result, timeout)) {
-                    
+                if (llamarAlServidorConTimeout(c, "conectarRobot", noArgs, result, timeout, id)) {
+                    cout << "estamos en el if\n" << "\n\n";
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'conectarRobot'\n\n";
@@ -242,7 +284,7 @@ int main(int argc, char* argv[]) {
 
             case 5: //desconectarRobot
   
-                if (llamarAlServidorConTimeout(c, "desconectarRobot", noArgs, result, timeout)) {
+                if (llamarAlServidorConTimeout(c, "desconectarRobot", noArgs, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'desconectarRobot'\n\n";
@@ -252,7 +294,7 @@ int main(int argc, char* argv[]) {
             
             case 6: //activarMotor
 
-                if (llamarAlServidorConTimeout(c, "activarMotores", noArgs, result, timeout)) {
+                if (llamarAlServidorConTimeout(c, "activarMotores", noArgs, result, timeout, id)) {
                     std::cout << "Llamada exitosa. Resultado: " << result << std::endl;
                 } else {
                     std::cout << "Timeout: la llamada al servidor ha superado el tiempo límite." << std::endl;
@@ -261,7 +303,7 @@ int main(int argc, char* argv[]) {
 
             case 7: //desactivarMotores
 
-                if (llamarAlServidorConTimeout(c, "desactivarMotores", noArgs, result, timeout)) {
+                if (llamarAlServidorConTimeout(c, "desactivarMotores", noArgs, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'desactivarMotores'\n\n";
@@ -270,7 +312,7 @@ int main(int argc, char* argv[]) {
 
             case 8: //home
 
-                if (llamarAlServidorConTimeout(c, "home", noArgs, result, timeout)) {
+                if (llamarAlServidorConTimeout(c, "home", noArgs, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'home'\n\n";
@@ -288,7 +330,7 @@ int main(int argc, char* argv[]) {
                     args[3]=input4;
                 }
 
-                if (llamarAlServidorConTimeout(c, "movLineal", noArgs, result, timeout)) {
+                if (llamarAlServidorConTimeout(c, "movLineal", noArgs, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'movLineal'\n\n";
@@ -297,7 +339,7 @@ int main(int argc, char* argv[]) {
 
             case 10: //activarPinza
 
-                if (llamarAlServidorConTimeout(c, "activarPinza", noArgs, result, timeout)) {
+                if (llamarAlServidorConTimeout(c, "activarPinza", noArgs, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'activarPinza'\n\n";
@@ -306,7 +348,7 @@ int main(int argc, char* argv[]) {
 
             case 11: //desactivarPinza
 
-                if (llamarAlServidorConTimeout(c, "desactivarPinza", noArgs, result, timeout)) {
+                if (llamarAlServidorConTimeout(c, "desactivarPinza", noArgs, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'desactivarPinza'\n\n";
@@ -318,7 +360,7 @@ int main(int argc, char* argv[]) {
                     cin >> input1;
                     oneArg[0]=input1;
                 }
-                if (llamarAlServidorConTimeout(c, "grabar", noArgs, result, timeout)) {
+                if (llamarAlServidorConTimeout(c, "grabar", noArgs, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'grabar'\n\n";
@@ -327,7 +369,7 @@ int main(int argc, char* argv[]) {
 
             case 13: //cargar
 
-                if (llamarAlServidorConTimeout(c, "cargar", noArgs, result, timeout)) {
+                if (llamarAlServidorConTimeout(c, "cargar", noArgs, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'cargar'\n\n";
@@ -336,7 +378,7 @@ int main(int argc, char* argv[]) {
 
             case 14: //posicionActual
 
-                if (llamarAlServidorConTimeout(c, "posicionActual", noArgs, result, timeout)) {
+                if (llamarAlServidorConTimeout(c, "posicionActual", noArgs, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'posicionActual'\n\n";
@@ -345,7 +387,7 @@ int main(int argc, char* argv[]) {
 
             case 15: // desconectarServidor
 
-                if (llamarAlServidorConTimeout(c, "desconectarRobot", noArgs, result, timeout)) {
+                if (llamarAlServidorConTimeout(c, "desconectarRobot", noArgs, result, timeout, id)) {
                     cout << "Desconectando del servidor...\n";    
                     cout << "Desconectado del servidor.\n";
                     cout << "Saliendo del programa...\n";
@@ -357,7 +399,7 @@ int main(int argc, char* argv[]) {
 
             case 16: //listarArchivosDeTrabajo
 
-                if (llamarAlServidorConTimeout(c, "listarArchivosDeTrabajo", noArgs, result, timeout)) {
+                if (llamarAlServidorConTimeout(c, "listarArchivosDeTrabajo", noArgs, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'listarArchivosDeTrabajo'\n\n";
@@ -406,7 +448,7 @@ int main(int argc, char* argv[]) {
 
                 oneArg[0] = input;
 
-                if (llamarAlServidorConTimeout(c, "enviarComando", noArgs, result, timeout)) {
+                if (llamarAlServidorConTimeout(c, "enviarComando", noArgs, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'enviarComando'\n\n";

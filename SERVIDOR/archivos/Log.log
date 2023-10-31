@@ -264,3 +264,4 @@ INFO: SEND G28 TO CALIBRATE
 2023-10-30 14:25:00 [ERROR] - 192.168.1.81 - movLineal -  POINT IS OUTSIDE OF WORKSPACE
 2023-10-30 14:25:19 [INFO] - 192.168.1.81 - movLineal -  LIOEAR  MOVE [X10.00 Y180.00 Z130.00 E0.00] t=2.40s
 >>>>>>> e2a9e17b82d83b34e4d552962c392e1203d4d29e
+2023-10-30 17:08:16 [ERROR] - 192.168.56.1 - conectarRobot -  No se puede establecer conexión con el brazo.
