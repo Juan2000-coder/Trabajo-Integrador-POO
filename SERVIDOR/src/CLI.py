@@ -26,6 +26,7 @@ from cmd import Cmd
 import os
 import subprocess
 import platform
+import logging
 
 from BrazoRobot import BrazoRobot
 from ArchivoLog import ArchivoLog
@@ -127,7 +128,7 @@ obtenerLogServidor
         """
         args = args.split()
         if len(args) == 0:
-            archivo = ArchivoLog('Log.log')
+            archivo = ArchivoLog('Log')
             for entrada in archivo.obtenerLog():
                 print(entrada)
         else:
