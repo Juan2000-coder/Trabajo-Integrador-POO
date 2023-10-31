@@ -1,7 +1,6 @@
 import serial
 import time
 
-from Punto import Punto
 from Excepciones import ExcepcionBrazoRobot
 
 class BrazoRobot():
@@ -15,7 +14,7 @@ class BrazoRobot():
         # La velocidad de comunicación que acepta al momento es de 115200 baudios.   
         if not self.conexion_establecida:
             try:
-                self.puerto_serie = serial.Serial(puerto, baud_rate)
+                self.puerto_serie = serial.Serial(puerto, baud_rate, timeout = 1)
                 self.conexion_establecida = True
                 time.sleep(2)   #Tiempo para que realice bien la conexion, si no envia los comandos muy rapido.
                 return "INFO: Conexión exitosa con el robot."
@@ -32,19 +31,16 @@ class BrazoRobot():
         #Primero almacenar la respuesta del comando, luego printear. 
         if self.conexion_establecida:
             try:
-                self.puerto_serie.write((comando + '\r'+'\n').encode('utf-8'))
-
-                # Ajusta un tiempo de espera (timeout) en segundos
-                self.puerto_serie.timeout = 1
-                data = b""
-
+                self.puerto_serie.write((comando + '\r\n').encode())
+                
+                data = b''
                 while True:
                     line = self.puerto_serie.readline()
                     if not line:
                         break
                     data += line
 
-                return data.decode('utf-8').strip()
+                return data.decode().strip()
             
             except Exception as e:
                 raise ExcepcionBrazoRobot(3)
@@ -72,8 +68,11 @@ class BrazoRobot():
         else:
             raise ExcepcionBrazoRobot(6)
     
-    def movLineal(self, coor:list, velocidad=None):
-        comando = f"G1 X{coor[0]} Y{coor[1]} Z{coor[2]} E{velocidad}"
+    def movLineal(self, coor:list, velocidad = 0):
+        if velocidad != 0:
+            comando = f"G1 X{coor[0]} Y{coor[1]} Z{coor[2]} E{velocidad}"
+        else:
+            comando = f"G0 X{coor[0]} Y{coor[1]} Z{coor[2]}"
         return self.enviarComando(comando)
         
     def activarPinza(self):

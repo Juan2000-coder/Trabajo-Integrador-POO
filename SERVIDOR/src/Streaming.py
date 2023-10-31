@@ -1,12 +1,12 @@
 import cv2
 from flask import Flask, Response, render_template
-import threading
-import signal
-import sys
+import logging
+
 class VideoStreamer:
     def __init__(self):
         self.app = Flask(__name__)
         self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+        logging.getLogger('werkzeug').disabled = True
 
     def generate_frames(self):
         while True:
@@ -27,25 +27,24 @@ class VideoStreamer:
         @self.app.route("/video_feed")
         def video_feed():
             return Response(self.generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
-
-        # Indica la dirección IP y el puerto en el que deseas ejecutar la aplicación
+        
         self.app.run(host='0.0.0.0', port=8000, debug=False)
 
-        # Libera la cámara al finalizar la ejecución
-        self.cap.release()
         
     def stop_streaming(self):
         self.streaming = False
         self.cap.release()
+        
+"""
+if __name__ == "__main__":
+    try:
+        elrubius = VideoStreamer()
+        thread = threading.Thread(target=elrubius.run, daemon=True)
+        thread.start()
 
-def start_video_stream():
-    video_streamer = VideoStreamer()
-    video_thread = threading.Thread(target=video_streamer.run)
-    video_thread.start()
-    def signal_handler(sig, frame):
-        video_streamer.stop_streaming()
-        sys.exit(0)
-
-    signal.signal(signal.SIGINT, signal_handler)
-    signal.signal(signal.SIGTERM, signal_handler)
-
+        while True:
+            input("pone algo")
+    except KeyboardInterrupt:
+        elrubius.stop_streaming()
+        print("hola")
+        print("hola")"""
