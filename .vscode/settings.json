@@ -46,6 +46,7 @@
         "streambuf": "cpp",
         "typeinfo": "cpp",
         "future": "cpp",
+<<<<<<< HEAD
         "bit": "cpp",
         "charconv": "cpp",
         "chrono": "cpp",
@@ -64,5 +65,8 @@
         "thread": "cpp",
         "cinttypes": "cpp",
         "variant": "cpp"
+=======
+        "chrono": "cpp"
+>>>>>>> b6ceafb31d27d3f6522d97362dfb1e3eecbf333f
     }
 }

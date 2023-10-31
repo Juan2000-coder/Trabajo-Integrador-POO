@@ -7,11 +7,11 @@
 #include <map>
 #include <string>
 #include <cstdlib> // Para la función 'system'
-
 #include <future>   // Para la función 'async' y 'future' en el metodo timeOut.
 #include <chrono>   // Para la función 'wait_for' en el metodo timeOut.
 #include <cctype>  // Para la función 'isspace' en el metodo generarIDUsuario.
 #include <algorithm> // Para la función 'remove_if' en el metodo generarIDUsuario.
+
 
 
 using namespace std;
