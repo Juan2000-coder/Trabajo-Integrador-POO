@@ -264,6 +264,7 @@ INFO: SEND G28 TO CALIBRATE
 2023-10-30 14:25:00 [ERROR] - 192.168.1.81 - movLineal -  POINT IS OUTSIDE OF WORKSPACE
 2023-10-30 14:25:19 [INFO] - 192.168.1.81 - movLineal -  LIOEAR  MOVE [X10.00 Y180.00 Z130.00 E0.00] t=2.40s
 >>>>>>> e2a9e17b82d83b34e4d552962c392e1203d4d29e
+<<<<<<< HEAD
 2023-10-30 19:03:25 [CRITICAL] - 192.168.1.105 - conectarRobot - tuple index out of range
 2023-10-31 10:42:18 [INFO] - 192.168.45.16 - conectarRobot -  Conexión exitosa con el robot.
 2023-10-31 10:42:38 [ERROR] - 192.168.45.16 - home -  Un evento ocurrió al intentar enviar el comando.
@@ -371,3 +372,6 @@ INFO: SEND G28 TO CALIBRATE
 2023-10-31 16:04:26 [INFO] - 192.168.1.105 - movLineal -  ROBOT ONLINE
 2023-10-31 16:04:26 [INFO] - 192.168.1.105 - movLineal -  SEND G28 TO CALIBRATE
 2023-10-31 16:04:26 [INFO] - 192.168.1.105 - movLineal -  LINEAR  MOVE: [X:10.00 Y:100.00 Z:130.00 E:8.00] t=1.18s
+=======
+2023-10-30 17:08:16 [ERROR] - 192.168.56.1 - conectarRobot -  No se puede establecer conexión con el brazo.
+>>>>>>> 58595fea1c63f63a40c7922e5c414521be55d713
