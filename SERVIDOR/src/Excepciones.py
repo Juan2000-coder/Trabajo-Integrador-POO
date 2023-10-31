@@ -29,7 +29,8 @@ class ExcepcionBrazoRobot(Excepciones):
 class ExcepcionArchivo(Excepciones):
     codigos = {
         1:("ERROR", " Al devolver el log."),
-        2:("ERROR", " Al leer un archivo de trabajo.")}
+        2:("ERROR", " Al leer un archivo de trabajo."),
+        3:("ERROR", " Al validar un usuario.")}
     modulo = "ARCHIVO"
 
     def __init__(self, codigo):

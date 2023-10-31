@@ -224,7 +224,7 @@ int main(int argc, char* argv[]) {
             case 3: //seleccionarModo
                 cin >> input;
                 oneArg[0] = input;
-                if (llamarAlServidorConTimeout(c, "selecionarModo", noArgs, result, timeout)) {
+                if (llamarAlServidorConTimeout(c, "seleccionarModo", oneArg, result, timeout)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'seleccionarModo'\n\n";
@@ -288,7 +288,7 @@ int main(int argc, char* argv[]) {
                     args[3]=input4;
                 }
 
-                if (llamarAlServidorConTimeout(c, "movLineal", noArgs, result, timeout)) {
+                if (llamarAlServidorConTimeout(c, "movLineal", args, result, timeout)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'movLineal'\n\n";

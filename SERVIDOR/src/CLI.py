@@ -34,7 +34,6 @@ from Servidor import Servidor
 import Excepciones
 from Registro import Registrar
 from Comando import ComandosGcode
-from Streaming import start_video_stream
 
 class CLI(Cmd):
     """Command Interpreter. Interface with user."""
@@ -218,12 +217,14 @@ movLineal <xx.x> <yy.y> <zz.z> [vv.v]
     vv.v    Velocidad del movimiento en mm/s.
         """
         args = args.split()
-
-        if (len(args) == 3) or (len(args) == 4):
-            result = self.brazoRobot.movLineal(args)
-            return Registrar(result)
+        result = None
+        if len(args) == 3:
+            result = self.brazoRobot.movLineal(args[:3])
+        elif len(args) == 4:
+            result = self.brazoRobot.movLineal(args[:3], args[3])
         else:
             raise Excepciones.ExcepcionDeComando(1)
+        return Registrar(result)
 
     def do_activarPinza(self, args):
         """
@@ -308,7 +309,6 @@ levantarServidor true|false
         if len(args) == 1:
             if args[0].lower() =="true":
                 if self.rpcServer is None:
-                    start_video_stream()
                     self.rpcServer = Servidor(self)  #este objeto inicia el servidor y se da a conocer
             elif args[0].lower() =="false":
                 if self.rpcServer is not None:
@@ -355,6 +355,7 @@ exit
         if self.brazoRobot.conexion_establecida == True:
             print(self.brazoRobot.desconectarRobot())
         if self.rpcServer is not None:
+            commandLine.rpcServer.shutdownStream()
             self.rpcServer.shutdown()
         print("Ejecucion CLI SERVIDOR terminada")
         raise SystemExit
@@ -368,5 +369,6 @@ if __name__ == "__main__":
         if commandLine.brazoRobot.conexion_establecida == True:
             print(commandLine.brazoRobot.desconectarRobot())
         if commandLine.rpcServer is not None:
+            commandLine.rpcServer.shutdownStream()
             commandLine.rpcServer.shutdown()
         print("Ejecucion CLI SERVIDOR terminada")

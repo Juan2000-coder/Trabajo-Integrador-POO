@@ -1,7 +1,7 @@
 # makefile written for gnu make
 SRCDIR = ./src
 BUILDDIR = ./build
-INCLDIR = ./xmlrpc
+INCLDIR = ./include/xmlrpc
 CXX		= g++
 CPPFLAGS	= -I$(INCLDIR)
 DEBUG		= -g
@@ -16,7 +16,7 @@ LDLIBS		= $(LIB) $(SYSTEMLIBS)
 
 SOURCES		= $(wildcard $(SRCDIR)/*cpp)
 OBJECTS		= $(patsubst $(SRCDIR)/%.cpp, $(BUILDDIR)/%.o, $(SOURCES))
-EXECUTABLE	= ./Server
+EXECUTABLE	= ./build/Cliente.exe
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.cpp
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
