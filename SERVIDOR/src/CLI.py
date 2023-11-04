@@ -26,7 +26,6 @@ from cmd import Cmd
 import os
 import subprocess
 import platform
-import logging
 
 from BrazoRobot import BrazoRobot
 from ArchivoLog import ArchivoLog
@@ -130,7 +129,7 @@ obtenerLogServidor
         if len(args) == 0:
             archivo = ArchivoLog('Log')
             for entrada in archivo.obtenerLog():
-                print(entrada)
+                print(entrada, end = '')
         else:
             raise Excepciones.ExcepcionDeComando(1)
 
@@ -356,7 +355,7 @@ exit
         if self.brazoRobot.conexion_establecida == True:
             print(self.brazoRobot.desconectarRobot())
         if self.rpcServer is not None:
-            commandLine.rpcServer.shutdownStream()
+            #commandLine.rpcServer.shutdownStream()
             self.rpcServer.shutdown()
         print("Ejecucion CLI SERVIDOR terminada")
         raise SystemExit
@@ -370,6 +369,6 @@ if __name__ == "__main__":
         if commandLine.brazoRobot.conexion_establecida == True:
             print(commandLine.brazoRobot.desconectarRobot())
         if commandLine.rpcServer is not None:
-            commandLine.rpcServer.shutdownStream()
+            #commandLine.rpcServer.shutdownStream()
             commandLine.rpcServer.shutdown()
         print("Ejecucion CLI SERVIDOR terminada")

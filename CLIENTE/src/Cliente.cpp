@@ -355,7 +355,7 @@ int main(int argc, char* argv[]) {
                     cin >> input1;
                     oneArg[0]=input1;
                 }
-                if (llamarAlServidorConTimeout(c, "grabar", noArgs, result, timeout, id)) {
+                if (llamarAlServidorConTimeout(c, "grabar", oneArg, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'grabar'\n\n";
@@ -363,8 +363,9 @@ int main(int argc, char* argv[]) {
                 break;
 
             case 13: //cargar
-
-                if (llamarAlServidorConTimeout(c, "cargar", noArgs, result, timeout, id)) {
+                cin >> input;
+                oneArg[0] = input;
+                if (llamarAlServidorConTimeout(c, "cargar", oneArg, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'cargar'\n\n";

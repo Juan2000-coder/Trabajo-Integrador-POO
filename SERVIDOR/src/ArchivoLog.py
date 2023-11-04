@@ -6,7 +6,9 @@ from Registro import Registro
 class ArchivoLog(logging.Logger):
     route = os.path.dirname(os.path.abspath(__file__))
     route = os.path.join(route, "..", "archivos")
-    FORMAT = '%(asctime)s [%(levelname)s] - %(id)s - %(client_ip)s - %(method_name)s - %(message)s'
+    #FORMAT = '%(asctime)s [%(levelname)s] - %(client_ip)s - %(method_name)s - %(message)s'
+    FORMAT = '%(asctime)20s %(levelname)10s - %(client_ip)15s - %(method_name)20s - %(message)s'
+
     DATEFMT = '%Y-%m-%d %H:%M:%S'
 
     def __init__(self, nombre: str):
@@ -20,8 +22,8 @@ class ArchivoLog(logging.Logger):
 
     def obtenerLog(self):
         try:
-            with open(self.fileHandler.baseFilename, "r") as archivo:
-                return archivo.readlines()
+            with open(self.fileHandler.baseFilename, 'r') as log:
+                return ''.join(log.readlines())
         except Exception as e:
             raise ExcepcionArchivo(1)
         

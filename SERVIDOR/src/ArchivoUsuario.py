@@ -1,4 +1,6 @@
 from ArchivoLog import ArchivoLog
 
 class ArchivoUsuario(ArchivoLog):
-    pass
+    def __init__(self, id:str):
+        self.id = id
+        super().__init__(id)

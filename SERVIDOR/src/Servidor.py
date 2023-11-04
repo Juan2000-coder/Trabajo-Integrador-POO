@@ -6,7 +6,7 @@ import Registro
 from ArchivoLog import ArchivoLog
 import Excepciones
 from UsuariosValidos import UsuariosValidos
-from Streaming import VideoStreamer
+from Streaming import VideoStreaming
 
 class Handler(SimpleXMLRPCRequestHandler):
     def __init__(self, request, client_address, server):
@@ -21,8 +21,9 @@ class Servidor(SimpleXMLRPCServer):
         self.consola = consola
         self.puerto = puertoRPC
         self.logServidor = ArchivoLog('Log')
-        self.streamer = VideoStreamer()
+        self.streamer = VideoStreaming()
         self.logUsuarios = {} #Este seria un diccionario para los logs de los usuarios
+        self.currentUserId = ''
         self.ipCliente = None
 
         addr = (socket.gethostbyname_ex("Juan_Portátil")[2][0], self.puerto)
@@ -57,10 +58,9 @@ class Servidor(SimpleXMLRPCServer):
         #self.register_function(self.video_server.get_video_frame, 'get_video_frame')
 
         self.threadRPC = Thread(target = self.run_server, daemon = True)
-        self.threadStream = Thread(target = self.streamer.run, daemon = True)
         self.threadRPC.start()
-        self.threadStream.start()
-
+        self.streamer.start()
+        
         print("Servidor RPC iniciado en el puerto [%s]" % str(self.server_address))
 
     def run_server(self):
@@ -69,10 +69,12 @@ class Servidor(SimpleXMLRPCServer):
     def shutdown(self):
         super().shutdown()
         super().server_close()
+        self.streamer.stopStreaming()
         self.threadRPC.join()
-    
-    def shutdownStream(self):
-        self.streamer.stop_streaming()
+        self.streamer.join()
+
+    #def shutdownStream(self):
+    #    self.streamer.stop_streaming()
 
     def _log(func):
         def metodoRPC(self, *args, **kwargs):
@@ -82,6 +84,7 @@ class Servidor(SimpleXMLRPCServer):
                 if len(args) > 0:
                     id = str(args[0])
                     if UsuariosValidos.validarUsuario(id):
+                        self.currentUserId = id
                         if id not in self.logUsuarios:
                             self.logUsuarios[id] = ArchivoLog(id)
                         argsstr = ''
@@ -95,7 +98,7 @@ class Servidor(SimpleXMLRPCServer):
                                 self.logUsuarios[id].log(self.ipCliente, func.__name__, registro)
                                 respuesta += registro.mensaje + '\n'
                             resultado = respuesta
-                            self.consola.actualizarJob(func.__name__)#medio tranfuga
+                            self.consola.actualizarJob(func.__name__ + argsstr)#medio tranfuga
                         else:
                             self.logServidor.log(self.ipCliente, func.__name__, Registro.Registro(("INFO", "Solicitud Exitosa")))
                             self.logUsuarios[id].log(self.ipCliente, func.__name__, Registro.Registro(("INFO", "Solicitud Exitosa")))
@@ -110,7 +113,7 @@ class Servidor(SimpleXMLRPCServer):
                 return e.registro.mensaje
             except Exception as e:
                 self.logServidor.log(self.ipCliente, func.__name__, Registro.Registro(("CRITICAL",str(e))))
-                self.logUsuarios[id].log(self.ipCliente, func.__name__, Registro.Registro(("CRITCAL", str(e))))
+                self.logUsuarios[id].log(self.ipCliente, func.__name__, Registro.Registro(("CRITICAL", str(e))))
                 self.consola.estadoServidor(str(e))
                 return "El servidor no pudo ejecutar una peticion. Excepcion no identificada."
         return metodoRPC
@@ -136,7 +139,7 @@ class Servidor(SimpleXMLRPCServer):
     
     @_log
     def obtenerLogServidor(self, args):
-        return self.logServidor.obtenerLog(args)
+        return self.logUsuarios[self.currentUserId].obtenerLog()
     
     @_log
     def seleccionarModo(self, args): 
