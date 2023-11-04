@@ -9,8 +9,8 @@ class VideoStreaming(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self, daemon=True)
         self.app = Flask(__name__)
-        self.hostaname = socket.getfqdn()
-        self.server = make_server(socket.gethostbyname_ex(self.hostname)[2][1], 5000, self.app)
+        self.hostname = socket.getfqdn()
+        self.server = make_server(socket.gethostbyname_ex(self.hostname)[2][0], 5000, self.app)
         self.ctx = self.app.app_context()
         self.ctx.push()
         self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)

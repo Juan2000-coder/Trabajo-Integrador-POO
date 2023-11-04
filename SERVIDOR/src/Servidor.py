@@ -26,7 +26,7 @@ class Servidor(SimpleXMLRPCServer):
         self.currentUserId = ''
         self.ipCliente = None
 
-        #addr = (socket.gethostbyname_ex("Juan_Portátil")[2][0], self.puerto)
+        #addr = (socket.gethostbyname_ex(self.hostname)[2][0], self.puerto)
         addr = (socket.gethostbyname_ex(self.hostname)[2][1], self.puerto)
 
         try:
