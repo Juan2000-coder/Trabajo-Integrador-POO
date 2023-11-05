@@ -27,6 +27,7 @@ class ComandosGcode:
 
         elif comando in ComandosGcode.comandosDelRobot:
             return ComandosGcode.comandosDelRobot[comando]
+        return ''
 
     @staticmethod
     def gcodeAComando(gcode):

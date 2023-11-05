@@ -5,7 +5,8 @@ import socket
 import Registro
 from ArchivoLog import ArchivoLog
 import Excepciones
-import os
+from UsuariosValidos import UsuariosValidos
+from Streaming import VideoStreaming
 
 class Handler(SimpleXMLRPCRequestHandler):
     def __init__(self, request, client_address, server):
@@ -19,11 +20,14 @@ class Servidor(SimpleXMLRPCServer):
         self.hostname = socket.getfqdn()
         self.consola = consola
         self.puerto = puertoRPC
-        self.logServidor = ArchivoLog('Log.log')
-        # self.logUsuarios = {} #Este seria un diccionario para los logs de los usuarios
+        self.logServidor = ArchivoLog('Log')
+        self.streamer = VideoStreaming()
+        self.logUsuarios = {} #Este seria un diccionario para los logs de los usuarios
+        self.currentUserId = ''
         self.ipCliente = None
 
-        addr = (socket.gethostbyname_ex(self.hostname)[2][0], self.puerto)
+        #addr = (socket.gethostbyname_ex(self.hostname)[2][0], self.puerto)
+        addr = (socket.gethostbyname_ex(self.hostname)[2][1], self.puerto)
 
         try:
             super().__init__(addr, requestHandler, logRequests, allow_none, encoding, bind_and_activate,
@@ -53,51 +57,63 @@ class Servidor(SimpleXMLRPCServer):
         self.register_function(self.enviarComando, 'enviarComando')
         #self.register_function(self.video_server.get_video_frame, 'get_video_frame')
 
-        self.thread = Thread(target = self.run_server)
-
-        self.thread.start()
-
+        self.threadRPC = Thread(target = self.run_server, daemon = True)
+        self.threadRPC.start()
+        self.streamer.start()
+        
         print("Servidor RPC iniciado en el puerto [%s]" % str(self.server_address))
 
     def run_server(self):
         self.serve_forever()
-        
+
     def shutdown(self):
         super().shutdown()
         super().server_close()
-        self.thread.join()
+        self.streamer.stopStreaming()
+        self.threadRPC.join()
+        self.streamer.join()
 
+    #def shutdownStream(self):
+    #    self.streamer.stop_streaming()
 
     def _log(func):
         def metodoRPC(self, *args, **kwargs):
-            # Ponemos lo del id de la siguiente manera
-            # id = args[0] #El primer argumento que se envia es el id
-
-            argsstr = ''
-            for arg in args:
-                argsstr += str(arg) + ' '
             try:
-                resultado = func(self, argsstr, **kwargs)
-                if type(resultado) is Registro.Registrar:
-                    respuesta = ""
-                    for registro in resultado.registros:
-                        self.logServidor.log(self.ipCliente, func.__name__, registro)
-                        respuesta += registro.mensaje + '\n'
-                    resultado = respuesta
-                    self.consola.actualizarJob(func.__name__)#medio tranfuga
+                # Ponemos lo del id de la siguiente manera
+                # id = args[0] #El primer argumento que se envia es el id
+                if len(args) > 0:
+                    id = str(args[0])
+                    if UsuariosValidos.validarUsuario(id):
+                        self.currentUserId = id
+                        if id not in self.logUsuarios:
+                            self.logUsuarios[id] = ArchivoLog(id)
+                        argsstr = ''
+                        for arg in args[1:]:
+                            argsstr += str(arg) + ' '
+                        resultado = func(self, argsstr, **kwargs)
+                        if type(resultado) is Registro.Registrar:
+                            respuesta = ""
+                            for registro in resultado.registros:
+                                self.logServidor.log(self.ipCliente, func.__name__, registro)
+                                self.logUsuarios[id].log(self.ipCliente, func.__name__, registro)
+                                respuesta += registro.mensaje + '\n'
+                            resultado = respuesta
+                            self.consola.actualizarJob(func.__name__ + argsstr)#medio tranfuga
+                        else:
+                            self.logServidor.log(self.ipCliente, func.__name__, Registro.Registro(("INFO", "Solicitud Exitosa")))
+                            self.logUsuarios[id].log(self.ipCliente, func.__name__, Registro.Registro(("INFO", "Solicitud Exitosa")))
+                        return resultado
+                    else:
+                        return "Usuario no registrado." #habría que poner en el log
                 else:
-                    self.logServidor.log(self.ipCliente, func.__name__, Registro.Registro(("INFO", "Solicitud Exitosa")))
-                return resultado
+                    return "Usuario no registrado."#habría que poner en el log
             except Excepciones.Excepciones as e:
                 self.logServidor.log(self.ipCliente, func.__name__, e.registro)
-                #if id in self.logUsuaros:
-                    #self.logUsuarios[id].log(self.ipCliente, func.__name__, e.registro)
-                #else:
-                    #self.logUsuarios[id] = ArchivoUsuario('Log'+'id.log')
+                self.logUsuarios[id].log(self.ipCliente, func.__name__, e.registro)
                 return e.registro.mensaje
             except Exception as e:
                 self.logServidor.log(self.ipCliente, func.__name__, Registro.Registro(("CRITICAL",str(e))))
-                #self.logUsuarios[id].log(self.ipCliente, func.__name__, Registro.Regstro(("CRITCAL", str(e))))
+                self.logUsuarios[id].log(self.ipCliente, func.__name__, Registro.Registro(("CRITICAL", str(e))))
                 self.consola.estadoServidor(str(e))
                 return "El servidor no pudo ejecutar una peticion. Excepcion no identificada."
         return metodoRPC
@@ -123,7 +139,7 @@ class Servidor(SimpleXMLRPCServer):
     
     @_log
     def obtenerLogServidor(self, args):
-        return self.logServidor.obtenerLog(args)
+        return self.logUsuarios[self.currentUserId].obtenerLog()
     
     @_log
     def seleccionarModo(self, args): 

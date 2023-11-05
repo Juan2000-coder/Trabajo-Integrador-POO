@@ -1,7 +1,0 @@
-<<<<<<< HEAD
-G1 X10 Y180 Z130 E0
-G28
-=======
-G1 X10 Y180 Z130 E0
-G28
->>>>>>> f7fd778ebcadba891dccafecd00fd8939aefb98d

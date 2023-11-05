@@ -69,7 +69,7 @@
  2023-11-04 09:57:45       INFO -    192.168.1.81 -            movLineal -  LINEAR  MOVE: [X:10.00 Y:100.00 Z:100.00 E:0.00] t=1.17s
  2023-11-04 09:57:45   CRITICAL -    192.168.1.81 -            movLineal - cannot access local variable 'x' where it is not associated with a value
  2023-11-04 10:00:09       INFO -    192.168.1.81 -               grabar -  Comandos se almacenaran en puta.txt
- 2023-11-04 10:01:34       INFO -    192.168.1.81 -        conectarRobot -  Conexión exitosa con el robot.
+ 2023-11-04 10:01:35       INFO -    192.168.1.81 -        conectarRobot -  Conexión exitosa con el robot.
  2023-11-04 10:04:17       INFO -    192.168.1.81 -        conectarRobot -  Conexión exitosa con el robot.
  2023-11-04 10:04:22       INFO -    192.168.1.81 -               grabar -  Comandos se almacenaran en puta.txt
  2023-11-04 10:04:27       INFO -    192.168.1.81 -                 home -  ROBOT ONLINE
@@ -81,7 +81,7 @@
  2023-11-04 10:04:39       INFO -    192.168.1.81 -      seleccionarModo -  ABSOLUTE MODE ON
  2023-11-04 10:04:39   CRITICAL -    192.168.1.81 -      seleccionarModo - tuple index out of range
  2023-11-04 10:08:04       INFO -    192.168.1.81 -        conectarRobot -  Conexión exitosa con el robot.
- 2023-11-04 10:08:21      ERROR -    192.168.1.81 -        conectarRobot -  La conexión ya está establecida.
+ 2023-11-04 10:08:22      ERROR -    192.168.1.81 -        conectarRobot -  La conexión ya está establecida.
  2023-11-04 10:08:37       INFO -    192.168.1.81 -               grabar -  Comandos se almacenaran en puta.txt
  2023-11-04 10:09:29       INFO -    192.168.1.81 -      seleccionarModo -  ROBOT ONLINE
  2023-11-04 10:09:29       INFO -    192.168.1.81 -      seleccionarModo -  SEND G28 TO CALIBRATE

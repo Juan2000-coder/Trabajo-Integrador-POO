@@ -7,11 +7,11 @@
 #include <map>
 #include <string>
 #include <cstdlib> // Para la función 'system'
-
 #include <future>   // Para la función 'async' y 'future' en el metodo timeOut.
 #include <chrono>   // Para la función 'wait_for' en el metodo timeOut.
 #include <cctype>  // Para la función 'isspace' en el metodo generarIDUsuario.
 #include <algorithm> // Para la función 'remove_if' en el metodo generarIDUsuario.
+
 
 
 using namespace std;
@@ -36,17 +36,14 @@ std::string generarIDUsuario(const std::string& nombre) {
 
 bool llamarAlServidorConTimeout(XmlRpcClient& c, const char* metodo, const XmlRpcValue& args, XmlRpcValue& result, int timeout, const std::string& id) {
     XmlRpcValue argsConId;
-
-    // Establece el ID de usuario como primer argumento.
     argsConId[0] = id;
 
-    // Copia los argumentos adicionales (si los hay).
-    for (int i = 0; i < args.size(); i++) {
-        argsConId[1 + i] = args[i];
+    // Establece el ID de usuario como primer argumento.
+    if (args.valid()){
+        for (int i = 0; i < args.size(); i++) {
+            argsConId[1 + i] = args[i];
+        }
     }
-    cout << "Llamando al servidor..." << endl;
-    cout << argsConId << endl;
-    cout << metodo << endl; 
 
     std::future<bool> future = std::async(std::launch::async, [&] {
         return c.execute(metodo, argsConId, result);
@@ -183,7 +180,7 @@ int main(int argc, char* argv[]) {
     id = generarIDUsuario(nombre);
 
     std::cout << "Su ID de usuario es: " << id << std::endl;
-    std::cout << "Bienvenido " << nombre << std::endl;
+    std::cout << "Bienvenido " << nombre << '\n'<< std::endl;
 
 
 
@@ -265,17 +262,15 @@ int main(int argc, char* argv[]) {
             case 3: //seleccionarModo
                 cin >> input;
                 oneArg[0] = input;
-                if (llamarAlServidorConTimeout(c, "selecionarModo", noArgs, result, timeout, id)) {
+                if (llamarAlServidorConTimeout(c, "seleccionarModo", oneArg, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'seleccionarModo'\n\n";
                 }
                 break;
             case 4: //conectarRobot
-                cout << "llamando a conectarRobot\n";
-        
+    
                 if (llamarAlServidorConTimeout(c, "conectarRobot", noArgs, result, timeout, id)) {
-                    cout << "estamos en el if\n" << "\n\n";
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'conectarRobot'\n\n";
@@ -330,7 +325,7 @@ int main(int argc, char* argv[]) {
                     args[3]=input4;
                 }
 
-                if (llamarAlServidorConTimeout(c, "movLineal", noArgs, result, timeout, id)) {
+                if (llamarAlServidorConTimeout(c, "movLineal", args, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'movLineal'\n\n";
@@ -360,7 +355,7 @@ int main(int argc, char* argv[]) {
                     cin >> input1;
                     oneArg[0]=input1;
                 }
-                if (llamarAlServidorConTimeout(c, "grabar", noArgs, result, timeout, id)) {
+                if (llamarAlServidorConTimeout(c, "grabar", oneArg, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'grabar'\n\n";
@@ -368,8 +363,9 @@ int main(int argc, char* argv[]) {
                 break;
 
             case 13: //cargar
-
-                if (llamarAlServidorConTimeout(c, "cargar", noArgs, result, timeout, id)) {
+                cin >> input;
+                oneArg[0] = input;
+                if (llamarAlServidorConTimeout(c, "cargar", oneArg, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'cargar'\n\n";
