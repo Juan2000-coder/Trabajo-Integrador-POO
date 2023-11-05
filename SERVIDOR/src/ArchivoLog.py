@@ -12,7 +12,7 @@ class ArchivoLog(logging.Logger):
     #FORMAT = '%(asctime)s - [%(levelname)s] - %(client_ip)s - %(method_name)s - %(message)s'
     DATEFMT = '%Y-%m-%d %H:%M:%S'
 
-    def __init__(self, nombre: str, FORMAT = '%(asctime)s [%(levelname)s] %(client_id)s %(client_ip)s [%(method_name)s] %(message)s'):
+    def __init__(self, nombre: str, FORMAT = '[%(asctime)s] [%(levelname)s] %(client_id)s %(client_ip)s [%(method_name)s] %(message)s'):
         super().__init__(nombre)
         self.archivo = os.path.join(self.route, nombre)
         self.fileHandler = logging.FileHandler(f'{self.archivo}.log')
@@ -55,11 +55,12 @@ class ArchivoLog(logging.Logger):
         patron = r'\[([^\]]*)\]'
         metodos = {}
         with open(self.fileHandler.baseFilename, 'r') as archivo:
-            for registro in archivo:
+            for i, registro in enumerate(archivo):
                 secuencias = re.findall(patron, registro)
-                nivel = secuencias[0]
-                metodo = secuencias[1]
-
+                if i == 0:
+                    inicio = secuencias[0]
+                nivel = secuencias[1]
+                metodo = secuencias[2]
                 if metodo in metodos:
                     metodos[metodo]["ocurrencias"] += 1
                     if nivel == "ERROR":
@@ -79,4 +80,4 @@ class ArchivoLog(logging.Logger):
             entrada = [metodo]
             entrada = entrada + list(valores.values())
             table.add_row(entrada, divider = True)
-        return str(table)
+        return "INICIO ACTIVIDAD: "+inicio + '\n' + str(table)
