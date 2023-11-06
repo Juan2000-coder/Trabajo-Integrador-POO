@@ -1,10 +1,20 @@
+"""
+ * Aplicativo para control de un robot 3DF conectado
+ * de forma local por puerto serie.
+ * Modulo: Servidor
+ * 
+ * @version  1.0
+ * @date     2023.11.06
+ * @author   Borquez Juan Manuel, Dalessandro Francisco, Miranda Francisco
+ * @contact  borquez.juan00@gmail.com, panchodal867@gmail.com, francisconehuenmiranda@gmail.com
+
+"""
 from xmlrpc.server import SimpleXMLRPCServer
 from xmlrpc.server import SimpleXMLRPCRequestHandler
 from threading import Thread
 import socket
 import Registro
-from ArchivoLog import ArchivoLog
-from ArchivoUsuario import ArchivoUsuario
+from Log import LogServidor, LogUsuario
 import Excepciones
 from UsuariosValidos import UsuariosValidos
 from Streaming import VideoStreaming
@@ -26,9 +36,9 @@ class Servidor(SimpleXMLRPCServer):
         self.hostname = socket.getfqdn()
         self.consola = consola      # Corresponde al CLI que construye al Servidor.
         self.puerto = puertoRPC
-        self.logServidor = ArchivoLog('Log')
+        self.logServidor = LogServidor('Log')
         self.streamer = VideoStreaming()
-        self.logUsuario:ArchivoUsuario = None      # El archivo de log para un usuario.
+        self.logUsuario:LogUsuario = None      # El archivo de log para un usuario.
         self.idActual = ''     # El id del usuario de la solicitud actual.
         self.ipCliente = None
 
@@ -84,7 +94,7 @@ class Servidor(SimpleXMLRPCServer):
                     if UsuariosValidos.validarUsuario(id):
                         if self.idActual != id:
                             self.idActual = id
-                            self.logUsuario = ArchivoUsuario(id)
+                            self.logUsuario = LogUsuario(id)
                         argsstr = ''
                         for arg in args[1:]:
                             argsstr += str(arg) + ' '

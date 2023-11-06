@@ -1,7 +1,7 @@
 """
  * Aplicativo para control de un robot 3DF conectado
  * de forma local por puerto serie.
- * 
+ * Módulo : CLI
  * 
  * @version  1.0
  * @date     2023.11.06
@@ -16,8 +16,8 @@ import subprocess
 import platform
 
 from BrazoRobot import BrazoRobot
-from ArchivoLog import ArchivoLog
-from ArchivoJob import ArchivoJob
+from Log import LogServidor
+from Job import Job
 from Servidor import Servidor
 import Excepciones
 from Registro import Registrar
@@ -35,7 +35,7 @@ class CLI(Cmd):
         super().__init__()
         self.servidorRpc = None
         self.robot = BrazoRobot()
-        self.archivoJob:ArchivoJob = None
+        self.archivoJob:Job = None
         self.grabando = False
 
     def estadoServidor(self, msg:str):
@@ -75,7 +75,7 @@ reporteGeneral
         """
         args = args.split()
         if len(args) == 0:
-            archivo = ArchivoLog('Log')
+            archivo = LogServidor('Log')
             try:
                 estado = self.robot.estado() 
             except Excepciones.ExcepcionBrazoRobot as e:
@@ -95,7 +95,7 @@ log
         """
         args = args.split()
         if len(args) == 0:
-            archivo = ArchivoLog('Log')
+            archivo = LogServidor('Log')
             return archivo.obtenerLog()
         else:
             raise Excepciones.ExcepcionDeComando(1)
@@ -221,7 +221,7 @@ grabar opcion
         if len(args) == 1:
             if args[0] != 'off':
                 if not self.grabando:
-                    self.archivoJob = ArchivoJob(args[0])
+                    self.archivoJob = Job(args[0])
                     resultado = "INFO: Comandos se almacenaran en " + self.archivoJob
                     self.grabando = True
                 else:
@@ -244,7 +244,7 @@ cargar <archivo>
         args = args.split()
         if len(args) == 1:
             resultado = ''
-            for comando in ArchivoJob(args[0]).obtenerComandos():
+            for comando in Job(args[0]).obtenerComandos():
                 resultado += self.robot.enviarComando(comando) + '\r\n'
             return Registrar(resultado)
         else:
@@ -280,7 +280,7 @@ listar
         args = args.split()
         if len(args) == 0:
             lista = ""
-            for archivo in os.listdir(ArchivoJob.jobroute):
+            for archivo in os.listdir(Job.ruta):
                 lista += self.formatoSalida.format(archivo + "\n")
             return lista
         else:
