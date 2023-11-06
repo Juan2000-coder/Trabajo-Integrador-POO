@@ -1,6 +1,6 @@
-# Clase para manejar la creación de archivos job
 import os
 from Excepciones import ExcepcionArchivo
+from Comando import ComandosGcode
 
 class ArchivoJob:
     route = os.path.dirname(os.path.abspath(__file__))
@@ -20,3 +20,12 @@ class ArchivoJob:
                 return archivo.readlines()
         except Exception:
             raise ExcepcionArchivo(2)
+        
+    def actualizar(self, linea:str):
+        lineaSeparada = linea.split()
+        comando = lineaSeparada[0]
+        params = lineaSeparada[1:]
+
+        if comando != "grabar":
+            comandoTransformado = ComandosGcode.comandoAGcode(comando, *params)
+            self.agregarComando(comandoTransformado)

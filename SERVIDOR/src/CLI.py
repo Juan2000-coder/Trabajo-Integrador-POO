@@ -1,25 +1,13 @@
 """
- * Application for general processing of ASCCI art files.
- * Solution for assignment 4 of Part C of TP1
- * Course: Oriented Object programming
+ * Aplicativo para control de un robot 3DF conectado
+ * de forma local por puerto serie.
  * 
- * @version 1.0
- * @date 	2023.09.23
- * @author 	Juan Manuel BORQUEZ PEREZ
- * @contact borquez.juan00@gmail.com
  * 
-"""
+ * @version  1.0
+ * @date     2023.11.06
+ * @author   Borquez Juan Manuel, Dalessandro Francisco, Miranda Francisco
+ * @contact  borquez.juan00@gmail.com, panchodal867@gmail.com, francisconehuenmiranda@gmail.com
 
-"""Carguemos la responsabilidad de la RAISE de excepciones sobre cada una de las clases
-ya sean de entidad(modelo) principalmente o de control. En cambio el manejo de las excepciones
-lo hacemos en la capa de visualización o en la capa de control. Es decir, las verificaciones 
-propias de los métodos de las clases se hacen dentro de esas clases y no en la llamada a las funciones.
-
-Observar que se indican los los bloques de capturas de excepciones varios tipos de excepciones asociadas
-a las distintas clases. Cada una de estas clases habría que definirlas en los archivos correspondientes.
-
-Podríamos tener un archivo entero para definición de clases de excepciones de todas las clases o bien definir
-cada una de las clases de excepciones en cada uno de los archivos de las clases del proyecto.
 """
 
 from cmd import Cmd
@@ -29,52 +17,41 @@ import platform
 
 from BrazoRobot import BrazoRobot
 from ArchivoLog import ArchivoLog
-from ArchivoUsuario import ArchivoUsuario
 from ArchivoJob import ArchivoJob
 from Servidor import Servidor
 import Excepciones
 from Registro import Registrar
-from Comando import ComandosGcode
 
 class CLI(Cmd):
-    """Command Interpreter. Interface with user."""
+    """Interprete de comandos para interfaz con el operador."""
 
     doc_header = "                        Ayuda para comandos documentados                      "
     undoc_header = "Comandos no documentados."
-    marginLevel = 5                      # Left Margin for output
-    outFormat = ' '*marginLevel + "{}"   # Left Margin string for use with format()
+    margen = 5                          # Margen izquierdo para salida por pantalla.
+    formatoSalida = ' '*margen + "{}"   # String de formato para margen izquierdo.
 
 
     def __init__(self):
-        """"""
         super().__init__()
-        self.rpcServer = None
-        self.brazoRobot = BrazoRobot()
-        self.nombreArchivoJob = None
-        self.jobFlag = False
+        self.servidorRpc = None
+        self.robot = BrazoRobot()
+        self.archivoJob:ArchivoJob = None
+        self.grabando = False
 
-    #ESTO POR AHÍ NO ESTAN CORRECTO PARA EL SAKE DE LA POO
     def estadoServidor(self, msg:str):
         print(msg)
+
+    def precmd(self, linea):
+        linea = linea.lower()
+        return linea
     
-    #ESTO HABRÍA QUE VERLO POR EL MISMO SAKE
-    def actualizarJob(self, line:str):
-        if self.jobFlag == True:
-            job = ArchivoJob(self.nombreArchivoJob)
-            lineSplit = line.split()
-            comando = lineSplit[0]
-            params = lineSplit[1:]
-
-            if comando != "grabar":
-                comandoTransformado = ComandosGcode.comandoAGcode(comando, *params)
-                job.agregarComando(comandoTransformado)
-
-    def onecmd(self, line):
+    def onecmd(self, linea):
         try: 
-            result = super().onecmd(line)
-            if result is not None:
-                print(result)
-                self.actualizarJob(line)
+            resultado = super().onecmd(linea)
+            if resultado is not None:
+                print(resultado)
+                if self.grabando:
+                    self.archivoJob.actualizar(linea)
         except Excepciones.Excepciones as e:
             print(e)
 
@@ -90,30 +67,17 @@ cls
         else:
             subprocess.call('clear', shell = True)
 
-    def do_reporteGeneral(self, args):
+    def do_reporte(self, args):
 
         """
-Muestra un reporte general de la actividad del usuario.
-reporteGeneral <id>
-    id      El id del usuario.
+Muestra un reporte general de la actividad del servidor.
+reporteGeneral
         """
-        print()
-        arguments = args.split()
-        if len(arguments) == 0:
-            # Debería buscar en la lista de requerimientos aquella que corresponda
-            # Con el ID indicado para luego llamar a un método del archivo de usuario
-            # asociado con el requerimiento, que arme el reporte y que lo devuelva
-            # como un str o algún objeto imprimible.
-            """
-            requerimientos seria un diccionario en el que las claves
-            son los id de los usuarios y los valores asociados son objetos
-            del tipo Archivo usuario.
-            Los objetos del tipo ArchivoUsuario tendrían un método reporte()
-            que devuelve el reporte en forma de str o bien como pretty table.
-            """
+        args = args.split()
+        if len(args) == 0:
             archivo = ArchivoLog('Log')
             try:
-                estado = self.brazoRobot.posicionActual()
+                estado = self.robot.estado() 
             except Excepciones.ExcepcionBrazoRobot as e:
                 if e.codigoDeExcepcion == 2:
                     estado = "Robot Desconectado."
@@ -123,11 +87,11 @@ reporteGeneral <id>
         else:
             raise Excepciones.ExcepcionDeComando(1)
         
-    def do_obtenerLogServidor(self, args):
+    def do_log(self, args):
 
         """
 Imprime el detalle del Log del Servidor.
-obtenerLogServidor
+log
         """
         args = args.split()
         if len(args) == 0:
@@ -136,77 +100,64 @@ obtenerLogServidor
         else:
             raise Excepciones.ExcepcionDeComando(1)
 
-    def do_seleccionarModo(self, args):
+    def do_modo(self, args):
         """
 Selecciona el modo de operacion en coordenadas Absolutas(a) o Relativas(r).
-seleccionarModo <modo>
+modo <modo>
     modo        modo = a || modo = r.
         """
         args = args.split()
         if len(args) == 1:
-            # Debería llamar al método correspondiente en la clase Robot.
-            result = self.brazoRobot.seleccionarModo(args[0])
-            return Registrar(result)
+            resultado = self.robot.seleccionarModo(args[0])
+            return Registrar(resultado)
         else:
             raise Excepciones.ExcepcionDeComando(1)
         
-    def do_conectarRobot(self, args):
+    def do_robot(self, args):
         """
-Conecta el robot.
-conectarRobot
-        """
-        args = args.split()
-        if len(args) == 0:
-            result = self.brazoRobot.conectarRobot('COM3', 9600)
-            return Registrar(result)
-        else:
-            raise Excepciones.ExcepcionDeComando(1)
-        
-    def do_desconectarRobot(self, args):
-        """
-Desconecta el robot.
-desconectarRobot
+Conecta o desconecta el robot.
+robot <opcion>
+    opcion      opcion = on || opcion = off
         """
         args = args.split()
         if len(args) == 0:
-            result = self.brazoRobot.desconectarRobot()
-            return Registrar(result)
+            if args[0] == 'on':
+                resultado = self.robot.conectarRobot('COM3')
+            elif args[0] == 'off':
+                resultado = self.robot.desconectarRobot()
+            else:
+                raise Excepciones.ExcepcionDeComando(2)
+            return Registrar(resultado)
         else:
             raise Excepciones.ExcepcionDeComando(1)
 
-    def do_activarMotores(self, args):
+    def do_motores(self, args):
         """
-Activa los motores del brazo.
-activarMotores
-        """
-        args = args.split()
-        if len(args) == 0:
-            result = self.brazoRobot.activarMotor()
-            return Registrar(result)
-        else:
-            raise Excepciones.ExcepcionDeComando(1)
-
-    def do_desactivarMotores(self, args):
-        """
-Desactiva los motores del brazo.
-desactivarMotores
+Activa o desactiva los motores del robot.
+motores <opcion>
+    opcion      opcion = on || opcion = off
         """
         args = args.split()
         if len(args) == 0:
-            result = self.brazoRobot.desactivarMotor()
-            return Registrar(result)
+            if args[0] == 'on':
+                resultado = self.robot.activarMotores()
+            elif args[0] == 'off':
+                resultado = self.robot.desactivarMotores()
+            else:
+                raise Excepciones.ExcepcionDeComando(2)
+            return Registrar(resultado)
         else:
             raise Excepciones.ExcepcionDeComando(1)
 
     def do_home(self, args):
         """
-Activa el proceso de Homming del brazo.
+Realiza el proceso de Homming del robot.
 home
         """
         args = args.split()
         if len(args) == 0:
-            result = self.brazoRobot.home()
-            return Registrar(result)
+            resultado = self.robot.home()
+            return Registrar(resultado)
         else:
             raise Excepciones.ExcepcionDeComando(1)
         
@@ -220,158 +171,152 @@ movLineal <xx.x> <yy.y> <zz.z> [vv.v]
     vv.v    Velocidad del movimiento en mm/s.
         """
         args = args.split()
-        result = None
         if len(args) == 3:
-            result = self.brazoRobot.movLineal(args[:3])
+            resultado = self.robot.movLineal(args[:3])
         elif len(args) == 4:
-            result = self.brazoRobot.movLineal(args[:3], args[3])
+            resultado = self.robot.movLineal(args[:3], args[3])
         else:
             raise Excepciones.ExcepcionDeComando(1)
-        return Registrar(result)
+        return Registrar(resultado)
 
-    def do_activarPinza(self, args):
+    def do_efector(self, args):
         """
-Activa el efector final.
-activarPinza
+Activa o desactiva el efector final del robot.
+efector <opcion>
+    opcion      opcion = on || opcion = off
         """
         args = args.split()
         if len(args) == 0:
-            # Debería llamar al metodo correspondiente en el brazo
-            result = self.brazoRobot.activarPinza()
-            return Registrar(result)
+            if args[0] == 'on':
+                resultado = self.robot.activarEfector()
+            elif args[0] == 'off':
+                resultado = self.robot.desactivarEfector()
+            else:
+                raise Excepciones.ExcepcionDeComando(2)
+            return Registrar(resultado)
         else:
             raise Excepciones.ExcepcionDeComando(1)
 
-    def do_desactivarPinza(self, args):
+    def do_estado(self, args):
         """
-Desactiva el efector final.
-desactivarPinza
-        """
-        args = args.split()
-        if len(args) == 0:
-            # Debería llamar al metodo correspondiente en el brazo
-            result = self.brazoRobot.desactivarPinza()
-            return Registrar(result)
-        else:
-            raise Excepciones.ExcepcionDeComando(1)
-        
-    def do_posicionActual(self, args):
-        """
-Inidica la posicion actual
+Inidica el estado actual del robot (posicion/modo)
+estado
         """
         args = args.split()
         if len(args) == 0:
-            # Debería llamar al metodo correspondiente en el brazo
-            result = self.brazoRobot.posicionActual()
-            return Registrar(result)
+            resultado = self.robot.estado()
+            return Registrar(resultado)
         else:
             raise Excepciones.ExcepcionDeComando(1)
 
     def do_grabar(self, args):
         """
-Inicia el proceso de grabación de movimientos para construir un archivo de trabajo con la secuencia grabada.
-grabar <Archivo>
-    Archivo     El archivo donde se guardará la secuencia.
+Inicia/detiene el proceso de grabación de movimientos para construir un archivo de trabajo con la secuencia grabada.
+grabar opcion
+    opcion    Nombre de un archivo (graba en el archivo) || off (detiene la grabación).
+              (El nombre del archivo no puede ser 'off')
+    
         """
         args = args.split()
-        if self.jobFlag == False:
-            if len(args) == 1:
-                self.nombreArchivoJob = args[0]
-                result = "INFO: Comandos se almacenaran en " + self.nombreArchivoJob
-                self.jobFlag = True
-                return Registrar(result)
+        if len(args) == 1:
+            if args[0] != 'off':
+                if not self.grabando:
+                    self.archivoJob = ArchivoJob(args[0])
+                    resultado = "INFO: Comandos se almacenaran en " + self.archivoJob
+                    self.grabando = True
+                else:
+                    resultado = "INFO: Grabación en curso."
             else:
-                raise Excepciones.ExcepcionDeComando(1)
+                resultado = "INFO: Almacenamiento de comandos detenido."
+                self.grabando = False
+                self.archivoJob = None
+            return Registrar(resultado)
         else:
-            result = "INFO: Almacenamiento de comandos parado."
-            self.jobFlag = False
-            return Registrar(result)
+            raise Excepciones.ExcepcionDeComando(1)
+            
 
     def do_cargar(self, args):
         """
 Carga un archivo de trabajo existente en el directorio.
-cargar <JobFile>
-    JobFile     El nombre del archivo de Trabajo en el directorio.
+cargar <archivo>
+    archivo     El nombre del archivo de Trabajo en el directorio.
     """
-
-        arguments = args.split()
-        if len(arguments) == 1:
-            result = ''
-            for comando in ArchivoJob(arguments[0]).obtenerComandos():
-                result += self.brazoRobot.enviarComando(comando) + '\r\n'
-            return Registrar(result)
+        args = args.split()
+        if len(args) == 1:
+            resultado = ''
+            for comando in ArchivoJob(args[0]).obtenerComandos():
+                resultado += self.robot.enviarComando(comando) + '\r\n'
+            return Registrar(resultado)
         else:
             raise Excepciones.ExcepcionDeComando(1)
 
-    def do_levantarServidor(self, args):
+    def do_servidor(self, args):
         """
-Inicia/Para el servidor rpc según el valor dado (true/false).
-levantarServidor true|false
+Inicia/detiene el servidor rpc según el valor dado (on/off).
+levantarServidor on|off
         """
         args = args.split()
         if len(args) == 1:
-            if args[0].lower() =="true":
-                if self.rpcServer is None:
-                    self.rpcServer = Servidor(self)  #este objeto inicia el servidor y se da a conocer
-            elif args[0].lower() =="false":
-                if self.rpcServer is not None:
-                    self.rpcServer.shutdown()
+            if args[0] == "on":
+                if self.servidorRpc is None:
+                    self.servidorRpc = Servidor(self)
+            elif args[0] == "off":
+                if self.servidorRpc is not None:
+                    self.servidorRpc.detener()
                     print("Servidor Apagado")
-                    self.rpcServer = None
+                    self.servidorRpc = None
             else:
                 raise Excepciones.ExcepcionDeComando(2)
         else:
             raise Excepciones.ExcepcionDeComando(1)
 
             
-    def do_listarArchivosDeTrabajo(self, args):
+    def do_listar(self, args):
 
         """
 Muestra los archivos de trabajo en el directorio actual.
-listarArchivosDeTrabajo
+listar
         """
         args = args.split()
         if len(args) == 0:
             lista = ""
-            for fileName in os.listdir(ArchivoJob.jobroute):
-                lista += self.outFormat.format(fileName + "\n")
+            for archivo in os.listdir(ArchivoJob.jobroute):
+                lista += self.formatoSalida.format(archivo + "\n")
             return lista
         else:
             raise Excepciones.ExcepcionDeComando(1)
         
-    def do_enviarComando(self, args):
+    def do_ejecutar(self, args):
         """
-Envia un comando al brazo robot.
-enviarComando <comando>
-    comando     El comando a enviar al brazo robot.
+Ejecuta un comando dado en G-Code.
+ejecutar <comando>
+    comando     El comando a ejecutar.
         """
-        result = self.brazoRobot.enviarComando(args)
-        return Registrar(result)
+        resultado = self.robot.enviarComando(args)
+        return Registrar(resultado)
         
     
-    def do_exit(self, args):
+    def do_salir(self, args):
 
         """
 Termina la ejecucion del programa.
-exit
+salir
         """
-        if self.brazoRobot.conexion_establecida == True:
-            print(self.brazoRobot.desconectarRobot())
-        if self.rpcServer is not None:
-            #commandLine.rpcServer.shutdownStream()
-            self.rpcServer.shutdown()
+        if self.robot.conexionEstablecida == True:
+            print(self.robot.desconectarRobot())
+        if self.servidorRpc is not None:
+            self.servidorRpc.detener()
         print("Ejecucion CLI SERVIDOR terminada")
         raise SystemExit
     
 if __name__ == "__main__":
     try:
-        commandLine = CLI()
-        commandLine.prompt = '->'
-        commandLine.cmdloop('Entrada de comandos')
+        cli = CLI()
+        cli.prompt = '->'
+        cli.cmdloop('Entrada de comandos')
     except KeyboardInterrupt as e:
-        if commandLine.brazoRobot.conexion_establecida == True:
-            print(commandLine.brazoRobot.desconectarRobot())
-        if commandLine.rpcServer is not None:
-            #commandLine.rpcServer.shutdownStream()
-            commandLine.rpcServer.shutdown()
+        if cli.robot.conexionEstablecida == True:
+            print(cli.robot.desconectarRobot())
+        if cli.servidorRpc is not None:
+            cli.servidorRpc.detener()
         print("Ejecucion CLI SERVIDOR terminada")

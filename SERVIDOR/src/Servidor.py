@@ -8,27 +8,32 @@ from ArchivoUsuario import ArchivoUsuario
 import Excepciones
 from UsuariosValidos import UsuariosValidos
 from Streaming import VideoStreaming
+from CLI import CLI
 
 class Handler(SimpleXMLRPCRequestHandler):
-    def __init__(self, request, client_address, server):
-        server.ipCliente = client_address[0]
-        super().__init__(request, client_address, server)
+    """Un Handler proprio definido sobre todo para obtener la ip
+    de un cliente remoto que hace una solicitud."""
+
+    def __init__(self, peticion, direccionCliente, servidor):
+        # Esto actualiza la ip de cliente que conoce el Servidor.
+        servidor.ipCliente = direccionCliente[0]
+        super().__init__(peticion, direccionCliente, servidor)
 
 class Servidor(SimpleXMLRPCServer):
-    def __init__(self, consola, puertoRPC = 8000, addr = None, requestHandler= Handler,
+    def __init__(self, consola:CLI, puertoRPC = 8000, addr = None, requestHandler= Handler,
                      logRequests=False, allow_none=False, encoding=None,
                      bind_and_activate=True, use_builtin_types=False):
         self.hostname = socket.getfqdn()
-        self.consola = consola
+        self.consola = consola      # Corresponde al CLI que construye al Servidor.
         self.puerto = puertoRPC
         self.logServidor = ArchivoLog('Log')
         self.streamer = VideoStreaming()
-        self.logUsuarios = {} #Este seria un diccionario para los logs de los usuarios
-        self.currentUserId = ''
+        self.logUsuario:ArchivoUsuario = None      # El archivo de log para un usuario.
+        self.idActual = ''     # El id del usuario de la solicitud actual.
         self.ipCliente = None
 
-        #addr = (socket.gethostbyname_ex(self.hostname)[2][0], self.puerto)
-        addr = (socket.gethostbyname_ex(self.hostname)[2][1], self.puerto)
+        addr = (socket.gethostbyname_ex(self.hostname)[2][0], self.puerto)
+        #addr = (socket.gethostbyname_ex(self.hostname)[2][1], self.puerto)
 
         try:
             super().__init__(addr, requestHandler, logRequests, allow_none, encoding, bind_and_activate,
@@ -40,55 +45,46 @@ class Servidor(SimpleXMLRPCServer):
             else:
                 raise
 
-        self.register_function(self.conectarRobot, 'conectarRobot')
-        self.register_function(self.desconectarRobot, 'desconectarRobot')
-        self.register_function(self.activarMotores, 'activarMotores') 
-        self.register_function(self.seleccionarModo, 'seleccionarModo')
-        self.register_function(self.desactivarMotores, 'desactivarMotores') 
-        self.register_function(self.reporteGeneral, 'reporteGeneral') 
+        self.register_function(self.robot, 'robot')
+        self.register_function(self.motores, 'motores') 
+        self.register_function(self.modo, 'modo')
+        self.register_function(self.reporte, 'reporte') 
         self.register_function(self.home, 'home') 
-        self.register_function(self.obtenerLogServidor, 'obtenerLogServidor') 
+        self.register_function(self.log, 'log') 
         self.register_function(self.movLineal, 'movLineal') 
-        self.register_function(self.activarPinza, 'activarPinza') 
-        self.register_function(self.desactivarPinza, 'desactivarPinza') 
+        self.register_function(self.efector, 'efector')  
         self.register_function(self.grabar, 'grabar') 
         self.register_function(self.cargar, 'cargar')        
-        self.register_function(self.listarArchivosDeTrabajo, 'listarArchivosDeTrabajo') 
-        self.register_function(self.posicionActual, 'posicionActual')
-        self.register_function(self.enviarComando, 'enviarComando')
-        #self.register_function(self.video_server.get_video_frame, 'get_video_frame')
+        self.register_function(self.listar, 'listar') 
+        self.register_function(self.estado, 'estado')
+        self.register_function(self.ejecutar, 'ejecutar')
         self.register_introspection_functions()
 
-        self.threadRPC = Thread(target = self.run_server, daemon = True)
-        self.threadRPC.start()
+        self.hiloRPC = Thread(target = self.correrServidor, daemon = True)
+        self.hiloRPC.start()
         self.streamer.start()
         
         print("Servidor RPC iniciado en el puerto [%s]" % str(self.server_address))
 
-    def run_server(self):
+    def correrServidor(self):
         self.serve_forever()
 
-    def shutdown(self):
+    def detener(self):
         super().shutdown()
         super().server_close()
-        self.streamer.stopStreaming()
-        self.threadRPC.join()
+        self.streamer.detenerStreaming()
+        self.hiloRPC.join()
         self.streamer.join()
-
-    #def shutdownStream(self):
-    #    self.streamer.stop_streaming()
 
     def _log(func):
         def metodoRPC(self, *args, **kwargs):
             try:
-                # Ponemos lo del id de la siguiente manera
-                # id = args[0] #El primer argumento que se envia es el id
                 if len(args) > 0:
                     id = str(args[0])
                     if UsuariosValidos.validarUsuario(id):
-                        self.currentUserId = id
-                        if id not in self.logUsuarios:
-                            self.logUsuarios[id] = ArchivoUsuario(id)
+                        if self.idActual != id:
+                            self.idActual = id
+                            self.logUsuario = ArchivoUsuario(id)
                         argsstr = ''
                         for arg in args[1:]:
                             argsstr += str(arg) + ' '
@@ -97,49 +93,42 @@ class Servidor(SimpleXMLRPCServer):
                             respuesta = ""
                             for registro in resultado.registros:
                                 self.logServidor.log(id, self.ipCliente, func.__name__, registro)
-                                self.logUsuarios[id].log(self.ipCliente, func.__name__, registro)
+                                self.logUsuario.log(self.ipCliente, func.__name__, registro)
                                 respuesta += registro.mensaje + '\n'
                             resultado = respuesta
-                            self.consola.actualizarJob(func.__name__ + argsstr)#medio tranfuga
+                            if self.consola.grabando:
+                                self.archivoJob.actualizar(func.__name__ + argsstr)
                         else:
                             self.logServidor.log(id, self.ipCliente, func.__name__, Registro.Registro(("INFO", "Solicitud Exitosa")))
-                            self.logUsuarios[id].log(self.ipCliente, func.__name__, Registro.Registro(("INFO", "Solicitud Exitosa")))
+                            self.logUsuario.log(self.ipCliente, func.__name__, Registro.Registro(("INFO", "Solicitud Exitosa")))
                         return resultado
                     else:
-                        return "Usuario no registrado." #habría que poner en el log
+                        return "Usuario no registrado."
                 else:
-                    return "Usuario no registrado."#habría que poner en el log
+                    return "Usuario no registrado."
             except Excepciones.Excepciones as e:
                 self.logServidor.log(id, self.ipCliente, func.__name__, e.registro)
-                self.logUsuarios[id].log(self.ipCliente, func.__name__, e.registro)
+                self.logUsuario.log(self.ipCliente, func.__name__, e.registro)
                 return e.registro.mensaje
             except Exception as e:
                 self.logServidor.log(id, self.ipCliente, func.__name__, Registro.Registro(("CRITICAL",str(e))))
-                self.logUsuarios[id].log(self.ipCliente, func.__name__, Registro.Registro(("CRITICAL", str(e))))
+                self.logUsuario.log(self.ipCliente, func.__name__, Registro.Registro(("CRITICAL", str(e))))
                 self.consola.estadoServidor(str(e))
                 return "El servidor no pudo ejecutar una peticion. Excepcion no identificada."
         return metodoRPC
     @_log
-    def conectarRobot(self, args):
-        return self.consola.do_conectarRobot(args)
+    def robot(self, args):
+        return self.consola.do_robot(args)
+    
+    @_log
+    def motores(self, args):
+        return self.consola.do_motores(args)
 
     @_log
-    def desconectarRobot(self, args):
-        return self.consola.do_desconectarRobot(args)
-    
-    @_log
-    def activarMotores(self, args):
-        return self.consola.do_activarMotores(args)
-    
-    @_log
-    def desactivarMotores(self, args):
-        return self.consola.do_desactivarMotores(args)
-    
-    @_log
-    def reporteGeneral(self, args):
+    def reporte(self, args):
         respuesta = ""
         try:
-            estado = self.consola.do_posicionActual('')
+            estado = self.consola.do_estado('')
             for registro in estado.registros:
                 respuesta += registro.mensaje + '\n'
 
@@ -149,16 +138,16 @@ class Servidor(SimpleXMLRPCServer):
             else:
                 raise
 
-        respuesta += self.logUsuarios[self.currentUserId].reporteGeneral()
+        respuesta += self.logUsuario.reporteGeneral()
         return respuesta
     
     @_log
-    def obtenerLogServidor(self, args):
-        return self.logUsuarios[self.currentUserId].obtenerLog()
+    def log(self, args):
+        return self.logUsuario.obtenerLog()
     
     @_log
-    def seleccionarModo(self, args): 
-        return self.consola.do_seleccionarModo(args)
+    def modo(self, args): 
+        return self.consola.do_modo(args)
     
     @_log
     def home(self, args):
@@ -169,13 +158,9 @@ class Servidor(SimpleXMLRPCServer):
         return self.consola.do_movLineal(args)
     
     @_log
-    def activarPinza(self, args):
-        return self.consola.do_activarPinza(args)
-    
-    @_log
-    def desactivarPinza(self, args):
-        return self.consola.do_desactivarPinza(args)
-    
+    def efector(self, args):
+        return self.consola.do_efector(args)
+
     @_log
     def grabar(self, args):
         return self.consola.do_grabar(args)
@@ -185,13 +170,13 @@ class Servidor(SimpleXMLRPCServer):
         return self.consola.do_cargar(args)
     
     @_log
-    def listarArchivosDeTrabajo(self, args):
-        return self.consola.do_listarArchivosDeTrabajo(args)
+    def listar(self, args):
+        return self.consola.do_listar(args)
     
     @_log
-    def posicionActual(self, args):
-        return self.consola.do_posicionActual(args)
+    def estado(self, args):
+        return self.consola.do_estado(args)
     
     @_log
-    def enviarComando(self, args):
-        return self.consola.do_enviarComando(args)
+    def ejecutar(self, args):
+        return self.consola.do_ejecutar(args)
