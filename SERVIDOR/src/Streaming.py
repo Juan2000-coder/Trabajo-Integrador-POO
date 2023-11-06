@@ -87,7 +87,7 @@ class VideoStreamer:
         def video_feed():
             return Response(self.generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
         
-        self.app.run(host='0.0.0.0', port=8000, debug=False)
+        self.app.run(host='0.0.0.0', port=8001, debug=False)
 
         
     def stop_streaming(self):

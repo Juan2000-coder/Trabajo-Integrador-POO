@@ -172,7 +172,8 @@ int main(int argc, char* argv[]) {
 
     std::string nombre;
     std::string id;
-    std::cout << "Ingrese su nombre <Apellido Nombre>" << std::endl;
+    std::string mensaje ="Ingrese su nombre <Apellido Nombre>";
+    std::cout << mensaje << std::endl;
     std::getline(cin, nombre); // Lee toda la línea, incluyendo espacios en blanco.
 
     id = generarIDUsuario(nombre);
