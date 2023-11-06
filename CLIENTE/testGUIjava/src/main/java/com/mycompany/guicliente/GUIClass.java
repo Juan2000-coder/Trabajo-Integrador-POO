@@ -12,10 +12,13 @@ import java.io.File;
 
 public class GUIClass {
     private Process externalProcess;
-    private static final String EXE_PATH = "D:\\tareas pancho\\UnCuyo\\Programacion Orientada a Objetos\\Trabajo-Integrador-POO-main\\CLIENTE\\build\\Cliente.exe";//cambiar para que sea una ruta relativa
+    private static String EXE_PATH;
 
     public void runExternalProgram(String ip, String port, javax.swing.JTextArea outputTextArea) {
         try {
+            String basePath = new File("").getAbsolutePath();
+            EXE_PATH = basePath.replace("testGUIjava", "\\build\\Cliente.exe");
+            System.out.println(EXE_PATH);
             ProcessBuilder processBuilder = new ProcessBuilder(EXE_PATH, ip, port);
             processBuilder.redirectErrorStream(true);
             externalProcess = processBuilder.start();
@@ -38,8 +41,10 @@ public class GUIClass {
                         appendToOutput(outputTextArea, line);
                         if (line.contains("Error in XmlRpcClient::doConnect: Could not connect to server (error 0).")) {
                             mostrarErrorPopup(1);
-                        }else if (line.contains("ERROR: POINT IS OUTSIDE OF WORKSPACE")){
+                        }else if (line.contains("POINT IS OUTSIDE OF WORKSPACE")){
                             mostrarErrorPopup(2);
+                        }else if(line.contains("Error in XmlRpcClient::writeRequest: write error (error 10053).")){
+                            mostrarErrorPopup(3);
                         }
                     }
                 }
@@ -87,15 +92,20 @@ public class GUIClass {
         }
     }
     private void mostrarErrorPopup(int tipo) {
+        String audioBasePath = new File("").getAbsolutePath();
+        String audioPath = audioBasePath.replace("testGUIjava", "\\audio");
         switch (tipo){
             case 1:
-                sonido("D:\\tareas pancho\\UnCuyo\\Programacion Orientada a Objetos\\Trabajo-Integrador-POO-main\\CLIENTE\\audio\\Spongebob-Disappointed-Sound-Effect.wav");
+                sonido(audioPath + "\\Spongebob-Disappointed-Sound-Effect.wav");
                 JOptionPane.showMessageDialog(null, "Error: No hay conexion con el servidor", "Error", JOptionPane.ERROR_MESSAGE);
-                
                 break;
             case 2:
+                sonido(audioPath + "\\Spongebob-Disappointed-Sound-Effect.wav");
                 JOptionPane.showMessageDialog(null, "Error: Punto fuera de limites", "Error", JOptionPane.ERROR_MESSAGE);
                 break;
+            case 3:
+                JOptionPane.showMessageDialog(null, "Error inesperado. Intente reiniciar la conexion con el robot", "Error", JOptionPane.ERROR_MESSAGE);
+                
         }
     
 }
