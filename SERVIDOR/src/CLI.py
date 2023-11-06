@@ -26,10 +26,11 @@ from cmd import Cmd
 import os
 import subprocess
 import platform
-import logging
+
 
 from BrazoRobot import BrazoRobot
 from ArchivoLog import ArchivoLog
+from ArchivoUsuario import ArchivoUsuario
 from ArchivoJob import ArchivoJob
 from Servidor import Servidor
 import Excepciones
@@ -98,27 +99,30 @@ reporteGeneral <id>
     id      El id del usuario.
         """
         print()
-        try:
-            arguments = args.split()
-            if len(arguments) == 0:
-                # Debería buscar en la lista de requerimientos aquella que corresponda
-                # Con el ID indicado para luego llamar a un método del archivo de usuario
-                # asociado con el requerimiento, que arme el reporte y que lo devuelva
-                # como un str o algún objeto imprimible.
-
-                """
-                requerimientos seria un diccionario en el que las claves
-                son los id de los usuarios y los valores asociados son objetos
-                del tipo Archivo usuario.
-                Los objetos del tipo ArchivoUsuario tendrían un método reporte()
-                que devuelve el reporte en forma de str o bien como pretty table.
-                """
-
-                return "INFO: Reporte del Usuario."
-        except Exception as e:
-            result = ':'.join(["ERROR", str(e)])
-            print(self.outFormat.format(result))
-            return result
+        arguments = args.split()
+        if len(arguments) == 0:
+            # Debería buscar en la lista de requerimientos aquella que corresponda
+            # Con el ID indicado para luego llamar a un método del archivo de usuario
+            # asociado con el requerimiento, que arme el reporte y que lo devuelva
+            # como un str o algún objeto imprimible.
+            """
+            requerimientos seria un diccionario en el que las claves
+            son los id de los usuarios y los valores asociados son objetos
+            del tipo Archivo usuario.
+            Los objetos del tipo ArchivoUsuario tendrían un método reporte()
+            que devuelve el reporte en forma de str o bien como pretty table.
+            """
+            archivo = ArchivoLog('Log')
+            try:
+                estado = self.brazoRobot.posicionActual()
+            except Excepciones.ExcepcionBrazoRobot as e:
+                if e.codigoDeExcepcion == 2:
+                    estado = "Robot Desconectado."
+                else:
+                    raise
+            return estado + '\n' + archivo.reporteGeneral()
+        else:
+            raise Excepciones.ExcepcionDeComando(1)
         
     def do_obtenerLogServidor(self, args):
 
@@ -129,8 +133,7 @@ obtenerLogServidor
         args = args.split()
         if len(args) == 0:
             archivo = ArchivoLog('Log')
-            for entrada in archivo.obtenerLog():
-                print(entrada)
+            return archivo.obtenerLog()
         else:
             raise Excepciones.ExcepcionDeComando(1)
 
@@ -356,7 +359,7 @@ exit
         if self.brazoRobot.conexion_establecida == True:
             print(self.brazoRobot.desconectarRobot())
         if self.rpcServer is not None:
-            commandLine.rpcServer.shutdownStream()
+            #commandLine.rpcServer.shutdownStream()
             self.rpcServer.shutdown()
         print("Ejecucion CLI SERVIDOR terminada")
         raise SystemExit
@@ -370,6 +373,6 @@ if __name__ == "__main__":
         if commandLine.brazoRobot.conexion_establecida == True:
             print(commandLine.brazoRobot.desconectarRobot())
         if commandLine.rpcServer is not None:
-            commandLine.rpcServer.shutdownStream()
+            #commandLine.rpcServer.shutdownStream()
             commandLine.rpcServer.shutdown()
         print("Ejecucion CLI SERVIDOR terminada")

@@ -9,10 +9,8 @@
 #include <cstdlib> // Para la función 'system'
 #include <future>   // Para la función 'async' y 'future' en el metodo timeOut.
 #include <chrono>   // Para la función 'wait_for' en el metodo timeOut.
-#include <cctype>  // Para la función 'isspace' en el metodo generarIDUsuario.
-#include <algorithm> // Para la función 'remove_if' en el metodo generarIDUsuario.
 
-
+//Hola mundo
 
 using namespace std;
 
@@ -291,9 +289,9 @@ int main(int argc, char* argv[]) {
             case 6: //activarMotor
 
                 if (llamarAlServidorConTimeout(c, "activarMotores", noArgs, result, timeout, id)) {
-                    std::cout << "Llamada exitosa. Resultado: " << result << std::endl;
+                    std::cout<< result << std::endl;
                 } else {
-                    std::cout << "Timeout: la llamada al servidor ha superado el tiempo límite.\n\n" << std::endl;
+                    std::cout << "Error en la llamada a activarMotores\n\n" << std::endl;
                 }
                 break;
 
@@ -356,7 +354,7 @@ int main(int argc, char* argv[]) {
                     cin >> input1;
                     oneArg[0]=input1;
                 }
-                if (llamarAlServidorConTimeout(c, "grabar", noArgs, result, timeout, id)) {
+                if (llamarAlServidorConTimeout(c, "grabar", oneArg, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'grabar'\n\n";
@@ -364,8 +362,9 @@ int main(int argc, char* argv[]) {
                 break;
 
             case 13: //cargar
-
-                if (llamarAlServidorConTimeout(c, "cargar", noArgs, result, timeout, id)) {
+                cin >> input;
+                oneArg[0] = input;
+                if (llamarAlServidorConTimeout(c, "cargar", oneArg, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'cargar'\n\n";

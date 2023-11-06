@@ -1,0 +1,22 @@
+[2023-11-05 16:27:27] [INFO] 192.168.1.81 [conectarRobot]  Conexión exitosa con el robot.
+[2023-11-05 16:27:29] [INFO] 192.168.1.81 [home]  ROBOT ONLINE
+[2023-11-05 16:27:29] [INFO] 192.168.1.81 [home]  SEND G28 TO CALIBRATE
+[2023-11-05 16:27:29] [INFO] 192.168.1.81 [home]  HOMING
+[2023-11-05 16:27:29] [INFO] 192.168.1.81 [home]  HOMING COMPLETE t=7.50s
+[2023-11-05 16:27:33] [INFO] 192.168.1.81 [movLineal]  LINEAR  MOVE: [X:100.00 Y:10.00 Z:100.00 E:0.00] t=0.73s
+[2023-11-05 16:27:37] [INFO] 192.168.1.81 [home]  HOMING
+[2023-11-05 16:27:37] [INFO] 192.168.1.81 [home]  HOMING COMPLETE t=4.50s
+[2023-11-05 16:27:46] [INFO] 192.168.1.81 [activarPinza]  GRIPPER ON
+[2023-11-05 16:27:52] [INFO] 192.168.1.81 [desactivarPinza]  GRIPPER OFF
+[2023-11-05 16:27:58] [INFO] 192.168.1.81 [activarMotores]  Motor activado.
+[2023-11-05 16:28:08] [INFO] 192.168.1.81 [desactivarMotores]  Motor desactivado.
+[2023-11-05 16:31:30] [INFO] 192.168.1.81 [reporteGeneral] Solicitud Exitosa
+[2023-11-05 16:32:05] [INFO] 192.168.1.81 [reporteGeneral] Solicitud Exitosa
+[2023-11-05 16:34:16] [INFO] 192.168.1.81 [conectarRobot]  Conexión exitosa con el robot.
+[2023-11-05 16:34:21] [INFO] 192.168.1.81 [reporteGeneral] Solicitud Exitosa
+[2023-11-05 16:34:44] [INFO] 192.168.1.81 [home]  HOMING
+[2023-11-05 16:34:44] [INFO] 192.168.1.81 [home]  HOMING COMPLETE t=7.50s
+[2023-11-05 16:34:47] [INFO] 192.168.1.81 [reporteGeneral] Solicitud Exitosa
+[2023-11-05 16:35:01] [INFO] 192.168.1.81 [desconectarRobot]  Conexión cerrada.
+[2023-11-05 16:35:04] [INFO] 192.168.1.81 [reporteGeneral] Solicitud Exitosa
+[2023-11-05 16:35:13] [INFO] 192.168.1.81 [reporteGeneral] Solicitud Exitosa
