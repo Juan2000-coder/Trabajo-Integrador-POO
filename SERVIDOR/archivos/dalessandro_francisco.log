@@ -1,0 +1,99 @@
+ 2023-11-04 09:28:53       INFO -    192.168.1.81 - listarArchivosDeTrabajo - Solicitud Exitosa
+ 2023-11-04 09:29:07       INFO -    192.168.1.81 -               cargar -  Una cantidad incorrecta de argumentos fueron dados.
+ 2023-11-04 09:29:11       INFO -    192.168.1.81 -               cargar -  Una cantidad incorrecta de argumentos fueron dados.
+ 2023-11-04 09:29:21       INFO -    192.168.1.81 -               cargar -  Una cantidad incorrecta de argumentos fueron dados.
+ 2023-11-04 09:36:48       INFO -    192.168.1.81 -        conectarRobot -  Conexión exitosa con el robot.
+ 2023-11-04 09:38:06       INFO -    192.168.1.81 -               cargar -  No se puede enviar el comando, robot desconectado.
+ 2023-11-04 09:38:13       INFO -    192.168.1.81 -        conectarRobot -  Conexión exitosa con el robot.
+ 2023-11-04 09:38:24       INFO -    192.168.1.81 -               cargar -  ROBOT ONLINE
+ 2023-11-04 09:38:24       INFO -    192.168.1.81 -               cargar -  SEND G28 TO CALIBRATE
+ 2023-11-04 09:38:24       INFO -    192.168.1.81 -               cargar -  GRIPPER ON
+ 2023-11-04 09:38:24       INFO -    192.168.1.81 -               cargar -  GRIPPER OFF
+ 2023-11-04 09:38:24      ERROR -    192.168.1.81 -               cargar -  COMMAND NOT RECOGNIZED
+ 2023-11-04 09:38:24      ERROR -    192.168.1.81 -               cargar -  COMMAND NOT RECOGNIZED
+ 2023-11-04 09:38:24      ERROR -    192.168.1.81 -               cargar -  POINT IS OUTSIDE OF WORKSPACE
+ 2023-11-04 09:38:24      ERROR -    192.168.1.81 -               cargar -  POINT IS OUTSIDE OF WORKSPACE
+ 2023-11-04 09:38:24       INFO -    192.168.1.81 -               cargar -  HOMING
+ 2023-11-04 09:38:24       INFO -    192.168.1.81 -               cargar -  HOMING COMPLETE t=7.50s
+ 2023-11-04 09:38:24       INFO -    192.168.1.81 -               cargar -  GRIPPER ON
+ 2023-11-04 09:38:24       INFO -    192.168.1.81 -               cargar -  GRIPPER OFF
+ 2023-11-04 09:43:21       INFO -    192.168.1.81 -        conectarRobot -  Conexión exitosa con el robot.
+ 2023-11-04 09:43:26       INFO -    192.168.1.81 -               grabar -  Comandos se almacenaran en puta.txt
+ 2023-11-04 09:43:35       INFO -    192.168.1.81 -                 home -  ROBOT ONLINE
+ 2023-11-04 09:43:35       INFO -    192.168.1.81 -                 home -  SEND G28 TO CALIBRATE
+ 2023-11-04 09:43:35       INFO -    192.168.1.81 -                 home -  HOMING
+ 2023-11-04 09:43:35       INFO -    192.168.1.81 -                 home -  HOMING COMPLETE t=7.50s
+ 2023-11-04 09:43:42      ERROR -    192.168.1.81 -            movLineal -  POINT IS OUTSIDE OF WORKSPACE
+ 2023-11-04 09:43:42   CRITICAL -    192.168.1.81 -            movLineal - cannot access local variable 'x' where it is not associated with a value
+ 2023-11-04 09:43:51       INFO -    192.168.1.81 -            movLineal -  LINEAR  MOVE: [X:10.00 Y:100.00 Z:100.00 E:3.00] t=1.17s
+ 2023-11-04 09:43:51   CRITICAL -    192.168.1.81 -            movLineal - cannot access local variable 'x' where it is not associated with a value
+ 2023-11-04 09:43:56       INFO -    192.168.1.81 -            movLineal -  LINEAR  MOVE: [X:10.00 Y:100.00 Z:100.00 E:2.00] t=10.00s
+ 2023-11-04 09:43:56   CRITICAL -    192.168.1.81 -            movLineal - cannot access local variable 'x' where it is not associated with a value
+ 2023-11-04 09:44:01       INFO -    192.168.1.81 -                 home -  HOMING
+ 2023-11-04 09:44:01       INFO -    192.168.1.81 -                 home -  HOMING COMPLETE t=4.50s
+ 2023-11-04 09:44:07       INFO -    192.168.1.81 -         activarPinza -  GRIPPER ON
+ 2023-11-04 09:44:15       INFO -    192.168.1.81 -      seleccionarModo -  ABSOLUTE MODE ON
+ 2023-11-04 09:44:15   CRITICAL -    192.168.1.81 -      seleccionarModo - tuple index out of range
+ 2023-11-04 09:44:22       INFO -    192.168.1.81 -      seleccionarModo -  ABSOLUTE MODE ON
+ 2023-11-04 09:44:22   CRITICAL -    192.168.1.81 -      seleccionarModo - tuple index out of range
+ 2023-11-04 09:44:51       INFO -    192.168.1.81 -               grabar -  Almacenamiento de comandos parado.
+ 2023-11-04 09:44:56       INFO -    192.168.1.81 -      seleccionarModo -  ABSOLUTE MODE ON
+ 2023-11-04 09:45:09       INFO -    192.168.1.81 -               grabar -  Comandos se almacenaran en puta.txt
+ 2023-11-04 09:45:15       INFO -    192.168.1.81 -      seleccionarModo -  ABSOLUTE MODE ON
+ 2023-11-04 09:45:15   CRITICAL -    192.168.1.81 -      seleccionarModo - tuple index out of range
+ 2023-11-04 09:49:34       INFO -    192.168.1.81 -               grabar -  Comandos se almacenaran en puta.txt
+ 2023-11-04 09:50:08       INFO -    192.168.1.81 -               grabar -  Almacenamiento de comandos parado.
+ 2023-11-04 09:50:30       INFO -    192.168.1.81 -               grabar -  Comandos se almacenaran en puta.txt
+ 2023-11-04 09:51:50       INFO -    192.168.1.81 -               grabar -  Almacenamiento de comandos parado.
+ 2023-11-04 09:52:51       INFO -    192.168.1.81 -               grabar -  Comandos se almacenaran en puta.txt
+ 2023-11-04 09:56:58       INFO -    192.168.1.81 -               grabar -  Comandos se almacenaran en puta.txt
+ 2023-11-04 09:57:04       INFO -    192.168.1.81 -               grabar -  Almacenamiento de comandos parado.
+ 2023-11-04 09:57:05       INFO -    192.168.1.81 -               grabar -  Comandos se almacenaran en puta.txt
+ 2023-11-04 09:57:06       INFO -    192.168.1.81 -               grabar -  Almacenamiento de comandos parado.
+ 2023-11-04 09:57:06       INFO -    192.168.1.81 -               grabar -  Comandos se almacenaran en puta.txt
+ 2023-11-04 09:57:07       INFO -    192.168.1.81 -               grabar -  Almacenamiento de comandos parado.
+ 2023-11-04 09:57:07       INFO -    192.168.1.81 -               grabar -  Comandos se almacenaran en puta.txt
+ 2023-11-04 09:57:08       INFO -    192.168.1.81 -               grabar -  Almacenamiento de comandos parado.
+ 2023-11-04 09:57:08       INFO -    192.168.1.81 -               grabar -  Comandos se almacenaran en puta.txt
+ 2023-11-04 09:57:09       INFO -    192.168.1.81 -               grabar -  Almacenamiento de comandos parado.
+ 2023-11-04 09:57:10       INFO -    192.168.1.81 -               grabar -  Comandos se almacenaran en puta.txt
+ 2023-11-04 09:57:13       INFO -    192.168.1.81 -               grabar -  Almacenamiento de comandos parado.
+ 2023-11-04 09:57:18       INFO -    192.168.1.81 -               grabar -  Comandos se almacenaran en puta.txt
+ 2023-11-04 09:57:25       INFO -    192.168.1.81 -        conectarRobot -  Conexión exitosa con el robot.
+ 2023-11-04 09:57:25   CRITICAL -    192.168.1.81 -        conectarRobot - unsupported operand type(s) for +: 'NoneType' and 'str'
+ 2023-11-04 09:57:31       INFO -    192.168.1.81 -                 home -  ROBOT ONLINE
+ 2023-11-04 09:57:31       INFO -    192.168.1.81 -                 home -  SEND G28 TO CALIBRATE
+ 2023-11-04 09:57:31       INFO -    192.168.1.81 -                 home -  HOMING
+ 2023-11-04 09:57:31       INFO -    192.168.1.81 -                 home -  HOMING COMPLETE t=7.50s
+ 2023-11-04 09:57:39       INFO -    192.168.1.81 -         activarPinza -  GRIPPER ON
+ 2023-11-04 09:57:45       INFO -    192.168.1.81 -            movLineal -  LINEAR  MOVE: [X:10.00 Y:100.00 Z:100.00 E:0.00] t=1.17s
+ 2023-11-04 09:57:45   CRITICAL -    192.168.1.81 -            movLineal - cannot access local variable 'x' where it is not associated with a value
+ 2023-11-04 10:00:09       INFO -    192.168.1.81 -               grabar -  Comandos se almacenaran en puta.txt
+ 2023-11-04 10:01:35       INFO -    192.168.1.81 -        conectarRobot -  Conexión exitosa con el robot.
+ 2023-11-04 10:04:17       INFO -    192.168.1.81 -        conectarRobot -  Conexión exitosa con el robot.
+ 2023-11-04 10:04:22       INFO -    192.168.1.81 -               grabar -  Comandos se almacenaran en puta.txt
+ 2023-11-04 10:04:27       INFO -    192.168.1.81 -                 home -  ROBOT ONLINE
+ 2023-11-04 10:04:27       INFO -    192.168.1.81 -                 home -  SEND G28 TO CALIBRATE
+ 2023-11-04 10:04:27       INFO -    192.168.1.81 -                 home -  HOMING
+ 2023-11-04 10:04:27       INFO -    192.168.1.81 -                 home -  HOMING COMPLETE t=7.50s
+ 2023-11-04 10:04:30       INFO -    192.168.1.81 -            movLineal -  LINEAR  MOVE: [X:10.00 Y:100.00 Z:100.00 E:0.00] t=1.17s
+ 2023-11-04 10:04:30   CRITICAL -    192.168.1.81 -            movLineal - cannot access local variable 'x' where it is not associated with a value
+ 2023-11-04 10:04:39       INFO -    192.168.1.81 -      seleccionarModo -  ABSOLUTE MODE ON
+ 2023-11-04 10:04:39   CRITICAL -    192.168.1.81 -      seleccionarModo - tuple index out of range
+ 2023-11-04 10:08:04       INFO -    192.168.1.81 -        conectarRobot -  Conexión exitosa con el robot.
+ 2023-11-04 10:08:22      ERROR -    192.168.1.81 -        conectarRobot -  La conexión ya está establecida.
+ 2023-11-04 10:08:37       INFO -    192.168.1.81 -               grabar -  Comandos se almacenaran en puta.txt
+ 2023-11-04 10:09:29       INFO -    192.168.1.81 -      seleccionarModo -  ROBOT ONLINE
+ 2023-11-04 10:09:29       INFO -    192.168.1.81 -      seleccionarModo -  SEND G28 TO CALIBRATE
+ 2023-11-04 10:09:29       INFO -    192.168.1.81 -      seleccionarModo -  ABSOLUTE MODE ON
+ 2023-11-04 10:11:51       INFO -    192.168.1.81 -        conectarRobot -  Conexión exitosa con el robot.
+ 2023-11-04 10:11:53       INFO -    192.168.1.81 -               grabar -  Comandos se almacenaran en puta.txt
+ 2023-11-04 10:11:59       INFO -    192.168.1.81 -      seleccionarModo -  ROBOT ONLINE
+ 2023-11-04 10:11:59       INFO -    192.168.1.81 -      seleccionarModo -  SEND G28 TO CALIBRATE
+ 2023-11-04 10:11:59       INFO -    192.168.1.81 -      seleccionarModo -  ABSOLUTE MODE ON
+ 2023-11-04 10:12:08       INFO -    192.168.1.81 -      seleccionarModo -  RELATIVE MODE ON
+ 2023-11-04 10:12:09       INFO -    192.168.1.81 -                 home -  HOMING
+ 2023-11-04 10:12:09       INFO -    192.168.1.81 -                 home -  HOMING COMPLETE t=7.50s
+ 2023-11-04 10:12:13       INFO -    192.168.1.81 -               grabar -  Almacenamiento de comandos parado.
+ 2023-11-04 10:12:19       INFO -    192.168.1.81 -                 home -  HOMING
+ 2023-11-04 10:12:19       INFO -    192.168.1.81 -                 home -  HOMING COMPLETE t=4.50s
