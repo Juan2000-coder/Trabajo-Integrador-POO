@@ -4,6 +4,7 @@ from threading import Thread
 import socket
 import Registro
 from ArchivoLog import ArchivoLog
+from ArchivoUsuario import ArchivoUsuario
 import Excepciones
 from UsuariosValidos import UsuariosValidos
 from Streaming import VideoStreaming
@@ -56,6 +57,7 @@ class Servidor(SimpleXMLRPCServer):
         self.register_function(self.posicionActual, 'posicionActual')
         self.register_function(self.enviarComando, 'enviarComando')
         #self.register_function(self.video_server.get_video_frame, 'get_video_frame')
+        self.register_introspection_functions()
 
         self.threadRPC = Thread(target = self.run_server, daemon = True)
         self.threadRPC.start()
@@ -86,7 +88,7 @@ class Servidor(SimpleXMLRPCServer):
                     if UsuariosValidos.validarUsuario(id):
                         self.currentUserId = id
                         if id not in self.logUsuarios:
-                            self.logUsuarios[id] = ArchivoLog(id)
+                            self.logUsuarios[id] = ArchivoUsuario(id)
                         argsstr = ''
                         for arg in args[1:]:
                             argsstr += str(arg) + ' '
@@ -94,13 +96,13 @@ class Servidor(SimpleXMLRPCServer):
                         if type(resultado) is Registro.Registrar:
                             respuesta = ""
                             for registro in resultado.registros:
-                                self.logServidor.log(self.ipCliente, func.__name__, registro)
+                                self.logServidor.log(id, self.ipCliente, func.__name__, registro)
                                 self.logUsuarios[id].log(self.ipCliente, func.__name__, registro)
                                 respuesta += registro.mensaje + '\n'
                             resultado = respuesta
                             self.consola.actualizarJob(func.__name__ + argsstr)#medio tranfuga
                         else:
-                            self.logServidor.log(self.ipCliente, func.__name__, Registro.Registro(("INFO", "Solicitud Exitosa")))
+                            self.logServidor.log(id, self.ipCliente, func.__name__, Registro.Registro(("INFO", "Solicitud Exitosa")))
                             self.logUsuarios[id].log(self.ipCliente, func.__name__, Registro.Registro(("INFO", "Solicitud Exitosa")))
                         return resultado
                     else:
@@ -108,11 +110,11 @@ class Servidor(SimpleXMLRPCServer):
                 else:
                     return "Usuario no registrado."#habría que poner en el log
             except Excepciones.Excepciones as e:
-                self.logServidor.log(self.ipCliente, func.__name__, e.registro)
+                self.logServidor.log(id, self.ipCliente, func.__name__, e.registro)
                 self.logUsuarios[id].log(self.ipCliente, func.__name__, e.registro)
                 return e.registro.mensaje
             except Exception as e:
-                self.logServidor.log(self.ipCliente, func.__name__, Registro.Registro(("CRITICAL",str(e))))
+                self.logServidor.log(id, self.ipCliente, func.__name__, Registro.Registro(("CRITICAL",str(e))))
                 self.logUsuarios[id].log(self.ipCliente, func.__name__, Registro.Registro(("CRITICAL", str(e))))
                 self.consola.estadoServidor(str(e))
                 return "El servidor no pudo ejecutar una peticion. Excepcion no identificada."
@@ -135,7 +137,20 @@ class Servidor(SimpleXMLRPCServer):
     
     @_log
     def reporteGeneral(self, args):
-        return self.consola.do_reporteGeneral(args)
+        respuesta = ""
+        try:
+            estado = self.consola.do_posicionActual('')
+            for registro in estado.registros:
+                respuesta += registro.mensaje + '\n'
+
+        except Excepciones.ExcepcionBrazoRobot as e:
+            if e.codigoDeExcepcion == 2:
+                respuesta += "Robot Desconectado.\n"
+            else:
+                raise
+
+        respuesta += self.logUsuarios[self.currentUserId].reporteGeneral()
+        return respuesta
     
     @_log
     def obtenerLogServidor(self, args):

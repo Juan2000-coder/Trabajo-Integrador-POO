@@ -288,9 +288,9 @@ int main(int argc, char* argv[]) {
             case 6: //activarMotor
 
                 if (llamarAlServidorConTimeout(c, "activarMotores", noArgs, result, timeout, id)) {
-                    std::cout << "Llamada exitosa. Resultado: " << result << std::endl;
+                    std::cout<< result << std::endl;
                 } else {
-                    std::cout << "Timeout: la llamada al servidor ha superado el tiempo límite." << std::endl;
+                    std::cout << "Error en la llamada a activarMotores\n\n" << std::endl;
                 }
                 break;
 
