@@ -174,7 +174,8 @@ int main(int argc, char* argv[]) {
 
     std::string nombre;
     std::string id;
-    std::cout << "Ingrese su nombre <Apellido Nombre>" << std::endl;
+    std::string mensaje ="Ingrese su nombre <Apellido Nombre>";
+    std::cout << mensaje << std::endl;
     std::getline(cin, nombre); // Lee toda la línea, incluyendo espacios en blanco.
 
     id = generarIDUsuario(nombre);
@@ -292,7 +293,7 @@ int main(int argc, char* argv[]) {
                 if (llamarAlServidorConTimeout(c, "activarMotores", noArgs, result, timeout, id)) {
                     std::cout << "Llamada exitosa. Resultado: " << result << std::endl;
                 } else {
-                    std::cout << "Timeout: la llamada al servidor ha superado el tiempo límite." << std::endl;
+                    std::cout << "Timeout: la llamada al servidor ha superado el tiempo límite.\n\n" << std::endl;
                 }
                 break;
 

@@ -25,8 +25,8 @@ class Servidor(SimpleXMLRPCServer):
         self.logUsuarios = {} #Este seria un diccionario para los logs de los usuarios
         self.ipCliente = None
 
-        addr = (socket.gethostbyname_ex("Juan_Portátil")[2][0], self.puerto)
-        #addr = (socket.gethostbyname_ex(self.hostname)[2][1], self.puerto)
+        #addr = (socket.gethostbyname_ex("Juan_Portátil")[2][0], self.puerto)
+        addr = (socket.gethostbyname_ex(self.hostname)[2][1], self.puerto)
 
         try:
             super().__init__(addr, requestHandler, logRequests, allow_none, encoding, bind_and_activate,
