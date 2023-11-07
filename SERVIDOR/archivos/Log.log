@@ -20,6 +20,9 @@
 [2023-11-05 16:35:01] [INFO] borquez_juan 192.168.1.81 [desconectarRobot]  Conexión cerrada.
 [2023-11-05 16:35:04] [INFO] borquez_juan 192.168.1.81 [reporteGeneral] Solicitud Exitosa
 [2023-11-05 16:35:13] [INFO] borquez_juan 192.168.1.81 [reporteGeneral] Solicitud Exitosa
+<<<<<<< HEAD
+[2023-11-06 19:07:03] [INFO] miranda_francisco 192.168.1.107 [conectarRobot]  Conexión exitosa con el robot.
+=======
 [2023-11-06 18:15:42] [ERROR] aranda_profe 192.168.100.8 [conectarRobot]  No se puede establecer conexión con el brazo.
 [2023-11-06 18:15:42] [INFO] aranda_profe 192.168.100.8 [seleccionarModo]  No se puede enviar el comando, robot desconectado.
 [2023-11-06 18:15:42] [INFO] aranda_profe 192.168.100.8 [posicionActual]  No se puede enviar el comando, robot desconectado.
@@ -38,6 +41,7 @@
 [2023-11-06 18:28:12] [ERROR] miranda_francisco 192.168.100.8 [conectarRobot]  No se puede establecer conexión con el brazo.
 [2023-11-06 18:28:12] [INFO] miranda_francisco 192.168.100.8 [seleccionarModo]  No se puede enviar el comando, robot desconectado.
 [2023-11-06 18:28:12] [INFO] miranda_francisco 192.168.100.8 [posicionActual]  No se puede enviar el comando, robot desconectado.
+<<<<<<< HEAD
 [2023-11-06 20:41:46] [ERROR] dalessandro_francisco 192.168.100.8 [conectarRobot]  No se puede establecer conexión con el brazo.
 [2023-11-06 20:41:46] [INFO] dalessandro_francisco 192.168.100.8 [seleccionarModo]  No se puede enviar el comando, robot desconectado.
 [2023-11-06 20:41:46] [INFO] dalessandro_francisco 192.168.100.8 [posicionActual]  No se puede enviar el comando, robot desconectado.
@@ -60,3 +64,6 @@
 [2023-11-06 21:02:05] [INFO] dalessandro_francisco 192.168.100.8 [seleccionarModo]  No se puede enviar el comando, robot desconectado.
 [2023-11-06 21:02:05] [INFO] dalessandro_francisco 192.168.100.8 [posicionActual]  No se puede enviar el comando, robot desconectado.
 [2023-11-06 21:02:16] [INFO] dalessandro_francisco 192.168.100.8 [home]  No se puede enviar el comando, robot desconectado.
+=======
+>>>>>>> be0d1c2c73a028bd4c2174cb8105799c15fcf5d4
+>>>>>>> adb6d3cab16999f19568323000328173cf68f349

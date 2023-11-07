@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+[2023-11-06 19:07:03] [INFO] 192.168.1.107 [conectarRobot]  Conexión exitosa con el robot.
+=======
 [2023-11-06 18:28:02] [INFO] 192.168.100.8 [cargar]  No se puede enviar el comando, robot desconectado.
 [2023-11-06 18:28:12] [ERROR] 192.168.100.8 [conectarRobot]  No se puede establecer conexión con el brazo.
 [2023-11-06 18:28:12] [INFO] 192.168.100.8 [seleccionarModo]  No se puede enviar el comando, robot desconectado.
 [2023-11-06 18:28:12] [INFO] 192.168.100.8 [posicionActual]  No se puede enviar el comando, robot desconectado.
+>>>>>>> be0d1c2c73a028bd4c2174cb8105799c15fcf5d4
