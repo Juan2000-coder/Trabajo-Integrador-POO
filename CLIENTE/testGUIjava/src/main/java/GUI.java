@@ -541,12 +541,12 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(gCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(enviarGCodeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(limpiarTextAreaBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(reiniciarBtn)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                        .addComponent(reiniciarBtn))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -690,9 +690,9 @@ public class GUI extends javax.swing.JFrame {
             return;
         }
         if (vel.isEmpty()){
-          comandoFinal = "movLineal " + xPos + " " + yPos + " " + zPos + "\n";  
+          comandoFinal = "movlineal " + xPos + " " + yPos + " " + zPos + "\n";  
         } else {
-          comandoFinal = "movLineal " + xPos + " " + yPos + " " + zPos + " " + vel + "\n"; 
+          comandoFinal = "movlineal " + xPos + " " + yPos + " " + zPos + " " + vel + "\n"; 
         }
 
         mandarComandoYActualizar(comandoFinal);
@@ -766,7 +766,7 @@ public class GUI extends javax.swing.JFrame {
         listarBtn.setEnabled(false);
         logServidorBtn.setEnabled(false);
         reporteGeneralBtn.setEnabled(false);
-        mandarComandoYActualizar("servidor off\n");
+        mandarComandoYActualizar("salir\n");
     }//GEN-LAST:event_reiniciarBtnActionPerformed
 
     private void logServidorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logServidorBtnActionPerformed
