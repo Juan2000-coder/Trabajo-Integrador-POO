@@ -9,12 +9,12 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "-Wall",
-                "-I.\\CLIENTE\\include\\xmlrpc",
-                ".\\CLIENTE\\src\\*.cpp",
-                ".\\CLIENTE\\src\\xmlrpc\\*.cpp", 
+                "-I.\\CLIENTE\\CONSOLA\\include\\xmlrpc",
+                ".\\CLIENTE\\CONSOLA\\src\\*.cpp",
+                ".\\CLIENTE\\CONSOLA\\src\\xmlrpc\\*.cpp", 
                 "-lws2_32",
                 "-o",
-                ".\\CLIENTE\\build\\Cliente",
+                ".\\CLIENTE\\CONSOLA\\build\\Cliente",
             ],
             "problemMatcher": [
                 "$gcc"
