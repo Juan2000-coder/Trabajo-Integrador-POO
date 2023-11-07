@@ -1,41 +1,67 @@
-import serial
-import time
+"""
+ * Aplicativo para control de un robot 3DF conectado
+ * de forma local por puerto serie.
+ * Componente: Brazo Robot.
+ * 
+ * @version  1.0
+ * @date     2023.11.06
+ * @author   Borquez Juan Manuel, Dalessandro Francisco, Miranda Francisco
+ * @contact  borquez.juan00@gmail.com, panchodal867@gmail.com, francisconehuenmiranda@gmail.com
 
-from Excepciones import ExcepcionBrazoRobot
+"""
+
+import serial
+from Excepciones import ExcepcionBrazoRobot     # Clase con excepciones personalizadas.
 
 class BrazoRobot():
+    """Clase con implementación de los comandos para la comunicación con
+    la placa de control del brazo Robótico."""
+
     def __init__(self):
         self.posicion = None    # Posición inicial desconocida.
-        self.velocidad = None   # Lo mismo para la velocidad.
-        self.conexion_establecida = False
-        self.puerto_serie = None
+        self.velocidad = None   # Velocidad inicial desconocida.
+        self.conexionEstablecida = False
+        self.puertoSerie = None
 
-    def conectarRobot(self, puerto:str, baud_rate):
-        # La velocidad de comunicación que acepta al momento es de 115200 baudios.   
-        if not self.conexion_establecida:
+    def conectarRobot(self, puerto:str, baudios = 115200):
+        """Establece la comunicación serial con el brazo Robótico.
+        
+        args:
+            puerto(str): Puerto COM donde se conecta la placa del Robot.
+            baudios(int): Velocidad normalizada de comuniacion con el Robot.
+        returns:
+            (str) Un mensaje indicando que la conexion se ha establecido, o 
+            una exepción del archivo de Excepciones si se produce un error al 
+            intentar establecer la comunicación.
+        """
+        if not self.conexionEstablecida:
             try:
-                self.puerto_serie = serial.Serial(puerto, baud_rate, timeout = 1)
-                self.conexion_establecida = True
-                time.sleep(2)   #Tiempo para que realice bien la conexion, si no envia los comandos muy rapido.
+                self.puertoSerie = serial.Serial(puerto, baudios, timeout = 1)
+                self.conexionEstablecida = True
                 return "INFO: Conexión exitosa con el robot."
         
             except Exception as e:
-                if not self.conexion_establecida:
+                if not self.conexionEstablecida:
                     raise ExcepcionBrazoRobot(1)
         else:
             raise ExcepcionBrazoRobot(7)
         
     def enviarComando(self, comando:str):
-        #USO: respuesta = robot.enviarComando("G28")
-        #     print("Arduino dice:", respuesta)
-        #Primero almacenar la respuesta del comando, luego printear. 
-        if self.conexion_establecida:
+        """Envía un comando en G-Code al Robot.
+        
+        args:
+            comando(str): El comando G-Code con los argumentos.
+        returns:
+            (str) Un mensaje proveniente de la placa del Robot o una excepcion
+            del archivo de Excepciones en caso de error.
+        """ 
+        if self.conexionEstablecida:
             try:
-                self.puerto_serie.write((comando + '\r\n').encode())
+                self.puertoSerie.write((comando + '\r\n').encode())
                 
                 data = b''
                 while True:
-                    line = self.puerto_serie.readline()
+                    line = self.puertoSerie.readline()
                     if not line:
                         break
                     data += line
@@ -50,10 +76,16 @@ class BrazoRobot():
 
 
     def desconectarRobot(self):
-        if self.conexion_establecida:
+        """Cierra la conexión serial con el Robot.
+        
+        returns:
+            (str) Un mensaje indicando la desconexión o una excepción
+            del archivo de Excepciones en caso de que ocurra un error.
+        """ 
+        if self.conexionEstablecida:
             try:
-                self.puerto_serie.close()
-                self.conexion_establecida = False
+                self.puertoSerie.close()
+                self.conexionEstablecida = False
                 return "INFO: Conexión cerrada."
             except Exception as e:
                 raise ExcepcionBrazoRobot(5)
@@ -61,6 +93,16 @@ class BrazoRobot():
             raise ExcepcionBrazoRobot(4)
             
     def seleccionarModo(self, modo:str):
+        """Selecciona el modo de operación del brazo Robótico
+        entre funcionamiento en coordenadas absolutas o relativas.
+
+        args:
+            modo(str): El modo 'a' indicando coordenadas Absolutas.
+                       El modo 'r' indicando coordenadas Relativas.
+        returns:
+            (str) Un mensaje desde el robot indicando el modo seleccionado
+            o una excepción en caso de error.
+        """ 
         if modo.lower() == "a":
             return self.enviarComando("G90")
         elif modo.lower() == "r":
@@ -69,81 +111,75 @@ class BrazoRobot():
             raise ExcepcionBrazoRobot(6)
     
     def movLineal(self, coor:list, velocidad = 0):
+        """Produce el movimento lineal del efector final
+        hacia una coordenada indicada.
+
+        args:
+            coor(list): Las coordenadas del punto destino.
+            velocidad(float): La velocidad del movimiento. Se toma una por
+                defecto en caso de no indicarse.
+        returns:
+            (str) Un mensaje desde el robot indicando el resultado de la operación
+            o una excepción en caso de error.
+        """
         if velocidad != 0:
             comando = f"G1 X{coor[0]} Y{coor[1]} Z{coor[2]} E{velocidad}"
         else:
             comando = f"G0 X{coor[0]} Y{coor[1]} Z{coor[2]}"
         return self.enviarComando(comando)
         
-    def activarPinza(self):
+    def activarEfector(self):
+        """Activa el efector final del Robot.
+.
+        returns:
+            (str) Un mensaje desde el robot indicando el resultado de la operación
+            o una excepción en caso de error.
+        """
         return self.enviarComando("M3")
             
-    def desactivarPinza(self):
+    def desactivarEfector(self):
+        """Desactiva el efector final del Robot.
+.
+        returns:
+            (str) Un mensaje desde el robot indicando el resultado de la operación
+            o una excepción en caso de error.
+        """
         return self.enviarComando("M5") 
 
     def home(self):
+        """Realiza la operación de Homing drl Robot.
+.
+        returns:
+            (str) Un mensaje desde el robot indicando el resultado de la operación
+            o una excepción en caso de error.
+        """
         return  self.enviarComando("G28")
     
-    def posicionActual(self):
+    def estado(self):
+        """Obtiene el estado actual del Robot (posicion, modo).
+.
+        returns:
+            (str) Un mensaje desde el robot indicando el resultado de la operación
+            o una excepción en caso de error.
+        """
         return  self.enviarComando("M114")
     
-    def activarMotor(self):
-        self.enviarComando("G17")
-        return "INFO: Motor activado."
+    def activarMotores(self):
+        """Activa los motores del Robot.
+.
+        returns:
+            (str) Un mensaje indicando el exito de la operación o
+            una excepción en caso de error.
+        """
+        resultado = self.enviarComando("M17")
+        return "INFO: Motores activados."
             
-    def desactivarMotor(self):
-        self.enviarComando("G18")
-        return "INFO: Motor desactivado."
-
-'''
-Ejemplo test
-if __name__ == "__main__":
-robot = BrazoRobot()
-puerto = 'COM5'
-velocidad = 115200
-robot.conectarRobot(puerto, velocidad)
-
-#   while robot.conexion_establecida:
-#      comando = input("Ingresa un comando (o 'q' para salir): ")
-#     if comando.lower() == 'q':
-#        break
-    #   respuesta = robot.enviarComando(comando)
-    #  print("Arduino dice:", respuesta)
-respuesta = robot.enviarComando("G28")
-print("Arduino dice:", respuesta)
-
-
-robot.seleccionarModo("absolutas")
-
-
-# Opción 1: Modo coordenadas absolutas
-# Esto enviará "G90" a Arduino
-
-#robot.seleccionarModo("relativas")
-# Opción 2: Modo coordenadas relativas
-# Esto enviará "G91" a Arduino
-
-# Crear un objeto Punto con las coordenadas deseadas
-objetivo = Punto(10.0, 180.0, 130.0)
-robot.movLineal(objetivo)
-
-respuesta = robot.enviarComando("G28")
-print("Arduino dice:", respuesta)
-
-objetivo = Punto(10.0, 180.0, 130.0)
-robot.movLineal(objetivo, 5)
-
-robot.seleccionarModo("relativas")
-respuesta = robot.enviarComando("G0")
-print("Arduino dice:", respuesta)
-
-respuesta = robot.enviarComando("M5")
-print("Arduino dice:", respuesta)
-
-respuesta = robot.enviarComando("M3")
-print("Arduino dice:", respuesta)
-
-
-
-robot.desconectarRobot()
-'''
+    def desactivarMotores(self):
+        """Desactiva el efector final del Robot.
+.
+        returns:
+            (str) Un mensaje indicando el exito de la operación o 
+            una excepción en caso de error.
+        """
+        self.enviarComando("M18")
+        return "INFO: Motores desactivados."
