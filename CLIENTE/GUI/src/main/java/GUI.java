@@ -654,6 +654,7 @@ public class GUI extends javax.swing.JFrame {
         desconectarRobotbtn.setEnabled(true);
         String comando = "robot on\n" + "modo r\n" + "estado\n";
         mandarComandoYActualizar(comando);
+        
     
     }//GEN-LAST:event_conectarRobotbtnActionPerformed
 
