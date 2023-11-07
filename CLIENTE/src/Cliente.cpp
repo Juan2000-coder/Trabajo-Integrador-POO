@@ -366,7 +366,7 @@ int main(int argc, char* argv[]) {
                 flagCliente = false;
                 break;
 
-            case 26:   //ejecutar
+            case 16:   //ejecutar
                 cin.ignore(); // Ignora el salto de línea pendiente en el búfer.
                 getline(cin, input); // Lee toda la línea como una cadena.
                 
@@ -376,7 +376,7 @@ int main(int argc, char* argv[]) {
 
                 oneArg[0] = input;
 
-                if (llamarAlServidorConTimeout(c, "ejecutar", noArgs, result, timeout, id)) {
+                if (llamarAlServidorConTimeout(c, "ejecutar", oneArg, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
                     cout << "Error en la llamada a 'ejecutar'\n\n";
