@@ -31,7 +31,7 @@ public class GUI extends javax.swing.JFrame {
                 } else {
                     // El botón está desmarcado, envía el comando "grabar" sin nombre
                     if (isGrabarActivated) {
-                        mandarComandoYActualizar("grabar\n");
+                        mandarComandoYActualizar("grabar off\n");
                         isGrabarActivated = false;
                     }
                 }
@@ -638,21 +638,21 @@ public class GUI extends javax.swing.JFrame {
 
     private void activarMotoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activarMotoresActionPerformed
         desactivarMotores.setSelected(false);
-        mandarComandoYActualizar("activarMotores\n");
+        mandarComandoYActualizar("motores on\n");
     }//GEN-LAST:event_activarMotoresActionPerformed
 
     private void desactivarMotoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desactivarMotoresActionPerformed
         activarMotores.setSelected(false);
-        mandarComandoYActualizar("desactivarMotores\n");
+        mandarComandoYActualizar("motores off\n");
     }//GEN-LAST:event_desactivarMotoresActionPerformed
 
     private void desconectarRobotbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desconectarRobotbtnActionPerformed
-        mandarComandoYActualizar("desconectarRobot\n");
+        mandarComandoYActualizar("robot off\n");
     }//GEN-LAST:event_desconectarRobotbtnActionPerformed
 
     private void conectarRobotbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conectarRobotbtnActionPerformed
         desconectarRobotbtn.setEnabled(true);
-        String comando = "conectarRobot\n" + "seleccionarModo r\n" +"posicionActual\n";
+        String comando = "robot on\n" + "modo r\n" + "estado\n";
         mandarComandoYActualizar(comando);
     
     }//GEN-LAST:event_conectarRobotbtnActionPerformed
@@ -661,11 +661,11 @@ public class GUI extends javax.swing.JFrame {
         String selectedMode = (String) seleccionarModoBox.getSelectedItem();
         String comando;
         if ("Relativas".equals(selectedMode)) {
-            comando = "seleccionarModo r\n";
+            comando = "modo r\n";
             mandarComandoYActualizar(comando);
             
         } else if ("Absolutas".equals(selectedMode)) {
-            comando = "seleccionarModo a\n";
+            comando = "modo a\n";
             mandarComandoYActualizar(comando);
         }
         
@@ -676,7 +676,7 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_homeBtnActionPerformed
 
     private void posicionActualBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_posicionActualBtnActionPerformed
-        mandarComandoYActualizar("posicionActual\n");
+        mandarComandoYActualizar("estado\n");
     }//GEN-LAST:event_posicionActualBtnActionPerformed
 
     private void movLinealBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_movLinealBtnActionPerformed
@@ -708,11 +708,11 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_cargarBtnActionPerformed
 
     private void efectorDesactivadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_efectorDesactivadoBtnActionPerformed
-        mandarComandoYActualizar("desactivarPinza\n");
+        mandarComandoYActualizar("efector off\n");
     }//GEN-LAST:event_efectorDesactivadoBtnActionPerformed
 
     private void efectorActivadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_efectorActivadoBtnActionPerformed
-        mandarComandoYActualizar("activarPinza\n");
+        mandarComandoYActualizar("efector on\n");
     }//GEN-LAST:event_efectorActivadoBtnActionPerformed
 
     private void limpiarTextAreaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarTextAreaBtnActionPerformed
@@ -720,7 +720,7 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_limpiarTextAreaBtnActionPerformed
 
     private void listarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarBtnActionPerformed
-       mandarComandoYActualizar("listarArchivosDeTrabajo\n");
+       mandarComandoYActualizar("listar\n");
     }//GEN-LAST:event_listarBtnActionPerformed
 
     private void enviarGCodeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarGCodeBtnActionPerformed
@@ -729,7 +729,7 @@ public class GUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Complete el campo de texto con GCode");
             return;
         }
-        mandarComandoYActualizar("enviarComando " + gCode + "\n");
+        mandarComandoYActualizar("ejecutar " + gCode + "\n");
     }//GEN-LAST:event_enviarGCodeBtnActionPerformed
 
     private void reiniciarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reiniciarBtnActionPerformed
@@ -766,15 +766,15 @@ public class GUI extends javax.swing.JFrame {
         listarBtn.setEnabled(false);
         logServidorBtn.setEnabled(false);
         reporteGeneralBtn.setEnabled(false);
-        mandarComandoYActualizar("desconectarServidor\n");
+        mandarComandoYActualizar("servidor off\n");
     }//GEN-LAST:event_reiniciarBtnActionPerformed
 
     private void logServidorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logServidorBtnActionPerformed
-        mandarComandoYActualizar("obtenerLogServidor\n");
+        mandarComandoYActualizar("log\n");
     }//GEN-LAST:event_logServidorBtnActionPerformed
 
     private void reporteGeneralBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteGeneralBtnActionPerformed
-        mandarComandoYActualizar("reporteGeneral\n");
+        mandarComandoYActualizar("reporte\n");
     }//GEN-LAST:event_reporteGeneralBtnActionPerformed
     private static GUIClass gui;
     private JFrame frame;
