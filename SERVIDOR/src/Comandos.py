@@ -19,7 +19,7 @@ class ComandosGcode:
         "modo": {"a": "G90", "r": "G91"},
         "motores": {"on":"M17", "off": "M18"},
         "home": "G28",
-        "estado": "G0",
+        "estado": "M114",
         "efector": {"on":"M3", "off":"M5"},
     }
 
@@ -32,9 +32,10 @@ class ComandosGcode:
             if len(args) == 3:
                 x, y, z = args
                 e = 0
+                return f"G0 X{x} Y{y} Z{z}"
             elif len(args) == 4:
                 x, y, z, e = args
-            return f"G1 X{x} Y{y} Z{z} E{e}"
+                return f"G1 X{x} Y{y} Z{z} E{e}"
         
         elif comando == "modo":
             if args[0] == "a":
