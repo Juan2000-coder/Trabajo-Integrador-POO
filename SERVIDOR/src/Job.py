@@ -56,5 +56,8 @@ class Job():
                 comando = lineaSeparada[0]
                 params = lineaSeparada[1:]
                 if comando != "grabar":
-                    comandoTransformado = ComandosGcode.comandoAGcode(comando, *params)
+                    if comando == "ejecutar":
+                        comandoTransformado = params[0]
+                    else:
+                        comandoTransformado = ComandosGcode.comandoAGcode(comando, *params)
                     self.agregarComando(comandoTransformado)
