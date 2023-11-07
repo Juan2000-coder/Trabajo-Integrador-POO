@@ -65,7 +65,8 @@ class CLI(Cmd):
             lineSplit = line.split()
             comando = lineSplit[0]
             params = lineSplit[1:]
-
+            print(comando)
+            print(params)
             if comando != "grabar":
                 comandoTransformado = ComandosGcode.comandoAGcode(comando, *params)
                 job.agregarComando(comandoTransformado)

@@ -4,7 +4,7 @@ class ComandosGcode:
         "activarMotores": "G17",
         "desactivarMotores": "G18",
         "home": "G28",
-        "posicionActual": "G0",
+        "posicionActual": "M114",
         "activarPinza": "M3",
         "desactivarPinza": "M5",
     }
@@ -15,9 +15,10 @@ class ComandosGcode:
             if len(args) == 3:
                 x, y, z = args
                 e = 0  # Velocidad por defecto
+                return f"G0 X{x} Y{y} Z{z}"
             elif len(args) == 4:
                 x, y, z, e = args
-            return f"G1 X{x} Y{y} Z{z} E{e}"
+                return f"G1 X{x} Y{y} Z{z} E{e}"
         
         elif comando == "seleccionarModo":
             if args[0] == "a":

@@ -224,7 +224,6 @@ int main(int argc, char* argv[]) {
   
 
     while (flagCliente) {
-    cout << "Ingrese una opción: ";
     cin >> input;
     
     auto it = comandoANumero.find(input); //Aquí, it es un iterador que apunta a la ubicación de input en el std::map stringToValue. La función find busca la clave input 
