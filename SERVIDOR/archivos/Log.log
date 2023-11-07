@@ -66,7 +66,11 @@
 [2023-11-06 21:02:16] [INFO] dalessandro_francisco 192.168.100.8 [home]  No se puede enviar el comando, robot desconectado.
 =======
 >>>>>>> be0d1c2c73a028bd4c2174cb8105799c15fcf5d4
+<<<<<<< HEAD
+[2023-11-06 21:49:13] [INFO] miranda_francisco 192.168.1.48 [conectarRobot]  Conexión exitosa con el robot.
+=======
 >>>>>>> adb6d3cab16999f19568323000328173cf68f349
+<<<<<<< HEAD
 [2023-11-06 22:20:53] [ERROR] dalessandro_francisco 192.168.100.8 [conectarRobot]  No se puede establecer conexión con el brazo.
 [2023-11-06 22:20:53] [INFO] dalessandro_francisco 192.168.100.8 [seleccionarModo]  No se puede enviar el comando, robot desconectado.
 [2023-11-06 22:20:53] [INFO] dalessandro_francisco 192.168.100.8 [posicionActual]  No se puede enviar el comando, robot desconectado.
@@ -77,3 +81,6 @@
 [2023-11-06 22:25:13] [INFO] borquez_juan 192.168.100.8 [desconectarRobot]  El robot ya se encuentra desconectado.
 [2023-11-06 22:53:05] [INFO] borquez_juan 192.168.100.8 [grabar]  Comandos se almacenaran en sexo.txt
 [2023-11-06 22:53:12] [INFO] borquez_juan 192.168.100.8 [enviarComando]  No se puede enviar el comando, robot desconectado.
+=======
+>>>>>>> 56ce35f7c58dc3624c98fde23ee627d5e04534a1
+>>>>>>> 734f73a528942d87057bf3353577fd9e4235a3b1

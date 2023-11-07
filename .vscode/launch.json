@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "GUI",
+            "request": "launch",
+            "mainClass": "GUI",
+            "projectName": "testGUIjava"
+        },
+        {
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
@@ -17,7 +24,10 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}\\CLIENTE\\build\\${fileBasenameNoExtension}.exe",
-            "args": ["192.168.1.105","8000"],
+            "args": [
+                "192.168.1.105",
+                "8000"
+            ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
