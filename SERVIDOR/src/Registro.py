@@ -35,6 +35,16 @@ class Registro():
                 self.mensaje =''
         else:
             raise Excepciones.ExcepcionDeRegistro(1)
+    def esDebug(self):
+        return self.nivelLog == "DEBUG"
+    def esInfo(self):
+        return self.nivelLog == "INFO"
+    def esWarning(self):
+        return self.nivelLog == "WARNING"
+    def esError(self):
+        return self.nivelLog == "ERROR"
+    def esCritical(self):
+        return self.nivelLog == "CRITICAL"
     def __str__(self):
         """Devuelve el registro en un formato como el propio el robot."""
         return ":".join([self.nivelLog, self.mensaje])

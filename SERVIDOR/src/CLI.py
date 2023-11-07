@@ -51,7 +51,7 @@ class CLI(Cmd):
             if resultado is not None:
                 print(resultado)
                 if self.grabando:
-                    self.archivoJob.actualizar(linea)
+                    self.archivoJob.actualizar(linea, resultado)
         except Excepciones.Excepciones as e:
             print(e)
 
@@ -71,7 +71,7 @@ cls
 
         """
 Muestra un reporte general de la actividad del servidor.
-reporteGeneral
+reporte
         """
         args = args.split()
         if len(args) == 0:
@@ -103,8 +103,7 @@ log
     def do_modo(self, args):
         """
 Selecciona el modo de operacion en coordenadas Absolutas(a) o Relativas(r).
-modo <modo>
-    modo        modo = a || modo = r.
+modo    a|r
         """
         args = args.split()
         if len(args) == 1:
@@ -116,11 +115,10 @@ modo <modo>
     def do_robot(self, args):
         """
 Conecta o desconecta el robot.
-robot <opcion>
-    opcion      opcion = on || opcion = off
+robot   on|off
         """
         args = args.split()
-        if len(args) == 0:
+        if len(args) == 1:
             if args[0] == 'on':
                 resultado = self.robot.conectarRobot('COM3')
             elif args[0] == 'off':
@@ -134,11 +132,10 @@ robot <opcion>
     def do_motores(self, args):
         """
 Activa o desactiva los motores del robot.
-motores <opcion>
-    opcion      opcion = on || opcion = off
+motores on|off
         """
         args = args.split()
-        if len(args) == 0:
+        if len(args) == 1:
             if args[0] == 'on':
                 resultado = self.robot.activarMotores()
             elif args[0] == 'off':
@@ -161,7 +158,7 @@ home
         else:
             raise Excepciones.ExcepcionDeComando(1)
         
-    def do_movLineal(self, args):
+    def do_movlineal(self, args):
         """
 Realiza el movimiento lineal del efector final.
 movLineal <xx.x> <yy.y> <zz.z> [vv.v]
@@ -182,11 +179,10 @@ movLineal <xx.x> <yy.y> <zz.z> [vv.v]
     def do_efector(self, args):
         """
 Activa o desactiva el efector final del robot.
-efector <opcion>
-    opcion      opcion = on || opcion = off
+efector on|off
         """
         args = args.split()
-        if len(args) == 0:
+        if len(args) == 1:
             if args[0] == 'on':
                 resultado = self.robot.activarEfector()
             elif args[0] == 'off':
@@ -213,7 +209,7 @@ estado
         """
 Inicia/detiene el proceso de grabación de movimientos para construir un archivo de trabajo con la secuencia grabada.
 grabar opcion
-    opcion    Nombre de un archivo (graba en el archivo) || off (detiene la grabación).
+    opcion    Nombre de un archivo (graba en el archivo) | off (detiene la grabación).
               (El nombre del archivo no puede ser 'off')
     
         """
@@ -222,7 +218,7 @@ grabar opcion
             if args[0] != 'off':
                 if not self.grabando:
                     self.archivoJob = Job(args[0])
-                    resultado = "INFO: Comandos se almacenaran en " + self.archivoJob
+                    resultado = "INFO: Comandos se almacenaran en " + self.archivoJob.nombre
                     self.grabando = True
                 else:
                     resultado = "INFO: Grabación en curso."
@@ -239,13 +235,13 @@ grabar opcion
         """
 Carga un archivo de trabajo existente en el directorio.
 cargar <archivo>
-    archivo     El nombre del archivo de Trabajo en el directorio.
+    archivo     El nombre del archivo de trabajo en el directorio.
     """
         args = args.split()
         if len(args) == 1:
             resultado = ''
             for comando in Job(args[0]).obtenerComandos():
-                resultado += self.robot.enviarComando(comando) + '\r\n'
+                resultado += self.robot.enviarComando(comando.strip('\n')) + '\r\n'
             return Registrar(resultado)
         else:
             raise Excepciones.ExcepcionDeComando(1)
@@ -253,7 +249,7 @@ cargar <archivo>
     def do_servidor(self, args):
         """
 Inicia/detiene el servidor rpc según el valor dado (on/off).
-levantarServidor on|off
+servidor on|off
         """
         args = args.split()
         if len(args) == 1:

@@ -12,6 +12,7 @@
 import os
 from Excepciones import ExcepcionArchivo
 from Comandos import ComandosGcode
+from Registro import Registrar
 
 class Job():
     """Clase para el tratamiento de archivos de Trabajo."""
@@ -19,6 +20,7 @@ class Job():
     ruta = os.path.join(ruta, "..", "job")
 
     def __init__(self, archivo):
+        self.nombre = archivo
         self.archivo = os.path.join(self.ruta, archivo)
 
     def agregarComando(self, comando):
@@ -41,15 +43,18 @@ class Job():
         except Exception:
             raise ExcepcionArchivo(2)
         
-    def actualizar(self, linea:str):
-        """Actualiza un archivo de trabajo partir de una línea del CLI.
+    def actualizar(self, linea:str, resultado):
+        """Actualiza un archivo de trabajo partir de una línea del CLI y el resultad
+        de la ejecucion. Solamente registra comandos exitosos.
         args:
             linea(str): una línea la entrada de prompt del CLI con un comando del Robot.
+            resultado: el resultado de un comando ejecutado.
         """
-        lineaSeparada = linea.split()
-        comando = lineaSeparada[0]
-        params = lineaSeparada[1:]
-
-        if comando != "grabar":
-            comandoTransformado = ComandosGcode.comandoAGcode(comando, *params)
-            self.agregarComando(comandoTransformado)
+        if type(resultado) is Registrar: # Correponde a un código G del Robot.
+            if not any(registro.esError() for registro in resultado.registros):
+                lineaSeparada = linea.split()
+                comando = lineaSeparada[0]
+                params = lineaSeparada[1:]
+                if comando != "grabar":
+                    comandoTransformado = ComandosGcode.comandoAGcode(comando, *params)
+                    self.agregarComando(comandoTransformado)

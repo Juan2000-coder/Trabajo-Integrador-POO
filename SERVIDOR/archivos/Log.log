@@ -1,22 +1,287 @@
-2023-11-05 13:03:06 [INFO] 192.168.1.81 [conectarRobot]  Conexión exitosa con el robot.
-2023-11-05 13:03:08 [INFO] 192.168.1.81 [home]  ROBOT ONLINE
-2023-11-05 13:03:08 [INFO] 192.168.1.81 [home]  SEND G28 TO CALIBRATE
-2023-11-05 13:03:08 [INFO] 192.168.1.81 [home]  HOMING
-2023-11-05 13:03:08 [INFO] 192.168.1.81 [home]  HOMING COMPLETE t=7.50s
-2023-11-05 13:03:12 [INFO] 192.168.1.81 [activarPinza]  GRIPPER ON
-2023-11-05 13:03:18 [INFO] 192.168.1.81 [movLineal]  LINEAR  MOVE: [X:10.00 Y:100.00 Z:130.00 E:0.00] t=1.18s
-2023-11-05 13:03:21 [INFO] 192.168.1.81 [home]  HOMING
-2023-11-05 13:03:21 [INFO] 192.168.1.81 [home]  HOMING COMPLETE t=4.50s
-2023-11-05 13:03:24 [INFO] 192.168.1.81 [desactivarPinza]  GRIPPER OFF
-2023-11-05 13:03:45 [INFO] 192.168.1.81 [seleccionarModo]  ABSOLUTE MODE ON
-2023-11-05 13:03:50 [INFO] 192.168.1.81 [seleccionarModo]  RELATIVE MODE ON
-2023-11-05 13:03:52 [INFO] 192.168.1.81 [home]  HOMING
-2023-11-05 13:03:52 [INFO] 192.168.1.81 [home]  HOMING COMPLETE t=3.50s
-2023-11-05 14:17:16 [INFO] 192.168.1.81 [reporteGeneral] Solicitud Exitosa
-2023-11-05 14:18:31 [INFO] 192.168.1.81 [reporteGeneral] Solicitud Exitosa
-2023-11-05 14:26:30 [INFO] 192.168.1.81 [reporteGeneral] Solicitud Exitosa
-2023-11-05 14:32:47 [INFO] 192.168.1.81 [conectarRobot]  Conexión exitosa con el robot.
-2023-11-05 14:32:52 [INFO] 192.168.1.81 [reporteGeneral] Solicitud Exitosa
-2023-11-05 14:33:02 [INFO] 192.168.1.81 [home]  HOMING
-2023-11-05 14:33:02 [INFO] 192.168.1.81 [home]  HOMING COMPLETE t=7.50s
-2023-11-05 14:33:05 [INFO] 192.168.1.81 [reporteGeneral] Solicitud Exitosa
+[2023-11-06 21:23:54] [INFO] borquez_juan 192.168.1.81 [robot]  Conexión exitosa con el robot.
+[2023-11-06 21:24:00] [INFO] borquez_juan 192.168.1.81 [home]  ROBOT ONLINE
+[2023-11-06 21:24:00] [INFO] borquez_juan 192.168.1.81 [home]  SEND G28 TO CALIBRATE
+[2023-11-06 21:24:00] [INFO] borquez_juan 192.168.1.81 [home]  HOMING
+[2023-11-06 21:24:00] [INFO] borquez_juan 192.168.1.81 [home]  HOMING COMPLETE t=7.50s
+[2023-11-06 21:25:56] [INFO] borquez_juan 192.168.1.81 [robot]  Conexión exitosa con el robot.
+[2023-11-06 21:25:59] [INFO] borquez_juan 192.168.1.81 [home]  ROBOT ONLINE
+[2023-11-06 21:25:59] [INFO] borquez_juan 192.168.1.81 [home]  SEND G28 TO CALIBRATE
+[2023-11-06 21:25:59] [INFO] borquez_juan 192.168.1.81 [home]  HOMING
+[2023-11-06 21:25:59] [INFO] borquez_juan 192.168.1.81 [home]  HOMING COMPLETE t=7.50s
+[2023-11-06 21:26:04] [INFO] borquez_juan 192.168.1.81 [home]  HOMING
+[2023-11-06 21:26:04] [INFO] borquez_juan 192.168.1.81 [home]  HOMING COMPLETE t=4.50s
+[2023-11-06 21:26:13] [INFO] borquez_juan 192.168.1.81 [movlineal]  LINEAR  MOVE: [X:100.00 Y:10.00 Z:100.00 E:0.00] t=0.73s
+[2023-11-06 21:26:20] [INFO] borquez_juan 192.168.1.81 [efector]  GRIPPER ON
+[2023-11-06 21:26:25] [INFO] borquez_juan 192.168.1.81 [efector]  GRIPPER OFF
+[2023-11-06 21:26:32] [INFO] borquez_juan 192.168.1.81 [home]  HOMING
+[2023-11-06 21:26:32] [INFO] borquez_juan 192.168.1.81 [home]  HOMING COMPLETE t=3.50s
+[2023-11-06 21:26:34] [INFO] borquez_juan 192.168.1.81 [motores]  Motor activado.
+[2023-11-06 21:26:38] [INFO] borquez_juan 192.168.1.81 [motores]  Motor desactivado.
+[2023-11-06 21:26:47] [INFO] borquez_juan 192.168.1.81 [movlineal]  LINEAR  MOVE: [X:100.00 Y:10.00 Z:100.00 E:0.00] t=0.73s
+[2023-11-06 21:26:52] [INFO] borquez_juan 192.168.1.81 [modo]  ABSOLUTE MODE ON
+[2023-11-06 21:26:56] [INFO] borquez_juan 192.168.1.81 [modo]  RELATIVE MODE ON
+[2023-11-06 21:26:59] [INFO] borquez_juan 192.168.1.81 [modo]  Llamada a comando con argumentos no válidos.
+[2023-11-06 21:27:02] [INFO] borquez_juan 192.168.1.81 [modo]  Llamada a comando con argumentos no válidos.
+[2023-11-06 21:27:11] [INFO] borquez_juan 192.168.1.81 [movlineal]  LINEAR  MOVE: [X:100.00 Y:13.00 Z:100.00 E:0.00] t=5.77s
+[2023-11-06 21:27:25] [INFO] borquez_juan 192.168.1.81 [movlineal]  LINEAR  MOVE: [X:100.00 Y:16.00 Z:100.00 E:0.00] t=5.77s
+[2023-11-06 21:27:36] [INFO] borquez_juan 192.168.1.81 [modo]  ABSOLUTE MODE ON
+[2023-11-06 21:27:41] [ERROR] borquez_juan 192.168.1.81 [movlineal]  POINT IS OUTSIDE OF WORKSPACE
+[2023-11-06 21:27:51] [CRITICAL] borquez_juan 192.168.1.81 [grabar] can only concatenate str (not "Job") to str
+[2023-11-06 21:27:57] [CRITICAL] borquez_juan 192.168.1.81 [grabar] can only concatenate str (not "Job") to str
+[2023-11-06 21:28:06] [INFO] borquez_juan 192.168.1.81 [reporte] Solicitud Exitosa
+[2023-11-06 21:28:18] [INFO] borquez_juan 192.168.1.81 [listar] Solicitud Exitosa
+[2023-11-06 21:28:31] [INFO] borquez_juan 192.168.1.81 [log] Solicitud Exitosa
+[2023-11-06 21:28:35] [INFO] borquez_juan 192.168.1.81 [log] Solicitud Exitosa
+[2023-11-06 21:30:11] [INFO] borquez_juan 192.168.1.81 [grabar]  Comandos se almacenaran en c:\Users\Public\Documents\UNCUYO\4-Cuarto_anio\2-Octavo_Semestre\2-Programacion_Orientada_a_Objetos\3-Trabajos_Practicos\3-Integrador\SERVIDOR\src\..\job\trabajo.txt
+[2023-11-06 21:30:23] [INFO] borquez_juan 192.168.1.81 [robot]  Conexión exitosa con el robot.
+[2023-11-06 21:30:27] [INFO] borquez_juan 192.168.1.81 [home]  ROBOT ONLINE
+[2023-11-06 21:30:27] [INFO] borquez_juan 192.168.1.81 [home]  SEND G28 TO CALIBRATE
+[2023-11-06 21:30:27] [INFO] borquez_juan 192.168.1.81 [home]  HOMING
+[2023-11-06 21:30:27] [INFO] borquez_juan 192.168.1.81 [home]  HOMING COMPLETE t=7.50s
+[2023-11-06 21:30:35] [ERROR] borquez_juan 192.168.1.81 [movlineal]  POINT IS OUTSIDE OF WORKSPACE
+[2023-11-06 21:30:39] [INFO] borquez_juan 192.168.1.81 [movlineal]  LINEAR  MOVE: [X:100.00 Y:120.00 Z:30.00 E:0.00] t=0.83s
+[2023-11-06 21:30:44] [INFO] borquez_juan 192.168.1.81 [efector]  GRIPPER ON
+[2023-11-06 21:30:46] [INFO] borquez_juan 192.168.1.81 [modo]  ABSOLUTE MODE ON
+[2023-11-06 21:30:50] [INFO] borquez_juan 192.168.1.81 [modo]  RELATIVE MODE ON
+[2023-11-06 21:30:52] [INFO] borquez_juan 192.168.1.81 [estado]  RELATIVE MODE
+[2023-11-06 21:30:52] [INFO] borquez_juan 192.168.1.81 [estado]  CURRENT POSITION: [X:100.00 Y:120.00 Z:30.00 E:0.00]
+[2023-11-06 21:30:56] [INFO] borquez_juan 192.168.1.81 [home]  HOMING
+[2023-11-06 21:30:56] [INFO] borquez_juan 192.168.1.81 [home]  HOMING COMPLETE t=4.50s
+[2023-11-06 21:30:58] [INFO] borquez_juan 192.168.1.81 [motores]  Motor activado.
+[2023-11-06 21:31:01] [INFO] borquez_juan 192.168.1.81 [motores]  Motor desactivado.
+[2023-11-06 21:31:06] [INFO] borquez_juan 192.168.1.81 [grabar]  Almacenamiento de comandos detenido.
+[2023-11-06 21:31:12] [INFO] borquez_juan 192.168.1.81 [listar] Solicitud Exitosa
+[2023-11-06 21:31:26] [INFO] borquez_juan 192.168.1.81 [reporte] Solicitud Exitosa
+[2023-11-06 21:31:29] [INFO] borquez_juan 192.168.1.81 [log] Solicitud Exitosa
+[2023-11-06 21:31:58] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 21:31:58] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=3.50s
+[2023-11-06 21:31:58] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR  MOVE: [X:0.00 Y:170.00 Z:120.00 E:0.00] t=0.00s
+[2023-11-06 21:31:58] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 21:31:58] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=2.00s
+[2023-11-06 21:32:16] [INFO] borquez_juan 192.168.1.81 [grabar]  Comandos se almacenaran en c:\Users\Public\Documents\UNCUYO\4-Cuarto_anio\2-Octavo_Semestre\2-Programacion_Orientada_a_Objetos\3-Trabajos_Practicos\3-Integrador\SERVIDOR\src\..\job\trabajo.txt
+[2023-11-06 21:32:21] [INFO] borquez_juan 192.168.1.81 [home]  HOMING
+[2023-11-06 21:32:21] [INFO] borquez_juan 192.168.1.81 [home]  HOMING COMPLETE t=3.00s
+[2023-11-06 21:32:27] [ERROR] borquez_juan 192.168.1.81 [movlineal]  POINT IS OUTSIDE OF WORKSPACE
+[2023-11-06 21:32:32] [ERROR] borquez_juan 192.168.1.81 [movlineal]  POINT IS OUTSIDE OF WORKSPACE
+[2023-11-06 21:32:36] [ERROR] borquez_juan 192.168.1.81 [movlineal]  POINT IS OUTSIDE OF WORKSPACE
+[2023-11-06 21:32:39] [ERROR] borquez_juan 192.168.1.81 [movlineal]  POINT IS OUTSIDE OF WORKSPACE
+[2023-11-06 21:32:43] [ERROR] borquez_juan 192.168.1.81 [movlineal]  POINT IS OUTSIDE OF WORKSPACE
+[2023-11-06 21:32:48] [ERROR] borquez_juan 192.168.1.81 [movlineal]  POINT IS OUTSIDE OF WORKSPACE
+[2023-11-06 21:32:51] [ERROR] borquez_juan 192.168.1.81 [movlineal]  POINT IS OUTSIDE OF WORKSPACE
+[2023-11-06 21:32:57] [ERROR] borquez_juan 192.168.1.81 [movlineal]  POINT IS OUTSIDE OF WORKSPACE
+[2023-11-06 21:33:00] [ERROR] borquez_juan 192.168.1.81 [movlineal]  POINT IS OUTSIDE OF WORKSPACE
+[2023-11-06 21:33:04] [ERROR] borquez_juan 192.168.1.81 [movlineal]  POINT IS OUTSIDE OF WORKSPACE
+[2023-11-06 21:33:07] [ERROR] borquez_juan 192.168.1.81 [movlineal]  POINT IS OUTSIDE OF WORKSPACE
+[2023-11-06 21:33:11] [ERROR] borquez_juan 192.168.1.81 [movlineal]  POINT IS OUTSIDE OF WORKSPACE
+[2023-11-06 21:33:14] [ERROR] borquez_juan 192.168.1.81 [movlineal]  POINT IS OUTSIDE OF WORKSPACE
+[2023-11-06 21:33:20] [INFO] borquez_juan 192.168.1.81 [modo]  RELATIVE MODE ON
+[2023-11-06 21:37:46] [INFO] borquez_juan 192.168.1.81 [robot]  Conexión exitosa con el robot.
+[2023-11-06 21:37:52] [INFO] borquez_juan 192.168.1.81 [grabar]  Comandos se almacenaran en trabajo.txt
+[2023-11-06 21:37:59] [INFO] borquez_juan 192.168.1.81 [home]  ROBOT ONLINE
+[2023-11-06 21:37:59] [INFO] borquez_juan 192.168.1.81 [home]  SEND G28 TO CALIBRATE
+[2023-11-06 21:37:59] [INFO] borquez_juan 192.168.1.81 [home]  HOMING
+[2023-11-06 21:37:59] [INFO] borquez_juan 192.168.1.81 [home]  HOMING COMPLETE t=7.50s
+[2023-11-06 21:38:10] [INFO] borquez_juan 192.168.1.81 [modo]  ABSOLUTE MODE ON
+[2023-11-06 21:38:14] [INFO] borquez_juan 192.168.1.81 [modo]  RELATIVE MODE ON
+[2023-11-06 21:38:18] [INFO] borquez_juan 192.168.1.81 [motores]  Motor activado.
+[2023-11-06 21:38:21] [INFO] borquez_juan 192.168.1.81 [motores]  Motor desactivado.
+[2023-11-06 21:38:25] [ERROR] borquez_juan 192.168.1.81 [movlineal]  POINT IS OUTSIDE OF WORKSPACE
+[2023-11-06 21:38:30] [INFO] borquez_juan 192.168.1.81 [movlineal]  LINEAR  MOVE: [X:10.00 Y:180.00 Z:130.00 E:0.00] t=2.40s
+[2023-11-06 21:38:35] [INFO] borquez_juan 192.168.1.81 [efector]  GRIPPER ON
+[2023-11-06 21:38:38] [INFO] borquez_juan 192.168.1.81 [efector]  GRIPPER OFF
+[2023-11-06 21:45:47] [INFO] borquez_juan 192.168.1.81 [grabar]  Comandos se almacenaran en trabajo.txt
+[2023-11-06 21:46:52] [INFO] borquez_juan 192.168.1.81 [robot]  Conexión exitosa con el robot.
+[2023-11-06 21:46:57] [INFO] borquez_juan 192.168.1.81 [grabar]  Comandos se almacenaran en trabajo.txt
+[2023-11-06 21:47:04] [INFO] borquez_juan 192.168.1.81 [home]  ROBOT ONLINE
+[2023-11-06 21:47:04] [INFO] borquez_juan 192.168.1.81 [home]  SEND G28 TO CALIBRATE
+[2023-11-06 21:47:04] [INFO] borquez_juan 192.168.1.81 [home]  HOMING
+[2023-11-06 21:47:04] [INFO] borquez_juan 192.168.1.81 [home]  HOMING COMPLETE t=7.50s
+[2023-11-06 21:47:10] [INFO] borquez_juan 192.168.1.81 [movlineal]  LINEAR  MOVE: [X:10.00 Y:20.00 Z:100.00 E:0.00] t=0.81s
+[2023-11-06 21:47:18] [INFO] borquez_juan 192.168.1.81 [efector]  GRIPPER ON
+[2023-11-06 21:47:21] [INFO] borquez_juan 192.168.1.81 [efector]  GRIPPER OFF
+[2023-11-06 21:47:27] [INFO] borquez_juan 192.168.1.81 [motores]  Motor activado.
+[2023-11-06 21:47:30] [INFO] borquez_juan 192.168.1.81 [motores]  Motor desactivado.
+[2023-11-06 21:47:32] [INFO] borquez_juan 192.168.1.81 [estado]  ABSOLUTE MODE
+[2023-11-06 21:47:32] [INFO] borquez_juan 192.168.1.81 [estado]  CURRENT POSITION: [X:10.00 Y:20.00 Z:100.00 E:0.00]
+[2023-11-06 21:47:39] [INFO] borquez_juan 192.168.1.81 [grabar]  Almacenamiento de comandos detenido.
+[2023-11-06 21:48:03] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 21:48:03] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=4.50s
+[2023-11-06 21:48:03] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR  MOVE: [X:0.00 Y:170.00 Z:120.00 E:0.00] t=0.00s
+[2023-11-06 21:48:03] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 21:48:03] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=3.50s
+[2023-11-06 21:48:03] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 21:48:03] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=2.00s
+[2023-11-06 21:48:03] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 21:48:03] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=3.00s
+[2023-11-06 21:48:03] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 21:48:03] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=5.00s
+[2023-11-06 21:48:03] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR  MOVE: [X:10.00 Y:20.00 Z:100.00 E:0.00] t=0.81s
+[2023-11-06 21:48:03] [INFO] borquez_juan 192.168.1.81 [cargar]  GRIPPER ON
+[2023-11-06 21:48:03] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 21:48:03] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=4.00s
+[2023-11-06 21:48:03] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR  MOVE: [X:10.00 Y:20.00 Z:100.00 E:0.00] t=0.81s
+[2023-11-06 21:48:03] [INFO] borquez_juan 192.168.1.81 [cargar]  GRIPPER ON
+[2023-11-06 21:48:03] [INFO] borquez_juan 192.168.1.81 [cargar]  GRIPPER OFF
+[2023-11-06 21:48:03] [ERROR] borquez_juan 192.168.1.81 [cargar]  COMMAND NOT RECOGNIZED
+[2023-11-06 21:48:03] [ERROR] borquez_juan 192.168.1.81 [cargar]  COMMAND NOT RECOGNIZED
+[2023-11-06 21:48:03] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR  MOVE: [X:10.00 Y:20.00 Z:100.00 E:0.00] t=0.00s
+[2023-11-06 21:49:43] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 21:49:43] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=5.00s
+[2023-11-06 21:49:43] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR  MOVE: [X:0.00 Y:170.00 Z:120.00 E:0.00] t=0.00s
+[2023-11-06 21:49:43] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 21:49:43] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=9.50s
+[2023-11-06 21:49:43] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 21:49:43] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=1.50s
+[2023-11-06 21:49:43] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 21:49:43] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=1.00s
+[2023-11-06 21:49:43] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 21:49:43] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=9.50s
+[2023-11-06 21:49:43] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR  MOVE: [X:10.00 Y:20.00 Z:100.00 E:0.00] t=0.81s
+[2023-11-06 21:49:43] [INFO] borquez_juan 192.168.1.81 [cargar]  GRIPPER ON
+[2023-11-06 21:49:43] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 21:49:43] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=4.00s
+[2023-11-06 21:49:43] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR  MOVE: [X:10.00 Y:20.00 Z:100.00 E:0.00] t=0.81s
+[2023-11-06 21:49:43] [INFO] borquez_juan 192.168.1.81 [cargar]  GRIPPER ON
+[2023-11-06 21:49:43] [INFO] borquez_juan 192.168.1.81 [cargar]  GRIPPER OFF
+[2023-11-06 21:49:43] [ERROR] borquez_juan 192.168.1.81 [cargar]  COMMAND NOT RECOGNIZED
+[2023-11-06 21:49:43] [ERROR] borquez_juan 192.168.1.81 [cargar]  COMMAND NOT RECOGNIZED
+[2023-11-06 21:49:43] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR  MOVE: [X:10.00 Y:20.00 Z:100.00 E:0.00] t=0.00s
+[2023-11-06 21:52:13] [INFO] borquez_juan 192.168.1.81 [robot]  Conexión exitosa con el robot.
+[2023-11-06 21:57:50] [INFO] borquez_juan 192.168.1.81 [cargar]  ROBOT ONLINE
+[2023-11-06 21:57:58] [INFO] borquez_juan 192.168.1.81 [cargar]  SEND G28 TO CALIBRATE
+[2023-11-06 21:58:02] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 21:58:02] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=7.50s
+[2023-11-06 21:58:02] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR  MOVE: [X:0.00 Y:170.00 Z:120.00 E:0.00] t=0.00s
+[2023-11-06 21:58:02] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 21:58:02] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=4.50s
+[2023-11-06 21:58:02] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 21:58:02] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=3.50s
+[2023-11-06 21:58:02] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 21:58:02] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=2.00s
+[2023-11-06 21:58:02] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 21:58:02] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=3.00s
+[2023-11-06 21:58:02] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR  MOVE: [X:10.00 Y:20.00 Z:100.00 E:0.00] t=0.81s
+[2023-11-06 21:58:02] [INFO] borquez_juan 192.168.1.81 [cargar]  GRIPPER ON
+[2023-11-06 21:58:02] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 21:58:02] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=5.00s
+[2023-11-06 21:58:02] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR  MOVE: [X:10.00 Y:20.00 Z:100.00 E:0.00] t=0.81s
+[2023-11-06 21:58:02] [INFO] borquez_juan 192.168.1.81 [cargar]  GRIPPER ON
+[2023-11-06 21:58:02] [INFO] borquez_juan 192.168.1.81 [cargar]  GRIPPER OFF
+[2023-11-06 21:58:02] [ERROR] borquez_juan 192.168.1.81 [cargar]  COMMAND NOT RECOGNIZED
+[2023-11-06 21:58:02] [ERROR] borquez_juan 192.168.1.81 [cargar]  COMMAND NOT RECOGNIZED
+[2023-11-06 21:58:02] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR  MOVE: [X:10.00 Y:20.00 Z:100.00 E:0.00] t=0.00s
+[2023-11-06 22:06:46] [INFO] borquez_juan 192.168.1.81 [cargar]  No se puede enviar el comando, robot desconectado.
+[2023-11-06 22:07:59] [INFO] borquez_juan 192.168.1.81 [cargar]  No se puede enviar el comando, robot desconectado.
+[2023-11-06 22:08:13] [INFO] borquez_juan 192.168.1.81 [robot]  Conexión exitosa con el robot.
+[2023-11-06 22:08:55] [INFO] borquez_juan 192.168.1.81 [cargar]  ROBOT ONLINE
+[2023-11-06 22:08:55] [INFO] borquez_juan 192.168.1.81 [cargar]  SEND G28 TO CALIBRATE
+[2023-11-06 22:08:55] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 22:08:55] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=7.50s
+[2023-11-06 22:08:55] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR  MOVE: [X:0.00 Y:170.00 Z:120.00 E:0.00] t=0.00s
+[2023-11-06 22:08:55] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 22:08:55] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=4.50s
+[2023-11-06 22:08:55] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 22:08:55] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=3.50s
+[2023-11-06 22:08:55] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 22:08:55] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=2.00s
+[2023-11-06 22:08:55] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 22:08:55] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=3.00s
+[2023-11-06 22:08:55] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR  MOVE: [X:10.00 Y:20.00 Z:100.00 E:0.00] t=0.81s
+[2023-11-06 22:08:55] [INFO] borquez_juan 192.168.1.81 [cargar]  GRIPPER ON
+[2023-11-06 22:08:55] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 22:08:55] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=5.00s
+[2023-11-06 22:08:55] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR  MOVE: [X:10.00 Y:20.00 Z:100.00 E:0.00] t=0.81s
+[2023-11-06 22:08:55] [INFO] borquez_juan 192.168.1.81 [cargar]  GRIPPER ON
+[2023-11-06 22:08:55] [INFO] borquez_juan 192.168.1.81 [cargar]  GRIPPER OFF
+[2023-11-06 22:08:55] [ERROR] borquez_juan 192.168.1.81 [cargar]  COMMAND NOT RECOGNIZED
+[2023-11-06 22:08:55] [ERROR] borquez_juan 192.168.1.81 [cargar]  COMMAND NOT RECOGNIZED
+[2023-11-06 22:08:55] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR  MOVE: [X:10.00 Y:20.00 Z:100.00 E:0.00] t=0.00s
+[2023-11-06 22:09:56] [INFO] borquez_juan 192.168.1.81 [robot]  Conexión exitosa con el robot.
+[2023-11-06 22:10:21] [INFO] borquez_juan 192.168.1.81 [cargar]  ROBOT ONLINE
+[2023-11-06 22:10:21] [INFO] borquez_juan 192.168.1.81 [cargar]  SEND G28 TO CALIBRATE
+[2023-11-06 22:10:21] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 22:10:21] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=7.50s
+[2023-11-06 22:10:21] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR  MOVE: [X:0.00 Y:170.00 Z:120.00 E:0.00] t=0.00s
+[2023-11-06 22:10:21] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 22:10:21] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=4.50s
+[2023-11-06 22:10:21] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 22:10:21] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=3.50s
+[2023-11-06 22:10:21] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 22:10:21] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=2.00s
+[2023-11-06 22:10:21] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 22:10:21] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=3.00s
+[2023-11-06 22:10:21] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR  MOVE: [X:10.00 Y:20.00 Z:100.00 E:0.00] t=0.81s
+[2023-11-06 22:10:21] [INFO] borquez_juan 192.168.1.81 [cargar]  GRIPPER ON
+[2023-11-06 22:10:21] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 22:10:21] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=5.00s
+[2023-11-06 22:10:21] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR  MOVE: [X:10.00 Y:20.00 Z:100.00 E:0.00] t=0.81s
+[2023-11-06 22:10:21] [INFO] borquez_juan 192.168.1.81 [cargar]  GRIPPER ON
+[2023-11-06 22:10:21] [INFO] borquez_juan 192.168.1.81 [cargar]  GRIPPER OFF
+[2023-11-06 22:10:21] [ERROR] borquez_juan 192.168.1.81 [cargar]  COMMAND NOT RECOGNIZED
+[2023-11-06 22:10:21] [ERROR] borquez_juan 192.168.1.81 [cargar]  COMMAND NOT RECOGNIZED
+[2023-11-06 22:10:21] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR  MOVE: [X:10.00 Y:20.00 Z:100.00 E:0.00] t=0.00s
+[2023-11-06 22:11:09] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 22:11:09] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=4.00s
+[2023-11-06 22:11:09] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR  MOVE: [X:0.00 Y:170.00 Z:120.00 E:0.00] t=0.00s
+[2023-11-06 22:11:09] [ERROR] borquez_juan 192.168.1.81 [cargar]  COMMAND NOT RECOGNIZED
+[2023-11-06 22:11:09] [ERROR] borquez_juan 192.168.1.81 [cargar]  COMMAND NOT RECOGNIZED
+[2023-11-06 22:11:09] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR  MOVE: [X:0.00 Y:170.00 Z:120.00 E:0.00] t=0.00s
+[2023-11-06 22:53:22] [INFO] borquez_juan 192.168.1.81 [robot]  Conexión exitosa con el robot.
+[2023-11-06 22:53:29] [INFO] borquez_juan 192.168.1.81 [grabar]  Comandos se almacenaran en tranajo.txt
+[2023-11-06 22:53:34] [INFO] borquez_juan 192.168.1.81 [home]  ROBOT ONLINE
+[2023-11-06 22:53:34] [INFO] borquez_juan 192.168.1.81 [home]  SEND G28 TO CALIBRATE
+[2023-11-06 22:53:34] [INFO] borquez_juan 192.168.1.81 [home]  HOMING
+[2023-11-06 22:53:34] [INFO] borquez_juan 192.168.1.81 [home]  HOMING COMPLETE t=7.50s
+[2023-11-06 22:53:44] [INFO] borquez_juan 192.168.1.81 [efector]  GRIPPER ON
+[2023-11-06 22:55:33] [INFO] borquez_juan 192.168.1.81 [robot]  Conexión exitosa con el robot.
+[2023-11-06 22:55:38] [INFO] borquez_juan 192.168.1.81 [grabar]  Comandos se almacenaran en tranajo.txt
+[2023-11-06 22:55:44] [INFO] borquez_juan 192.168.1.81 [home]  ROBOT ONLINE
+[2023-11-06 22:55:44] [INFO] borquez_juan 192.168.1.81 [home]  SEND G28 TO CALIBRATE
+[2023-11-06 22:55:44] [INFO] borquez_juan 192.168.1.81 [home]  HOMING
+[2023-11-06 22:55:44] [INFO] borquez_juan 192.168.1.81 [home]  HOMING COMPLETE t=7.50s
+[2023-11-06 22:55:50] [CRITICAL] borquez_juan 192.168.1.81 [movlineal] cannot access local variable 'comando' where it is not associated with a value
+[2023-11-06 22:56:02] [INFO] borquez_juan 192.168.1.81 [movlineal]  LINEAR MOVE: [X:100.00 Y:120.00 Z:20.00 E:0.00] t=0.82s
+[2023-11-06 22:57:33] [CRITICAL] borquez_juan 192.168.1.81 [movlineal] cannot access local variable 'comando' where it is not associated with a value
+[2023-11-06 22:59:57] [INFO] borquez_juan 192.168.1.81 [grabar]  Grabación en curso.
+[2023-11-06 23:00:09] [INFO] borquez_juan 192.168.1.81 [home]  HOMING
+[2023-11-06 23:00:09] [INFO] borquez_juan 192.168.1.81 [home]  HOMING COMPLETE t=4.50s
+[2023-11-06 23:00:18] [CRITICAL] borquez_juan 192.168.1.81 [movlineal] cannot access local variable 'comando' where it is not associated with a value
+[2023-11-06 23:02:33] [INFO] borquez_juan 192.168.1.81 [robot]  Conexión exitosa con el robot.
+[2023-11-06 23:02:43] [INFO] borquez_juan 192.168.1.81 [grabar]  Comandos se almacenaran en tranajo.txt
+[2023-11-06 23:02:59] [INFO] borquez_juan 192.168.1.81 [movlineal]  ROBOT ONLINE
+[2023-11-06 23:02:59] [INFO] borquez_juan 192.168.1.81 [movlineal]  SEND G28 TO CALIBRATE
+[2023-11-06 23:02:59] [ERROR] borquez_juan 192.168.1.81 [movlineal]  POINT IS OUTSIDE OF WORKSPACE
+[2023-11-06 23:06:12] [INFO] borquez_juan 192.168.1.81 [robot]  Conexión exitosa con el robot.
+[2023-11-06 23:06:24] [INFO] borquez_juan 192.168.1.81 [grabar]  Comandos se almacenaran en tranajo.txt
+[2023-11-06 23:06:28] [INFO] borquez_juan 192.168.1.81 [home]  ROBOT ONLINE
+[2023-11-06 23:06:28] [INFO] borquez_juan 192.168.1.81 [home]  SEND G28 TO CALIBRATE
+[2023-11-06 23:06:28] [INFO] borquez_juan 192.168.1.81 [home]  HOMING
+[2023-11-06 23:06:28] [INFO] borquez_juan 192.168.1.81 [home]  HOMING COMPLETE t=7.50s
+[2023-11-06 23:06:32] [INFO] borquez_juan 192.168.1.81 [movlineal]  LINEAR MOVE: [X:10.00 Y:100.00 Z:120.00 E:0.00] t=1.19s
+[2023-11-06 23:06:37] [ERROR] borquez_juan 192.168.1.81 [movlineal]  POINT IS OUTSIDE OF WORKSPACE
+[2023-11-06 23:06:44] [INFO] borquez_juan 192.168.1.81 [grabar]  Grabación en curso.
+[2023-11-06 23:06:53] [INFO] borquez_juan 192.168.1.81 [efector]  GRIPPER ON
+[2023-11-06 23:06:56] [INFO] borquez_juan 192.168.1.81 [motores]  Motores activados.
+[2023-11-06 23:07:00] [INFO] borquez_juan 192.168.1.81 [modo]  ABSOLUTE MODE ON
+[2023-11-06 23:07:05] [INFO] borquez_juan 192.168.1.81 [grabar]  Almacenamiento de comandos detenido.
+[2023-11-06 23:07:09] [INFO] borquez_juan 192.168.1.81 [home]  HOMING
+[2023-11-06 23:07:09] [INFO] borquez_juan 192.168.1.81 [home]  HOMING COMPLETE t=4.50s
+[2023-11-06 23:07:35] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 23:07:35] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=3.50s
+[2023-11-06 23:07:35] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR MOVE: [X:10.00 Y:120.00 Z:100.00 E:0.00] t=1.35s
+[2023-11-06 23:07:35] [INFO] borquez_juan 192.168.1.81 [cargar]  GRIPPER ON
+[2023-11-06 23:07:35] [INFO] borquez_juan 192.168.1.81 [cargar]  GRIPPER OFF
+[2023-11-06 23:07:35] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR MOVE: [X:10.00 Y:120.00 Z:100.00 E:2.00] t=7.07s
+[2023-11-06 23:07:35] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 23:07:35] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=2.00s
+[2023-11-06 23:07:35] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 23:07:35] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=3.00s
+[2023-11-06 23:07:35] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR MOVE: [X:100.00 Y:120.00 Z:20.00 E:0.00] t=0.82s
+[2023-11-06 23:07:35] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 23:07:35] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=5.00s
+[2023-11-06 23:07:35] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING
+[2023-11-06 23:07:35] [INFO] borquez_juan 192.168.1.81 [cargar]  HOMING COMPLETE t=4.00s
+[2023-11-06 23:07:35] [INFO] borquez_juan 192.168.1.81 [cargar]  LINEAR MOVE: [X:10.00 Y:100.00 Z:120.00 E:0.00] t=1.19s
+[2023-11-06 23:07:35] [INFO] borquez_juan 192.168.1.81 [cargar]  GRIPPER ON
+[2023-11-06 23:07:35] [INFO] borquez_juan 192.168.1.81 [cargar]  ABSOLUTE MODE ON
+[2023-11-06 23:08:38] [ERROR] borquez_juan 192.168.1.81 [robot]  La conexión ya está establecida.

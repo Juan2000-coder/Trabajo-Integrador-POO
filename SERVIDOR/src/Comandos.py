@@ -17,7 +17,7 @@ class ComandosGcode:
 
     comandosDelRobot = {
         "modo": {"a": "G90", "r": "G91"},
-        "motores": {"on":"G17", "off": "G18"},
+        "motores": {"on":"M17", "off": "M18"},
         "home": "G28",
         "estado": "G0",
         "efector": {"on":"M3", "off":"M5"},
@@ -28,7 +28,7 @@ class ComandosGcode:
         """Convierte una línea de comando de CLI (comando y argumentos)
         en un comando G-Code."""
 
-        if comando == "movLineal":
+        if comando == "movlineal":
             if len(args) == 3:
                 x, y, z = args
                 e = 0
