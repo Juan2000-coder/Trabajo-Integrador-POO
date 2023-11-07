@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GUI extends javax.swing.JFrame {
-
     /**
      * Creates new form GUI
      */

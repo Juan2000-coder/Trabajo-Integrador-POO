@@ -17,7 +17,7 @@ public class GUIClass {
     public void runExternalProgram(String ip, String port, javax.swing.JTextArea outputTextArea) {
         try {
             String basePath = new File("").getAbsolutePath();
-            EXE_PATH = basePath.replace("testGUIjava", "\\build\\Cliente.exe");
+            EXE_PATH = basePath + "\\CLIENTE\\build\\Cliente.exe";
             System.out.println(EXE_PATH);
             ProcessBuilder processBuilder = new ProcessBuilder(EXE_PATH, ip, port);
             processBuilder.redirectErrorStream(true);
