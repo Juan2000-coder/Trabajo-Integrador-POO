@@ -20,3 +20,7 @@
 [2023-11-05 16:35:01] [INFO] 192.168.1.81 [desconectarRobot]  Conexión cerrada.
 [2023-11-05 16:35:04] [INFO] 192.168.1.81 [reporteGeneral] Solicitud Exitosa
 [2023-11-05 16:35:13] [INFO] 192.168.1.81 [reporteGeneral] Solicitud Exitosa
+[2023-11-06 22:25:05] [INFO] 192.168.100.8 [grabar]  Comandos se almacenaran en hola.txt
+[2023-11-06 22:25:13] [INFO] 192.168.100.8 [desconectarRobot]  El robot ya se encuentra desconectado.
+[2023-11-06 22:53:05] [INFO] 192.168.100.8 [grabar]  Comandos se almacenaran en sexo.txt
+[2023-11-06 22:53:12] [INFO] 192.168.100.8 [enviarComando]  No se puede enviar el comando, robot desconectado.

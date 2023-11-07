@@ -119,3 +119,9 @@
 [2023-11-06 21:02:05] [INFO] 192.168.100.8 [seleccionarModo]  No se puede enviar el comando, robot desconectado.
 [2023-11-06 21:02:05] [INFO] 192.168.100.8 [posicionActual]  No se puede enviar el comando, robot desconectado.
 [2023-11-06 21:02:16] [INFO] 192.168.100.8 [home]  No se puede enviar el comando, robot desconectado.
+[2023-11-06 22:20:53] [ERROR] 192.168.100.8 [conectarRobot]  No se puede establecer conexión con el brazo.
+[2023-11-06 22:20:53] [INFO] 192.168.100.8 [seleccionarModo]  No se puede enviar el comando, robot desconectado.
+[2023-11-06 22:20:53] [INFO] 192.168.100.8 [posicionActual]  No se puede enviar el comando, robot desconectado.
+[2023-11-06 22:21:00] [INFO] 192.168.100.8 [grabar]  Comandos se almacenaran en hola.txt
+[2023-11-06 22:21:09] [INFO] 192.168.100.8 [home]  No se puede enviar el comando, robot desconectado.
+[2023-11-06 22:21:17] [INFO] 192.168.100.8 [desconectarRobot]  El robot ya se encuentra desconectado.
