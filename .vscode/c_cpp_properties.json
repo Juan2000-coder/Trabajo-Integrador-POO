@@ -5,7 +5,7 @@
             "compilerPathInCppPropertiesJson": "",
             "includePath": [
                 "D:/include",
-                "${workspaceFolder}/CLIENTE/include/xmlrpc"
+                "${workspaceFolder}/CLIENTE/CONSOLA/include/xmlrpc"
             ],
             "defines": [
                 "_DEBUG",
