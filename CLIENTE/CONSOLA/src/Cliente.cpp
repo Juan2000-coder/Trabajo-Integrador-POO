@@ -10,7 +10,6 @@
 #include <future>   // Para la función 'async' y 'future' en el metodo timeOut.
 #include <chrono>   // Para la función 'wait_for' en el metodo timeOut.
 
-//Hola mundo
 
 using namespace std;
 

@@ -41,8 +41,8 @@ class Servidor(SimpleXMLRPCServer):
         self.idActual = ''                  # El id del usuario de la solicitud actual.
         self.ipCliente = None               # La ip del cliente actual.
 
-        addr = (socket.gethostbyname_ex("Juan_Portátil")[2][0], self.puerto)
-        #addr = (socket.gethostbyname_ex(self.hostname)[2][1], self.puerto)
+        #addr = (socket.gethostbyname_ex("Juan_Portátil")[2][0], self.puerto)
+        addr = (socket.gethostbyname_ex(self.hostname)[2][1], self.puerto)
 
         try:
             super().__init__(addr, requestHandler, logRequests, allow_none, encoding, bind_and_activate,

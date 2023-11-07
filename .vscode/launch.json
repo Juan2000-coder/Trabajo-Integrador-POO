@@ -9,6 +9,13 @@
             "name": "GUI",
             "request": "launch",
             "mainClass": "GUI",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "GUI",
+            "request": "launch",
+            "mainClass": "GUI",
             "projectName": "testGUIjava"
         },
         {
