@@ -76,77 +76,53 @@ void cls() {
 void mostrarAyuda(int comando) {
     switch (comando) {
         case 1:
-            cout << "Comando: reporteGeneral\nDescripción: Genera un reporte general del robot.\n";
+            cout << "Comando: reporte\nDescripción: genera un reporte general del robot.\n";
             break;
         case 2:
-            cout << "Comando: obtenerLogServidor\nDescripción: Obtiene el registro de actividad del servidor.\n";
+            cout << "Comando: log\nDescripción: obtiene el registro de actividad del servidor.\n";
             break;
         case 3:
-            cout << "Comando: seleccionarModo\nDescripción: Selecciona el modo de operación (auto o manual) del robot.\n";
+            cout << "Comando: modo\nDescripción: selecciona el modo (a) coordenadas absolutas o (r) relativas.\n";
             break;
         case 4:
-            cout << "Comando: conectarRobot\nDescripción: Conecta el robot al servidor.\n";
+            cout << "Comando: robot\nDescripción: conecta (on) o desconecta(off) el robot.\n";
             break;
         case 5:
-            cout << "Comando: desconectarRobot\nDescripción: Desconecta el robot del servidor.\n";
+            cout << "Comando: motores\nDescripción: activa(on) o desactiva(off) los motores del robot.\n";
             break;
-        
         case 6:
-            cout << "Comando: activarMotores\nDescripción: Activa los motores del robot.\n";
+            cout << "Comando: home\nDescripción: mueve el robot a la posición home.\n";
             break;
-        
         case 7:
-            cout << "Comando: desactivarMotores\nDescripción: Desactiva los motores del robot.\n";
+            cout << "Comando: movlineal\nDescripción: movimiento lineal del efecto final.\n";
             break;
-        
         case 8:
-            cout << "Comando: home\nDescripción: Mueve el robot a la posición home.\n";
+            cout << "Comando: efector\nDescripción: activa(on) o desactiva(off) el efector final del robot.\n";
             break;
-        
         case 9:
-            cout << "Comando: movLineal\nDescripción: Mueve el robot en línea recta.\n";
+            cout << "Comando: grabar\nDescripción: graba una secuencia de movimientos en un archivo de trabajo.\n";
             break;
-        
         case 10:
-            cout << "Comando: activarPinza\nDescripción: Activa la pinza del robot.\n";
+            cout << "Comando: cargar\nDescripción: carga una secuencia de movimientos de un archivo de trabajo.\n";
             break;
-
         case 11:
-            cout << "Comando: desactivarPinza\nDescripción: Desactiva la pinza del robot.\n";
+            cout << "Comando: estado\nDescripción: obtiene el estado actual del robot (posicion y modo).\n";
             break;
-        
         case 12:
-            cout << "Comando: grabar\nDescripción: Graba una secuencia de movimientos.\n";
+            cout << "Comando: listar\nDescripción: lista los archivos de trabajo disponibles en el servidor.\n";
             break;
-        
         case 13:
-            cout << "Comando: cargar\nDescripción: Carga una secuencia de movimientos.\n";
-            break;
-        
-        case 14:
-            cout << "Comando: posicionActual\nDescripción: Obtiene la posición actual del robot.\n";
-            break;
-        
-        case 15:
-            cout << "Comando: desconectarServidor\nDescripción: Desconecta el servidor.\n";
-            break;
-    
-        case 16:
-            cout << "Comando: listarArchivosDeTrabajo\nDescripción: Lista los archivos de trabajo disponibles.\n";
-            break;
-
-        case 17:
             cout << "Comando: ayuda\nDescripción: Muestra la lista de comandos disponibles.\n";
             break;
-
-        case 18:
-            cout << "Comando: cls\nDescripción: Limpia la consola.\n";
+        case 14:
+            cout << "Comando: cls\nDescripción: limpia la consola.\n";
             break;
-        
-        case 19:
-            cout << "Comando: salir\nDescripción: Cierra el programa.\n";
+        case 15:
+            cout << "Comando: salir\nDescripción: cierra el programa.\n";
             break;
-
+        case 16:
+            cout << "Comando: ejecutar\nDescripción: ejecuta un comando en código G.\n";
+            break;
         default:
             cout << "Comando no reconocido. Use 'ayuda' para ver la lista de comandos disponibles.\n";
             break;
@@ -195,26 +171,22 @@ int main(int argc, char* argv[]) {
     //MAPA
     std::map<std::string, int> comandoANumero;
     // Llena el mapa con las correspondencias entre strings y valores. Esto es similar a un diccionario en python.
-    comandoANumero["reporteGeneral"] = 1;
-    comandoANumero["obtenerLogServidor"] = 2;
-    comandoANumero["seleccionarModo"] = 3;
-    comandoANumero["conectarRobot"] = 4;
-    comandoANumero["desconectarRobot"] = 5;
-    comandoANumero["activarMotores"] = 6;
-    comandoANumero["desactivarMotores"] = 7;
-    comandoANumero["home"] = 8;
-    comandoANumero["movLineal"] = 9;
-    comandoANumero["activarPinza"] = 10;
-    comandoANumero["desactivarPinza"] = 11;
-    comandoANumero["grabar"] = 12;
-    comandoANumero["cargar"] = 13;
-    comandoANumero["posicionActual"] = 14;
-    comandoANumero["desconectarServidor"] = 15;
-    comandoANumero["listarArchivosDeTrabajo"] = 16;    
-    comandoANumero["ayuda"] = 17;   // Agregamos el comando "ayuda" a la lista de comandos.
-    comandoANumero["cls"] = 18;     // Agregamos el comando "cls" a la lista de comandos.
-    comandoANumero["salir"] = 19;   // Agregamos el comando "salir" a la lista de comandos.
-    comandoANumero["enviarComando"] = 20;  // Agregamos el comando "enviarComando" a la lista de comandos.
+    comandoANumero["reporte"] = 1;
+    comandoANumero["log"] = 2;
+    comandoANumero["modo"] = 3;
+    comandoANumero["robot"] = 4;
+    comandoANumero["motores"] = 5;
+    comandoANumero["home"] = 6;
+    comandoANumero["movlineal"] = 7;
+    comandoANumero["efector"] = 8;
+    comandoANumero["grabar"] = 9;
+    comandoANumero["cargar"] = 10;
+    comandoANumero["estado"] = 11;
+    comandoANumero["listar"] = 12;
+    comandoANumero["ayuda"] = 13;   // Agregamos el comando "ayuda" a la lista de comandos.
+    comandoANumero["cls"] = 14;     // Agregamos el comando "cls" a la lista de comandos.
+    comandoANumero["salir"] = 15;   // Agregamos el comando "salir" a la lista de comandos.
+    comandoANumero["ejecutar"] = 16;  // Agregamos el comando "enviarComando" a la lista de comandos.
 
     
     bool flagCliente = true;
@@ -233,78 +205,58 @@ int main(int argc, char* argv[]) {
     
     
 
-    int timeout = 15; // Tiempo límite en segundos para la llamada al servidor.
+    int timeout = 60; // Tiempo límite en segundos para la llamada al servidor.
     if (it != comandoANumero.end()) { 
         int value = it->second; //accede al valor asociado a la clave
        
         
         switch (value) {
-            case 1: //reporteGeneral
+            case 1: //reporte
 
-                if (llamarAlServidorConTimeout(c, "reporteGeneral", noArgs, result, timeout, id)) {
+                if (llamarAlServidorConTimeout(c, "reporte", noArgs, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
-                    cout << "Error en la llamada a 'reporteGeneral'\n\n";
+                    cout << "Error en la llamada a 'reporte'\n\n";
                 }
                 break;
 
-            case 2: //obtenerLogServidor
+            case 2: //log
 
-                if (llamarAlServidorConTimeout(c, "obtenerLogServidor", noArgs, result, timeout, id)) {
+                if (llamarAlServidorConTimeout(c, "log", noArgs, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
-                    cout << "Error en la llamada a 'obtenerLogServidor'\n\n";
+                    cout << "Error en la llamada a 'log'\n\n";
                 }
                 break;
 
-            case 3: //seleccionarModo
+            case 3: //modo
                 cin >> input;
                 oneArg[0] = input;
-                if (llamarAlServidorConTimeout(c, "seleccionarModo", oneArg, result, timeout, id)) {
+                if (llamarAlServidorConTimeout(c, "modo", oneArg, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
-                    cout << "Error en la llamada a 'seleccionarModo'\n\n";
+                    cout << "Error en la llamada a 'modo'\n\n";
                 }
                 break;
-            case 4: //conectarRobot
-    
-                if (llamarAlServidorConTimeout(c, "conectarRobot", noArgs, result, timeout, id)) {
+            case 4: //robot
+                cin >> input;
+                oneArg[0] = input;
+                if (llamarAlServidorConTimeout(c, "robot", oneArg, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
-                    cout << "Error en la llamada a 'conectarRobot'\n\n";
+                    cout << "Error en la llamada a 'robot'\n\n";
                 }
                 break;
-
-            case 5: //desconectarRobot
-  
-                if (llamarAlServidorConTimeout(c, "desconectarRobot", noArgs, result, timeout, id)) {
-                    cout << result << "\n\n";
-                } else {
-                    cout << "Error en la llamada a 'desconectarRobot'\n\n";
-                }
-                break;
-
-            
-            case 6: //activarMotor
-
-                if (llamarAlServidorConTimeout(c, "activarMotores", noArgs, result, timeout, id)) {
+            case 5: //motores
+                cin >> input;
+                oneArg[0] = input;
+                if (llamarAlServidorConTimeout(c, "motores", oneArg, result, timeout, id)) {
                     std::cout<< result << std::endl;
                 } else {
-                    std::cout << "Error en la llamada a activarMotores\n\n" << std::endl;
+                    std::cout << "Error en la llamada a 'motores'\n\n" << std::endl;
                 }
                 break;
-
-            case 7: //desactivarMotores
-
-                if (llamarAlServidorConTimeout(c, "desactivarMotores", noArgs, result, timeout, id)) {
-                    cout << result << "\n\n";
-                } else {
-                    cout << "Error en la llamada a 'desactivarMotores'\n\n";
-                }
-                break;
-
-            case 8: //home
-
+            case 6: //home
                 if (llamarAlServidorConTimeout(c, "home", noArgs, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
@@ -312,7 +264,7 @@ int main(int argc, char* argv[]) {
                 }
                 break;
 
-            case 9: //movLineal
+            case 7: //movlineal
                 
                 cin >> input1 >> input2 >> input3;
                 args[0]=input1;
@@ -323,32 +275,24 @@ int main(int argc, char* argv[]) {
                     args[3]=input4;
                 }
 
-                if (llamarAlServidorConTimeout(c, "movLineal", args, result, timeout, id)) {
+                if (llamarAlServidorConTimeout(c, "movlineal", args, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
-                    cout << "Error en la llamada a 'movLineal'\n\n";
+                    cout << "Error en la llamada a 'movlineal'\n\n";
                 }
                 break;
 
-            case 10: //activarPinza
-
-                if (llamarAlServidorConTimeout(c, "activarPinza", noArgs, result, timeout, id)) {
+            case 8: //efector
+                cin >> input;
+                oneArg[0] = input;
+                if (llamarAlServidorConTimeout(c, "efector", oneArg, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
-                    cout << "Error en la llamada a 'activarPinza'\n\n";
+                    cout << "Error en la llamada a 'efector'\n\n";
                 }
                 break;
 
-            case 11: //desactivarPinza
-
-                if (llamarAlServidorConTimeout(c, "desactivarPinza", noArgs, result, timeout, id)) {
-                    cout << result << "\n\n";
-                } else {
-                    cout << "Error en la llamada a 'desactivarPinza'\n\n";
-                }
-                break;
-
-            case 12: //grabar
+            case 9: //grabar
                 if (cin.peek() != '\n') {
                     cin >> input1;
                     oneArg[0]=input1;
@@ -360,7 +304,7 @@ int main(int argc, char* argv[]) {
                 }
                 break;
 
-            case 13: //cargar
+            case 10: //cargar
                 cin >> input;
                 oneArg[0] = input;
                 if (llamarAlServidorConTimeout(c, "cargar", oneArg, result, timeout, id)) {
@@ -370,37 +314,25 @@ int main(int argc, char* argv[]) {
                 }
                 break;
 
-            case 14: //posicionActual
+            case 11: //estado
 
-                if (llamarAlServidorConTimeout(c, "posicionActual", noArgs, result, timeout, id)) {
+                if (llamarAlServidorConTimeout(c, "estado", noArgs, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
-                    cout << "Error en la llamada a 'posicionActual'\n\n";
+                    cout << "Error en la llamada a 'estado'\n\n";
                 }
                 break;
 
-            case 15: // desconectarServidor
+            case 12: //listar
 
-                if (llamarAlServidorConTimeout(c, "desconectarRobot", noArgs, result, timeout, id)) {
-                    cout << "Desconectando del servidor...\n";    
-                    cout << "Desconectado del servidor.\n";
-                    cout << "Saliendo del programa...\n";
-                    exit(0);
-                } else {
-                    cout << "Error en la llamada a 'desconectarServidor'\n\n";
-                }
-                break;
-
-            case 16: //listarArchivosDeTrabajo
-
-                if (llamarAlServidorConTimeout(c, "listarArchivosDeTrabajo", noArgs, result, timeout, id)) {
+                if (llamarAlServidorConTimeout(c, "listar", noArgs, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
-                    cout << "Error en la llamada a 'listarArchivosDeTrabajo'\n\n";
+                    cout << "Error en la llamada a 'listar'\n\n";
                 }
                 break;
             
-            case 17: // Ayuda
+            case 13: // Ayuda
                     cout << "Lista de comandos disponibles:" << endl;
                     for (const auto &cmd : comandoANumero) {
                         if (cmd.first != "ayuda") {  // Excluir el comando "ayuda" de la lista de comandos.
@@ -422,17 +354,17 @@ int main(int argc, char* argv[]) {
                     break;
             
 
-            case 18:    // cls
+            case 14:    // cls
                     cls();
                     
                 break;
             
-            case 19:    //salir
+            case 15:    //salir
                 cout << "Saliendo del programa...\n";
                 flagCliente = false;
                 break;
 
-            case 20:   //enviarComando
+            case 16:   //ejecutar
                 cin.ignore(); // Ignora el salto de línea pendiente en el búfer.
                 getline(cin, input); // Lee toda la línea como una cadena.
                 
@@ -442,10 +374,10 @@ int main(int argc, char* argv[]) {
 
                 oneArg[0] = input;
 
-                if (llamarAlServidorConTimeout(c, "enviarComando", noArgs, result, timeout, id)) {
+                if (llamarAlServidorConTimeout(c, "ejecutar", oneArg, result, timeout, id)) {
                     cout << result << "\n\n";
                 } else {
-                    cout << "Error en la llamada a 'enviarComando'\n\n";
+                    cout << "Error en la llamada a 'ejecutar'\n\n";
                 }
                 break;
                            
