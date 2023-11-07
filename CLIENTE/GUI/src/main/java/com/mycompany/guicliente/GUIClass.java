@@ -17,7 +17,7 @@ import java.io.File;
 public class GUIClass {
     private Process externalProcess;
     private static String EXE_PATH;
-
+    private boolean logFlag = false;
     /**
      * Ejecuta un programa externo con los parámetros proporcionados y redirige su salida estándar.
      *
@@ -55,14 +55,21 @@ public class GUIClass {
                     for (String line : chunks) {
                         appendToOutput(outputTextArea, line);
                         // Muestra mensajes de error emergentes según el contenido de la salida.
-                        if (line.contains("Error in XmlRpcClient::doConnect: Could not connect to server (error 0).")) {
-                            mostrarErrorPopup(1);
-                        } else if (line.contains("POINT IS OUTSIDE OF WORKSPACE")) {
-                            mostrarErrorPopup(2);
-                        } else if (line.contains("Error in XmlRpcClient::writeRequest: write error (error 10053).")) {
-                            mostrarErrorPopup(3);
+                        if(logFlag == false){
+                            if (line.contains("Error in XmlRpcClient::doConnect: Could not connect to server (error 0).")) {
+                                mostrarErrorPopup(1);
+                            } else if (line.contains("POINT IS OUTSIDE OF WORKSPACE")) {
+                                mostrarErrorPopup(2);
+                            } else if (line.contains("Error in XmlRpcClient::writeRequest: write error (error 10053).")) {
+                                mostrarErrorPopup(3);
+                            }else if(line.contains("Conexión exitosa con el robot.")){
+                                sonido(basePath + "\\audio\\USB-CONNECTING-SOUND-EFFECT.wav");
+                            }else if(line.contains("Conexión cerrada.")){
+                                sonido(basePath + "\\audio\\Sonido-de-Robot-Apagándose-Efecto-de-Sonido.wav");
+                            }
                         }
                     }
+                    logFlag = false;
                 }
             };
 
@@ -85,8 +92,14 @@ public class GUIClass {
      */
     public void sendCommands(String command, javax.swing.JTextArea outputTextArea) {
         try {
+            if (command.contains("log")){
+                    logFlag = true;
+                    System.out.println(logFlag);
+             }
             if (externalProcess != null) {
+
                 OutputStream outputStream = externalProcess.getOutputStream();
+                System.out.println(command);
                 outputStream.write(command.getBytes());
                 outputStream.flush();
             }
