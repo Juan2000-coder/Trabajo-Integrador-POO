@@ -20,3 +20,4 @@
 [2023-11-05 16:35:01] [INFO] borquez_juan 192.168.1.81 [desconectarRobot]  Conexión cerrada.
 [2023-11-05 16:35:04] [INFO] borquez_juan 192.168.1.81 [reporteGeneral] Solicitud Exitosa
 [2023-11-05 16:35:13] [INFO] borquez_juan 192.168.1.81 [reporteGeneral] Solicitud Exitosa
+[2023-11-06 19:07:03] [INFO] miranda_francisco 192.168.1.107 [conectarRobot]  Conexión exitosa con el robot.
