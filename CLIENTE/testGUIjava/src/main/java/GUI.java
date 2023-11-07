@@ -73,6 +73,8 @@ public class GUI extends javax.swing.JFrame {
         gCodeTextField.setEnabled(false);
         enviarGCodeBtn.setEnabled(false);
         listarBtn.setEnabled(false);
+        logServidorBtn.setEnabled(false);
+        reporteGeneralBtn.setEnabled(false);
         gui = new GUIClass(); // Initialize the GUI class
 
     }
@@ -130,6 +132,9 @@ public class GUI extends javax.swing.JFrame {
         grabarCheckBox = new javax.swing.JCheckBox();
         cargarBtn = new javax.swing.JButton();
         listarBtn = new javax.swing.JButton();
+        logServidorBtn = new javax.swing.JButton();
+        reporteGeneralBtn = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
         limpiarTextAreaBtn = new javax.swing.JButton();
         gCodeTextField = new javax.swing.JTextField();
         enviarGCodeBtn = new javax.swing.JButton();
@@ -400,6 +405,23 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        logServidorBtn.setText("Obtener log del servidor");
+        logServidorBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logServidorBtnActionPerformed(evt);
+            }
+        });
+
+        reporteGeneralBtn.setText("Reporte General");
+        reporteGeneralBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reporteGeneralBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel17.setText("Información");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -412,6 +434,7 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(logServidorBtn)
                             .addComponent(jLabel7)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -439,7 +462,9 @@ public class GUI extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(cargarBtn)
                                 .addGap(7, 7, 7)
-                                .addComponent(listarBtn)))))
+                                .addComponent(listarBtn))
+                            .addComponent(reporteGeneralBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17))))
                 .addContainerGap(249, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -470,7 +495,13 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cargarBtn)
                     .addComponent(listarBtn))
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(logServidorBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(reporteGeneralBtn)
+                .addGap(19, 19, 19))
         );
 
         limpiarTextAreaBtn.setText("Limpiar");
@@ -540,7 +571,7 @@ public class GUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(limpiarTextAreaBtn)
                             .addComponent(reiniciarBtn))))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -575,6 +606,8 @@ public class GUI extends javax.swing.JFrame {
         gCodeTextField.setEnabled(true);
         enviarGCodeBtn.setEnabled(true);
         listarBtn.setEnabled(true);
+        logServidorBtn.setEnabled(true);
+        reporteGeneralBtn.setEnabled(true);
 
         String params = apellidoInput + " " + nombreInput + "\n";
         mandarComandoYActualizar(params);
@@ -731,8 +764,18 @@ public class GUI extends javax.swing.JFrame {
         gCodeTextField.setEnabled(false);
         enviarGCodeBtn.setEnabled(false);
         listarBtn.setEnabled(false);
+        logServidorBtn.setEnabled(false);
+        reporteGeneralBtn.setEnabled(false);
         mandarComandoYActualizar("desconectarServidor\n");
     }//GEN-LAST:event_reiniciarBtnActionPerformed
+
+    private void logServidorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logServidorBtnActionPerformed
+        mandarComandoYActualizar("obtenerLogServidor\n");
+    }//GEN-LAST:event_logServidorBtnActionPerformed
+
+    private void reporteGeneralBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteGeneralBtnActionPerformed
+        mandarComandoYActualizar("reporteGeneral\n");
+    }//GEN-LAST:event_reporteGeneralBtnActionPerformed
     private static GUIClass gui;
     private JFrame frame;
     private boolean isGrabarActivated = false;
@@ -815,6 +858,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -830,12 +874,14 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton lanzarPrograma;
     private javax.swing.JButton limpiarTextAreaBtn;
     private javax.swing.JButton listarBtn;
+    private javax.swing.JButton logServidorBtn;
     private javax.swing.JButton movLinealBtn;
     private javax.swing.JTextField nombreField;
     private javax.swing.JTextArea outputTextArea;
     private javax.swing.JTextField portIngresar;
     private javax.swing.JButton posicionActualBtn;
     private javax.swing.JButton reiniciarBtn;
+    private javax.swing.JButton reporteGeneralBtn;
     private javax.swing.JComboBox<String> seleccionarModoBox;
     private javax.swing.JTextField velocidadTextField;
     private javax.swing.JTextField xPosTextField;
