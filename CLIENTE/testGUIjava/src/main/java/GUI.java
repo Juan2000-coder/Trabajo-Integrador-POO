@@ -737,6 +737,7 @@ public class GUI extends javax.swing.JFrame {
         nombreField.setText("");
         ipIngresar.setText("");
         portIngresar.setText("");
+        grabarCheckBox.setSelected(false);
         ipIngresar.setEnabled(true);
         portIngresar.setEnabled(true);
         lanzarPrograma.setEnabled(true);

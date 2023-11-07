@@ -41,5 +41,33 @@
 [2023-11-06 18:28:12] [ERROR] miranda_francisco 192.168.100.8 [conectarRobot]  No se puede establecer conexión con el brazo.
 [2023-11-06 18:28:12] [INFO] miranda_francisco 192.168.100.8 [seleccionarModo]  No se puede enviar el comando, robot desconectado.
 [2023-11-06 18:28:12] [INFO] miranda_francisco 192.168.100.8 [posicionActual]  No se puede enviar el comando, robot desconectado.
+<<<<<<< HEAD
+[2023-11-06 20:41:46] [ERROR] dalessandro_francisco 192.168.100.8 [conectarRobot]  No se puede establecer conexión con el brazo.
+[2023-11-06 20:41:46] [INFO] dalessandro_francisco 192.168.100.8 [seleccionarModo]  No se puede enviar el comando, robot desconectado.
+[2023-11-06 20:41:46] [INFO] dalessandro_francisco 192.168.100.8 [posicionActual]  No se puede enviar el comando, robot desconectado.
+[2023-11-06 20:41:49] [ERROR] dalessandro_francisco 192.168.100.8 [conectarRobot]  No se puede establecer conexión con el brazo.
+[2023-11-06 20:41:49] [INFO] dalessandro_francisco 192.168.100.8 [seleccionarModo]  No se puede enviar el comando, robot desconectado.
+[2023-11-06 20:41:49] [INFO] dalessandro_francisco 192.168.100.8 [posicionActual]  No se puede enviar el comando, robot desconectado.
+[2023-11-06 20:41:52] [INFO] dalessandro_francisco 192.168.100.8 [home]  No se puede enviar el comando, robot desconectado.
+[2023-11-06 20:41:54] [INFO] dalessandro_francisco 192.168.100.8 [posicionActual]  No se puede enviar el comando, robot desconectado.
+[2023-11-06 20:41:59] [INFO] dalessandro_francisco 192.168.100.8 [activarPinza]  No se puede enviar el comando, robot desconectado.
+[2023-11-06 20:42:03] [INFO] dalessandro_francisco 192.168.100.8 [desactivarPinza]  No se puede enviar el comando, robot desconectado.
+[2023-11-06 20:42:09] [INFO] dalessandro_francisco 192.168.100.8 [obtenerLogServidor] Solicitud Exitosa
+[2023-11-06 20:42:24] [CRITICAL] dalessandro_francisco 192.168.100.8 [reporteGeneral] list index out of range
+[2023-11-06 20:42:33] [INFO] dalessandro_francisco 192.168.100.8 [home]  No se puede enviar el comando, robot desconectado.
+[2023-11-06 20:42:40] [ERROR] dalessandro_francisco 192.168.100.8 [conectarRobot]  No se puede establecer conexión con el brazo.
+[2023-11-06 20:42:40] [INFO] dalessandro_francisco 192.168.100.8 [seleccionarModo]  No se puede enviar el comando, robot desconectado.
+[2023-11-06 20:42:40] [INFO] dalessandro_francisco 192.168.100.8 [posicionActual]  No se puede enviar el comando, robot desconectado.
+[2023-11-06 20:43:41] [INFO] dalessandro_francisco 192.168.100.8 [listarArchivosDeTrabajo] Solicitud Exitosa
+[2023-11-06 21:02:03] [INFO] dalessandro_francisco 192.168.100.8 [grabar]  Comandos se almacenaran en hola.txt
+[2023-11-06 21:02:05] [ERROR] dalessandro_francisco 192.168.100.8 [conectarRobot]  No se puede establecer conexión con el brazo.
+[2023-11-06 21:02:05] [INFO] dalessandro_francisco 192.168.100.8 [seleccionarModo]  No se puede enviar el comando, robot desconectado.
+[2023-11-06 21:02:05] [INFO] dalessandro_francisco 192.168.100.8 [posicionActual]  No se puede enviar el comando, robot desconectado.
+[2023-11-06 21:02:16] [INFO] dalessandro_francisco 192.168.100.8 [home]  No se puede enviar el comando, robot desconectado.
+=======
 >>>>>>> be0d1c2c73a028bd4c2174cb8105799c15fcf5d4
+<<<<<<< HEAD
 [2023-11-06 21:49:13] [INFO] miranda_francisco 192.168.1.48 [conectarRobot]  Conexión exitosa con el robot.
+=======
+>>>>>>> adb6d3cab16999f19568323000328173cf68f349
+>>>>>>> 56ce35f7c58dc3624c98fde23ee627d5e04534a1
