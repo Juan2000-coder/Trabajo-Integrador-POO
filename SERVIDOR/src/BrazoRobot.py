@@ -171,7 +171,7 @@ class BrazoRobot():
             (str) Un mensaje indicando el exito de la operación o
             una excepción en caso de error.
         """
-        resultado = self.enviarComando("M17")
+        self.enviarComando("M17")
         return "INFO: Motores activados."
             
     def desactivarMotores(self):
