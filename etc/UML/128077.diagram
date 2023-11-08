@@ -1,99 +1,275 @@
 format 224
 
-classcanvas 128002 class_ref 128002 // Servidor
-  classdiagramsettings member_max_width 0 end
-  xyzwh 124.7 81 2000 81 39
-end
-classcanvas 128077 class_ref 128077 // ArchivoLog
-  classdiagramsettings member_max_width 0 end
-  xyzwh -76.2 346.6 2000 544 139
-end
-classcanvas 128205 class_ref 128205 // Registro
-  classdiagramsettings member_max_width 0 end
-  xyz 204.2 599.2 2000
-end
 classcanvas 128461 class_ref 128333 // BrazoRobot
   classdiagramsettings show_members_full_definition yes show_members_visibility yes member_max_width 0 end
-  xyz 637.9 266.2 2005
-end
-classcanvas 128514 class_ref 128130 // main
-  classdiagramsettings member_max_width 0 end
-  xyz 742.5 121.8 2005
+  xyz 2404.88 160.46 2005
 end
 classcanvas 128717 class_ref 128589 // Cmd
   classdiagramsettings member_max_width 0 end
-  xyz 674.1 24.7 2000
+  xyz 2233.6 40.02 2000
 end
-classcanvas 128845 class_ref 128717 // InterfazCLI
+classcanvas 128845 class_ref 128717 // CLI
   classdiagramsettings member_max_width 0 end
-  xyzwh 386.6 9.6 2000 209 289
+  xyzwh 2145.32 117.46 2000 220 321
 end
-classcanvas 129154 class_ref 128258 // Punto
+classcanvas 129357 class_ref 135373 // Job
   classdiagramsettings member_max_width 0 end
-  xyz 716.3 556.7 2000
+  xyz 2107.09 478.12 2000
 end
-classcanvas 129229 class_ref 128845 // Secuencia
+classcanvas 130381 class_ref 142157 // ComandosGcode
   classdiagramsettings member_max_width 0 end
-  xyz 41.9 183.7 2000
+  xyz 1753.85 512.63 2000
 end
-classcanvas 129357 class_ref 135373 // ArchivoJob
+classcanvas 130509 class_ref 142285 // Excepciones
   classdiagramsettings member_max_width 0 end
-  xyz 536 406 2000
+  xyz 357.38 649.31 2000
 end
-classcanvas 129485 class_ref 135501 // ArchivoUsuario
+classcanvas 130765 class_ref 142541 // Exception
   classdiagramsettings member_max_width 0 end
-  xyz 463 501 2000
+  xyz 396.89 570.82 2000
 end
-relationcanvas 128333 relation_ref 128077 // <composition>
-  from ref 128077 z 2001 to ref 128205
-  no_role_a no_role_b
-  multiplicity_a_pos 213 580 3000 no_multiplicity_b
+classcanvas 131149 class_ref 142669 // ExcepcionArchivo
+  classdiagramsettings member_max_width 0 end
+  xyz 40.92 836.79 2000
+end
+classcanvas 131277 class_ref 142797 // ExcepcionBrazoRobot
+  classdiagramsettings member_max_width 0 end
+  xyz 189.62 836.79 2000
+end
+classcanvas 131405 class_ref 142925 // ExcepcionDeComando
+  classdiagramsettings member_max_width 0 end
+  xyz 361.89 836.79 2000
+end
+classcanvas 131533 class_ref 143053 // ExcepcionDeServidor
+  classdiagramsettings member_max_width 0 end
+  xyz 701.6 836.79 2000
+end
+classcanvas 131661 class_ref 143181 // ExcepcionDeRegistro
+  classdiagramsettings member_max_width 0 end
+  xyz 535.37 836.79 2000
+end
+classcanvas 131789 class_ref 143309 // Log
+  classdiagramsettings member_max_width 0 end
+  xyz 1187.65 353.36 2000
+end
+classcanvas 131917 class_ref 143437 // logging.Logger
+  classdiagramsettings member_max_width 0 end
+  xyz 1050.29 403.36 2000
+end
+classcanvas 132045 class_ref 143565 // LogServidor
+  classdiagramsettings member_max_width 0 end
+  xyz 1714.17 403.36 2005
+end
+classcanvas 132173 class_ref 143693 // LogUsuario
+  classdiagramsettings member_max_width 0 end
+  xyz 1713.75 610.31 2005
+end
+classcanvas 132685 class_ref 143821 // Registro
+  classdiagramsettings member_max_width 0 end
+  xyzwh 535.33 634.8 2000 113 123
+end
+classcanvas 132813 class_ref 143949 // Registrar
+  classdiagramsettings member_max_width 0 end
+  xyz 562.84 60.12 2000
+end
+classcanvas 133837 class_ref 144077 // SimpleXMLRPCRequestHandler
+  classdiagramsettings member_max_width 0 end
+  xyz 1002.27 754.64 2010
+end
+classcanvas 133965 class_ref 144205 // Handler
+  classdiagramsettings member_max_width 0 end
+  xyz 850.71 747.13 2000
+end
+classcanvas 134221 class_ref 144333 // Servidor
+  classdiagramsettings member_max_width 0 end
+  xyz 945.18 247.01 2000
+end
+classcanvas 134349 class_ref 144461 // SimpleXMLRPCServer
+  classdiagramsettings member_max_width 0 end
+  xyz 945.18 130.92 2005
+end
+classcanvas 134605 class_ref 144589 // VideoStreaming
+  classdiagramsettings member_max_width 0 end
+  xyz 805.5 130.92 2000
+end
+classcanvas 134733 class_ref 144717 // threading.Thread
+  classdiagramsettings member_max_width 0 end
+  xyz 661.62 130.92 2000
+end
+classcanvas 136269 class_ref 144845 // UsuariosValidos
+  classdiagramsettings member_max_width 0 end
+  xyz 669.58 235.21 2000
 end
 relationcanvas 129101 relation_ref 128333 // <generalisation>
   from ref 128845 z 2001 to ref 128717
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 end
-relationcanvas 129410 relation_ref 128386 // <aggregation>
-  from ref 128461 z 2006 to ref 129154
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
 relationcanvas 129538 relation_ref 128514 // <aggregation>
-  decenter_begin 870
   from ref 128845 z 2006 to ref 128461
   no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 129869 relation_ref 134989 // <unidirectional association>
-  from ref 128514 z 2006 to ref 128845
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 130125 relation_ref 135245 // <aggregation>
-  from ref 128845 z 2001 to ref 129485
-  no_role_a no_role_b
-  multiplicity_a_pos 483 482 3000 no_multiplicity_b
+  multiplicity_a_pos 2387 284 3000 multiplicity_b_pos 2374 284 3000
 end
 relationcanvas 130253 relation_ref 135373 // <aggregation>
   from ref 128845 z 2001 to ref 129357
   no_role_a no_role_b
-  multiplicity_a_pos 538 387 3000 no_multiplicity_b
+  multiplicity_a_pos 2227 459 3000 multiplicity_b_pos 2237 444 3000
 end
-relationcanvas 130434 relation_ref 129154 // <aggregation>
-  decenter_begin 293
-  decenter_end 699
-  from ref 128845 z 2001 to ref 128077
+relationcanvas 132301 relation_ref 141901 // <generalisation>
+  from ref 131789 z 2001 to ref 131917
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 end
-relationcanvas 130562 relation_ref 129282 // <aggregation>
-  from ref 128845 z 2001 to ref 128002
+relationcanvas 132429 relation_ref 142029 // <generalisation>
+  from ref 132045 z 2006 to ref 131789
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 end
-relationcanvas 131714 relation_ref 130306 // <unidirectional association>
-  from ref 128845 z 2001 to ref 129229
+relationcanvas 132557 relation_ref 142157 // <generalisation>
+  from ref 132173 z 2006 to point 1674.89 641.766
+  line 136834 z 2006 to point 1674.89 422.63
+  line 136962 z 2006 to ref 131789
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133069 relation_ref 142413 // <generalisation>
+  geometry VHV unfixed
+  from ref 131149 z 2001 to point 92.32 797.508
+  line 133890 z 2001 to point 424.28 797.508
+  line 134018 z 2001 to ref 130509
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133197 relation_ref 142541 // <generalisation>
+  geometry VHV unfixed
+  from ref 131277 z 2001 to point 252.12 797.508
+  line 135629 z 2001 to point 424.28 797.508
+  line 135757 z 2001 to ref 130509
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133325 relation_ref 142669 // <generalisation>
+  from ref 131405 z 2001 to ref 130509
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133453 relation_ref 142797 // <generalisation>
+  geometry VHV unfixed
+  from ref 131533 z 2001 to point 763.2 797.508
+  line 135373 z 2001 to point 424.28 797.508
+  line 135501 z 2001 to ref 130509
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133581 relation_ref 142925 // <generalisation>
+  geometry VHV unfixed
+  from ref 131661 z 2001 to point 597.72 797.508
+  line 137602 z 2001 to point 424.28 797.508
+  line 137730 z 2001 to ref 130509
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133709 relation_ref 143053 // <generalisation>
+  from ref 130509 z 2001 to ref 130765
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134093 relation_ref 143181 // <generalisation>
+  from ref 133965 z 2011 to ref 133837
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134146 relation_ref 143874 // <unidirectional association>
+  from ref 129357 z 2001 to ref 130381
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134274 relation_ref 144002 // <aggregation>
+  decenter_end 522
+  from ref 132813 z 2001 to ref 132685
+  no_role_a no_role_b
+  multiplicity_a_pos 567 615 3000 multiplicity_b_pos 576 105 3000
+end
+relationcanvas 134477 relation_ref 143309 // <generalisation>
+  from ref 134221 z 2006 to ref 134349
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134530 relation_ref 144258 // <composition>
+  geometry VHV unfixed
+  decenter_begin 112
+  decenter_end 841
+  from ref 134221 z 2001 to point 957 208.652
+  line 136450 z 2001 to point 887 208.652
+  line 136578 z 2001 to ref 134605
+  no_role_a no_role_b
+  multiplicity_a_pos 873 175 3000 multiplicity_b_pos 943 228 3000
+end
+relationcanvas 134658 relation_ref 144386 // <dependency>
+  geometry VH unfixed
+  decenter_end 814
+  from ref 133965 z 2001 to point 905 310
+  line 137346 z 2001 to ref 134221
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134786 relation_ref 144514 // <unidirectional association>
+  geometry VH unfixed
+  decenter_begin 76
+  from ref 128845 z 2001 to point 2159 76
+  line 136706 z 2001 to ref 132813
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 135810 relation_ref 144898 // <unidirectional association>
+  decenter_begin 949
+  from ref 128845 z 2006 to ref 132045
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 135938 relation_ref 145026 // <unidirectional association>
+  decenter_begin 333
+  from ref 134221 z 2001 to ref 136269
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 136066 relation_ref 145154 // <aggregation>
+  from ref 130509 z 2001 to ref 132685
+  no_role_a no_role_b
+  multiplicity_a_pos 518 702 3000 multiplicity_b_pos 505 703 3000
+end
+relationcanvas 136141 relation_ref 143437 // <generalisation>
+  from ref 134605 z 2001 to ref 134733
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 136194 relation_ref 145282 // <aggregation>
+  decenter_end 507
+  from ref 134221 z 2006 to point 1011.49 715.31
+  line 137090 z 2006 to point 1893.02 715.31
+  line 137218 z 2006 to ref 132173
+  no_role_a no_role_b
+  multiplicity_a_pos 1876 681 3000 multiplicity_b_pos 995 334 3000
+end
+relationcanvas 136322 relation_ref 145410 // <aggregation>
+  geometry HV unfixed
+  decenter_begin 814
+  from ref 134221 z 2006 to point 1752 310
+  line 137474 z 2006 to ref 132045
+  no_role_a no_role_b
+  multiplicity_a_pos 1738 384 3000 multiplicity_b_pos 1087 319 3000
+end
+relationcanvas 137293 relation_ref 144205 // <aggregation>
+  decenter_begin 428
+  decenter_end 111
+  from ref 128845 z 2001 to ref 134221
+  no_role_a no_role_b
+  multiplicity_a_pos 1087 262 3000 multiplicity_b_pos 2128 261 3000
+end
+relationcanvas 137421 relation_ref 144333 // <dependency>
+  decenter_begin 579
+  decenter_end 550
+  from ref 134221 z 2001 to ref 128845
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 end

@@ -1,16 +1,26 @@
-window_sizes 1366 705 320 1041 555 104
+window_sizes 1366 705 226 1135 566 93
 
 diagrams
   active  classdiagram_ref 128077 // Server
-    1041 555 100 A4 7 0
+    1135 566 100 C 72 0
 end
 show_stereotypes
+selected attribute_ref 138573 // usuariosRegistrados
 open
-  class_ref 128077 // ArchivoLog
-  class_ref 128205 // Registro
-  class_ref 128333 // BrazoRobot
   class_ref 128589 // Cmd
-  class_ref 128717 // InterfazCLI
-  class_ref 128002 // Servidor
+  class_ref 142157 // ComandosGcode
+  class_ref 142285 // Excepciones
+  class_ref 142669 // ExcepcionArchivo
+  class_ref 142797 // ExcepcionBrazoRobot
+  class_ref 142925 // ExcepcionDeComando
+  class_ref 143053 // ExcepcionDeServidor
+  class_ref 143181 // ExcepcionDeRegistro
+  class_ref 143309 // Log
+  class_ref 143693 // LogUsuario
+  class_ref 143821 // Registro
+  class_ref 143949 // Registrar
+  class_ref 144205 // Handler
+  class_ref 144333 // Servidor
+  class_ref 144845 // UsuariosValidos
 end
 end
