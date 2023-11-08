@@ -30,7 +30,8 @@ public class GUIClass {
             // Obtiene la ruta de la aplicación externa y configura ProcessBuilder.
             String basePath = new File("").getAbsolutePath();
             System.out.println(basePath);
-            EXE_PATH = basePath.replace("GUI", "\\CONSOLA\\build\\Cliente.exe");
+            //EXE_PATH = basePath.replace("GUI", "\\CONSOLA\\build\\Cliente.exe");
+            EXE_PATH = basePath + "\\CLIENTE\\CONSOLA\\build\\Cliente.exe";
             System.out.println(EXE_PATH);
             ProcessBuilder processBuilder = new ProcessBuilder(EXE_PATH, ip, port);
             processBuilder.redirectErrorStream(true);
@@ -63,9 +64,11 @@ public class GUIClass {
                             } else if (line.contains("Error in XmlRpcClient::writeRequest: write error (error 10053).")) {
                                 mostrarErrorPopup(3);
                             }else if(line.contains("Conexión exitosa con el robot.")){
-                                sonido(basePath + "\\audio\\USB-CONNECTING-SOUND-EFFECT.wav");
+                                //sonido(basePath + "\\audio\\USB-CONNECTING-SOUND-EFFECT.wav");
+                                sonido(basePath + "\\CLIENTE\\GUI\\audio\\USB-CONNECTING-SOUND-EFFECT.wav");
                             }else if(line.contains("Conexión cerrada.")){
-                                sonido(basePath + "\\audio\\Sonido-de-Robot-Apagándose-Efecto-de-Sonido.wav");
+                                //sonido(basePath + "\\audio\\Sonido-de-Robot-Apagándose-Efecto-de-Sonido.wav");
+                                sonido(basePath + "\\CLIENTE\\GUI\\audio\\Sonido-de-Robot-Apagándose-Efecto-de-Sonido.wav");
                             }
                         }
                     }
