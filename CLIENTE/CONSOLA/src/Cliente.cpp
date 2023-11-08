@@ -7,7 +7,7 @@
  * al conectarse a un servidor que admite RPC.
  * 
  * @version  1.0
- * @date     2023.11.06
+ * @date     2023.11.07
  * @author   Borquez Juan Manuel, Dalessandro Francisco, Miranda Francisco
  * @contact  borquez.juan00@gmail.com, panchodal867@gmail.com, francisconehuenmiranda@gmail.com
 */
