@@ -1,3 +1,16 @@
+/**
+ * Aplicativo para control de un robot 3DF conectado
+ * de forma local por puerto serie.
+ * Modulo: Cliente.
+ * 
+ * Esta es una consola para el comando del robot de forma remota
+ * al conectarse a un servidor que admite RPC.
+ * 
+ * @version  1.0
+ * @date     2023.11.07
+ * @author   Borquez Juan Manuel, Dalessandro Francisco, Miranda Francisco
+ * @contact  borquez.juan00@gmail.com, panchodal867@gmail.com, francisconehuenmiranda@gmail.com
+*/
 #include <iostream>
 #include <stdlib.h>
 #include <fstream>
@@ -6,14 +19,13 @@
 #include <iomanip> 
 #include <map>
 #include <string>
-#include <cstdlib> // Para la función 'system'
+#include <cstdlib>  // Para la función 'system'
 #include <future>   // Para la función 'async' y 'future' en el metodo timeOut.
 #include <chrono>   // Para la función 'wait_for' en el metodo timeOut.
 
 
 using namespace std;
 
-//#include "json.hpp"
 #include "XmlRpc.h" 
 
 using namespace XmlRpc;
@@ -23,7 +35,7 @@ using namespace XmlRpc;
 std::string generarIDUsuario(const std::string& nombre) {
     // Genera el ID a partir del nombre, eliminando espacios y reemplazando por guiones bajos.
     std::string id = nombre;
-    std::replace(id.begin(), id.end(), ' ', '_'); // Reemplaza los espacios por guiones bajos
+    std::replace(id.begin(), id.end(), ' ', '_');                // Reemplaza los espacios por guiones bajos
     std::transform(id.begin(), id.end(), id.begin(), ::tolower); // Convierte a minúsculas
     return id;
 }

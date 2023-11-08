@@ -4,7 +4,7 @@
  * Componente: Brazo Robot.
  * 
  * @version  1.0
- * @date     2023.11.06
+ * @date     2023.11.07
  * @author   Borquez Juan Manuel, Dalessandro Francisco, Miranda Francisco
  * @contact  borquez.juan00@gmail.com, panchodal867@gmail.com, francisconehuenmiranda@gmail.com
 
@@ -171,7 +171,7 @@ class BrazoRobot():
             (str) Un mensaje indicando el exito de la operación o
             una excepción en caso de error.
         """
-        resultado = self.enviarComando("M17")
+        self.enviarComando("M17")
         return "INFO: Motores activados."
             
     def desactivarMotores(self):

@@ -43,14 +43,14 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="enviarGCodeBtn" min="-2" pref="117" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" min="-2" pref="534" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="limpiarTextAreaBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="reiniciarBtn" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jScrollPane1" alignment="0" min="-2" pref="560" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="41" max="32767" attributes="0"/>
+              <EmptySpace pref="15" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

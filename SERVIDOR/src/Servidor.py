@@ -4,7 +4,7 @@
  * Modulo: Servidor
  * 
  * @version  1.0
- * @date     2023.11.06
+ * @date     2023.11.07
  * @author   Borquez Juan Manuel, Dalessandro Francisco, Miranda Francisco
  * @contact  borquez.juan00@gmail.com, panchodal867@gmail.com, francisconehuenmiranda@gmail.com
 
@@ -41,7 +41,7 @@ class Servidor(SimpleXMLRPCServer):
         self.idActual = ''                  # El id del usuario de la solicitud actual.
         self.ipCliente = None               # La ip del cliente actual.
 
-        #addr = (socket.gethostbyname_ex("Juan_Portátil")[2][0], self.puerto)
+        
         addr = (socket.gethostbyname_ex(self.hostname)[2][1], self.puerto)
 
         try:

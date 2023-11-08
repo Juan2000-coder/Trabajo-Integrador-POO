@@ -4,7 +4,7 @@
  * Componente: Streaming.
  * 
  * @version  1.0
- * @date     2023.11.06
+ * @date     2023.11.07
  * @author   Borquez Juan Manuel, Dalessandro Francisco, Miranda Francisco
  * @contact  borquez.juan00@gmail.com, panchodal867@gmail.com, francisconehuenmiranda@gmail.com
 
@@ -23,7 +23,7 @@ class VideoStreaming(threading.Thread):
         threading.Thread.__init__(self, daemon=True)
         self.app = Flask(__name__)          # Crea una instancia de la aplicación Flask.
         self.hostname = socket.getfqdn()    # Obtiene el nombre de host.
-        self.server = make_server(socket.gethostbyname_ex(self.hostname)[2][1], 5000, self.app)
+        self.server = make_server('0.0.0.0', 5000, self.app)
         self.ctx = self.app.app_context()
         self.ctx.push()
         self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)  # Inicia la captura de video desde la cámara.

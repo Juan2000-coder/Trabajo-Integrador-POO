@@ -1,7 +1,0 @@
-[2023-11-07 17:01:06] [ERROR] dalessandro_francisco 192.168.1.107 [robot]  No se puede establecer conexión con el brazo.
-[2023-11-07 17:01:06] [INFO] dalessandro_francisco 192.168.1.107 [modo]  No se puede enviar el comando, robot desconectado.
-[2023-11-07 17:01:06] [INFO] dalessandro_francisco 192.168.1.107 [estado]  No se puede enviar el comando, robot desconectado.
-[2023-11-07 17:01:18] [INFO] dalessandro_francisco 192.168.1.107 [robot]  Conexión exitosa con el robot.
-[2023-11-07 17:01:24] [INFO] dalessandro_francisco 192.168.1.107 [log] Solicitud Exitosa
-[2023-11-07 17:03:08] [INFO] dalessandro_francisco 192.168.1.107 [home]  No se puede enviar el comando, robot desconectado.
-[2023-11-07 17:03:10] [INFO] dalessandro_francisco 192.168.1.107 [robot]  Conexión exitosa con el robot.
